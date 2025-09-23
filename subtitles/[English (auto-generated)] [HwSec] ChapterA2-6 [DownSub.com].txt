@@ -1,0 +1,248 @@
+In this sub chapter, we are going to
+look at two most representative examples
+of CPU architecture including the
+processor cores and also important more
+importantly the memory hierarchy design.
+One is the ARM Cortex A8. Uh this one is
+for mobile uh applications and it is
+kind of configurable. Uh what I meant is
+that uh because I ARM uh processors are
+can be provided as a soft core that
+means it is uh modifiable.
+the uh because typically ARM core is uh
+yeah provided as an IP to the design
+house and the design house if they want
+they can make modification.
+Uh but if the uh IP is given as a hard
+core that means uh they are not
+modifiable. Uh typically it is uh
+already optimized by the uh vendor in
+this case the ARM um company uh they
+already um yeah optimize the core uh uh
+but yeah on their own way. So uh uh in
+this case the design house may not want
+to or may not be able to modify the
+parameters.
+Uh so it has a configurable core
+supporting the ARM version 7 uh
+instruction set here. Yeah, you may be
+confused because this is a instruction
+set version. Instruction set version is
+version 7 but A8 is the model code. So
+it is different. Okay. So Cortex A8
+supports ARM version 7 instruction set.
+Okay. It is a little bit different and
+it is yeah very popular um yeah ARM
+processor one of popular processors
+especially uh used in the mobile uh
+smartphones.
+So it can issue two instructions per
+clock cycle uh at uh rates up to one
+ghahz
+and it employs two level cache uh L1 and
+L2. Uh but it is optional if it is given
+as a soft core uh that the um the
+designers can make changes. Uh but if it
+is a hard core then it is it may be
+already fixed. Anyways, uh the first
+level cache can be either 16 kilobyte or
+32 kilobyte and the L2 cache is optional
+and it size could be 128 kilobyte to 1
+megabyte and it can be organized into
+single bank or up to four uh banks
+and the cache block size is 64 uh byte.
+Okay. So this is some uh characteristics
+of the ARM cortex AA and for memory
+management uh it has uh yeah two TLBs
+fully associative TLB TLBs uh and
+because uh yeah it has two TLBs for
+instruction and data and each TLB has 32
+entries.
+And page size could be variable
+and uh 4 kilob to 16 mgabyte and the
+replace algorithm is just a roundroin
+and the hardware handles the TB misses
+and this is the uh diagram of the memory
+hierarchy of cortex A8
+and uh the virtual address is given
+32-bit and uh out of 32-bit 18 bits uh
+are used as a vure page number and all
+the remaining 14 bits uh is for page
+offset and because the first 18 bits are
+virtual page number it is translated to
+physical page number and uh it is
+temporarily
+stored in the TLB. V and so this is the
+TLB
+uh and uh the L1 cache is indexed by the
+virtual page number and the uh
+combination of the virtual pag number
+and offset that means the L1 cache is
+virtually indexed
+but tag is physically tagged. tag. So it
+is called virtually indexed physically
+tagged cache. So uh this by uh indexing
+the uh cache with vulture index uh we
+can uh reduce or hide the translation
+time because while we look up the L1
+cache with the virtual page number uh we
+can translate the virtual address to the
+physical address simultaneously. ly. So
+in this way we can hide the latency
+but ultimately we have to check whether
+the data in the cache is actually uh we
+are looking for uh in that case we need
+the physical tag. So that is uh trans
+that is from the translated physical
+address.
+So uh if the translated physical address
+is in the TLB then we can immediately uh
+retrieve the physical tag from the TLB.
+Otherwise we have to wait for the MMU to
+to translate uh from the voucher p vure
+address to the uh physical address.
+And this is L1 cache and TLB. And uh we
+may optionally have L2 cache. So but L2
+cache on works only the physical
+address. That means L2 cache is
+physically indexed physically tagged. So
+the uh the indexing address is from the
+physical address and also the tag is
+also from the physical address.
+And the L1 cache is four-way associative
+cache and the L2 cache is eightway
+associative cache.
+So this yeah graph shows the memory
+performance of the typical core text a
+uh architecture.
+Yeah, obviously if the application has a
+larger memory footprint uh too large to
+accommodate store in the cache then the
+memory performance is very poor. So in
+case of MCF it has large memory
+footprint. So uh it yeah experience uh
+very high miss rate and yeah on on the
+right side we can see that the miss
+penalty is very high especially for MCF
+and when we uh compare these two graph
+what we can observe is that the miss
+rate of L1 cache is typically higher
+than that of the L2 cache because L2
+cache has a larger uh capacity. But in
+terms of penalty
+uh actually the penalty of L2 cache is
+uh uh yeah compared to the when
+considering the uh the miss rate we can
+see that the some for some applications
+the uh L2 mis penalty is very
+significant because it takes even longer
+uh to fetch data from the main memory.
+uh compared to the uh L2 cache.
+Intel Core i7 uh has these features. In
+case of Intel uh every everything, every
+parameter has been already fixed. So it
+is just given uh Intel decide everything
+and manufacture. So we have a fixed uh
+number uh in this uh uh yeah
+architecture and uh Intel Core i7 yeah
+supports x86
+uh 64 instruction set instruction
+architecture and it has four cores uh
+and all cores uh run support out of
+order execution and because we have four
+cores uh we can uh issue four
+instructions per uh every cycle and it
+employs 16 stage pipeline with dynamic
+scheduling and it supports up to two
+simultaneous threads per processor.
+This means even though we have one core
+one pro processor it supports
+simultaneous thread that means uh the
+processor core can maintain two context
+at the same time.
+Then uh because the processing
+uh the functional units are limited, we
+may fully exploit the parallelism. There
+could be some limitations on exploiting
+the parallelism. But uh typically
+uh because of the data dependency
+uh all the functional units are not
+always fully utilized.
+So instead of maintaining only one uh
+context for the uh by the processor
+core, if we maintain two context, then
+we can run these two threads at the same
+time as if we have uh two cores. So that
+that is called simultaneous
+multi-threading. So uh this Intel i7
+architecture supports uh simultaneous
+threading multi-threading
+and the memory system has 48 bit virtual
+address and 32-bit physical address. the
+max. So therefore the maximum physical
+memory space could be up to 32 gigabyte
+and it supports three memory channels
+and the and so the peak memory bandwidth
+is 25 GB per second and uh it has two
+level uh TLB structure that means we
+have L1 TLB and also L2 uh TLB. B.
+So we have in I7 we have L L1 TB here
+for instruction and data and uh we have
+L2 TLB. So uh in interourse uh we have
+two levels of TLB and it has three
+levels of caches. So the first level
+cache is split into instructional cache
+and data cache and they are private
+caches. That means if if we have
+multiple cores in case of i7 it has four
+cores then each core has its own L1
+cache L1 I cache and L1 uh data cache
+they are pro private but in case of L2
+and L3 they are shar shared by all cores
+and the configurations of these uh cache
+memories are summarized
+in the uh table on the left. So in case
+of instruction TLB it size is 128
+entries and four-way sudo value and
+access latency is one uh cycle and is
+miss penalty is seven cycle that means
+edex the access time to the second level
+uh TLB uh plus one uh mis uh yeah
+handling overhead
+and this uh data yeah TL TLB or it is
+also called DLB because it is uh TLB for
+the data and uh it size is 64 entries
+fourway yeah access latency one cycle
+miss penalty seven cycle and the second
+level of TLB is much larger uh four 5100
+512
+uh entries and four-way uh and it takes
+six cycles to when it hits but if it
+misses then his penalty is very large
+because we have to translate the
+physical address to the uh uh from the
+virtual address to the physical address.
+In case of caches the L1 cache uh has uh
+two caches IND and they the size of them
+uh is the same but the associativity is
+different. The I cache I cache has four
+way uh set associative cache while the
+data cache is eight way and the access
+latency is four cycles. But uh in case
+of Intel cache uh i7 uh the L1 caches
+pipeline.
+So uh we can reduce the uh we can
+actually maximize the throughput of the
+uh cache access
+and L2 cache is larger and more uh uh
+yeah set and it takes even longer time
+and L3 yeah even longer. Okay. And the
+replacement policy is suro LU. The ideal
+value policy cannot be efficiently
+implemented in hardware. So the pseudo
+LLU is very popular way uh to uh yeah
+mimic the LU uh implemented in hardware
+and this is the yeah memory performance
+uh and yeah what can we observe here is
+similar to the uh memory performance of
+uh I uh the ARM processors. Please.

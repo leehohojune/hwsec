@@ -1,0 +1,254 @@
+Power consumption is one of the most
+important issues nowadays uh regardless
+of the classes of processors.
+It is obvious that the power efficiency
+is very important for mobile devices.
+But uh it is also related with reliable
+uh operations. Uh because if the if the
+processor consumes too much power uh
+then it may cause uh device malfunction.
+Uh because the power supply um if the
+processor consumes power more than the
+capability of the power supply then yeah
+uh it cannot work reliably. And also uh
+when the power when the processor
+consumes power that means uh it um needs
+cooling otherwise it will get permanent
+damage
+and also the power efficiency is
+important uh for uh the cloud services
+because the cloud the operating cost is
+mainly uh determined by the electricity
+cost.
+But the power consumption is actually
+the amount of energy uh per unit time.
+Uh but sometimes or uh all almost always
+we have to consider energy because
+energy is a product of the average power
+and the execution time. Even though the
+processor consumes more power within uh
+short period of time, if uh we can
+finish the same job uh with even more
+power but very short time then in May uh
+results in less consumption of energy.
+So we always need to consider energy not
+just power.
+So for example here uh processor A has
+20% higher power consumption than
+processor B but uh the execution of the
+task can be 70%
+of processor B then the in terms of
+energy we can see that the power in uh
+processor A consumes uh less power than
+processor B because uh processor A has
+more power uh consumes more power but it
+has higher um uh performance. So the
+total amount of energy it consumes is
+less than uh processor B. So uh we
+always need to consider the energy
+consumption but sometimes the power
+consumption is useful um primarily for a
+con uh for fixed uh works because um
+yeah because for the fixed work uh yeah
+typically uh the the amount of the the
+period of execution time would be almost
+the same. So the amount of amount of
+energy is likely to proportional to
+power consumption. So in that case power
+consumption is useful and also power
+consumption is typically used as a
+constraint. So in case of chip design
+for the from the perspective of chip
+design uh the constraint is or usually
+um uh determined by power consumption uh
+because um the peak power consumption is
+directly related with peak current um
+current flow. So uh when we design a
+chip because it is a hardware we don't
+know how long it should work. Typically
+the hardware must must to learn
+yeah for very long time. So we don't uh
+we yeah the hardware engineers have no
+idea how long it will work. But the
+physical constraint is usually
+determined by the maximum uh current or
+power consumption. So the power
+consumption typically is useful uh when
+we design hardware uh as a uh and the
+power consumption is given as a uh
+constraint.
+Dynamic energy uh is proportional to
+capacitive load times uh the square of
+voltage the power supply voltage and uh
+for single transition. So the dynamic
+energy is consumed when a signal is uh
+changed from one to zero or 0 to one.
+But only if we are considering only one
+transition then the dynamic energy uh
+becomes half.
+And when this is the when we we say
+energy it uh already consider the
+execution time. uh but if we want to
+calculate the power consumption then we
+need to consider the frequency because
+uh the power consumption is the energy
+consumption within a um yeah unit time.
+So we have to consider how many times
+the signal uh yeah signal uh yeah
+changes uh within a unit time. So uh it
+is uh expressed as frequency here here.
+So frequency is not just clock frequency
+but the uh frequency of switching
+activities.
+So uh one example is shown here that uh
+the
+50% reduction in voltage may result in a
+50% reduction in frequency. Uh because
+of the voltage reduction the frequency
+the uh the amount of changing signal
+changes could be also reduced. In that
+case the uh reduced uh energy is about
+72% to the original uh because when you
+put the numbers to this um this uh uh
+yeah this equation then uh you will get
+uh this and if you plug these numbers to
+this equation then you will get uh this
+one. So uh yeah this is how we can
+estimate the uh power or energy
+consumption using uh this.
+Yeah, the clock frequency has grown very
+rapidly but very recently uh the
+clock frequency has not uh increased a
+lot uh compared to uh yeah previous
+years mainly because the power
+consumption uh because the technology
+allows to because of the uh tech the
+feature size shrinking we may put more
+transistors and because of the uh uh if
+the transistor size shrinks then the
+delay is also likely to uh decrease. So
+we expect then higher uh clock frequency
+but because of the power consumption we
+cannot increase the power we increase
+the clock frequency. So the power
+consumption is actually the limiting
+wall uh to increase the uh clock
+frequency.
+Then how what what can we do? Uh one way
+could be uh just turn off the clock if
+we don't use the module because the
+clock is one of the major uh power
+consuming component in the processor
+because it changes very uh yeah quickly.
+So uh it is called a uh clock uh gating.
+So if we don't use something uh then we
+can just cut the clock so that uh its
+dynamic power can be saved and this is
+uh actually employed in many commercial
+uh processors.
+If we don't actually need very high
+performance then we may scale down the
+voltage and clock frequency so that we
+can reduce the uh overall power or
+energy consumption and this is done uh
+dynamically meaning uh we can change the
+clock frequency and the supply voltage
+during runtime. So this is also very
+famous technique and when we this is a
+dynamic technique but as for the uh
+static technique um we can optimize the
+power consumption uh focusing on the
+common uh cases. It is a general
+principle. So not just only power
+optimization but we can apply this
+principle to uh yeah for example
+performance optimization
+or anything else.
+But sometimes
+uh just reducing uh decreasing the power
+consumption uh is not always result in
+energy reducing energy consumption
+because um I I will explain this uh yeah
+ne uh yeah next slide next of next
+slide.
+Okay. And the other challenge
+of the power consumption is static
+power. It is also called leakage power
+because even if even if we
+don't if we do nothing the processor or
+the semiconductor in general still
+consumes uh very little energy. But uh
+the problem is uh because of the feature
+size shrinking the dynamic power uh
+keeps decreasing but the static power
+the leakage power is not decreasing
+uh as much as the dynamic power. So uh
+the rate the uh relative portion of the
+static power is becoming higher and
+leakage power is all very important for
+mobile devices because you you you
+imagine uh uh the smartphone.
+So you don't use the smartphone yet. Uh
+yeah, you don't keep using the
+smartphone. You just turn it on when you
+need it and just turn it off. So the
+actually the idle time of the smartphone
+is pretty long. During the idle time, it
+consumes power. So it energy. So that is
+a uh that is caused by the uh set uh the
+leakage power.
+Some studies shows that uh yeah in high
+performance design often exceed 50%
+the to in yeah out of total power
+consumption 50% of the power consumption
+is actually leakage because the high
+performance technology usually use very
+low uh yeah threshold voltage. So this
+um yeah static power is related with uh
+threshold voltage. Um yeah but anyways
+yeah if we uh discuss about this
+technology I mean the device technology
+manufacturing technology uh it is whole
+another story. So uh anyways what I want
+to say here is that stat static power is
+also one of the major concerns uh yeah
+pertaining to the power consumption
+and the performance per watt is uh yeah
+a new uh efficiency metric uh nowadays
+before in uh before uh we are
+concernable about the power consumption.
+Usually the efficiency metric was uh the
+performance per uh scale millimeter. Uh
+but nowadays we we are more concerned
+about the power consumption. So now we
+are using performance per watt is more
+popular uh metric. So from this
+perspective race to hold strategy is
+actually yeah gaining more popularity
+because uh in order to reduce the power
+consumption there could be two extreme
+uh strategy. One is we reduce the
+performance
+just right to meet the dead deadline.
+So that is one approach
+so that we can reduce the uh average
+power consumption. The other extreme is
+this.
+We finish the task as soon as possible
+even much earlier than the deadline and
+then go to sleep because the power
+consumption is not
+not only by the processor but also uh it
+the power is consumed by other
+periphers.
+So if the uh given task is complete very
+quickly and then go to uh slim mode then
+not only the processor but other
+peripherals can also save the power. So
+uh yeah often these uh strateies works
+very well uh especially for the complex
+uh systems that have many uh
+periphererals.
+So in the future in the foreseeable
+future uh the power consumption is still
+very big concern in this uh industry.

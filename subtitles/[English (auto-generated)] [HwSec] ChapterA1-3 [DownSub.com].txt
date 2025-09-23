@@ -1,0 +1,359 @@
+Yeah, in this video I will discuss the
+about the role of the computer
+architecture or uh how I can say when we
+design a computer architecture what we
+have to consider or what we have to
+define. So the what this is the uh
+in this slide it is summarized as the
+role of the computer architecture or
+role of the computer architect who is
+designing the computer architecture. So
+uh typically you it is or used to be the
+instruction set architecture that is the
+defining the instruction set
+architecture was considered the primary
+role of the computer architect. Uh but
+uh the in order to define the
+instruction set architecture actually uh
+it is not uh not just only architecture
+but when we define the architecture we
+have to consider many other uh different
+aspects of the whole computing system.
+So these design aspects here that means
+the def definition of the instruction
+set but uh we also need to uh consider
+implementation part because the when we
+define the instruction instruction set
+then we got to implement it using the uh
+gain level or transistor level hardware.
+So we have to consider how it should be
+implemented otherwise we have a very
+nice uh definition of instruction set
+but it is very difficult to be
+implemented in hardware. So do we don't
+want to uh face that kind of situation.
+So when we design the define the
+instruction set, we got to uh consider
+the implementation
+and we also consider other uh some
+indirected
+uh aspects of the uh the
+technologies. For example, the most
+representing example could be the
+compiler. That means even though we have
+very efficient and hardware friendly
+instruction set, if the compiler is not
+smart enough to uh generate the
+optimized assembly code for the uh
+instruction set
+actually the software cannot u yeah run
+uh as we expected. So the compiler the
+state-ofthe-art
+uh technology of the compiler must be
+considered when we design the uh
+instruction set. What's the operating
+system? So the compiler is only for
+generation of the code but the operating
+system actually takes control of the
+runtime behavior of the software. So we
+need to understand and if possible we
+have to support the operations of the
+operating systems and we also need to
+consider logic design packaging and
+these kind of uh technologies as well.
+They are not directly related with the
+processor itself but they are uh anyways
+um uh affecting the overall performance
+of the system and uh because the
+computer architecture is actually in the
+middle of the layers of the computing
+system. So underline under the computer
+architecture uh the design of the uh
+device and circuit and uh above this
+line we have system software compiler
+and uh applications. So because this
+computer architecture is at the middle
+in the middle of the layers of the
+system uh the when we design
+architecture we got to consider all
+these u uh yeah components in the
+system. So it is not easy. So that's
+what I want to say here.
+And uh uh from the next slide I will
+discuss what exactly we have to define
+when we instruct when we define the
+instruction set architecture. The first
+one is class of ISA that means uh nearly
+all instruction set architecture today
+we have are general purpose register
+architecture. This sounds like very uh
+obvious but it's not actually because uh
+is in case of Java Java virtual machine
+it doesn't employ general purpose
+register it it is not general purpose
+register architecture it is tank machine
+so instead of reading and writing
+registers accessing registers to perform
+operation uh the Java virtual machine
+access st not register so it ST machine
+but as I mentioned nearly all ISAs today
+are general purpose register
+architectures. Anyways, we got to choose
+what kind of what class of ISA we are
+going to uh use
+and uh in yeah in nowadays the the two
+most popular general purpose rest
+architecture this some kind of
+derivatives of the general purpose rest
+architecture is register memory ISA or
+load store ISA
+in register memory ISA
+some instructions are direct allowed to
+access memory and doing some operations
+at the same time. So one instruction can
+read or access the memory and do perform
+the computation uh by one instruction it
+is allowed. But in case of root store
+ISA
+uh only there are
+only uh load and store instructions they
+are allowed to access memory and uh all
+the general computation
+operations are only on the registers. So
+in road store ISAs only these two
+instructions are uh for example if we
+want to read operand from the memory and
+then let's say add them and then write
+the in uh result to the memory then in a
+road store ISA
+road instruction must be used to read me
+read the data operand from the memory
+and store it to the register. So it is
+one instruction and the other
+instruction is adding uh two operants in
+the registers and then store the result
+to the register and then the store
+instruction must be used to store the uh
+result in the register to the memory. So
+the accessing memory and uh doing
+operation using the registers are uh
+completely separated in this
+architecture
+but still they are general purpose
+register architecture because uh they
+are anyways uh accessing registers to
+perform operations.
+And the second aspect we have to define
+is memory addressing.
+Most computers use bite addressing. That
+means when we access memory then we want
+to read one bite. One bite. But some
+architectures
+require aligned objects. That means we
+cannot read one single bite from the
+memory. But we can read only four bytes
+or eight bytes uh together only. So it
+is aligned access. But if what we need
+is one only one bite out of four byte
+then we got to uh by using some
+instructions we got to extract what we
+want from the uh four byte um yeah data.
+But some architectures do not uh require
+alignment. So we can directly access uh
+uh only one bite in the memory. But in
+that case uh the memory access time
+increases.
+So basically slower and addressing mode
+we have to define. That means when we
+specify the address in the memory we
+want to access then there are many ways
+different ways to specify the uh memory
+target address. For example, we may use
+only one register and the register uh
+has the uh the target address and or
+immediate that means we can give some
+constant value uh as an address or
+displacement or offset that means we we
+can uh it is a uh we have a baseline
+address base address and then we uh
+define only we give only the offset from
+the base address and P relative and
+other kinds of very uh that actually
+there are many uh addressing modes.
+Anyways, we when we define the
+instruction set architecture, then we uh
+define what kind of addressing modes we
+want to support
+and we need to define the types and
+sizes of brands. Uh for example, some
+instruction set architecture support 8
+bit uh 16 bit or 32-bit even 64bit uh
+operants and some architecture supports
+only integer uh operants and some
+architecture uh extends uh the uh the
+operand to the double precision floating
+point. So anyways we got to uh specify
+what kind of oper we are going to
+support
+that actually related with
+the operations we want to support.
+So for example addition sub uh
+subtraction multiplication
+uh this kind of operation or uh logical
+operations such as ending oring these
+kind of operations. So one we want to
+support and uh this is related with the
+types of operands. So uh the operands
+are basically in hardware they are
+binary 00 1 0 1 0. What kind of
+operation means that how we want to
+interpret the values in the register?
+They are just zero and one. So is it
+integer? Is it floating number? Is it
+double precision floating number? That
+depends on what kind of operations we
+want to do using those registers. So
+that is uh determined by the instruction
+the operation. But for example here some
+data t operations arithmetic logical
+operations these are uh should be
+defined and we also need to control flow
+instructions branches or conditional
+branches or function call return this
+kind of instructions what kind of
+operations we want to uh support
+and finally
+we need to determine how to encode the
+instruction set uh instruction. So uh
+at the beginning of the microprocessor
+so x86
+uh employs variable length uh encoding
+that means uh depending on the
+instruction the length of the encoded
+instruction is different.
+Typically it results in smaller uh
+program size but it actually
+uh incurs more complex uh hardware
+implementation.
+So later ARM and MIPS architectures
+employ fixed length uh instruction set
+architecture that means all the
+instructions are encoded with the same
+length. So decoding logic of hardware uh
+becomes much uh simpler.
+So in we we got to clarify some
+terminologologist here because when we
+say instructional architecture it could
+be conf uh confused with some
+organization micro architecture or
+hardware. So let me clarify here. So
+instruction set architecture means the
+uh basically
+instruction set architecture is
+uh in uh
+informally you can consider it as a
+assembly language. So we are defining
+assembly language that is instruction
+set architecture and when we say micro
+architecture then uh then it means it is
+implementation
+how we implement the instruction set
+architecture it's sometimes called
+organization so they are basically same
+uh but anyways how micro architecture
+means the implementation
+of the instruction set architecture For
+example, uh how we define the memory
+system, memory interconnect, internal
+processor design. For example, AMD
+Opteron and Intel Core i7 implement the
+same instruction set but in different
+ways, different organizations. They have
+different uh types of memory system and
+memory interconnect.
+Yeah. also internal processor
+architecture is different. So uh this is
+the meaning of the micro architecture
+and the hardware
+uh it is uh in it refers to specifics of
+a computer uh specifically detailed
+logic design some uh uh logic that means
+some uh gain level uh logic gates how we
+uh uh yeah comb combine them to
+implement uh the micro architecture.
+So for example, Intel Core i7 and Zon uh
+they have almost nearly uh identical
+organizations but uh slightly different
+in uh the hardware implementation
+uh in terms of clang rates or memory
+systems. uh so that the zeon uh can be
+more effective for suffers. So uh these
+are uh some clarification of the uh uh
+terminologies that could be confusing.
+So when we say architecture then that
+then that means it covers all of these
+three aspects instruction architecture
+micro architecture and hardware.
+So when we uh define the computer
+instructions set architecture then uh we
+have to also as I mentioned before we
+have to also consider other uh
+components around the uh computer
+processor. So for example um application
+area what kind of applications are uh
+expected to run on this processor uh it
+depends on the different categories of
+the processor. uh if our processor is
+likely to be used in the mobile device
+then we when we uh define the
+instructions and architecture we have to
+uh yeah consider the real time
+performance and energy efficiency for
+example and other categories have
+different types of requirements we we we
+got to consider them and software
+compatibility
+It is often called backward
+compatibility because uh if we have a um
+uh a uh legacy previous version of the
+processor then if we have a totally new
+instruction architecture then the legacy
+software cannot run. I I cannot say
+cannot run but it is very difficult to
+it might be difficult to run this new
+processor. uh so we have to consider
+this one and OS uh requirement some it
+is related with the application area so
+for for some applications
+uh some applications even don't have any
+operating system in embedded systems
+sometimes the embedded systems do not
+have any operating system in some case
+uh yeah so it we depending on the uh in
+me operating system the u hardware uh
+the the necessary uh operations might be
+slightly different. So we got to uh
+consider all of these aspects.
+So in summary uh when we define
+instructions and architecture
+uh this is a program
+uh visible instruction set that means it
+is kind of assembly language definition
+and it serves as the uh interface
+between software and hardware.
+But we also need to consider how it will
+be implemented that is micro
+architecture and hardware implementation
+uh in uh really silicon level physical
+implementation
+and we also uh it would be good if we
+can consider the technology trend uh
+because as of now if this processor
+looks good but in the near future
+because of the technology trend we can
+ex we might may expect that in the near
+future different types of instructions
+set architecture might be better. So uh
+we it is not sure we we don't know but
+uh still we need to consider uh the
+technical trends as well.

@@ -1,0 +1,270 @@
+one type of processors cannot fit every
+application. So basically we can
+classify the major uh computing classes
+into five categories. Uh each of these
+category has different um yeah uh
+requirements.
+So the first one is personal mobile
+devices.
+Yeah, you can. Yeah. Yeah. Imagine.
+Yeah. The smartphone basically. So the
+in if a processor used in the smartphone
+uh you are going to develop then you
+will need to consider these um yeah
+requirements. They are unique to this
+category of the uh processors. So uh
+first of all they are very uh sensitive
+to energy efficiency because the mobile
+the nature of the mobile device is uh
+that you are uh running these devices uh
+with batteries. So the battery has
+limited time on time. So uh if your
+processor consumes too much energy then
+your device cannot run for a long uh
+period of time. So uh the energy
+efficiency is very important in this
+category of processors. And the next one
+is flash memory. uh these kind of mobile
+devices usually employ fleshy memories
+instead of magnetic uh disc. Of course
+nowadays because the flashy memory
+technology has advanced and their
+manufacturing cost is down. Uh we are
+using SSD the solid state drives instead
+of hard disk drives. Uh but uh still in
+um yeah desktop and servers we are still
+using hard disk drive and uh here the
+flexi memory uh is directly connected to
+the processor. So in case of SSD uh it
+is uh connecting to the processor
+through some uh uh system buses like
+PCI. Uh but in embedded mobile devices
+usually the flash memory has much
+shorter latency to access
+and the responsiveness is also important
+for uh this kind of uh yeah processors
+and uh also it is related with real time
+performance because uh typically when
+you use smartphone you are expecting
+almost immediate response
+from the device. So uh because of the
+user uh user experience the
+responsiveness and real time performance
+is very uh important
+and also it has limited memory size. uh
+instead uh compared to the hard disk the
+cost per uh bte uh stored in the memory
+is much higher. So uh the software
+developers are trying to minimize the
+code size. Of course, sometimes the
+objective of optimization could be the
+performance improvement because of as I
+mentioned just before the responsiveness
+and real time is also uh important
+requirements. That means the performance
+of the software is important but at the
+same time we are also considering we
+have to consider the code size as well.
+This is because usually there is a
+tradeoff between the code size and the
+performance. But anyways, these uh
+requirements are unique uh to this
+category of processors
+and the other the the the next one is
+desk computing and or or yeah the laptop
+could be similar uh to this but laptop
+is a kind of a mobile device but uh
+desktop is usually connected to uh the
+power power supply. So yeah, it is
+categorized as a a separate uh yeah uh
+yeah segment
+and in case of desk the computing price
+performance product is the primary
+driver and uh yeah because it is always
+connected to the power supply the power
+efficiency is important but it it is not
+as important as uh for
+uh mobile devices and you we are usually
+using interactive applications on
+desktops for example web service u or
+yeah some yeah using um word processor
+powerpoint these kind of applications
+are usually interactive so uh the uh
+responsiveness is also important for
+this type of this category of processors
+And the next one is server computing.
+And the server serves as a backbone of
+enterprise computing. So the
+availability is the most critical
+requirement in this category of
+processors because if the server doesn't
+work then it may cost a lot millions of
+dollars. So uh it should be guaranteed
+to run uh no matter what uh happens. So
+uh that's the most important uh yeah
+requirement for this category of
+processes. Of course the efficiency or
+scalability they are also considered as
+a requirements but not as important as
+the availability.
+And now the next one is cloud computing.
+Yeah, in the text book it is called
+clusters or warehouse scale computers.
+But in modern terminology I should say
+this category is uh cloud computing. And
+the major difference from the cloud
+computing from the server computing is
+that in the cloud computing collections
+of computers are connected and and they
+are act acting
+as uh as if they are one computer.
+So from the perspective of user we are
+accessing just one computer but actually
+in the back end there are bunch of
+servers are working uh to ser to to uh
+respond to my request. So uh this kind
+of uh collection of computing uh is
+called a usually uh cluster used to be
+called clusters but nowadays the cloud
+is the more uh popular uh name for this
+type of computing and uh this is al in
+this category of processors the price
+performance uh are is also So one of the
+major uh factors but here power
+efficiency is also uh important for this
+uh category because usually we are using
+cloud uh in data center scale very large
+large scale. Of course, we may use the
+server uh in a uh data center scale. Uh
+but usually we are in if the servers are
+collected in data center scale, they are
+usually uh uh configured as a cloud. So
+uh the cloud has much the cloud
+computing system
+usually imply that they are uh large
+scale computing system and they are
+often um hosted by a data center. So in
+order to operate a large scale servers
+then the power efficiency is important
+uh because one is the economic reason
+because uh if we can reduce the power
+consumption then we can save the money
+for the power power electronic uh bills.
+But the other technical issue is that if
+we if these servers consume too much
+power that means they um they are
+emitting uh too much uh uh yeah heat. So
+so the cost of cooling system uh will
+increase. So the power consumption is uh
+one of the requirements important
+requirements in this category.
+And the next one is embedded computing.
+The main the main uh uh feature
+of this embedded computing category is
+that it requires diverse processing
+power.
+as simple as 8 bit processor costing
+less than a dime to network switches at
+100.
+So it covers a very broad range of uh
+performance requirements
+and very often
+these type of applications are very
+sensitive to price
+because uh the same type of devices
+uh yeah pro produced uh in massive scale
+and even If
+just one dime the price of one dime is
+increased if it is multiplied by for
+example 10 million then the total cost
+will be increased by $100 million. So uh
+because of the volume of manufacturing
+uh the price is very important in this
+type of uh processors
+and we can find many embedded computing
+uh processors including microwaveing
+machines, printers, networking switches
+and so on. So uh actually uh this is you
+know in terms of number of units yeah
+this embedded computing category uh is
+the I think yeah the very big uh yeah uh
+industry
+and yeah I'd like to mention the classes
+of parallelism again uh The instruction
+level parallelism is implicit
+parallelism and uh it exploits
+uh uh yeah usually some uh rescheduling
+instructions
+uh so that we can run independent
+instruction in parallel and the backto
+architecture
+or GPU they employ single instruction in
+in multiple data uh architecture that is
+uh we are running the same instruction
+but different architecture a different
+data in parallel
+in old terminology this type of
+architecture was called uh vector
+architecture uh but the GPU is one of
+the um uh implementation of this type of
+uh architecture but precisely speaking
+GPU Q is not simmed but uh it is
+precisely called as uh thread level
+parallelism because uh not just single
+instruction because the GPU actually
+executes a single thread on different
+data not just instruction. So uh
+precisely it is configured it is uh
+classified as thread level parallelism
+but sometimes it is um yeah you know
+just a uh highle view it might be called
+a uh sim
+and the thread level parallelism here
+this is uh they are running the
+different uh different thread basically.
+Yeah, we are running independent
+applications in parallel.
+About 10 years ago, we when we didn't
+have the multiore processors uh we are
+running multiple application multiple
+independent applications on a single
+processor. Then it is time multiplexed.
+That means the operating system uh
+actually schedule schedules multiple
+applications
+uh slot by slot. So that as from the uh
+from the user users perspective uh it
+looks like running multiple applications
+but in nowadays we are using mult
+multi-core systems where actually more
+than one processors are running. In that
+case each processor runs um yeah
+independent applications. So it it is uh
+it can be considered as a thread level
+parallelism or multiple instruction
+multiple data MIMD.
+So all of so if we are running um yeah
+this kind of uh uh MIMD architecture
+then it it can be considered as request
+level parallelism. It is even higher
+than the thread level parallelism
+because in case of a thread level
+parallelism we may have one application
+running multiple thread but in case of a
+thread level parallelism uh we are uh
+running almost independent just not
+coupled um yeah uh uh applications. So
+uh it can be considered as a rally
+coupled uh MIMD
+and it used to be very simple to exploit
+the parallelism especially only for the
+instruction level parallelism. the
+software engineers uh do not need to uh
+worry about it. But uh nowadays we are
+using exploit explicit parallelism. That
+means the programmers actually uh yeah
+make the software to take advantage of
+the uh parallelism explicitly. So
+sometimes it is easy but in many cases
+it is a due burden uh for the software
+programmers.

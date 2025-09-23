@@ -1,0 +1,205 @@
+In this of chapter uh we will discuss
+the memory uh the what type of memories
+are available and uh here we are talking
+about some volatile memories that is
+directly accessed by the uh the
+processor because it is uh more related
+with the processor performance. What I
+meant is that we are excluding the uh
+nonvolatile memories like flesh
+memories.
+So we are just talking about the uh
+volatile memories here and two most
+representative volatile memories are SRM
+stated and DM dynamine RAM. SRAMM uh is
+usually used for cache memory and it is
+a onchip memory. That means uh typically
+we are using the SRM for cache memory
+because it is much faster but it is uh
+is implementation cost in terms of size
+is bigger compared to DM. So we are
+typically use DM for main memory as a
+main memory.
+When we in order to store one bit SRM
+needs typically six transistors. It
+depends on the SRM architecture but at
+least six transistors per bit. But in DM
+we need only one transistor per bit. But
+we also need one capacitor uh for uh to
+store one bit
+and SM does not require refresh but in
+case of DM periodic refresh is required
+because we are storing data in capacity
+it decays
+yeah gradually. So if we don't refresh
+it, yeah, the data will be erased. So we
+have to refresh uh the data in the DM uh
+periodically
+and uh the SRM is fast. So we uh the it
+is very the access time is close to the
+actual cycle time. uh
+and but the in case of DM it is a little
+bit slower and I will explain how DM
+works in the next slide. So anyways it
+is uh the protocol the access protocol
+is uh different from SRM because in case
+of SM it it is very simple because uh
+when we give address and control signals
+read or write that kind of things to the
+memory then the o the memory uh data is
+almost immediately available but in case
+of D uh we have to uh do something more.
+Okay.
+So yeah, this is typical organization of
+DM.
+Nowadays we have multiple banks in a DM.
+Here in this diagram we c you can see
+that the banks four banks here
+each bank can
+be accessed simultaneously. That's why
+we split one DM into multiple banks.
+Otherwise when we access one bank we if
+we have only one bank if we are
+accessing that particular bank then we
+cannot
+access other uh parts of the data and
+because we are splitting the DM into
+multiple banks that means if while we
+are accessing one bank and accessing
+here means that we are uh waiting for
+the data we can access other banks at
+the same time. So by because this
+architecture is possible because we
+split the memory into multiple uh banks
+and typically each bank consists of
+multiple rows.
+Then uh these are multiple rows means
+that we can also access multiple rows uh
+simultaneously. So there are many yeah
+parallelism available uh in DM.
+But the protocol is a little bit
+complicated compared to SNM because in
+order to access a bank, we first need to
+pre-charge or activate the uh yeah
+pre-charge the row. That means uh the
+the data stored in the uh memory cells
+are transferred to temporal row buffer.
+then we can access the data from the
+buffer. So uh we have to transfer the
+data in the cells to the yeah temporal
+buffer. So this takes some time.
+So we first give row address first so
+that the the data in that row can be
+transferred to the buffer and then give
+the column address
+to
+uh specifically choose the data we need
+in the buffer. So we are giving yeah row
+address column address separately
+but once the data is stored in the
+buffer the data in the buffer can be
+accessed very quickly.
+So that means because uh one row has uh
+yeah data in serial
+if we access all the data in the row we
+can very quickly access the data but in
+case of random access because we have to
+uh pre-charge give row address and then
+we can access data it takes some more
+time but if we access the data
+uh sequentially then it is very fast. So
+the memory access pattern actually has
+significant impact on DM performance. So
+there are many research works that
+optimize the memory access pattern to
+the uh DM
+and because the DM is used the main
+memory uh it anyways
+uh keeps improving.
+But when the DM was first invented
+actually uh yeah many pe people were uh
+skeptical I heard because we have to
+refresh it periodically and the protocol
+is very complicated and at the time it
+is not so fast but because it keeps
+improving now uh it is it takes the role
+of the main memory.
+that means its performance uh and
+manufacturing cost actually improves a
+lot.
+So compared to DM the SDM synchronous DM
+uh has many uh benefits. So it has
+synchronous interface. That means we
+have a clock signal. The regular DM, the
+traditional DM doesn't have a clock. So
+uh it takes time
+to synchronize the signals.
+That means we have to give some enough
+margin to re to stabilize the signals.
+But if we have a clock and everything
+works uh according to the clock edge
+then uh the overhead of the
+synchronization can be reduced
+significantly
+and typically SDM uh use the both rising
+and falling clock edges
+in typical
+synchronous hardware logic digital logic
+use only one of them rising edge or
+falling edge. But in case of S3M they
+usually use both edges
+and as I mentioned before yeah DMs
+have multiple banks so that we can
+access
+multiple banks uh simultaneously and the
+data path uh are being uh widened.
+So these are some uh um
+major uh performance metric that have
+been evolved over time. So clang
+transfer bandwidth they kept have kept
+increasing
+and it is not shown here but here the
+voltage supply has been also reduced
+and DM has been even uh evared order uh
+used as a graphics DM. It is still DM
+but uh it is specialized for the needs
+of GPU. So because nowadays GPUs are
+very popular especially for uh AI
+applications
+and it is even wider interface
+and the CRM rate is also uh yeah higher.
+So uh it is still DM but some special uh
+kind of DM
+and flash memory. Yeah, this is
+nonvolatile memory and we are not using
+the flash memory as a main memory but uh
+yeah uh in case of um
+yeah it is just mentioned as a types of
+memory here
+and for the AI application the memory
+bandwidth is very uh critical.
+And uh because of the advancement in the
+packaging technology now we can stack
+multiple DM
+yeah in 3D.
+So that is called high bandwidth memory
+in short HBM.
+As shown in this diagram, we have
+multiple dyes
+stacking over the logic die and they are
+interconnected through TSV that stands
+for through silicon via. So we can uh we
+by using this if if we don't have this
+kind of connection
+or we have to connect this memory to
+processor using some wires because the
+number of wires we can use is limited
+compared to through silicon via uh we
+cannot uh increase the bandwidth. there
+is a limitation on increasing uh the
+number of bits but in case of TSV uh we
+can uh we can use much more number of uh
+connections
+between the memory die and the GPU die.
+So that's how we can improve the
+performance, maximize the performance.

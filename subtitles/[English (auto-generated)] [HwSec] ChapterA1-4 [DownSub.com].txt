@@ -1,0 +1,154 @@
+Okay, in this video I will explain the
+general trends in technology.
+uh when we are looking at the trend in
+the integrated circuit logic uh the
+trend is the density uh density is uh
+being increased by about 35% per year
+and uh yeah I you don't have to remember
+the the actual numbers but anyways what
+is important here is that the transistor
+density increases
+And uh the
+uh the dice size is also increasing but
+dice size is increasing just slightly
+because uh even even the larger die size
+uh does not always good. It's not always
+good because um uh because if the dice
+size is too big then the the yield the
+uh the failure rate the yeah can be
+affected. Okay. So uh anyways the dice
+size increases the transistor density is
+also increasing and in case of DM also
+the capacity uh is being uh increased
+and uh in case of semi conductor flash
+memory uh it is even
+growing faster so almost doubling every
+two year. uh also the cost the
+manufacturing cost is is much
+uh much scaling faster than the DM but
+still the in in uh in terms of bite
+dollar per bite uh the flesh memory is
+more expensive than DM
+but but still it's yeah
+uh scaling down uh very quickly
+And the disk technology also uh gives us
+more space and uh reduced access time.
+Among these trend uh what uh what would
+like to note is that when we consider
+bandwidth and latency actually the
+improvement of the uh bandwidth
+uh has uh dramatically outplaced the
+latency. Here bandwidth means the uh it
+is sometimes called your throughput and
+is the total amount of work done in a
+given time while latency or response
+time is the time between start and
+completion of an event. So that the
+latency is the we when we say delay
+usually it means latency when we request
+something and the latency means the time
+delay uh from the request uh until we
+get the response. But the throughput
+means the total amount of work that can
+be done in a given time. That means
+there could be many requesters in the
+system and the system can uh process all
+of them or a part of them in a given
+time. So that is determined by the uh
+throughput or bandwidth.
+So the bandwidth is actually growing
+much faster than the latency. So that is
+the uh uh major observation uh here.
+And these are some um yeah uh
+milestones. So uh when we look at the
+microprocessors then uh yeah it has
+grown about 25,000
+times uh in terms of microprocessor
+performance
+and in case of memory uh yeah from 1980
+to 2010
+uh the bandwidth has been increased by
+around 1,000 times. times but the
+latency is improved only six times. So
+you can here see that the bandwidth
+improvement is much uh higher uh larger
+than the latency improvement. And in
+case of a network yeah from 1970 to 20
+2010 uh it the latencies of the
+bandwidth has improved uh around 10,000
+times but latency is improved by about
+30 uh times
+and hard disk as well. So the throughput
+the bandwidth has improved uh 340 times
+but uh latency only uh six uh 13 times
+and the size of the transistor is uh
+getting smaller. So it is yeah often
+called technology scaling and uh uh yeah
+in 19 uh 71 uh the feature size the the
+the uh minimum size of the transistor uh
+used to be 10 micro micrometer but it it
+it keeps shrinking and in 2011 32
+nanometer 22 nanometer and Now is we are
+facing three or four nanometer
+technologies.
+When the feature shrinks then uh
+transistor density increases because
+yeah we are we we are having a smaller
+transistors then we can afford more
+number of transistors and transistor
+performance is likely to impro uh
+improve. Um so the it works faster
+because it gets smaller that means uh
+even small changes in operation can
+result in different uh yeah output. So
+that means uh its performance improves
+and operating voltage also is reduced
+while the transistor is getting smaller
+the wire cannot be. So nowadays the wire
+delay is uh yeah giving us um uh some
+issues because the wire cannot scale as
+much as the transistor is delay the
+relative portion of the delay is uh
+becoming larger. So now we need to
+consider the wire delay uh
+yeah more uh than before. Uh but the the
+the wire delay is not just simple is not
+as simple as the uh transistor delay
+because the wire delay is actually
+affected not only by the wire itself but
+its length is uh yeah is pattern I I
+mean uh how well yeah geometry I can say
+geometry and uh how thick how how many
+uh gates are connected all of these
+factors are affecting the wire delay. So
+it is not easy to estimate the delay. So
+anyways uh this is some of the major
+issue when we design the uh
+semiconductor. So we need to consider
+this as a technology trend
+power consumption as well. So uh
+the not just power consumption but it is
+related with the thermal uh heat um uh
+dissipation. So if uh the semiconductor
+is too hot then uh it yeah it could uh
+destroy itself. So we need to cool down
+the uh the yeah the the the
+semiconductor IC. And in case of Intel
+processor, if it has uh the uh thermal
+uh thermometer uh in the processor
+itself and if the temperature is too
+high uh it slows it down by itself so
+that the the temperature cannot go up
+beyond a threshold. It protects itself
+from uh the destructive uh uh yeah heat
+and this is also related with power
+delivery.
+Yeah. So uh power is not delivered
+evenly and reliably reliably then the
+yeah the the chip cannot work uh
+reliably. So uh how we deliver the the
+power to uh the components in the system
+is also very critical issue. So uh yeah
+so the power supply is also uh what we
+have to consider when we design uh a
+system.

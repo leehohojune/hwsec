@@ -1,0 +1,211 @@
+Yeah, in 2004, Bill Gates uh mentioned
+um yeah says said basically said this uh
+it is about the uh amazing uh
+achievement in microprocessor industry.
+So basically uh it is saying he is
+saying that uh we are getting a very
+powerful tool that can be used for many
+purposes.
+So now it has become uh yeah realized I
+mean we have uh many uh systems with
+microprocessors. For example, you are
+bringing smartphones and you are working
+on a laptop or desktop and you are
+watching uh smart TV everywhere uh has
+the yeah well is backed up by uh
+microprocessors.
+So this graph shows the how the microp
+processors uh have improved at the early
+stage or relatively the improvement was
+slow but from 19 about 1986 to 2002
+it has very rapidly uh improved about
+52% per year. It's amazing. Yeah, it is
+not comparable to any other uh industry.
+But in about 20 200 2004
+the improvement rate has dropped.
+Yeah, because of many uh some uh reasons
+uh I will explain them later. Uh but
+still uh the improvement rate is still
+22% per year. It is still not
+negligible. It is still growing area and
+uh uh because of this achievement we are
+actually benefit from uh this
+improvement.
+So yeah in 1970s
+um yeah the microprocessor basically
+this industry has begun and uh the the
+next uh important milestone was at the
+late 1970s the integrated circuit uh has
+uh been um yeah uh has been how I can
+say uh it is uh Yeah, it has a major uh
+yeah breakthrough. So uh because of the
+uh implementation of the processors in
+integrity circuit actually boost the
+performance uh uh performance
+improvement and the next major milestone
+was the risk architecture. The risk
+stands for reduced instruction set
+computer. And uh the philosophy of this
+architecture is to simplify the
+instruction set so that we can simplify
+the hardware implementation and make it
+as efficiently as possible and also it
+has uh lightened the burden of the
+software. uh basically the compiler. So
+uh by adapting this kind of um yeah
+design philosophy uh the microprocessor
+and also software the entire system
+could be uh yeah grown
+and we also there are also two major
+um yeah breakthroughs uh in the software
+industry. uh one is elimination of
+assembly and the other one is
+standardized uh operating systems like
+Unix and Linux. The elimination of
+assembly means that we now have
+highlevel languages C, C++ and folder
+Python, Java all the highle languages
+are now available. We we don't need to
+make program using assembly language.
+And the other one is uh the operating
+system because the operating system is
+um now you may heard about the pix uh
+standard. So all the uh because of this
+kind of standard uh we can expect the
+standard service of the operating system
+that actually uh makes the software uh
+uh to be uh developed very efficiently.
+all the all these com the combination of
+all these um yeah innovations uh now we
+can uh now we uh experience uh the uh
+major improvements in this industry.
+So uh because of this uh improvement uh
+we are expecting that enhanced computing
+uh capability
+uh if you imagine about 10 or 20 years
+ago what we can do with our smartphone
+for example could be only done by
+superco computer consisting of tens or
+hundreds of main frames. So it is now
+the performance is comparable to
+supercomputers in 20 years ago. So it is
+really dramatic uh yeah uh improvement
+and we now have many uh different
+classes of computers um yeah as I
+mentioned smartphones, tablets and also
+uh desktop servers. Yeah we are using
+microprocessors
+uh everywhere.
+Um yeah so the microprocess dominance is
+yeah basically the same so uh instead of
+uh using if we don't have a
+microprocessors
+probably if we need some electronic
+devices then we are we had to make it
+using some electronic circuits.
+So because of the improvement in
+microprocessor we don't need to make
+everything just using a circuit instead
+we if we have microprocessor then we can
+implement everything by software
+programmable software. So uh that is a
+very good impact of the uh achievement
+in the microprocess industry and the
+other one is software development uh
+revolution
+because of the performance improvement.
+Now we can use the highlevel languages
+otherwise we could not afford the
+overhead of the high language languages.
+In other words, if the microprocessor is
+still too slow, then we got to use only
+assembly language otherwise we cannot
+expect or we cannot achieve the u yeah
+expected performance. So the performance
+imp improvement uh was uh yeah was
+impacting on uh yeah made uh this kind
+of uh yeah good impacts in this um yeah
+electronic devices industry
+but unfortunately the hardware uh
+improvement uh is facing now uh
+limitations. So since 2003 single
+processor performance improvements has
+dropped. It is still growing but not as
+rapidly as before. There are two major
+hurdles. The the first one is power
+consumption.
+Yeah. Even if we we might be able to um
+yeah make the processor running faster
+but but the problem is we cannot afford
+the faster
+uh processors power consumption.
+Yeah. If the micro if the integrated
+circuit consumes too much power, it is
+not only just problem of efficiency but
+it could destroy itself. So the power
+consumption is one of the major uh uh
+obstacle that we pursue the higher
+performance of the processor and the
+other one is lack of instruction level
+parallelism.
+The uh the instruction level parallelism
+is uh some kind of implicit ex
+parallelism we can exploit
+uh without the awareness of the software
+engineer. So the software engineer uh
+develop software
+just um not um without being aware of
+this kind of a parallelism.
+The hardware just uh takes advantage of
+the uh parallelism. But because uh in
+order to make the processor faster
+actually
+um
+the level of parallelism we can exploit
+is yeah a little bit reduced or in other
+words we already took all full advantage
+of the existing instruction level
+parallelism.
+So we need to take advantage of another
+other types of parallelism. They include
+data level parallelism and thread level
+parallelism.
+So the instruction level parallelism
+means that uh when we run software
+we don't actually the program is written
+sequentially. So the programmer expects
+that all the instructions are executed
+serially sequentially one by one. But uh
+when we take a closer look at the
+instructions they actually don't need to
+be all yeah they all don't need to be
+executed sequentially. Some instructions
+are independent each other. that implies
+that we can run them paralle in
+parallel. Uh that this this kind of a
+parallelism is called instruction level
+parallelism because we can run
+instructions in parallel. But uh it is
+not uh explicit. That means the
+programmer doesn't need to worry about
+this. They just make the program a as
+usual and the hardware can take this
+take advantage of this kind of
+parallelism by itself.
+But because as I mentioned before the
+instruction level parallelism is already
+been taken full advantages so it is
+facing the limitation. So now we are
+moving to uh explicit parallelism such
+as uh data parallelism and thread level
+parallelism.
+So by exploiting this kind of
+parallelism uh we we can further improve
+the performance. So the instruction
+level parallelism is for the single uh
+single processors but data level
+parallelism or thread level parallelism
+can be exploited by multi-core processor
+or GPU. GPU is a representative example
+of uh yeah thread exploiting the thread
+level par parallelism.

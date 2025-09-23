@@ -1,0 +1,297 @@
+Okay. Yeah. Let's get started with the
+first lab. The uh the title of this lab
+is uh cash optimization
+and the objective includes to get
+familiar with an architecture simulator.
+Uh we are going to use GEM 5, one of the
+most famous architectural uh simulator.
+uh and the other one is to develop
+understanding of cash optimization. Uh
+we already learned in the class how we
+can uh improve the performance by
+considering the cachy size. Uh
+specifically we learn the blocking
+method to feed the uh the data size into
+the cache. So we will uh learn how
+actually you already learned and you
+just implement this blocking method and
+then see uh whether it really works or
+not.
+In order to use the gem 5, this is what
+you are going to do. First you will need
+to install and build gem 5. Actually
+this website uh gives a detailed
+instruction. So let me show you the is
+link. Okay. So this is the instruction
+uh on how you can build uh the gem 5
+simulator.
+There are actually couple of ways. Uh
+one is uh you can uh build the build
+environment on Ubuntu here. So if you
+are using the latest Ubuntu then you can
+install all these uh packages and then
+uh get ready to compile uh the uh gem
+file. So this is one way or and this is
+for Ubuntu. So if you are uh yeah I mean
+this is one way. So you you may make a
+uh one uh some voucher machine or
+multiboot uh you can uh directly if you
+are uh you can directly access Ubuntu
+then this is uh yeah you may use this uh
+method and the other one is here uh it
+provides docker so uh if you are using
+docker then you don't have to actually
+install all these uh plinkages because
+you it already has everything. So uh I
+will explain
+uh yeah that how we can uh compile gen 5
+using docker but you can still do the
+same thing using this Ubuntu uh uh yeah
+uh yeah environment. Okay. So first you
+you will need to uh install the docker
+desktop
+and this is the link to download the
+docker desktop here and yeah the free
+version of docker is enough. So uh you
+can just yeah download just free uh
+docker desktop and once you download
+then this is the uh actual uh imaging of
+the docker application
+and then
+uh this is pulling uh the docker image
+from their distribution site. So this is
+already given in this uh yeah
+instruction page here do pull image
+name. So this is one example and uh this
+is another example. So you will need to
+run uh command promput and then uh run
+this one. I already did it so I will not
+do that again. And once you download the
+image then this is how you can run. Uh
+so this is also given here here and in
+my case I run this uh image using uh the
+root uh as a root account and you will
+need to uh make or not make one
+directory on your host machine uh to map
+the gem five directory in the uh
+container to the host folder. In my
+case, I uh made yeah this location. So
+uh I make a folder here. Then uh this is
+a shared folder between the host machine
+and the container. So uh you if you
+make ch any changes to this directory
+then in the container you can access the
+changes from this directory. So this is
+a shared folder between the container
+and the host machine and yeah this is
+the uh the do image you just downloaded.
+In my case, I made uh a
+batch file.
+Yeah. So once you run this one, then you
+can see that there there is a gem five
+folder. So uh here uh you can uh this is
+a shared folder. I I said before and
+then download the gem five using this uh
+command. Then uh it takes some time and
+when you get to gem five directory this
+is what you can see and then finally
+using this con uh you can build uh the
+gem file.
+There are a couple of options you can
+choose. This is the build uh command.
+ISA means what kind of uh processor you
+want to build or um yeah power PC risk
+five. Yeah, this is what uh Gen 5
+supports in our lab. We need x86
+and the variant means uh debug opt.
+Typically we use opt. So uh here I ran
+the uh I build x86 opt variant using
+four uh CPU cores. It it depends on your
+system. Okay. So it typically takes at
+least couple of hours. So uh yeah it
+takes a lot and uh yeah so you will need
+to take some time uh to uh do this lab.
+Okay. So once you are done with build
+building the gem five then this is how
+you can run the baseline
+uh the application that is actually
+given as a file here. So this is a
+matrix matrix multiplication. It is we
+already did in the class and this is the
+initialization code and this is the
+actual multiplication and this is the uh
+declaration of the input and output
+matrix.
+Okay. So uh you can uh yeah I made the
+directory for the baseline application
+here. Okay. And then make
+directory here and then place base C to
+this directory. So let me show you here.
+So when you go to gen test
+progs you can see lab one here and this
+one base jump C. Okay. And then you can
+compile base jump c base c then you will
+get a out and then you need to edit the
+configuration script. This is uh when
+you run gem five simulation you need to
+uh you need to let the simulator know
+what exactly the simulator should do. So
+this is the script to uh to in to give
+some instructions to the simulator.
+Okay. So
+yeah, this script actually defines a
+simple uh system uh consisting of one
+processor, two level one caches and one
+level two cache. So let me briefly
+explain uh how we can uh make a system
+using uh this script. So uh you can find
+this is some this is a python file. So
+it looks very uh yeah familiar to some
+of you and we are importing some
+packages and this is actually what we
+are going to run on this simulator.
+Okay, this is a simulator. So uh we are
+going to run what kind of benchmark the
+software we are going to run using this
+simulator and this is the uh actual
+path. So uh you need to here you need to
+update change the line 61. This is the
+line 61. So uh it used to be the hello
+world application. So I changed it to
+the uh lab one uh the baseline
+application.
+Then let me continue to explain this
+one. And this is some uh uh uh it can uh
+get some uh command line options. Uh so
+this is the processing uh command line
+options and this is the definition of
+the system the whole system and it's
+clock is this one and it has yeah 1
+ghahertz clock and
+yeah this is the main memory main memory
+uh size is oh you you you have to
+increase the
+yeah this memory size is the original
+script I don't remember exactly but yeah
+this yeah you will need to increase this
+memory size to uh this much okay but
+actually it still works but uh some you
+can you you may see some warning
+messages so if you see warning messages
+then you will need to increase the total
+uh number total uh capacity of the uh
+main memory and this is The definition
+of CPU x86 timing simple CPU. There are
+couple of different um CPU models.
+The timing simple is the simple uh CPU
+but is still approximately give you some
+uh uh timing information. Uh if timing
+is not accurate then the simulation
+speed gets more faster. Uh but uh you
+can use that simulator only to verify
+functionality. But if the timing is
+included then it it gets slower but you
+you can get uh some timing information
+as well but it is not very accurate. If
+you want to uh accurate if you want
+accurate timing information timing uh
+simulation result then you will need to
+use different type of CPU. For example
+um uh atomic CPU. This atomic CPU is a
+in in order processor model uh and with
+very accurate uh timing. So it is even
+slower and uh Gen 5 also supports out of
+order processor models. So uh depending
+on what you want to simulate uh you can
+choose the uh CPU model in for this lab
+uh this is enough x86 timing simple CPU
+is enough. So uh we are going to use
+this one and this is the definition of
+caches. We have uh I caching and D
+caching uh separately and this is
+connecting the uh uh caches to the CPU
+and we also
+have a L2 cache and this L2 cache need
+to be connected to L1 through a system
+bus. So this is the uh uh definition of
+the system bus
+and yeah this is the connections and
+this is uh this is to uh uh yeah
+basically connection
+and this is the memory model and we are
+going to use DM DDR3 uh DM and
+uh yeah the workload we already defined
+and here. So, uh yeah, this is the work
+code we are going to use. Okay. And
+yeah, so this is just uh yeah,
+housekeeping tasks just running the
+simulation. Okay. And uh this script is
+uh for uh system emulation mode. Gen 5
+supports two modes. One is system
+emulation mode. That's why here here
+these two these capitals S and E stands
+for system emulation and the other mode
+is full system mode. Basically systems
+system system call emulation mode this
+uh in this mode we don't actually run
+the operating system. So when the
+application user level application
+uh uh runs and needs to call uh system
+course. of the uh the operating system
+uh instead of stimulating the operating
+system uh the host machine directly just
+to service the uh system core. So it is
+uh it is very useful uh to evaluate
+using user level applications.
+But sometimes you also need to evaluate
+how uh the system software like uh
+operating system or device drivers work
+then you will need to run full system
+mode. In the case, yeah, obviously it is
+slower than the uh system sim uh system
+call emulation mode for now because we
+are going to uh optimize the case
+behavior of the user level application.
+So uh we are going to use the system
+called emulation mode.
+Okay. Then uh you can run uh using this
+command to uh run the baseline
+application on the simulate simulator
+and we this command line option uh
+defines the cache size. Actually the
+default value is bigger than this but
+because we are going we want to show the
+impact of the cache optimization we I
+just uh yeah reduce the size of the
+cache otherwise if we use the uh default
+value it will have a larger cache if I
+remember corre correctly it must be
+around 16 kilobyte in that case we need
+even bigger
+uh matrix and running the simulation
+will take longer. So uh I just want to
+uh spend too much time on just uh
+waiting for the simulation result. So I
+reduce the cache size and the uh matrix
+size and this is the result of the
+baseline. So it takes uh yeah it's very
+long about
+yeah 1,000 billion cycles uh to finish
+the application and what you are uh have
+you you you have to submit is to uh
+modify the version of this uh baseline
+application uh so that by using the
+blocking method I uh yeah explained in
+the class
+then uh
+yeah by using the blocking method uh you
+can uh improve the cachy behavior and
+then get a faster uh result. So uh I am
+expecting that uh if your method is
+correctly applied then uh this number
+will be smaller.
+So that's what you need to submit and
+submit your source code with the screen
+capture of the result to the RMS just
+source code and screen capture will be
+enough.

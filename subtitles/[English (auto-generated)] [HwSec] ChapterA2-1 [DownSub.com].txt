@@ -1,0 +1,459 @@
+The memory subsystem design is one of
+the most important uh aspect of
+designing a processor.
+It is not only for the performance but
+also security because uh in nowadays
+many attacks especially the uh side
+channel analysis attacks are based on
+memories and also you may know that
+there are many uh attacks uh
+vulnerabilities
+uh uh pertaining to uh memory access. So
+memory subste design is very important
+but in this video uh we are going to
+focus on the performance uh yeah
+perspective of the memory hierarchy.
+Ideally
+uh we expect we hope that the memory
+there is one infinitely large memory
+that offer that supports immediate
+access of any data but in reality uh it
+is not possible. So we have to design a
+hierarchy of memories
+uh each of which has greater capacity
+than the preceding but which is less
+quickly accessible. So on the right side
+of this slide some examples are shown.
+So for example
+uh the register the uh the this is the
+fast the uh fastest memory and register
+is a a kind of a memory because we can
+store data in registers.
+The speed of accessing a register uh is
+uh the latency is very short but the
+size is very limited. So we employ first
+level cache in that case it takes about
+one nancond but size is a little bit
+larger but this is not enough though so
+we have the next level memory that is
+layer two in that case it is a little
+bit slower but it is a little bit larger
+this keeps going on so Level three,
+slower, larger.
+Main memory, typically DAM, even
+slower, but even larger. And finally,
+the disk storage uh is slowest but
+largest. So, this is a typical example
+of a memory hierarchy.
+And this one, the next one, this one is
+the memory hierarchy of typical uh
+personal mobile devices.
+Anyhow, uh what I want to show here is
+that the memory hierarchy is inevitable
+because we don't have the idea
+infinitely large memory that where we
+can access any data immediately.
+So instead in reality we have to design
+a memory hierarchy
+that actually gives us many issues. So
+um or we can say from the perspective of
+a researcher that gives us many
+opportunities because we need to explore
+different types of um yeah designs. So
+yeah that's why we can uh the the yeah
+where the researchers actually can
+contribute.
+So this is a graph that shows the
+performance gap between the processor
+and memory is ever uh growing. For
+example
+uh Intel Core i7 uh has four cores at
+3.2 2 GHz. That means the peak bandwidth
+of the memory to the memory
+is 400 GBTE per second but the DM can
+support only 25 GBTE per second. So
+compared to the memory uh bandwidth
+demand actually it can actual uh yeah
+available bandwidth is only 6% of the
+peak demand.
+So the most uh famous the yeah
+prevailent solution to this performance
+gap is cache. So uh we will going to uh
+we we are going to uh yeah uh del into a
+little bit
+details of the cache.
+First we need to classify the cash
+organization.
+We can classify the cache by set
+associative.
+So how many blocks can be placed in a
+cache? This is the determining factor of
+a cache organization.
+Typically we classify caches into three
+categories. The first one is direct map
+cache that is that has only one block
+per set. For example, yeah this is an
+illeration of the uh direct map cache.
+So in this organization
+uh if we want to find the data within
+uh
+cache index the blog index then there is
+only one block for a typical index the
+for the given index but in case of
+nayway uh set associative cache for
+example two-way set associative cache
+this is the example row two-way set
+associative cache then for the given
+index for example then we have two
+blocks.
+So
+if any of these two blocks hits then we
+can immediately access the data we want.
+So uh yeah and to the extreme then we
+have a fully associative cache. So there
+is only one set and block one block can
+go anywhere. So uh this is yeah probably
+the most uh efficient uh yeah cache in
+terms of uh space utilization. But uh
+from the perspective of uh space
+utilization
+uh the more way we have the more uh
+efficient but the problem is in if we
+increase the number of ways then the
+access time may increase. Here access
+time means um the absolute time to
+access a memory. For example, 10 ncond 2
+20 ncond this is the uh memory access
+time but uh
+that should be translated to cycle
+that is typically depends on the clock
+frequency of the processor. So if the
+processor runs at for example um
+yeah 1 ghahz then one clock cycle it
+corresponds to one nancond. So if the
+access time is 10 ncond that means 10
+cycle but if the processor runs 10 yeah
+for example 1 g 100 megahertz that means
+the clock cycle is 10 ncond so in that
+case uh 10 ncond delay means one clock
+cycle but how about how about 9 ncond
+then it is shorter than one clock
+period. So it still pays one cycle. So
+the cache access time this is absolute
+time not number of cycles. Uh depending
+on the clock frequency of the processor
+then the increase the uh access time may
+or may not affect the uh performance.
+And we can classify the cash by right
+strategies.
+The right through cash means that
+uh
+this is uh this classification is
+uh
+for the case when right miss occurs. So
+when we when yeah you want to write
+something to the cache but that uh
+request block is not in the cache then
+what happens
+the in case of write through cache the
+the
+uh the requested data is written to the
+cache
+and immediately
+the data the actually the cache block
+that contains the requested data is
+written to the next memory hierarchy. So
+if we have level two cache then uh we
+have to write the data to the level two
+cache or the memory then if the cache
+mis occurs at the last level cache then
+we have to uh write the data to the
+memory.
+So the in case of write through cache
+the processor waits until the request
+data is written to the cache as well as
+to the next level memory. But in case of
+write back cache, the processor
+immediately
+returns when the data is written to only
+that particular cache and the data
+written to the cache is
+ultimately
+have to written have to be written to
+the next level memory. It is done when
+that particular right that particular
+cash block
+is evicted. So as you know when cash mis
+occurs then we have to allocate new a
+space for the new block that means the
+one of the existing block should be
+evicted that means it should be removed
+from the cache. So in that case if that
+block has had been updated before then
+that block should be written to the next
+level
+otherwise it can be just erased. But in
+case of write through cache as soon as
+something one data is root written to
+the current cache then it is immediately
+copied to the next level cache next
+level memory.
+We can also classify the cache by uh the
+right allocate policy. That means
+these two caches
+assume that implies that when right mis
+occurs then we allocate the one memory
+one cache block at the current cache.
+But in case this is right allocate
+cache.
+When right mis occurs we allocate
+a block to the cache. But there is
+another type of cache that is called
+right nonallocate cache. In that case
+there is no right miss. Actually
+whenever any uh yeah whenever any rhyme
+miss occurs then it doesn't uh allocate
+a block for the request requested data
+in the cache. Instead it is just
+immediately passed to the next level
+memory. So it is called right
+non-allocate cache.
+But the problem with right non-allocated
+cache is that the processor should wait
+until the data is written to the next
+level cache. So it typically the next
+level cache has longer latency. So the
+processor has to wait for long.
+Anyhow
+uh a right buffer can reduce the right
+latency.
+For example, in case of right through
+cache we the processor has to wait until
+the data is written to the next level
+memory. But if we have a right buffer
+then the processor just returns as soon
+as the data is written to the right
+buffer. So the right buffer uh is
+located between two
+caches. For example, if L1 cache miss
+occurs, then uh right miss occurs, then
+the data to be written to L2 cache is
+written to the right buffer. Then uh the
+processor can continues
+uh its operation and while the processor
+is working the right buffer in
+background in parallel
+writes the data to the next level cache.
+So it is yeah a kind of queue between
+the two uh caches. So it actually helps
+a lot to improve the performance.
+And then
+when the catch miss occurs
+compulsory miss is uh also called cold
+miss because when a processor boots up
+then there is no valid data in the
+cache. The cache miss is yeah
+inevitable. So the first time access to
+the cache always incurs cash misses. So
+that is called comparative or cold miss
+and capacitive miss occurs when the
+capacity of the
+cache is too small to support to
+accommodate the request data set and
+confering miss occurs when uh there is
+already existing data in the cache set
+and uh we cannot find the request data
+in the current set. So there is a
+conflict and one of the existing block
+should be evicted. So that is uh c confl
+cases
+and you you may yeah in many cases there
+is actually uh not clear separation
+between capestimis and compliments.
+So sometimes yeah it is not clear
+and for the multiore systems many uh for
+the multiore systems
+uh the in order to maintain the
+coherence between among the caches a
+coherence protocols
+one yeah a coherence protocol should be
+implemented.
+So even though we have enough space in
+the case in order to maintain coherence
+we may yeah flush the cache block. We
+may have to yeah flush the cache block.
+So it is called coherency miss. So in
+yeah the cos means that uh for example
+we have two cores and each core has
+private L1 cache. In that case, if uh
+the these two cores
+have the same
+data in the cache here, the same data
+means the data at the same memory
+location.
+And because the L1 cache is private,
+each processor maintains each uh the L1
+cache uh separately.
+But we have to make sure that these two
+processors
+see the same data if that data is at the
+same location in the memory
+but the caches are maintained
+separately. In that case, yeah, the cocy
+means that the processor can see the
+same data
+even though they are see the data
+through different caches.
+For that, the cache blocks of these two
+L1 caches should be coherent. They
+should be the same.
+that is guaranteed by the cash coherence
+protocol. In order to maintain the
+coherency, there could be cash misses
+even though we have enough space in the
+cash.
+The cash miss rate or hit rate is the
+most popular metric to measure the cash
+performance. The cache miss rate can be
+calculated by the number of misses per
+number of accesses. And the average
+memory access time
+can be computed by heat time plus mis
+rate times miss penalty. I I think it is
+quite intuitive, right? When you access
+a data, if cash heat occurs, then we can
+immediately access the uh yeah access
+the data. But if miss occurs, we uh pay
+the miss penalty. But the miss not does
+not always occur. So we have to
+yeah multiply the miss penalty
+with the
+possibility
+of miss that is miss rate. So if we have
+two uh yeah one yeah two for example
+levels of cache and uh and we can uh
+compute the memory average memory access
+time in this way.
+So uh the heat time of L1 plus miss rate
+of L1 times the miss penalty of L1. The
+miss penalty of L1 means the access time
+to the L2 cache. So the access time of
+the L2 cache can be computed by heat
+time of the L2 cache plus mis rail of L2
+times miss penalty of L2. We can expand
+this this uh this equation to more
+number of uh yeah cash uh levels. So
+instead of miss penalty of L2 if we have
+L3 cache then this is
+this means the average average access
+time of L3 then the average access time
+of L3 can be computed by heat time of L3
+plus miss rate of L3 times miss penalty
+and the penalty of L3 could be average
+access time to the main memory. So we
+can yeah simply expand this uh equation
+to the more uh number of levels
+and these six uh six techniques six ways
+there are yeah some basic ways to
+improve the cache but it is a general
+principle that means they don't always
+work.
+Typically, if we increase the block
+size, the cache mis rate is likely to be
+reduced, but not always. It depends on
+the uh application.
+And if we have bigger cache then yeah
+that helps to improve the performance.
+Higher associivity. If we have more
+number of ways then it is likely to
+reduce the cash but but here is a
+tradeoff. If we increase the number of
+ways then we may reduce the cache miss
+but it may increase the access time of
+the memory. That's because the
+controller of the cache controller uh
+the latency the delay of the cache
+controller may increase because the
+complexity increases
+and this graph actually shows it.
+If we have the same uh cache size but
+when we increase the number of ways then
+the access time is likely to increase
+mainly because the increased complexity
+of the cache controller
+and we if we have a multi-level caching
+then if we have have a very uh yeah uh
+Swiss part then we can actually optimize
+the uh yeah balanced uh performance
+because the budget is limited under the
+same budget. If we for example implement
+everything to the L1 cache then the
+access time is the best but most likely
+the capacity is too small. In that case
+the overall performance may not be very
+good. So if under the same budget, same
+cost, same area instead of one single L1
+cache if we divide L1 and L2 then uh we
+can balance the cash miss rate and the
+access time. So we have to find the best
+balance
+uh and best number of uh levels of
+caches. Of course it is it all depends
+on the application the benchmark uh but
+always we have to find uh so that that's
+why we need standard benchmark. So
+typically the computer architect uh aim
+to maximize the performance for the uh
+standard benchmark.
+Typically the read is more important
+more has more impact on the performance
+because when we write data to the cache
+the cache the processor actually doesn't
+have to wait until the data is actually
+written to the uh main memory
+because the yeah the
+uh writing to the main memory can be
+done in background.
+in parallel with the uh processor
+running. So but if read
+miss occurs then the processor waits
+because the processor cannot go
+continue the operation without the
+requested data. So we have to prioritize
+the read request uh to the right uh
+request
+and the virtual indexing means that when
+we uh want to find
+where the data is in the cache we need
+the
+yeah memory memory address
+but there are two types of uh caches.
+One is uh physically indexed cache. That
+means uh we use the physical address to
+index the cache. In that case, we have
+to wait until the virtual address is
+translated to the physical address.
+So if the cache is indexed by the
+virtual address then we don't have to
+wait for the uh virtual address to
+physical address translation. But one
+problem with this approach is that uh
+because
+different applications
+have their own virtual address space.
+that means different application may
+have the same virtual address.
+So in that case we need to distinguish
+these two virtual address. In that case
+uh we may need to have a little bit more
+information from the uh application. So
+this virtual we need we have to know
+that this virtual address belongs to
+which application. So in main yeah also
+increase the access time. So in case
+yeah when we design a processor and yeah
+memory hierarchy
+uh there is no single best way to
+improve the performance there is always
+tradeoff. So we have to balance uh all
+the aspects of the design space.

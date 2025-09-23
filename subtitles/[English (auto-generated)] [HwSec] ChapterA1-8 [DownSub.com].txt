@@ -1,0 +1,160 @@
+Among
+many different metrics, probably the
+performance is the um yeah, one of the
+most important metric uh because we
+still need to consider power
+consumption, reliability, these kind of
+things. But still, uh performance is
+still uh very important. And when we are
+talking about performance, uh typically
+we use two metrics. The first one is
+response time or sometimes it is called
+latency or delay. So basically when we
+start an application how much time we
+have to wait for the result. uh it is
+related with the response time and the
+throughput is uh how much uh work the
+processor can do within a uh uh set uh
+within a unit time. So uh it is
+important metric for servers because
+servers are typically used by uh
+multiple users. So in that case uh it is
+related with how many users can
+simultaneously use that service
+and uh when we say performance typically
+this value uh the higher is the better.
+uh it means uh if we translate it by
+from execution time then it means the
+shorter uh is the better.
+So uh we can express this uh uh
+relationship using uh this uh yeah
+equation.
+And when we measure the execution time
+uh here again we have two ways to
+measure the performance the execution
+time. One is using word clock. Yeah, it
+is basically uh yeah simply using a
+stopwatch
+uh we can measure the execution time.
+The other one is CPU time. Yeah, we use
+the some special um
+actually the processor usually the
+processor has is uh internal performance
+counter. So uh the CPU can count the
+number of cycles by itself.
+When we use work clock it this time
+includes not only processor but also uh
+disk access time, memory access time, IO
+activities or network activities
+everything is included
+some in some sometimes some for some
+applications
+uh yeah this work clock time could be
+more accurate metric for performance but
+in other cases CPU time only the amount
+of time spent by CPU the processor could
+be uh most important.
+Uh yeah typically
+when we compare the performance of
+processors we use CPU time because uh
+the IO activities are
+yeah not over our interest to compare.
+So in that case we use CPU time
+and the other issue is that uh
+when we compare the performance then we
+need to run software
+especially if we are we want to compare
+the performance of a processor then how
+what what should we run to for
+comparison?
+that is uh typically called uh yeah
+benchmark sweep. So it is not just one
+single application because uh yeah for
+some for one application that particular
+application may use some instructions
+but some yeah it may not use other
+instructions and also depending on the
+application that application may use
+only small set of instructions very
+heavily but not others. But in different
+application that application may use
+different set of instructions heavily.
+So instead of using just a small number
+or one application we had we need uh a
+bench of a bunch of applications that
+exhibit uh different behaviors.
+uh from the perspective of processors
+they utilize
+uh most of the uh instructions that the
+uh processor supports. So uh they are
+called uh benchmark suites
+and they need to be standardized
+because uh if you yeah imagine that you
+are selling a pro processor and you want
+to say that your processor is better
+than other u yeah competitors then you
+are very tempted to choose the
+applications that are that uh shows good
+performance on your processor but not
+other processors. So
+there could be some cherrypicking of uh
+applications. So uh people uh the
+researchers in this area uh yeah made a
+standard uh benchmark suite. The most
+successful standard benchmark suite is
+spec that stands for standard
+performance evaluation cooperation.
+Yeah, it it is still being used and
+it have different types of uh benchmark
+suites. If we want to compare processor
+throughput then the spang rate benchmark
+suites is good for uh this purpose and
+for IO performance we may use spec FS fs
+yeah stands for file system. If you are
+comparing web server performance then
+spec web transaction processing TPC
+benchmark actually TPC benchmarks are
+not a part of spec benchmark. It is a
+separate benchmark but anyways the TPC
+benchmark is also one of um yeah famous
+uh standard benchmarks in this
+community. So uh in in short
+we are using a standard benchmark to
+compare uh the processor performance and
+depending on what exactly we want to
+compare some different types of
+benchmarks may be used
+because we are running multiple uh
+applications. Uh some or we may want to
+see uh one representative value to
+compare this this processor and this
+processor.
+In spec the standard approach is span
+ratio.
+In this approach, the execution time of
+each benchmark is normalized to a
+reference processor. Then uh we are just
+comparing the ratio of the execution
+time. And then because still we compute
+this ratio for each benchmark. If we
+want to summarize them into one metric
+then we are using geometric mean not
+arithmetic mean because this is a ratio
+so we are using the geometric mean.
+So this is an example. Uh this is the uh
+comparison between we what what we want
+to hear is to compare the AMD Opteron
+and Intel Itanium 2 using spec uh
+floatingpoint benchmark and the
+reference processor here is Sun ultra 5.
+So this column is the reference and this
+is the spang ratio between the opteron
+and uh ultra 5 and this spang ratio is
+for opteron and this spang ratio is for
+itanium 2. Uh the ratio is basically the
+execution time uh yeah uh over the uh
+the reference uh execution time. Then we
+have a geometry mean here.
+So this geometry mean uh by comparing
+this geometry mean we can see that which
+one is actually faster.

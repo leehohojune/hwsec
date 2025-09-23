@@ -1,0 +1,253 @@
+This is very typical equation when we
+want to compute the CPU time. The actual
+uh time that is spent by the processor.
+Uh the first factor is uh clock cycle
+time. uh it is determined by the uh
+clock frequency and eventually it is
+determined by the uh logic
+implementation.
+Uh for example, if the processor runs at
+1 ghahertz that means one cycle means
+one nancond. So uh that is one factor
+that determines the CPU time. The other
+one the next one is cycles per
+instruction.
+It is average uh cycles per instruction
+because depending on the instruction uh
+it may consume different cycles and also
+it is the uh other uh subsystems are
+also affecting this number because if we
+want to access memory uh depending on uh
+whether the cache hits or not uh the
+number of cycles the instruction needs
+to wait could be different. So these
+cycles per instruction uh is an average
+number of cycles that the one
+instruction need to take uh to uh
+complete
+and it is usually affected by the micro
+uh the instruction set architecture or
+the organization. The the organization
+here means micro architecture. So uh
+typically when we from the perspective
+of CPU uh architect the processor
+designer uh the designer is the
+processor designer uh is uh contribute
+to the cycles per instruction. The clock
+cycle time uh the clock frequency
+typically is uh deter uh is affected by
+the back end engineer or circuit uh
+implementation engineers and the
+instruction count is from the software
+because uh when we run a um an
+application the number of instructions
+uh could be determined by the uh the uh
+application
+But still it is affected by the
+instruction set architecture because
+even though we are using the same
+benchmark depending on the instruction
+set architecture we may uh need to
+implement the same uh functionality
+using different uh instructions. So and
+also uh it is also affected by the
+compiler. Uh yeah how much how smart the
+compiler optimize
+uh the code size or performance uh the
+number of instructions could be uh
+different. So by multiplying these three
+factors we get the CPU time
+to uh
+there are many uh here in yeah there
+there could be many different ways to
+improve the performance but here uh we
+are talking about uh exploiting the
+parallelism.
+We can classify the types of parallelism
+in various ways. But in this uh small
+chapter uh we categorize it to uh three
+categoriz categories. The first one is
+system level uh parallelism. Uh that is
+um uh they can be exploited by some high
+level software and the second one is
+instruction level parallelism. So uh it
+is by uh executing multiple instructions
+at the same time we can uh improve the
+performance. And the third one is
+hardware level the the gate or device
+level parallelism. For example, set
+associative cache use multiple memory
+banks uh so that we can uh access
+multiple uh sections of the memory uh uh
+in parallel. If the memory is not banked
+uh in other words, if there is only one
+bank in the memory, then we can access
+one at a time. But because there are
+multiple banks, we can access more than
+one uh at the same time. So this is one
+example of uh yeah uh yeah device level
+uh parallelism.
+And the other very uh important property
+then we want to exploit to boost
+performance is locality.
+That means uh we expect that uh two
+types of uh localities. One is temporal
+locality. That means recently accessed
+items are likely to be accessed in the
+near future.
+And the spatial locality means some
+items
+uh once they are accessed
+other items nearby that item are likely
+to be uh yeah accessed. So these two
+types of yeah in many applications these
+two types of localities are uh yeah very
+often observed. So by uh exploiting this
+locality we can improve the performance.
+The best example could be the cache uh
+because the cachy is a temporal storage
+for the memory um and once any uh yeah
+any memory item is accessed then it is
+temporarily stored in the cache.
+If it is accessed again and that
+yeah requested item is in the cache then
+the processor can access that item very
+uh quickly. So uh this is one uh
+representative example to exploit uh
+locality
+and the other strategy could be focusing
+on the common case instead of uh yeah
+improving everything together. Sometimes
+it might be not possible. We have to
+choose uh one uh improve something but
+not others. in the case how we can uh
+choose uh what to improve.
+So we have to focus more on the frequent
+cases over yeah uh others.
+So when we allocate resources, yeah, we
+we want to give more resources more
+quickly to uh to some uh part of the
+system that has a highest impact on the
+frequent operations powerful
+optimization as well. uh we h we if we
+need to choose uh uh there if there is a
+tradeoff when we have to choose uh uh
+some components in the system then need
+to uh be optimized uh then we got to
+yeah choose the uh frequently used uh
+yeah component dependability and
+performance they all the same. So from
+different perspective but still yeah
+sometimes there there could be a case
+that uh
+in from the perspective of performance
+component A is more important but from
+the perspective of dependability another
+component could be important but the
+optimization strategy might be
+different. Uh so in that case you know
+even higher level uh do we have to put
+more emphasis on dependability or
+performance that should be determined
+and then we can determine which
+component we have to focus on
+because we have multiple components in
+the system. uh even though we are
+enhancing optimize something some
+component in the system from the
+perspective of the whole system the
+impact could be reduced. So uh this law
+is a famous law that express this
+situation. So let's take an example web
+server for example we employ a due
+processor which is 10 times faster on
+computation that means the execution
+time would be uh yeah uh divided by 10
+or the speed up is 10. So it is very
+yeah drastic improvement but let's let's
+assume that the computation takes 40% of
+an let's say application and 60% is just
+waiting for IO uh to complete in that
+case the speed will be computed using
+this row in this way so 60% this doesn't
+change because we are just waiting for
+the IO
+what is actually reduced is only 40%.
+And divide by 10 means uh yeah for
+example it takes uh 0.4 let's say uh
+second uh it will be done in 0.04 04 uh
+second. So it is huge improvement. But
+if we consider this IO waiting time then
+the actual speed up of the whole system
+would be only 1 56. So even though we
+are employing a dual processor 10 times
+faster
+uh we are expecting only 56%
+improvement of the overall performance.
+So uh so this this is why we have to
+focus on the common case. So uh if for
+example if we can improve
+anyhow this 60% uh time then it is
+overall impact on the performance would
+be might be uh even uh higher.
+So uh even though we are increasing the
+performance of something uh the expected
+improvement could be saturated because
+of this law. Uh yeah so the fraction
+could be uh yeah uh not very uh yeah uh
+substantial.
+So let's uh take some or more examples.
+Let's say a graphic processor has a
+floating point scale root computing unit
+and it takes about 20% uh execution
+time. So maybe one option could be speed
+up this floating point square root by 10
+times. Then uh all the impact of this
+improvement on the overall performance
+would be uh uh computed by this equation
+the amalo and then gives us 1.22
+and the other one is uh all floating
+point instructions
+not just the square root but all
+instructions but in that case the
+individual improvement could be only 1.6
+six uh times but the the amount of uh
+the percentage of the all floating point
+instructions is 50%.
+So uh from this option uh we can expect
+the speed of 1 uh 23.
+From this analysis, we can expect that
+option two is slightly better than the
+first option. Uh yeah. So uh because if
+we look at only this number actually the
+first one looks much better but the
+problem is the this percentage of what
+we improve.
+So it is also important factor that we
+have to consider.
+And the same uh law can be applied to
+reliability.
+So let's assume that some system uh
+shows an failure rate uh 23 per one uh
+million hours. Uh in that system the
+power supply failure rate is given that
+and this is 22% of the total failure
+rate. Then we want to improve the power
+supply uh failure rate uh by uh uh for
+example uh employing a redundant power
+supply for example uh which result in
+4,000 times uh yeah improvement
+uh but uh the power supply actually
+takes 22% of the total so by applying
+the ama else we we get 1.28.
+That means even though we improve the
+power supply failure rate or let's say
+reduce the f power supply failure rate
+by 4,000 times still the overall uh
+system uh uh yeah is benefit only uh
+1.20 times 28%. So uh if it costs a lot
+then we may need to reconsider uh or
+anyways if we yeah we need to evaluate
+uh the efficiency
+of this uh uh improvement uh yeah it is
+really worthwhile or

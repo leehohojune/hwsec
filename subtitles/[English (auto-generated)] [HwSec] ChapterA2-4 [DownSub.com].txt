@@ -1,0 +1,303 @@
+Modern processors nowadays usually
+employ virtual memory. The virtual
+memory allows us to share hardware while
+preventing interference between them. So
+the virtual memory uh allows us to
+efficiently manage the hardware
+resources. Uh not only that uh it is it
+it really helps uh the security
+improvement uh because we can uh block
+some interference of u malicious
+application
+uh from intruding other affecting or
+interferencing uh other benign
+applications.
+Uh in order to maintain virtual memory
+uh the processor need to support user
+and supervisor modes
+and these two modes
+because uh so that the user mode in the
+user mode uh the application should have
+limited capability of managing or
+accessing hardware including the memory.
+By doing this we can limit the access uh
+access capability of the user mode
+application from uh the supervisor mode
+application. So the in the supervisor
+mode we can change the uh policy of the
+user mode applications.
+Uh so uh the processor needs to support
+transition between these moves. Uh and
+uh some instructions must be executed
+only in the supervisor mode so that the
+user mode cannot um yeah maliciously
+temper with the policies of um the user
+mode applications. So by using this uh
+we can protect um the memory of a benign
+application from being uh tempered by
+other uh malicious applications.
+The most popular way of memory
+protection is uh pagebased memory
+protection. That means uh we divide the
+memory space into fixed size pages
+typically 4 kilobyte
+but for some uh processors they support
+even larger uh memory pages. Uh this is
+because uh if we fix only 4 kilobyte
+page then we need a very big page table
+that that is because the size of the
+main memory uh increased a lot and if we
+have only fixed uh page size then the
+number of pages will increase
+drastically. So uh very recently uh some
+processors and uh operating systems
+support uh a a small number of fixed
+sides. That means the one page cannot be
+just arbitrarily long. Uh we can only
+choose 4 kilobyte, 8 kilobyte, 16
+kilobyte only yeah one of these three
+options. So that that's another approach
+we may consider for uh a system that
+needs large uh main memory space.
+And once we uh uh split the main memory
+space into pages then we can give
+permissions uh to the application to
+when accessing each page. So for
+example, we may allow this application A
+to only read certain pages or uh we may
+allow Yeah.
+read and write and even execution. Ah
+okay. So for for security reason
+nowadays we don't allow
+a certain pag of both write and
+execution permission.
+Uh because uh yeah there are many types
+of attacks that uh inject malicious code
+to the main memory
+through writing some code into the
+memory and executing the uh malicious
+code. Then it means uh the application
+write something to a page and execute
+the page. That means
+yeah uh in benign application typically
+the benign applications only write data
+to the memory not instructions.
+It is very rare case. Of course, some
+yeah just in time compiler some yeah
+applications may need this capability
+but most of the uh yeah applications do
+not need to write instruction to the
+memory. So uh typically it is not
+allowed.
+Anyways uh we can uh control the
+permission of read, write and execution
+of uh applications to a certain page uh
+page by page. So that is the most
+popular way for memory pro uh yeah
+protection
+and uh this vulture memory if we employ
+virtual memory uh we need to translate
+the virtual memory address to physical
+memory address. It takes time
+to reduce the latency of me address
+translation.
+uh we employ we consider yeah not all
+processors have this uh cache but some
+processors have translation lucaside
+buffer TLB that is basically a cache for
+address translation
+once a a sudden virtual memory was
+translated to a sudden physical memory
+recently and if the pair
+uh is stored in the cache TLB.
+If the same virtual address needs to be
+translated again, then instead of
+translating that address again, we can
+actually uh look up that physical
+address very quickly from the TLB.
+The vulture memory works well and it is
+very effective to isolate applications.
+But the problem here is that we have to
+rely on the operating system to m uh
+maintain this protection.
+But here uh the size of the operating
+system uh has ever growing. Uh that
+means uh the attack space or the
+possibility of vulnerabilities
+also increase with the size of the
+operating system.
+So we uh need h we need to reduce the
+optics surfa surface by reducing the
+part
+of the system that we have to trust.
+So uh that's why we need vulture machine
+here.
+The vulture margin came forth uh in late
+1916.
+It has been there for a long time. uh
+but uh in yeah as the technology
+advances nowadays the virtual machines
+are very popular and this is because the
+increasing importance of isolation and
+security in modern systems. As I
+mentioned before, if we employ virtual
+machines, we have to trust only the
+hypervisor and the code size of the
+hypervisor is typically very much
+smaller than that of the operating
+system.
+Yeah. So uh and because of the
+popularity of the cloud or data centers
+now there there is a growing need to
+share single computer among many
+unrelated users and the virtual machine
+is very effective way to manage this
+kind of uh situation.
+So we need if we want to employ virtual
+machines then we need some kind of um
+manager sometimes it is called
+hypervisor or virtual machine monitor.
+Yeah in other uh yeah it depending on
+the vendor of the virtual machine it is
+called in different way with yeah by
+different names.
+So the uh for example hypervisor the
+hypervisor
+determines how to map virtual resources
+to the physical resources. So it is uh
+is key functionality is managing the
+physical uh resources and map those
+resources to virtual machines.
+So virtual machines are yeah much
+smaller than traditional operating
+system
+and because we need another layer of
+software
+uh it degrades of the performance but uh
+fortunately
+um the performance of processors uh is
+enough to support
+additional layer of software stack and
+also uh the some hardware special
+hardware instructions are available
+nowadays that actually help a lot to
+implement or managing the virtual
+machines.
+So when the virtual machines are
+employed, it is much easier to uh manage
+the software.
+Even on the same physical machine we may
+provide some virtual machines running
+legacy wes some others current stable
+west and some a little small number of
+virtual machines may want to use
+next version of OS releases that are not
+stable yet.
+So we have a flexibility of providing
+different kinds of OSS
+on a same physical machine. So uh it it
+yeah gives us flexibility of managing
+software and we also can manage hardware
+efficiently.
+We can improve dependability the
+stability through isolation. Uh because
+if any of the virtual machines uh is
+happen to be malicious then uh even
+though one virtual machine has a
+malicious intent uh it cannot be
+propagated easily to other virtual
+machines
+and also because hardware resources are
+virtualized.
+If one hardware resource fails then uh
+we can seamlessly
+migrate then resource with a uh
+alternative resource if available. For
+example, if we have for example two
+network cards and one network card
+fails, but if the other one works well,
+then uh if
+a virtual machine used to use the first
+one to communicate over the network but
+it fails and without notice of the
+application debureer machine, we the
+hypervisor can change the map of that
+network card to the another one so that
+the virtual machine can now communicate
+over network through different
+network card. So from the perspective of
+the virtual machine yeah it cannot even
+notice of the changes in the hardware
+resources. So in this way uh the the
+user experience and also managing
+hardware could become yeah much uh
+efficient
+in order to realize the virtual machine
+uh the the core functionality of the
+virtual machine is isolation.
+So uh the virtual machine should support
+uh guest software
+uh
+uh to be uh separated.
+That means uh separation of between
+virtual machines as well as separation
+of uh between the software stack and the
+uh real hardware.
+So the guest OS or guest software should
+not be able to directly access the
+hardware physical hardware.
+Always
+the hyperbaric visor should be placed in
+between them and the guest guest
+application can only access the physical
+resource through the hypervisor. So this
+is another type of isolation
+and the virtual machine also uh need to
+virtualize the processor including state
+address translation IO exceptions and
+interrupts
+and also memory.
+So the virtualization of processor and
+memory that means the hypervisor should
+have full control over the resource
+mapping of the processor resources and
+memory resources as well as IO
+resources.
+If the processor has special instruction
+for virtualization
+then it helps to uh to improve the
+efficiency of uh virtualization.
+Intel processors and also other embedded
+processors as well if they support
+virtual machine then they have a special
+instructions to support virtualization.
+So these are are some requirements of
+virtualization but they are already
+mentioned in the previous slide.
+But in reality it is not easy to
+completely separate the guest system and
+the uh host system. It is possible. It
+is possible but not very efficient. So
+the Zen approach is called para
+virtualization. That means we allow
+small modifications to the guest waste
+to simplify virtualization.
+As I mentioned
+even even if we don't want to make any
+modification to the guests for
+virtualization it is possible it is
+allowed but in that case the
+virtualization
+uh is a little bit less efficient
+uh compared to allowing modification.
+So the zen actually maps itself into the
+oppo small memory of the virtual
+machines memory space.
+Then uh the from the virtual uh the
+guest OS uh it actually can directly
+interact with the hypervisor
+then it will reduce the uh size of the
+operating system as well as the uh the
+uh hypervisor and um yeah it is uh it
+allows the uh efficient Management of
+the hardware resources.

@@ -1,0 +1,231 @@
+When we design a processor, we always to
+consider the economics
+uh because we if we cannot expect the
+enough revenue out of producing a new
+processor then yeah there is no reason
+to design a new processor. So it's all
+about money. So what what actually
+impact on the uh cost here? Cost means
+manufacturing cost of a processor not
+only processor but or yeah in general
+yeah semiconductor. So the first thing
+we have to consider is the time it is
+actually technologically
+uh it is related with yield. Here yield
+means the
+success rate. So uh this is because
+because we are using very small scale
+technology nanoscale technology the
+humans cannot control all the physical
+phenomena. uh even though we are using
+the same wafer the same uh facility the
+same design some chips work but some
+chips don't we cannot control some
+factors be cannot be controlled
+so the yield here means the number of
+good chips over the number of total
+manufactured chip
+If the success rate the yield is too low
+then uh the manufacturing cost is
+obviously increased.
+So uh if it is too low then it is called
+that this technology is not stable
+and if the yeah yield is low then it
+will take more time to produce the
+expected amount of expected number of uh
+chips. So it takes more time. So it is
+one factor. The other one is volume.
+Yeah, it is not just semiconductor but
+in yeah many mass production systems the
+volume if yeah as volume increases the
+the cost the cost per unit here uh is
+likely to decrease. So the rule of thumb
+the rule of thumb means the uh empirical
+uh yeah rule uh says that the cost the
+cost per unit is decre uh decreasing
+about 10% for each doubling uh of volume
+and the last one is uh commoditization
+uh it it is related with the
+competition. If we can easily replace
+one component of your system with
+another one then the vendor of that
+particular component is likely to
+compete and offer the best offer.
+Otherwise uh the yeah you if you don't
+have any choice then the vendor will
+charge you as much as they want because
+you cannot yeah change it to uh another
+uh component. So uh this is one another
+factor that affect uh the uh yeah
+manufacturing cost.
+And if we look at the manufacturing cost
+in more uh detail uh we have to consider
+some uh yeah factors. The first one is
+the cost of a die here. Dye yeah you you
+can see the uh the photo of a wafer
+actually wafer is usually you know
+sucker form and uh one dye. Yeah. Here
+for example this is called a die. This
+will be uh packaged and produced as a uh
+chip. So uh within a d within a wafer
+you will have many uh dice. So uh the uh
+yeah so we can uh count the dice per
+wafer using this uh formula. So it is a
+estimation. Here you can see this symbol
+uh not not exactly but yeah
+approximately because because if this
+die is a rectangular then we can uh
+directly uh compute the uh the the
+number of dice by uh dividing the area
+of a wafer by area of one dice size.
+then we will get the number of dice uh
+but because this is a circle not rectang
+uh yeah uh rectangle. So uh we uh have
+this kind of uh estimation equation.
+So basically uh this is as I mentioned
+this is the uh the uh size the area of
+the wafer
+just pi r square and this is the area of
+one d. So we if we divide the total area
+by the area of one dice then we will get
+uh the the number of dice but
+unfortunately
+the dice on the these boundaries we
+cannot use them because they are not
+rectangular. So we can estimate the
+number of dice on the border that we
+cannot use by using this uh equation. So
+it is basically just estimation. So this
+is uh pi uh times wafer diameter uh that
+is uh the length of this uh boundary and
+this is the uh uh the estimate the the
+uh the one yeah the this one uh one side
+of the uh this uh die. So uh by dividing
+uh the the whole uh length of the die at
+a wafer by one side of the uh die we can
+get the number of dyes on the edge. So
+this but this is a estimation not exact
+number. So by uh subtracting uh the
+number of dice on the edge from the
+total die, we can estimate the number of
+dice like this.
+And uh but unfortunately
+not all dice work well. So we have to uh
+here plug the die yield. So the cost of
+one dye can be now estimated by the cost
+of wafer the total wafer by dice per
+wafer the number of dice but uh we have
+to uh yeah multip have to multiply it by
+uh the success rate die yield.
+Okay. So by using this equation uh we
+can estimate the uh cost of dye and uh
+let's see the some example here. So if
+we have 300 mm wafer this is a diameter
+and one dye we want to produce uh the
+size of one dye is given uh here and how
+many dice. So we can just plug these
+numbers to uh this equation then we will
+get uh around this uh many uh dice from
+that wafer.
+Okay. Oh yeah.
+Then how can we estimate the die yield?
+Uh
+the most important factor could be one
+of the important factor is defect
+density
+because uh the chip failure means that
+the chip has defect. So uh approximately
+how many defects could be there within a
+given area unit area that is uh defect
+density.
+So if the defect densities is too high
+then there must yeah the yield must be
+low and because of this defect density
+yeah the die size actually related with
+the die yield because the bigger the d
+size is the more likely to have the
+defect.
+Yeah because yeah this defect is just
+spread through across uh the wafer. So
+the chance of having uh a defect is
+likely to increase if the dice size
+increase.
+And process complexity
+uh is if the process the technology the
+manufacturing process is too complex
+then it is likely to fail. So it is
+another factor and redundancy could uh
+yeah help to increase the yield. Uh it
+is typically used for memory cells
+because we have uh because the memory s
+cells are very regular. So uh we place
+memory cells more than we actually need.
+For example, if we need 4 kilobyte on
+memory, then we may
+we may implement 5 kilobyte memory cell
+then we are using only four. So if the
+four one of the uh cells in the 4
+kilobyte memory fails then instead of
+just throwing that die away uh we can uh
+use it if we can replace that failing
+part of that memory with the spare 1
+kilobyte because um yeah yeah we we need
+4 kilobyte but we have one extra
+spare memory. So if we replace the
+failing segment of the memory with the
+spare that works well then yeah we don't
+need to throw this D away. So by using
+this kind of technique uh we can boost
+the yield.
+So this is a formula of estimating the
+yield. The D yield is uh related with
+wafer yield and here defects per unit
+area and die area and this is the
+complexity factor.
+Uh this is not a theoretical value but
+the complexity factor the process
+complexity factor is empirical uh value.
+So let's see the example. If we have uh
+this uh dice size and this is the defect
+density and n is given here u the wafer
+is always works well that means 100% ill
+then what is the die ill
+by just plugging these numbers to here
+we get uh this number so about 40% of
+the die work uh but unfortunately 60% %
+uh fail. And when you plug these numbers
+to this formula, you will need to uh be
+careful with the unit here. This uh
+formula works for centimeter uh yeah
+centimeter uh unit. So if if the uh the
+yeah numbers are given in different unit
+you will need to convert that number to
+cm
+and the die yield manufacturing cost uh
+it is only for manufacturing but in
+semiconductor actually the major portion
+of the cost is nonrecurring.
+engineering cost. You you can just uh
+consider this as a design cost
+and also yeah design cost by human and
+also uh in order to manufacture chips we
+need to first design or manufacture the
+mask. Once the mask is given then we can
+produce um yeah many uh chips but the
+cost of manufacturing mask is yeah
+enormous. So uh this is called
+nonrecurring
+uh engineering cost because it is not
+recurring
+uh so it is called nonrecurring
+engineering cost
+and the other cost we have to consider
+is operational cost. uh because as shown
+here that in case of servers
+uh we are running servers typically 24
+hours per day. So the operational cost
+that is typically related with the power
+consumption is now as significant as the
+purchase cost. So here again the power
+consumption is very important factor
+when we uh consider the cost as well.

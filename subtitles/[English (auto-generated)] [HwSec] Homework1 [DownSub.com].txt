@@ -1,0 +1,323 @@
+Hello.
+Yes.
+Hey, you
+Uh there see
+okay then let's do the uh first homework
+together and uh the first problem is
+this uh computing the manufacturing
+cost. Uh so this is actually related
+with let me
+Uh
+so
+76
+what is that? Yeah it's because of the
+yeah zoom control I cannot yeah go back
+and forth. Okay. Anyways, yeah, this is
+related with uh A16
+sub chapter A16. Uh how to compute the
+uh manufacturing cost of a die. So uh
+this question is about this uh yeah. So
+the first question is if 300 mm diameter
+wafer is used to u manufacture each chip
+then how many dyes are there in a die.
+So this formula this equation is already
+given here. So we can just plug these uh
+numbers uh into this equation then we
+can estimate the number of dice. I
+already already explained the meaning of
+this uh equation. So I am not going to
+reiterate the same thing again here. And
+uh one you need to be careful here is
+that the unit of the numbers. So all of
+these numbers are in centimeter. So you
+have to uh yeah make make sure that all
+the numbers you plug uh must be in
+centimeter.
+So for example uh I IBM power five uh
+the number of dice uh if we implement
+IBM power five uh then uh the dice size
+is 3.889 889
+and the estimated differently. So this
+is the D area. So here and this is the
+diameter diameter here. So the diameter
+is given in millimeter. So you have to
+convert uh 300 mm to 30 cm. So this is
+what you need to be careful. And yeah
+here again this diameter and uh this is
+the D area. So you can yeah use this
+number to here and uh this is just
+approximation because the D is in a so
+is a circle not rectangle. So uh we
+cannot use these dice on the border. So
+this is just as estimation anyways
+because the uh equation is given you can
+just plug these numbers and then you can
+get this. So this means that when we
+implement IBM power five on 300 mm die
+wafer then we can get around
+147 uh dice per uh wafer.
+You can do the same thing uh with other
+uh uh processors.
+Then uh the next question is uh if the
+wafer yield is 100% and process complex
+defector is given 12 then what is the
+die yield of which chip? So the D yield
+is given uh here uh in this slide the
+wafer yield is 100% that means it's just
+one and here defects per unit area and
+die area and n so these are the numbers
+we have to consider so the diill let's
+take a look at IBM power five again and
+this is the uh the estimated the
+depending rate. So you can plug this
+number to here and this is di area and
+this is the uh process complexity
+factor. Then uh plugging all these
+numbers then we get this one. So uh when
+we implement IBM power five then uh we
+can expect that about 87%
+of the dice are working correctly but
+about uh 13% will fail.
+And the next two question is if the
+wafer cost is the same then which chip
+can be manufactured at the lowest cost
+then we have to uh compute the cost of
+D. So the cost of D is
+here the cost of wafer divided by the
+product of dice per wafer uh and DEL.
+So we just computed dice per wafer and
+die yield in the in the previous
+questions. So we are using these numbers
+and then because all the uh the di the
+vapor cost is fixed we can only compare
+these numbers. Then uh we can see that
+uh the AMD operon uh gives us the lowest
+cost because this is the smallest.
+So yeah this question uh you can just uh
+use this formula uh to compute this uh
+equations. And the next problem is about
+reliability
+uh compute MTF and uh the yeah basically
+we are uh computing the MTF.
+Uh in this example uh we suppose a
+system consisting of four components and
+uh there MTF and MTTR are given in this
+table and uh
+the MTF and MTR of each component is
+given here but we want to compute the
+MTF of the system as a whole. So in this
+case we already did this uh in the uh in
+the example. So yeah here
+so when we compute the MTF over a system
+we first compute the failure rate. So
+failure rate can be computed in this
+way. So it basically we are just adding
+up how many failures we are expecting
+for the given time period in this case
+for example 1 billion hours.
+So the first uh we uh compute failure
+rate then it is an inverted value of
+MTF. So uh this is component a failure
+rate this is the b cde and by adding up
+all of these we get 0.01 01 this is
+failure rate. So it's inverted value is
+MTTF that means uh this uh whole system
+will work for 100 hours on aaging uh
+without failure.
+Then we want to lengthen the MTTF by uh
+adding one more redundant redundant
+component. And uh if the cost of adding
+one component is the same then adding
+which component will give us the longest
+MTF. In that case we have to uh compare
+compare the failure rate uh after
+Yeah, adding one more component to each
+uh yeah each component. So if we add one
+more component one more component a then
+entity of a can be computed uh in this
+way. So uh that is also given uh
+here. So uh if we have two redundant
+redundant components then uh the MTF can
+be estimated using uh this formula.
+So we are using the this formula. Then
+the component a MT of component A. Now
+we have two components
+uh two component A. then the MTTF of
+component A will be uh 62,500.
+So uh the
+MTTF or the failure rate yeah this is
+the easy one. So uh if we compare uh
+compute the failure rate when if we add
+one more component a then this is the
+failure rate.
+We can do the same thing for adding
+component B, C and D individually
+respectively. Then uh by comparing the
+failure rate, the lowest failure rate
+means the longest MTF.
+So we can see that adding component C
+gives us the best uh yeah uh MTF. So uh
+uh adding component C would give us the
+best uh yeah performance per cost.
+Then the next question is uh let's
+suppose we want to optimize a processor
+then uh there is a always tradeoff. So
+the first question is if the new fast
+floating point unit speeds up the
+floating operations by on average two
+times speed up of two uh and the
+floating point operations take 20% of
+the original program's execution then
+what is the overall speed up if we
+ignore the penalty to any other
+instructions
+then it is about the lambda throw. So
+you can see that uh using this formula
+we can uh we can compute the overall
+speed up.
+So uh
+even though 20% of floating point
+operations are
+executed
+uh two times faster. That means it takes
+half. So that's why we divide 0.2
+uh by two but the remaining 80%
+just it remains the same. So it does not
+affected by speeding up. So by add
+plugging these numbers uh we can compute
+that the overall uh speed up is 1.11.
+That means uh if we expedite
+floatingoint operations by two times uh
+we are expecting about 11% improvement.
+And now we suppose that the speeding up
+of the floating point unit actually have
+negative impacts on other uh yeah
+some other components.
+Then rejecting 1.5 slowdown that is
+if we translate this in terms of speed
+up then it is 2/3.
+Then if the data cache consumes 10% of
+the execution time one then what is the
+overall speed of now? So this is the
+formula. Okay. So overall
+uh the 20% of the floating point unit is
+P uh is uh accelerated by two times but
+uh the data C access that takes 10%
+would be uh slowed down. So uh by using
+this formula we can get this number that
+means now we can expect only 5%
+improvement.
+Okay. Then next question is uh about
+yeah memory access time. So the memory
+access time average memory access time
+can be computed in this way. If we have
+only one level cache, we can compute uh
+heat time plus vis times uh vis penalty.
+So here
+then
+uh
+so
+we we are currently having four ways set
+associative cache and it hit rate is uh
+0.9898%.
+And it takes two cycle two cycle. So
+this is the access time when cashi hit
+occurs. But when cashi miss occurs then
+the miss rate is 2%. And the penalty is
+10 cycle here 10 cycle. So this is the
+average memory access time.
+And if we employ way prediction way
+predicting uh cache then what would be
+the uh average memory access time. Then
+when a way predicting it is employed
+then the cach works as if it is a direct
+mapped cache. So in this case the hit uh
+rate is 96%.
+But the actual access time would be
+different because heat hit heat hit
+access time is different uh because the
+accuracy of the prediction is about 80%
+here 80%. So if the prediction is
+correct then the access time is only one
+cycle but if not then it takes three
+cycles.
+So when heat occurs then yeah this is
+the average access time to the cache.
+The mi in case of miss it is just the
+same. So the miss uh rate is 4% and the
+miss uh penalty is 10 cycle. So now we
+have this uh much memory uh average
+memory access time.
+And the last question is uh comparing
+the energy basically. So uh if we
+compute the energy cons consumption of
+hibernating
+uh we have to consider the uh in order
+to hibernate we have to uh store all the
+data in the memory to the uh disk and it
+consumes energy.
+So uh
+yeah here uh we assume that the uh DRM
+yeah basically here we don't have the uh
+we don't assume the disk but we are
+using a flash memory here. So uh when we
+write 64 bytes
+read from DM
+it it it consumes
+uh 0.5 nanojoule and writing 64 bytes
+or reading
+writing 64 bytes to the flash memory
+consume yeah this much uh energy and
+then uh
+because the total amount of memory is
+this much uh divided by the 64 we get
+this number
+and the energy consumption of waking up
+is energy consumption of hibernating
+because it is just b opposite direction.
+So how many cycles we need then uh yeah
+because we uh need this much energy to
+uh go into the hibernating mode and then
+waking up and by dividing this power
+consumption this is energy and this is
+power consumption and this is the uh the
+period uh of consuming this much energy.
+So by uh yeah dividing the energy by the
+uh the power consumption we get the uh
+actual time. So uh if only if the idle
+time is longer than this period uh we
+can expect that the hibernating uh gives
+us uh yeah power saving
+and uh now I am realizing that yeah this
+is a typo it is not nanojoule but
+microjoule okay I will yeah update this
+later.
+Okay. So, uh this is the uh solution to
+the first homework and um so yeah do you
+have any question?
+Okay. Then yeah maybe later if you come
+up with any uh question then you may
+yeah let me know later and uh I already
+posted the first lab as well. So uh uh
+yeah it will take some time because you
+need to set up the simulator and
+compile. It takes depending on the
+hardware spec. I mean the your desktop
+or laptop spec it will take couple of
+hours. So I will I just gave you enough
+time to finish the first lab. Usually I
+give one week for lab but in this case I
+gave you two weeks. Uh but it takes
+time. So uh I strongly recommend you to
+start the lab as soon as possible
+because the compiling installing uh
+takes uh may take longer than you uh
+expect. Okay.
+Okay. Then I think we can stop uh doing
+the homework together here and then for
+the rest of time uh yeah please do the
+lab and then if you have any question uh
+you may just send an email or post
+questions to the LMS. Okay.
+Okay. Thank you. Then I will conclude
+today's meeting here. Thank you. Bye.

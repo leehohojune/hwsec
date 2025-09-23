@@ -1,0 +1,416 @@
+There are also some optimization
+techniques assisted by uh the compiler
+compiler assisted uh optimizations. Uh
+these techniques are uh changing uh
+modifying the software. Sometimes the
+the programmers can uh consider uh
+optimize the memory access pattern
+considering the caching behavior or the
+compiler actually can do it uh
+automatically.
+For example, here uh we if we
+uh declare
+a multi-dimensional array then uh yeah
+for for for this particular example we
+have two uh dimension uh array here and
+then typically we have uh uh low major
+uh the memory layout that means
+For example here uh
+yeah the the actually the memory space
+is onedimensional. So it is just
+incremental
+and uh for example here this is the
+first uh the first row for example here
+zero and this is the second row for
+example and for each row inside the row
+we have the column index. So for example
+this one is x0
+and zero and this one is x01 x02 and so
+on. So uh if uh we access this array in
+this order for example in this order
+then what's going to happen is that we
+we do not access the array or the memory
+uh sequentially but we just almost
+randomly it it looks like a random
+access
+because you see that But
+because the I is the in inner root and J
+is outer root but the array is declared
+in this way. So uh the in this example
+you can see that we first success for
+example here
+but the next iteration
+uh I is increased. So instead of the
+next memory location uh we access the
+somewhere
+somewhere that whose address is the
+current address plus the size of the
+row. So for example in this example it
+is 100.
+So uh we cannot fully exploit the
+locality
+but if we define the uh the the
+two-dimensional array in column major
+order
+if we change the um the root
+indexing order then we can actually
+fully exploit the special locality
+because now we can access the memory
+sequentially.
+This kind of optimization can be done by
+the programmer if the programmer is
+aware of the cash cache behavior or uh
+even though the uh programmer make the
+yeah write the program in this way. If
+the compiler can detect uh this memory
+access pattern then actually the
+compiler can assign the memory layout
+uh
+uh the in column major order instead of
+the uh regular uh row major order. So
+that that can be done by the compiler or
+the programmer can change the rewrite
+the program to uh this pattern.
+So uh this is one way to uh change the
+software to um yeah to fully exploit the
+cache behavior.
+The other example is blocking. That is
+uh even though we can exploit we we
+declare the
+uh array and the indexing order to
+exploit the cache behavior. If the
+memory size itself is too big then uh it
+may not fit into the small cache. In
+that case uh we may not be able to fully
+exploit the uh locality.
+So instead of in uh accessing the whole
+array
+uh at the same time uh we can uh reduce
+the number of elements we access at a
+given time
+uh the smaller block then it is called a
+blocking method.
+So let me show you some example here.
+This is a typical way to uh way of a
+matrix matrix multiplication
+as illustrated here. Now if we have
+array like uh in this way then uh dx is
+output and in order to
+multiply y and z this is uh if we want
+to uh compute this element then we
+access this and this for example.
+So if the memor the array size is small
+and if we have enough space to store
+them in the cache then this is perfectly
+fine. But for example, we we have a very
+small cache or if the n here the size of
+the array is very very large then we we
+cannot exploit the uh the fully exploit
+the um the uh locality because you you
+see that when we access Y then it is a
+uh low uh low major but when we access Z
+then it is column major.
+So even though we use the loop
+interchange we discussed in the previous
+slide, we cannot solve the problem in
+this memory access pattern. In that case
+we can reduce the working set the
+working set that we need to access at a
+given time. Uh we can reduce the working
+by blocking. This is the code of the
+blocking here. this B factor by factor
+of B we reduce the number of elements we
+need to access at a given time. So for
+example here we if we access this one
+compute this one then we yeah we only
+use these elements to partially
+uh compute this element. So here you can
+see that we are accumulating R and we
+directly assign it to the uh X array but
+here instead of uh yeah after
+accumulating R we don't simply assign to
+output but we uh accumulate it again
+that means that uh for the given block
+we compute only the partial
+results
+by using these small uh number of
+elements and because because now we have
+only these elements we need to access
+all of these elements fit into the cache
+and after finishing access all these
+element we move to the next block. Then
+we are accessing this part and this part
+and after fully accessing computing
+everything using only this part we get
+some partial results here and then we
+move to the next uh block. So the ba
+basic principle here is that instead of
+uh computing uh the result uh
+the whole liert we split
+the result into pieces and then we only
+uh compute the partial lizards by fully
+exploiting the data input data uh stored
+in the cache. So in this way we can
+improve the cache performance
+and uh we we if we can figure out the
+memory access pattern in advance then we
+can pre fetch
+the data.
+We can prefetch instruction and also
+data. Actually instruction prefetch
+because typically the instruction it the
+instruction memory is accessed
+sequentially. So uh it is relatively
+easier to uh predict and combining to
+the branch predictor uh we can uh
+improve the accuracy of the instruction
+prep. But in case of data prefetch uh it
+is
+uh sometimes
+it is uh easy to predict but not always.
+Uh so uh we when we prefetch data we
+need to be careful because the uh the
+the the rationale behind the prefetching
+uh is to utilize the unused memory
+bandwidth. But even though we are using
+unused memory bandwidth in may still
+interfere the demand misses because
+once the memory access begins we cannot
+interrupt
+uh or cancel the memory request in the
+middle. So anyways when the prefetching
+starts the memory band used to be unused
+but
+before finishing the prefetching
+the demand access if the demand access
+uh is requested then we cannot yeah
+begin the actual the demand access
+immediately. So the penalty increases.
+So yeah. So that that's why we need to
+be careful when we uh implement the
+prefetching otherwise it may actually
+hurt degrade the performance.
+The hardware itself can automatically
+prefetch the next instruction or data.
+The other approach could be assisted by
+the compiler.
+Precisely speaking, the compiler may not
+be able to yeah it is also yeah
+two yeah compiler assist approaches. If
+the compiler can figure out when and
+where to pre fetch automatically, then
+the programmer doesn't need to um yeah
+uh think about this. But it may not be
+able to uh the compiler may not be able
+to uh predict the uh the next data. In
+the case the programmer may need to uh
+change it or uh the programmer may need
+to insert explicit uh prefetching
+instructions. Then
+because the programmer can uh
+because programmer
+if the programmer uh knows the behavior
+of the program very well then the
+prefetching will be uh effective.
+Typically
+uh
+this is typically effective for
+non-blocking caches. uh because if the
+cache is blocked because of the
+prefetting then again it may degrade the
+performance
+and if we use the uh compiler controlled
+prefetching that means we are inserting
+prefetching instructions explicitly that
+means uh we have more uh yeah
+instructions so there will be
+instruction overhead Okay.
+And
+uh we we have to focus on the uh likely
+cashmisses to avoid unnecessary prefetch
+otherwise uh yeah actually if
+if the prefetched data is not used then
+it is not only useless but also uh the
+uh may incur performance overhead.
+So the most effective pattern will be
+found in loops. So it is relatively uh
+predictable
+and it if the prefetching works well
+then it can pro it yeah can provide
+about 4 to 31% of improvement.
+So let me take a look at this example.
+Okay, let's assume that we have 8
+kilobyte direct map cache and 16 byte uh
+block that means one but the size of one
+block is 16 uh bite and it is right back
+cache and write allocate that means if
+right miss occurs then the due cache
+line uh will be uh yeah uh will replace
+the existing one or So the new cash line
+will be allocated for the right mist.
+And we have in the program you can see
+we have two twodimensional arrays A and
+B and uh each element in the in the
+array is 8 byt long. That means because
+we have a 16 byt block for one caching
+block we can store two elements
+and uh each
+each array has three rows and 100
+columns.
+And yeah in case of B it has one more
+row. Okay, because you can see here this
+is J + one and the the next the uh the
+index is uh up to 100.
+So for in this uh given configuration
+uh we can compute the number of cash
+misses in this way.
+So because uh
+in this program you can see B is only
+read and A is only written because B is
+input and A is output and uh because
+this is write allocate cache. So when a
+incurs cash then we still have the cash
+block allocated
+and because when a misses cash miss
+occurs then the cache block is allocated
+and it has 16 bytes two elements. So in
+if we access in this order then a can
+exploit the uh spatial locality because
+when a cache miss occurs then because we
+have we fetch two elements in the array
+A then when we access this one m occurs
+but when the new block is allocated the
+next one is fetched from the allocated
+in the cache. So when the next one is
+success then it always hits. So we have
+uh we have only uh yeah 150 misses uh
+because when we access all these uh
+elements one by one we will need to
+access 300 elements in array A but only
+half of them uh will uh yeah incur cash
+misses.
+But in case of it does not benefit from
+spatial locality because you can see
+that uh this is accessed uh in major
+order I I mean the uh low major order.
+So even though we have two uh even
+though we have two uh uh elements in the
+array in the cache block uh they are not
+the JSON. Yeah. What what we actually
+need is not the right next to one but
+the uh yeah uh 100 elements away. So we
+cannot exploit the uh spatial locality.
+But if we uh we we can keep B in the
+cache, we can actually benefit from uh
+the temporal locality because uh this
+one J0
+this one will be accessed three times.
+The first success may incur cashmies but
+for the next one. So when I is one and
+two then we this we access B J0 again
+and again.
+So if we keep this array in the cache
+then uh it can be accessed again.
+So it is kind of temporal locality.
+So the misses due to B will be for uh
+this success when I is zero and also the
+first to access of BJ
+when J is zero. Uh so uh only for the
+first to success of each uh yeah for
+only for the first when I is zero the
+kashmis occurs
+and because we have uh 101
+uh rows in B. So we have 101 misses due
+to uh accessing arab. So in total we
+will have 251
+misses if we run this uh program on this
+configuration of cache.
+Then let's see by using prefetching how
+can we improve the performance. So here
+let's assume that because prefetching
+still takes time uh in order to fetch
+prefetch the data uh timely uh we need
+to issue the prefetching in seven
+iterations in advance.
+So here you can see that these prefetch
+instructions are explicitly inserted
+and because we need seven iterations in
+advance to prefetch the data here uh
+when we access J equals zero we prefetch
+J + 7
+and here the same. So uh when this uh
+the first array the first iteration is
+executed
+we prefetch the next data uh while we
+are computing uh this the current
+iteration
+and this is uh just uh the same. So if
+we change let's say uh the program in
+this way then how many cash misses will
+be occurred for the first group here the
+seven misses will occur because we for
+the first seven accesses we cannot take
+advantage of the prefetching because uh
+it takes seven iterations.
+So for the first seven access
+the cash misses are inevitable. So seven
+misses for uh B these are um yeah
+anyways these cash misses occur but in
+case of A because of the special local
+locality uh we have only four misses
+because when if uh yeah a 0000 is
+success caching miss occurs but a if we
+access the right next data then it is
+already in the cache so it doesn't occur
+the cash cash miss it it hits the cache
+but if we access a02 then cash miss
+occurs again but not a 03 so we have
+four misses
+due to array a in the first row so in
+the first row we will have 11 caching
+misses for the same reason for this
+second group we will have four misses
+due to A only A because in case of B
+because we have enough
+assuming that we have enough space in
+the direct web cache and there is no
+conflicting miss then because of the
+first rule we already have all B the all
+elements in the array B in the cache so
+there is no cash miss because of B the
+cash misses occur only uh by uh array A.
+So we have this uh four misses for the
+when I is one and four misses again for
+when I is two. So in total we will have
+19 uh yeah misses.
+So compared to 251
+we reduce the cashmir by 25
+32. So yeah it is very um yeah uh
+effective I believe but uh we pay uh 400
+prefetch instructions because yeah these
+instructions should be uh executed uh
+each iteration of the loop. So it is
+cost but we can reduce the cashmies
+depending on the requirement and the
+architecture. This can be a good trade
+and may not. So depending on the c
+depending on the yeah application and
+the uh catch catch architecture we have
+to decide.
+So yeah in summary we went through these
+types of cache optimization uh
+techniques and these uh table summarizes
+that how uh the each cache each
+technique improve
+uh the yeah which metric of the caching
+behavior. For example, uh these caches
+the small and simple caches uh is
+positive impact on uh cash heat time but
+not miss rate because it is a small
+cache. The miss rate is likely to
+increase but we expect the performance
+improvement by reducing the heat time
+for example. So yeah you this is some uh
+summary and comparison of the uh cash
+optimiz optimization techniques just
+Yeah.

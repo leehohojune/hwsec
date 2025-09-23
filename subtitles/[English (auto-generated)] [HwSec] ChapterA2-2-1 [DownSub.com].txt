@@ -1,0 +1,250 @@
+When we design the memory hierarchy of a
+processor, the cache organization
+is the most important part. And uh when
+we want to optimize the cache
+performance, there are typically five
+ways to improve the performance in
+general. So uh by reducing uh heat time
+using exploiting parallelism or reducing
+mis rate reducing miss penalty or
+increasing cache bandwidth these are
+some categories of improving the cash
+performance.
+So uh the first technique uh is a small
+and simple first level cache.
+In case of the first level cache instead
+of bigger cache uh we typically prefer
+small cache so that the actual access
+time can be reduced.
+So
+it show this graph shows that under the
+if the cache size is the same then uh
+the smaller way of the cache the less
+weight the less number of ways gives us
+the faster access time. This is mainly
+because the complexity
+of the c controller.
+For example, let's say uh we have two
+options. One way one option is two-way
+said associative cache
+when the when yeah heat occurs then uh
+it uh consume one uh cycle
+but the miss rate is uh this much. But
+if we have four way send associative
+cache then the miss rate is actually
+reduced because if we have more number
+of ways uh the cash misate is likely to
+be reduced but the problem is because of
+the increased controller complexity the
+heat time increases it is 1.4 four
+cycles on average and yeah in both cases
+the mis penalty is the same because this
+is success time to the next level memory
+so it is the same if these numbers are
+given then let's compare which uh gives
+us the better performance so in case of
+two-way associative cache this is hit uh
+yeah access time latency Y and miss
+rate times miss penalty gives us 1.57.
+But in case of four-way set associative
+cache this is hit time uh plus miss rate
+times miss penalty it gives us 1.8
+uh yeah cycles on average. So when we
+compare these two options we can see
+that this one the two-way setive cache
+actually gives us a better performance.
+This is yeah mainly because the uh yeah
+the heat time the access time is shorter
+but this is uh
+yeah if the cache size is even bigger
+this ming may not be a little bit
+different. We are currently talking
+about the first level cache. In case of
+first level cache, yeah, we typically
+maintain small but fast uh cache. So uh
+this works for the uh L1 C. We we are
+talking about L1 cache. In case of last
+level C for example, it is much larger.
+In that case when we compare uh in this
+metric actually typically for the large
+cache uh increasing the number of ways
+is likely to give us better performance.
+So uh keep in mind that this is uh we
+are talking about L1 cache
+and if we have a multi-way
+cache then uh when processor wants to
+access some data we have to find we have
+to find which way the request requested
+data uh is located. If we cannot find
+then the cashmix occurs.
+Yeah. Traditional way to find uh
+determine which way is to just compare
+everything.
+So it increases
+uh uh it incurs the increased uh average
+access time because the same for the
+same reason the increased uh complexity
+of the controller.
+One technique we may consider is
+prediction.
+If we have for example four ways then if
+the in the last time if the second way
+was hit then we just predict that the
+second way will hit again in the next
+access. By predicting the access uh we
+the cash heat then we can reduce the
+access time on average. If the if heat
+actually helps but if it doesn't then
+yeah we have to pay for more access
+time. This is also kind of mis penalty
+or misprediction penalty.
+Even though we prefer cache the first
+level cache smaller and faster the
+larger cache will for the last level
+cache or the second level cache we need
+larger uh capacity in the case the
+access time is likely to increase that
+may affect the clock frequency. So in
+order to decouple this uh two uh
+performance metric we may employ
+pipeline cache.
+So in case of when we pipeline the cache
+controller then we can keep the clock
+frequency short
+but still the access time
+actually pipelining increases the access
+time a little bit longer uh because uh
+there is some overhead of pipelining but
+we can keep the uh clock frequency as
+fast as possible. So uh in many modern
+processors the pipeline cache
+controllers are popular especially for
+the lower level caches
+for the multiore caches. a multiore
+system. Uh
+uh not even multiore system. We we are
+uh modern processors usually employ out
+of order uh processor. That means the
+instructions are not executed
+rigorously in order. They can run in
+parallel. That means even though one
+access one instruction is waiting for
+the memory access other instructions may
+be able to continue if those
+instructions do not have any data
+dependency or control dependency. So in
+that case even though cash a mis occurs
+if there is an independent instruction
+then that instruction may just continue
+then in that case that uh that
+particular instruction may access the
+cache and the access may hit. So that is
+called hit under miss. So the first
+instruction
+is waiting because the cash mis occurs
+while the first instruction is waiting
+the second instruction may access the
+memory and cash hits. So this can happen
+especially in the out of order processor
+and the cache controller can should uh
+handle multiple outstanding cash misses.
+Multibank caches are for the shared
+caches
+especially in the multico ecosystem.
+In that case more because this is a
+shared cache multiple cores may want to
+access the cash at the same time.
+If the shared cash is not multi-banked
+then only one of the c one of them can
+access the cash at one cycle.
+So by splitting the shared cash into
+multiple banks then multiple cores may
+access multiple banks. If they are
+accessing different banks then they can
+access the cash in parallel. So by doing
+this we can uh uh fully exploit the
+parallelism of the uh processor course.
+When rhythm occurs then the processor if
+out of process out of order process is
+not employed then typically the
+processor should wait until the
+requested data comes. Yeah. Even for the
+out of order processor anyways the first
+instruction uh the instruction should
+wait even though yeah all the
+instructions may continue but eventually
+the first the instruction should anyways
+go uh otherwise it may block all the
+instructions to continue.
+So if rhythm is occurs then uh
+if this critical word first will only
+restart are not employed then uh the
+proto of the instruction should wait
+until the cachy block is actually uh
+replaced.
+But if the critical word first policy
+this technique is employed then
+uh because
+the one cache block may contain multiple
+uh bytes. So the requested data could be
+in the middle of the cache block.
+Instead of fetching
+yeah replacing the block from the
+beginning of the block,
+we can fetch the data in the middle from
+the middle of data middle of the block
+that is actually requested by the
+processor. In this way, we can service
+the request data
+as soon as possible first and then fill
+all the parts of the block later so that
+the read miss penalty can be reduced.
+Yeah, this technique is called critical
+word first and only in case of only
+restart, we still fetch the new block
+from the beginning of the block. But the
+instruction doesn't have to wait until
+all the block is replaced. Instead, it
+waits until the requested data is
+fetched. As soon as the request data is
+fetched, the processor the instruction
+can continue and the rest of the block
+is filled uh yeah in background.
+The right buffer
+uh is a queue between two levels of
+caches.
+In order to use the right proper space
+efficiently, we may consider merging a
+right data. So for example, in the for
+yeah in this diagram
+uh the space of one uh entry to the
+right buffer uh is uh
+32 bytes.
+So one instruction yeah missing occurs
+right miss and eight byte data is
+written for example and for some time
+later before this data is written to the
+next level memory
+the next request arrives and the next
+next if the next one for example uh
+132
+arrives but In that case we don't have
+any enough space in the right buffer. So
+in that case this instruction must wait
+until uh the right buffer becomes
+available.
+But when we yeah look a little bit
+closer uh to this request actually we
+know that uh
+these these requests are in continuous
+memory space because each entry has
+eight byt and uh yeah eight this one
+block is eight byte and this total size
+is 32 byt. So instead of individually
+adding this request to the entry of the
+right buffer we can merge this request
+into one entry if possible. So by
+combining multiple request
+uh we can efficiently use the space in
+the right buffer. So it is called
+merging ripe buffer.

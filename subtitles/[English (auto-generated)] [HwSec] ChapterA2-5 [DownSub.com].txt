@@ -1,0 +1,86 @@
+In order to support the virtual machine
+uh the multiple components need to
+cooperate.
+Representative example is that the
+architecture the hardware and the
+operating system the software should
+work together to uh support virtual
+memory or virtual machine more uh
+efficiently.
+So uh the IBM had to change the
+instruction set architecture to support
+virtual uh memories and this x86
+popf instruction uh was uh uh considered
+as a sensitive
+uh instruction. Uh so um this is because
+yeah basically that instruction uh ls
+the flag registers from the top of the
+stack in memory. One of the flag is the
+interrupt enabled flag and uh until
+recent changes
+uh running the this instruction in the
+user mode uh rather than trapping it
+because if uh it uh triggers trapping
+then it is uh executed in the supervisor
+mode. So with even higher uh privilege
+that could uh uh in uh yeah raise some
+security concerns. So uh it is uh it
+just executed uh in the user mode
+uh and in system mode in it does not
+change the uh interrupt enable flag. Uh
+so uh but in this way it is secure but
+is a problem because the guest OS should
+run in the user mode inside a VM.
+Uh but recent changes in the uh x86
+architecture uh yeah this extension uh
+was uh yeah yeah updated to solve this
+problem. What I want to say is not the
+details of this instruction but uh the
+cooperation between the hardware
+architecture and the software uh is uh
+required.
+Another issue is that uh the coherency
+of cash uh becomes also uh one of the
+issues
+uh because now we have uh mult multiple
+layers of caches.
+Even the processor caching uh has the
+fastest L1 private caching but uh we
+also have L2 and L3 shared cache. Not
+only these caches, some IO devices may
+have their own cache in the device. So
+in that case uh the same data may uh uh
+may reside in different caches.
+So caching is supposed to store uh data
+just uh temporarily. That means um uh
+even yeah we may update only one of
+them.
+If another cache retains an old data and
+something the processor or DMA
+components
+may read the old data.
+So we if this uh can happen then we have
+to maintain the coherence of the data
+stored in different caches.
+So this is one uh issue. So one yeah way
+to resolve this one this issue could be
+employing uh cache coherence protocol
+whenever any data is updated in one
+cache
+by running the coance protocol uh we may
+propagate this update to other caches if
+other caches have the same data the copy
+of the data or simply we can invalidate
+other copies in different caches.
+So or uh whenever we update a cache
+block uh we just employed right through
+cache that means we update the data in
+the cache. Yeah. All the Yeah. Yeah.
+Update the data in the uh in the old uh
+caches. So yeah uh there are these there
+are different type types of solutions
+and they have their own pros and cons.
+So depending on the requirement we may
+uh we have to choose the uh the
+appropriate protocol to resolve this
+issue.

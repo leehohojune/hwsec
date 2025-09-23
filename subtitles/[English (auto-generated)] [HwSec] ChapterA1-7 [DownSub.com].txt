@@ -1,0 +1,217 @@
+When we design a system, the
+dependability is very critical
+especially for the uh s servers because
+if we fails then the down cost uh would
+be uh very significant.
+Historically long time ago uh integrated
+circuits were among the most reliable
+computer components. uh but because of
+the feature size shrinks um nowadays it
+is not
+uh as reliable as before. So we have to
+uh consider the uh how we can uh make
+the chips work uh reliably or at least
+we need to uh estimate
+how often the chip or the any component
+in the system fail.
+So because a system consists of many
+different uh components then the failure
+of a module one level could be uh just
+considered as a component error in
+higher level and we can develop some
+kind of um u some kind of uh uh deal uh
+method that can uh deal with a failure.
+For example, a fault tolerant system
+typically employ uh redundant components
+so that if anyone fails then we can
+replace replace the uh fault component
+with a um yeah uh with a uh with a sound
+component immediately. So it is often
+called fault tolerance system or it is
+also called duplication.
+So uh in this way we can make or even
+though any component fails we can make
+the whole system still working uh
+correctly.
+So one way to measure the reliability is
+to use the meanantime to failure. So
+this is uh the this means that if we
+have longer meanantime to failure that
+means uh we
+it works uh we can expect this amount of
+time without any failure. So the this is
+the meaning of this one and the we can
+invert this one as in failures in time.
+So this is the expected number of
+failures per billion hours of operation.
+So uh for example if we have 1 million
+hours MTF that means we are expecting
+then this component works uh for 1
+million hours on average without any
+failure. So this is one metric and it
+can be equally converted by or to 1,000
+uh failures in time uh 1,000 failures in
+billion hours of operation. So uh if
+this fit number is high then means it is
+more likely to fail.
+So basically these two metric are uh
+measuring the reliability of any
+component but in different uh
+perspective
+and this is a metric for reliability and
+the other one is availability that is
+even though if any component fails then
+we have to repair or replace that
+component with a new one. So uh we are
+we another we have another uh metric
+that is called meanantime to repair
+that means if any component fails uh
+during this time period the component
+doesn't work. So this is basically the
+interrupt uh interruption duration. So
+the meantime D2 failures can be defined
+by MTTF plus MTTR.
+So uh uh if we have these two numbers
+then we can uh estimate the module
+availability by using uh this equation.
+So uh using these equations we can
+expect how long our system can work uh
+without any failure.
+Let's take a look at this example. Let's
+assume a disk subsystem
+with these components. It has 10 discs
+each rated at 1 million hour MTF and one
+ata controller power supply fan and
+cable and each component has this uh uh
+MTTF. Then uh if we assume that the
+lifetimes are exponentially distributed
+and failures are independent then how we
+can compute the MTF? Uh simply speaking
+we if we have multiple components then
+we can uh compute the MTPF as if they
+are just totally independent. And the
+next failure is also independent from
+the previous failure. It it is not in
+real situation it may not because once
+it once any component fail then it is
+usually likely to u be fragile more
+fragile. That means the empty f is
+likely to be shortened
+but we for simplicity uh we don't assume
+that so all the failures are basically
+independent
+then we can compute the MTF in this way
+to uh aggregate the MTF we use this
+failure rate instead of MTA DTA then uh
+the failure rate means given the time
+period how many times it is likely to
+fail. So uh because the disk each disk
+has 1 million hours of MTTF that means
+if we uh invert this number then this is
+the estimation of how many uh how many
+how many failures are expected during
+the uh given time period. Here it is uh
+yeah 1 million hour and because we have
+10 discs then uh we are just simply
+adding up uh because uh this is failure
+rate. So if any of any disk out of 10
+disks uh fails then uh it is uh the
+failure of the whole system. So we are
+just adding and adding all the failure
+rates in the system in this way and
+finally we get this number this number
+and this is uh estimated that we are
+expecting 23 failures per 1 million hour
+and if we change it to fit then the uh
+uh the basis becomes the billion
+So we are multiplying 23 by 1,000 then
+this is what we have. So in uh in the
+unit of fit then the MTF is simply the
+invert of the failure rate. Then this is
+the MTTF. It means that on average we
+expect this system to work for uh 33,000
+hours without any uh failure
+and let's assume that uh we want to
+increase the MTF by uh re uh by adding a
+redundant component. So for example here
+uh we are adding one more uh power
+supply and uh we assume that just one
+power supply is sufficient to run the
+disk uh subsystem. That means uh even if
+we have two uh power supplies
+and if any of them works well then the
+whole system will work
+and yeah the power supply uh has 200 uh
+thousand hour of MTF and in order to
+replace one power supply it takes 24
+hours. So 24-hour MTTR
+then uh we can uh estimate the MTPTF
+over the redundant power supply uh by uh
+by using this equation. So the the this
+is the meantime failure until one power
+supply fails
+because we have two power supply. So
+yeah you can uh think of that uh the
+failure rate because we have two then
+the failure rate well simply doubles
+because uh if any of them fails then it
+is anyways failure. So in terms of
+failure rate it doubles. In other words
+if it is inverted in terms of meanantime
+failure then uh it is divided by two. So
+this is the meanantime failure rate or
+meanantime failure uh of the two power
+supplies. Then uh in order to compute
+the meanantime failure we also uh think
+about this because if both
+both power supplies should work
+correctly then this is the uh simply the
+MTF of the two power supplies but this
+is a redundant system and one power
+supply is enough to uh run the whole
+disk subsystem. So even though one of
+them fails those systems still work. So
+the MTF of this power supply uh yeah it
+it doesn't mean that it is failure
+because uh only if both power supply
+fail then it is actually failure and uh
+because we can replace one of them while
+uh the other one works correctly. though
+uh the actual failure occurs when one uh
+power supply fails and until it is
+repaired if the other one also fails
+then it is actual failure. So we can
+estimate that um that uh chance the
+probability by uh by uh dividing
+uh the meanantime
+meanantime uh MTR meanantime to repair
+by uh divided by uh MTTF of one uh power
+supply because uh if you draw this one.
+So this is the uh range uh the time
+period of repair and if MTF is very uh
+within this for example then uh it is
+very likely to fail
+but if it is long enough so this is
+empty
+and this is empty.
+So uh if this is long enough then uh the
+chance the the chance of failure
+during this time
+can be locally estimated by this
+equation. this uh MTTR divided by MTTF
+and uh by yeah uh dividing this MTTF of
+the two power supplies uh by the chance
+of another failure before the first one
+is repaired. Uh this is the uh MTTF of
+the actual uh uh the redundant uh power
+supplies. Okay. So, uh by using this uh
+we can uh and by yeah and after
+simplifying this equation to this and
+then plug the numbers here then this is
+what we have. As you can see the
+meanantime failure is actually very uh
+significantly increased. If we add one
+more component. So this is typical uh
+way to increase uh the MTTF but still
+the cost will be doubled but uh the MTF
+will be anyways increased.
