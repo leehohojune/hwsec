@@ -1,0 +1,248 @@
+In this sub chapter we are going to
+discuss GPU. Uh GPU is uh actually stem
+from the graphic accelerators. It is
+dedicated hardware not a programmable uh
+yeah chip. So uh it has been evolved
+from the graphic uh dedicated graphic
+accelerator. It it used to be totally
+different from CPU
+and uh but the Nvidia actually uh
+developed a programmable hardware
+accelerator for graphic processing.
+it is the origin of the uh GPU. So GPU
+and CPU do not share any common
+architectural ancestor. That means their
+origin is totally different. So that's
+why the terminology and especially the
+terminology is very different.
+Uh but uh they are actually converging.
+uh they are uh both are uh programmable
+and in a high level language programming
+language the program language itself is
+uh becoming uh similar
+but still the primary purpose of GPU is
+graphic um yeah acceleration uh but they
+are expanding uh their territory to
+cover other uh applications especially
+Actually nowadays the artificial
+intelligence AI is I think the more uh
+yeah popular application of GPU but
+still other kind of uh gra uh not only
+graphics but cryptography or even
+blockchain mining can be uh yeah
+accelerated by using GPU. do.
+So as I just mentioned before, GPU
+computing is now considered as a due
+main stream of computing
+but it is still a core processor not a
+main controller. uh but uh the
+performance of GPU is
+very uh substantially higher than
+general purpose CPU for certain
+applications. Uh GPU
+uh is getting more uh popularity
+nowadays
+to support high level programming model.
+The MBDR
+uh developed CUDA language. So it is uh
+C like programming language and uh by
+using CUDA uh we can develop software
+not only on the GPU but also uh CPU in
+the same environment. So uh it is very
+useful for uh highlevel uh yeah
+programmers who who don't actually need
+uh to understand every hardware details
+of GPU.
+But in a high level programming model uh
+there are some challenges we have to
+address. The first one is heterogeneous
+computing because the GPU itself cannot
+be the main processor. It is a core
+processor. That means we have to program
+both main CPU and GPU at the same time.
+But their instructions set architecture
+uh is different. So but high level
+languages should cover these different
+uh architecture. So this heterogeneous
+computing must be addressed when we use
+the high level programming language
+model programming model. And the second
+one is data transfer because we are
+running an application on different
+CPU uh processors but they are
+physically separated.
+That means uh we have to transfer data
+from one processor to the other
+processor and vice versa.
+And this usually becomes a hidden
+sometimes hidden overhead because uh
+when we run the same application on GPU
+uh we can expect performance improvement
+compared to the main CPU. But if we
+don't consider the data transfer time,
+it may not actually help
+because it takes time to transfer data
+to GPU and then get back the result from
+the GPU and they if uh we consider this
+data transfer time then the speed of the
+the speed of of accelerating the
+computation may be just uh yeah
+cancelled out. So uh when we develop uh
+the application running on both CPU and
+GPU then we have to consider the data
+transfer and we have to come up with
+efficient way to uh transfer data or the
+best uh the best option is to hide the
+data transfer latency. That means while
+we are running some computation the data
+for the next computation is transferred
+in background in parallel. In that way
+we can hide the uh data transfer time.
+So uh anyways we have to consider the
+data transfer and the the last one is
+multiple forms of parallelism.
+In fact, GPU can handle many not many
+but some different types of parallelism.
+So, instruction level, data level,
+thread level, different levels of
+parallelism.
+If we use different languages for
+different
+yeah level of parallelism then it will
+be very difficult to make an
+application. So uh when we uh develop a
+programming model then uh by using one
+unified environment the programmer
+should be able to
+model or implement these various type of
+parallelism uh without any uh yeah
+modification. So that's the these three
+challenges must to be addressed uh when
+uh we develop the programming model for
+GPU
+and the CUDA itself is a proprietary
+programming model that works only on
+Nvidia uh product. Uh so uh but after
+this CUDA is getting yeah popular
+popularity uh the uh some older types of
+GPU has been uh yeah uh has been
+developed and they also need need
+programming model but because the
+manufacturer is different they don't
+want to use CUDA because CUDA is only
+for uh Nvidia. So uh the researchers
+developed an open uh programming model
+that works uh similar with CUDA. So that
+is called Open CL. So that Open CL uh
+can support multiple uh platforms
+including uh Nvidia GPUs.
+So to address these challenges, the CUDA
+uh chose the CUDA threat as the unifying
+uh theme for all kind of uh parallelism.
+So uh MBDR CUDA CUDA thread can be used
+to model or implement different types of
+uh parallelism including multi-
+threading multiple instruction multiple
+data simmed or or even instruction level
+parallelism.
+So all of these multi-threading, MIME,
+SIMD, instruction level, parallelism are
+all uh existing uh uh terminologies and
+because CUDA thread can cover all these
+uh parallelism. Uh so they classifies
+this new programming model as SIMT
+single instruction multiple thread. So
+uh it is very similar but a little bit
+different from these uh existing
+terminologies.
+So these are a little bit concrete
+examples of the CUDA programming model.
+The focus of this course is not CUDA
+programming. So we will just go through
+very high level uh very essential uh
+properties only.
+Uh as I mentioned before the programming
+model should handle the heterogeneous
+computing. So uh in CUDA programming
+model the programmer can specify this
+portion of the program should should run
+on GPU or on uh the host CPU. So uh this
+one device or global by using these
+keywords uh the programmer can uh yeah
+specify which processor uh should be
+used to run this portion of the program
+and this one is for the system processor
+the main CPU
+and also we can use the same keywords
+first uh for function as well as
+variables. So if the variables with
+device were global then it they are
+those variables are allocated in the GPU
+memory.
+And when we the call the functions
+running on the GPU from the main CPU
+then this key this should be uh added to
+the uh function definition. So this is
+function name and this is parameter they
+are basically the same with just general
+C. But uh these uh additional parameters
+must be given.
+They are specifying
+uh the
+the level of parallelism. So uh the size
+of grid and size of block here
+uh dim grid indicates the number of
+blocks uh that should be launched and
+dim block is indicates the number of
+threads per block and uh these two
+variables are uh to identify the ID the
+number the actual index X of the block
+or thread.
+So by using these variables with the
+thread can identify
+uh the its own thread index and also the
+blog index that the thread belongs to.
+Let's take a example. Uh we are this
+example is implementation of DAX P that
+is uh double precision and uh yeah we
+are uh uh we are doing scalar vector
+multiplication and vector vector
+addition. So this is the basically the
+formula.
+This is the function core and this is
+the uh implementation of this
+computation corner and by using this for
+loop uh we are computing each element uh
+in this way. If we implement this
+function using cuda then it will look
+like on the right.
+So we need these additional parameters
+when we call this function and the name
+and other parameters are basically the
+same and we have to determine how many
+blocks we want to uh invoke by C when we
+call this function.
+So the number of blocks and the uh uh
+the grid size must be given
+and uh and you can notice that this is
+on the host. So this portion of the
+program must run on the uh host CPU and
+this function is running on the GPU that
+is indicated by this uh device keyword.
+And in the uh function
+it can identify the block index and
+thread index by using these uh
+variables.
+and this is the size of the block. So by
+uh using these variables uh this
+particular function or this particular
+thread can identify which data that this
+particular thread should uh do the
+computation on. So uh this is basically
+the same I. So here it is going through
+just the zero to n but in this model
+each thread works on one particular
+element on the array and each thread
+must identify which data that this
+thread must work on. That can be done by
+these variables.

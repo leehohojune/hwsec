@@ -1,0 +1,245 @@
+This is an vector vector multiply
+example that illustrates how the GPU uh
+computes uh this operation.
+So let's suppose uh this example has uh
+uh each vector has uh 81 92 elements.
+Then the grid the grid is a vectorzable
+loop. the total loop. So the grid works
+on all uh 8,000 elements uh but they are
+split into uh blocks. So you you can
+refer to the uh diagram on the right.
+There are 16 uh thread blocks and
+because it has 16 blocks and there are
+8192 elements that means uh 81 92
+divided by 16 gives us 512. So each
+thread block has uh 512
+uh elements and then each block now
+contains 16 threads of sim instructions.
+That means uh 16 simmed threads. So on
+the right side you can see that uh we uh
+each in each thread block there are uh
+simmed thread from 0 to 15. Okay. So now
+we have 16 simmed threads and then each
+thread now uh each sim instruction in
+the thread uh calculates 32 elements per
+instruction. So you can see that each
+thread now has 32 computation performing
+uh 32 computation.
+So as a hierarchical manner the
+800 8,000 elements or 8,000 computations
+are done in uh parallel by using uh the
+concept of block
+and sim thread and then simmed
+instruction.
+when we take a look at take a a little
+bit closer look at the multi-threaded
+sim processor that is called streaming
+multiprocessor in GPU tom but anyways uh
+in the the uh the textbook actually
+describe this as multi- threaded sim
+processor because it is a more familiar
+uh yeah terminology ology
+and anyways uh this is also an example
+because the actual number or could be
+different depending on the architecture.
+In this example, there are 16 simmed
+lanes here. Sim lanes or functional
+unit. So here each unit has the
+computation ALU register and load store
+unit. So we have 16 lanes in this
+example for one streaming uh yeah
+multipro stream streaming
+uh multiprocessor
+and uh there is auler hardware the sim
+threaduler it is also called warp
+scheduleuler uh in the GPU terminology
+and this hardwareuler can schedule up to
+48 IND independent threads
+and uh their status is uh keep uh kept
+track uh by the scoreboard. You can see
+in the warp scheduleuler uh there is a
+uh scoreboard hardware that keeps track
+of the uh status of each thread.
+uh if any thread is available
+then uh this scheduleuler sends that
+thread to the processor.
+So the GPU hardware has two scheduulers.
+One is a thread block scheduleuler and
+the other one is sim thread uhuler. So
+the first scheduleuler is higher level.
+It assigns thread blocks. So blocks the
+group of threads to multi-threaded sim
+processors. So streaming uh yeah
+multipprocessor
+while it assigns the block uh it cons uh
+it considers the memory locality. So it
+tries to ensure uh the thread blocks are
+assigned to processors whose local
+memories have the necessary data
+and within one sim processor uh within
+one multi-threaded sim processor that is
+streaming multiprocessor
+uh the sim thread scheduler or what
+scheduler schedules each thread thread.
+So it dispatches
+any ready thread to the actual uh the
+processing element.
+So this is how the sim thread uh
+scheduleuler works. So there are many
+threads assigned to this uh uh streaming
+multiprocessor. Then this scheduleuler
+uh select uh available ready to run uh
+thread and then it yeah send that thread
+to the processor.
+So uh these instructions are basically
+independent.
+Then uh the scheduleuler can choose any
+thread
+that uh out of the assigned threads. So
+uh the scheduled thread might be might
+may keep changing. So in this example on
+the right uh you can see that at the
+first time the sim thread number eight
+uh this one is scheduled but at the next
+thread one is scheduled and next three
+and eight again but the next
+instruction. So you can see that this is
+11th instruction but now uh it excuse
+the next instruction. So it is by
+basically multiplexing uh different
+threads.
+In this way uh the utilization of the
+processor can be increased by hiding any
+latency especially memory lat memory
+access latency. Uh so it means if this
+let's say thread 8 is trying to read
+some data from the memory but the cach
+may uh yeah cache miss may occur then it
+has to wait until the data is fetched.
+If we cannot schedule other pro other
+thread then this is pipeline store it is
+wasted but because we have another
+independent thread if that thread is
+ready to run then instead of waiting for
+the data uh we can run that different
+another uh thread. So in this way we can
+fully utilize the processor pipeline and
+hide the memory access latency. So this
+approach is the key difference from the
+vector processor because the vector
+processor uh typically execute uh one
+vector instruction to completion without
+uh starting the next one. So it is not
+multiplexed.
+GPU has many processing cores at the
+same time it should have many registers
+otherwise we cannot keep them running.
+This is also just an example. the actual
+number may differ with the actual uh
+hardware architecture. In this example,
+uh it has 32,000
+registers. It compared to CPU or other
+uh yeah general purpose processors, it
+is much larger number.
+But uh these registers are uh one
+processor cannot use all of these uh
+registers. Each sim thread is limited to
+use only up to 64 registers.
+Okay. But yeah, so if we have 16
+physical sim delays the functional unit
+then uh each may contain 2,000
+registers. So this is for thread but
+this is for uh the uh yeah the the
+hardware the processing unit
+and the register is used in this way. So
+let's think about uh sim thread. Uh one
+thread may have 64 registers as I
+mentioned. Then each register may have
+32 elements with 32bit wide.
+And if the oparan is double precision uh
+floating point then uh it is uh stored
+in two adjacent to 32-bit registers. So
+because we need if it is double
+precision then we need 64 bits then we
+are combining two uh yeah adjacent
+registers to store 64-bit data
+and uh the registers are dynamically
+allocated. It is not uh allocated
+compile time. It is runtime uh allocated
+runtime and then it is automatically
+freed when the uh one sim thread uh yeah
+completes.
+This is a block diagram of the memory
+hierarchy of GPU.
+So each thread has a private memory but
+it is open chip DM memory a part of open
+chip DM memory to each sim delay
+and it is used for state frame register
+spilling and some private variables.
+Here register spilling comes from
+compiler technique. When a
+local
+function is working in these
+registers more than available then the
+values are stored in the memory
+temporarily. So it is register spilling.
+in this called register spilling and
+this memory is not shared by any other
+elements
+and the in the next level we have local
+memory.
+Uh this term is a little bit confusing
+if in just legacy traditional computer
+architecture if we say local memory is
+sounds like a private memory. Uh but in
+GPU this local memory means shared
+memory but not shared by all
+processors but only by one streaming
+multiprocessor
+and this is an on memory.
+So the definition is the onin memory
+shared by
+one uh multi-threaded symbol processor.
+So the multipated single processor or uh
+streaming multiprocessor in GPU tom
+and this memory is shared by all sim
+lanes within that
+yeah streaming multiprocessor
+but not between other processors and it
+is also dynamically allocated and there
+is a global memory that can be accessed
+by any processor.
+and uh be but still it is only used by
+GPU. So it is often called GPU memory
+and it is an offch memory.
+Nowadays in uh very recent GPU
+architectures support
+uh some some GPU architectures support
+uh sharing the DRM with the host
+processor
+and sometimes the memory uh the virtual
+address space can be also mapped to the
+host CPU in that way from the
+perspective of a host CPU, it is much
+easier to access and manage the memory
+in the uh GPU.
+This is an example of fermy
+architecture.
+It has uh instruction cache and register
+file here and many uh sim lanes
+and it has a local uh load store unit
+and some uh
+yeah
+some special functional unit uh that is
+typically for graphics applications
+and it has 64 kilobyte
+uh shared memory or it can be configured
+as a cache. Here the difference between
+memory and cache means uh the in case of
+it is configured as memory then the
+programmer should manage that memory but
+if it is configured as cache then uh it
+is transparent. So the programmer
+doesn't have to worry about which data
+should be stored here and which data
+should not. Uh this is done by hardware.

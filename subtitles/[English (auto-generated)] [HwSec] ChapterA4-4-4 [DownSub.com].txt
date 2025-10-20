@@ -1,0 +1,221 @@
+The instruction set architecture of GPU
+is called PTX instruction. That stands
+for parallel thread execution
+and this is not actual uh hardware
+instruction but it is abstracted
+instruction. However, uh it it mostly uh
+it is directly translated to machine
+instruction but some instructions may be
+expanded or uh combined into one uh
+hardware instruction.
+So the reason why Nvidia
+uh come up with comes up with this
+abstract instruction set architecture is
+that uh it can provides a stable
+instruction set architecture for
+compilers. Here's table means not
+changing that means uh depending on the
+hardware architecture if the instruction
+set architecture changes then the
+compiler should also uh be updated. So
+it is very uh yeah inconvenient.
+So they provide a uh stable abstraction
+layer so that any changes in the
+hardware generations can be hidden
+and it also supports virtual registers.
+The actual hardware physical registers
+are allocated during runtime but in the
+compile time they are assigned to
+virtual registers. In that way we can
+efficiently utilize the uh physical
+registers.
+This is a typical format of ptx
+instruction.
+The first one is the op code
+multiplication addition that kind of
+what kind of operation this instruction
+uh indicates and the next one is type.
+It specifies the type of the operon.
+There are four categories of the types.
+The first one is untyped. So it is just
+binary and the second one is unsigned
+integer and third one is signed integer
+and then floated point uh numbers and
+the it also can we can also specify the
+bin length
+in case of untyped
+uh yeah untyped
+type yeah uh it can be 8, 16, 32 or 64.
+All other register uh other types are
+the same except a floating point because
+in order to uh represent a floating
+number floating point number we need at
+least 16 bits.
+So uh by using this specifier
+uh we can give the hardware how to
+interpret the operands
+and then operands are actually given.
+The first oparan is the destination
+oparan followed by up to three uh source
+ops.
+This is the table of basic ptx
+instructions.
+Let's take a just a couple of uh yeah
+examples. For example, this one add this
+is op code. So it indicates this
+instruction is for addition. And the
+next f32 means it is on 32bit floating
+point number. That means all the
+following operate operands must be
+interpreted as 32bit floating point
+numbers. D is the destination operand. A
+and B are the source oper. So uh the
+meaning of this instruction is given
+this way. uh D equ= A + B and all the
+operants are 32bit floating point
+and you can interpret it all the
+instructions
+in in a similar way
+and this is an example of how we use
+these instructions to implement a
+computation kernel. This is a D uh DXP
+example and uh here uh we are uh yeah
+doing multiplication and addition uh on
+this uh yeah uh implementing this
+equation.
+So the
+assembly code below is a direct
+translation from this C code.
+So it begins with computing the block uh
+the index of the memory.
+So uh in here in the C code this
+dimension is given as a variable then
+but in this uh assembly code we assume
+that it is 512.
+So by uh multiplying 512 that means
+shifting to the left by 9. So we
+implement this as shift operator and
+then add operator here. This one is for
+this one
+and then this is a bite offset. So uh
+because uh we are dealing with double uh
+so uh uh
+we got to multiply
+uh the index by a to get the address. So
+this is uh for uh computing the address
+from the uh index of the variable
+and we actually load data by using these
+instructions and applying uh yeah
+conducting multiplication, addition and
+then finally stores the data.
+The GPU has hardwarebased order colesing
+uh logic. That is uh by combining
+memory accesses
+uh we can
+uh increase improve the uh uh memory
+bandwidth. Typically uh we are using DAM
+SD RAM as a main memory. In case of GPU
+the GPU memory is also uh DM. DAM the
+performance of DAM is heavily dependent
+on the memory access pattern. If we are
+reading consecutive memory address data
+or addresses at the same time, uh it is
+the most efficient pattern.
+But the program the code is not always
+accessing the memory in this way. So the
+special hardware
+uh detects if we combine or aligning
+memory access in this way then the
+hardware does it.
+So in this way we can fully utilize the
+memory bandwidth.
+However, the programmer still needs to
+consider this. If the programmer can
+ensure that the adjacent CUDA threads
+access nearby addresses at the same
+time, then the hardware address
+coalesing
+logic can be much more effective to uh
+combine those memory accesses.
+Otherwise, even though we have this
+special hardware, if the memory access
+pattern is purely random, then even
+though we have this hardware, it doesn't
+work. So, the programmer should still uh
+help that uh the memory access pattern
+can be easily
+cored by the hardware to do so. uh if if
+possible the threads the adjacent thread
+should access nearby addresses at the
+same time. So in in if we can ensure
+this then the memory accessor pattern is
+very um uh yeah fit into the uh the yeah
+the favorable to
+yeah the DM access
+the conditional branches are also
+supported by GPU. Of course, this is a
+single instruction on multiple thread.
+If every thread works in the exactly
+same way, I mean running exactly the
+same instructions, then the performance
+must be maximized. But unfortunately,
+not all the in all the algorithms can be
+implemented in this way. So anyways the
+GPU supports conditional branch that can
+uh that the thread
+some thread may diverse from the other
+uh yeah thread
+to do so it needs explicit uh predicane
+register that indicates whether or not
+the branch should taken and it also also
+employs a um uh concept of mask
+and it also needs a branch
+synchronization stack and instruction
+markers. I will show you example on the
+in the following uh slide.
+So uh these mechanisms
+allow the thread may diverse uh into
+multiple execution path and then
+eventually they should converge so that
+all the threads can run in uh one single
+uh instruction.
+So but yeah still it is supported but if
+there are too many branches then the
+efficiency must be yeah degradated. So
+uh it's still possible but not very fa
+favorable I should say.
+So this is an example. Let's say the
+original code runs the either these two
+uh yeah in yeah statements depending on
+the this condition then this can be
+translated to ptx code in this way. uh
+first in rows data and then uh
+yeah I said we need a explicit predicate
+register. So in this case P1 is used as
+a predicate register and then depending
+on the result it takes branch and it
+pushes the old mask. So by running this
+instruction actually uh we are assuming
+that there is a stack that maintains the
+mask and also we are assuming there is a
+mask. It is not explicit but uh this
+instruction accesses the mask uh yeah
+you know implicitly.
+So if this is not true then the branch
+is taken to else one.
+So it goes to here
+if this condition is met otherwise it
+just uh run this uh instructions.
+So it is basically corresponds to this
+statement and then uh we have to uh yeah
+we should not execute the else. So it
+jumps to and end if after finishing
+running uh this statement.
+And this push comp and uh pop those are
+uh some synchronization markers that
+that are inserted by the uh PTX
+assembler.
+Two, this is to manage the mask
+registers. So it is automatically
+uh yeah handled by the ose handler to uh
+set or manage the mask registers.

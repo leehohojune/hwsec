@@ -1,0 +1,223 @@
+Okay. Yeah, it's time to get started. So
+I will go through homework two solution
+today and
+I
+yeah it is being recorded now but I am
+wondering that if
+yeah okay yeah I was considering just
+speaking Korean because all I found that
+all students are Korean so but yeah
+anyways let yeah official this English
+course. So I will go through a homework
+to solution uh in English. Okay. Uh the
+first question uh is about uh renaming
+register. Uh so uh
+in this group you can see some stoall
+cycles here. So uh this is because uh
+some uh operations instructions take
+more cycles than others. Uh in that case
+uh
+yeah there could be some uh pipeline
+stores that is basically delays
+but uh if there is no um yeah data
+dependency then we can reschedu those
+instructions so that we can hide uh this
+kind of uh delays.
+So for example here this load
+instruction the output f4 is used by
+right next instruction. So uh if this
+kind of dependency exists then we cannot
+uh reorder the order of these two
+instructions
+and uh but in this case this is true
+dependency but uh this third instruction
+load instruction uh overrides F4. That
+means uh this uh actually if we are
+using the same register name here then
+this is also dependency we cannot change
+the order. If we uh execute this
+instruction
+uh in between these two instructions
+like here then uh this in this mult
+instruction will read uh something
+different. So we cannot re uh reorder
+the these three instructions but because
+this is right after right uh dependency
+that is false dependency. So if we are
+using different register instead of f4
+for example f8 f 10 then uh this
+instruction is now independent from uh
+these two instructions. So in this way
+we can um uh have some freedom to
+reorder the execution. So in in this
+example we can identify some uh uh false
+dependencies here f4 this is right after
+right dependency and this f_sub_4 to f4
+this is true dependency we have to keep
+them. uh but here this is f4 f4 this is
+force dependency and again here f8 and
+f8. So uh by renaming these instructions
+uh we can reschedule. So here uh as I
+mentioned uh this F6
+uh yeah this F4 yeah this in this uh
+registers this F4 register is now
+changed to T2.
+So uh but we still need to keep this
+true dependency. So that's why we have
+T2 here. And um
+yeah so th this is the only uh register
+renaming uh potential register name. We
+we may rename this one also uh but uh
+even though we changed the name uh this
+doesn't help uh to improve the
+performance.
+Anyways, yeah, because we now changing
+this uh register to T2, uh we can
+reschedu
+uh these two instruction, this
+instruction.
+So now uh we can execute this
+instruction here and uh this instruction
+as well here. Then uh yeah, we can hide
+these pipeline stores.
+Okay. And the next problem is about
+branch predictor. Uh it is kind of a
+very simple uh uh yeah problem because
+uh let me show this slide.
+So be uh in the in the problem two of
+homework uh the branch predictor we
+assume is two bit branch predictor that
+means it has four state. Basically we
+have a counter two bit counter uh from
+zero to three. So whenever
+branch is taken the uh counter value
+increments
+uh and if it is not taken then it
+decrements
+and if
+the current state the value of the
+current state is larger than two but
+larger than yeah larger yeah larger than
+one actually uh because this is zero one
+two three so and if of a value is two or
+three then it is predicted
+to be taken otherwise it is predicted
+not to uh be taken.
+So uh we are assuming these two bit uh
+yeah predictor in this example.
+So,
+so the actual outcome
+this is initial state and if the branch
+is turn out to be taken then it
+increments taken again increments taken
+again increments. If it is not taken
+decrement. So but it is saturated. That
+means if the counter value is three and
+it is taken again then it is it doesn't
+wrap around it remains three
+and yeah when it is not taken yeah the
+same way it it works and uh based on the
+actual state number or the value of the
+counter uh this is the prediction. So if
+uh the state is in zero or one then it
+is predicted not uh not taken and if the
+state is in two or three then the
+prediction is taken. So uh this is how
+the two bit uh yeah uh branch predictor
+the simple uh branch predictor works.
+And the next question is about Thomas Lo
+algorithm. It is using the pre
+reservation station uh to keep track of
+the execution of out of order uh yeah uh
+execution of instructions.
+And this example is given uh when there
+is one load store uh unit and one uh uh
+adder
+and what you need to do is uh do the
+same thing but now we have two adders.
+So let me let me uh go through uh this
+uh example. So the first one is load
+instruction and
+you can see that it is issued and
+because the load store unit is available
+uh it is becomes busy and it is loading
+and the target address is uh R1. So yeah
+this is the target address
+and the result of this uh instruction
+will be stored in f_sub_2. So uh we have
+uh L1 in F_sub_2
+and in the next cycle let's let's assume
+that every instruction proceeds to the
+next stage at every cycle. Then this
+load instruction is now uh uh moved to
+execution. And uh the third instruction
+this is uh addition uh is now issued uh
+because the adder is available
+uh but one of the operand is uh from the
+first load instruction. So it is not
+available now. So uh this qj indicates
+that this second the first op will come
+from uh load uh store unit. Uh but in
+case of web two it is available. So uh
+the reservation station keeps the actual
+value and the result of this the first
+adder uh will be stored in F4
+and the next cycle the first instruction
+now completes. So uh the register
+f_sub_2 is updated and the value is uh
+broadcasted uh through the bus and the
+first adder uh now fetches that uh value
+from the uh bus. So now uh yeah we have
+the value of the first opin and uh now
+we have all the oparans. So the first uh
+adder can proceed to execution and the
+third instruction is issued because the
+second adder is currently available. Uh
+and again this uh there is a dependency
+uh the first operand is coming from the
+second instruction. So uh we this uh
+field indicates that the first operand
+will come from uh this first adder
+and the result of this uh third
+instruction will be written to f6.
+In the next cycle the second instruction
+completes and f4 is updated that value
+is broadcasted through the bus. So uh
+adder the second adder fetches the first
+plan and now the second uh adder can
+proceed to execution and last cycle
+everything is done. So this is an
+example of how the solular uh algorithm
+works.
+And the last question is uh this is uh
+it is quite similar with the first uh
+question. So the first question is
+register renaming in the uh instruction
+level. Uh but in this uh problem it is
+uh in the loom level.
+So we are accessing arrays.
+uh but in this uh array uh we can see
+some uh dependencies. So for example
+here it is written here and it is uh
+read here
+uh and it is overwritten again here. So
+it is a kind of first dependency. So uh
+we we have to identify this kind of
+dependencies and resolve uh this hazard
+by renaming the uh uh array.
+So as I mentioned here this is true
+dependency but this is a false
+dependency. So we change it this first
+uh array name to t
+and uh
+here is this is also first dependency
+because it is uh being read here but it
+is written here. So it is also uh
+changed to B1
+and this this dependency is also first
+dependency. So it is also changed.
+So anyways yeah we by by using uh this
+uh register renaming uh we can break
+some first dependencies.
+Okay.
+Okay.

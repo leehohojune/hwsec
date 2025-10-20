@@ -1,0 +1,358 @@
+Typically loops are the primary source
+of parallelism in most programs.
+So the compilers
+in are trying to uh find uh and maximize
+the parallelism
+uh in available in the loop. But when we
+look at the loop not all loops are
+parallelizable.
+uh just as it is as they are. So uh we
+need to modify the loop a little bit. If
+possible then uh we can make them uh
+parallelizable.
+So uh in this sub chapter we will
+discuss how to do that. First we need to
+identify the loop carried dependence. Uh
+this is another type of dependence. uh
+it is not it is very similar to data
+dependency but uh it is data dependency
+uh between
+iterations.
+The typical example is this one. The
+later iteration
+uh depends on the values produced in
+earlier iterations.
+So for example if any value is generated
+at iteration zero then that value is uh
+used in the following iteration. This
+kind of dependency is called a loop
+carried dependence. If any loop has this
+kind of dependence then it is very hard
+to parallelize it because uh the loop
+iterations are not independent. They
+must be executed
+serially sequentially. So uh we cannot
+uh yeah exploit uh the parallelism if
+this kind of uh loop dependence uh
+exists.
+But uh even though there is root carried
+dependence if uh we can somehow modify
+the loop we can parallelize it. One way
+could be uh analyzing the index
+induction variable.
+this induction variable. Yeah, it is
+also called index variable like loop
+counter. Typically we use i in the for
+loop in C. So uh the this induction
+variable usually
+follow a predictable pattern.
+That means uh we can predict the or
+manage the uh dependence between
+iterations
+when we carefully looking at the
+induction variables.
+Uh in this loom level parallelism that
+we are currently talking about the intra
+loop dependence is not a big problem. Of
+course, if all the statements within one
+iteration
+are also
+independent, then we can actually
+maximize the
+uh the parallelism. But if it is really
+true, then actually we don't really need
+to put them in the one loop. we can
+actually split these independent there
+is no reason to uh yeah run these
+independent instructions within one
+loop.
+So typically when we look at only one
+iteration they may have some
+dependencies.
+So but uh the in yeah from the
+perspective of loom level parallelism
+this doesn't uh prevent uh the
+exploiting the loom level parallelism as
+long as the statements within each
+iteration maintains their order.
+This manipulating room level parallelism
+is very important for exploiting
+uh both data level parallelism and
+thread level and also instruction level
+parallelism because basically we are
+maximizing the parallelism by
+manipulating the loop. Then uh we can
+exploit the maximized parallelism by uh
+using any um yeah existing mechanisms
+for example out of board execution or
+sim instruction uh depending on the
+actual uh parallelism available.
+So let's take a look at some example.
+Uh in this example we have two
+statements in each iteration and uh this
+loop has loop carried uh dependence. Uh
+here
+a i is used here.
+But in order to generate a i + one, we
+need to read ai which is uh produced in
+the previous
+iteration. So this is a typical example
+of a loop carried dependence. And there
+is another dependence that uh
+s_ub_2
+a i + one is uh
+generated in the previous statement. So
+s_ub_2 depends on s1 within one
+iteration but it is not a root carried
+uh dependence. So it does not prevent
+parallelizing this loop.
+Even though a loop has loop carried
+dependence, uh if we manipulate if we
+can then we by manipulating the loop uh
+we can actually make it parallelizable.
+Let let's take a look at this example.
+So here this in this example there is a
+loop carried dependence because of B.
+When we compute AI,
+it needs BI.
+But but you can see that this p I + 1
+updates
+p of the next index which will be used
+in the next iteration.
+So it is loop carried uh dependence
+but there is any there there is no
+cyclic dependency. So in this case we
+can modify the order of the statement in
+uh light on the right side.
+So here if we unroll this loop then uh a
+z is computed and then b1 then a1 b2 and
+so on. So uh but here in this row on the
+left
+a uh each group a is first computed
+followed by b.
+But uh in order to remove the loop uh
+carried dependence we can manipulate the
+order of this uh implementation of the
+loop in in this way. So it is basically
+computing a b a b alternatively
+and here these two the this pair is
+executed each uh in each iteration.
+Instead if we
+change the loop, manipulate the loop in
+this way, what happens is that the first
+one is computed separately and then uh
+these two statements are computed in
+each iteration and then this one is
+finally uh compute the last one. If we
+change the the uh the loop in this way
+then we can see here that there is no
+loop carried dependence but still there
+is a dependency between this and this
+because of B I + one but this dependency
+is only within
+an iteration. So it does not prevent the
+parallelizing
+uh this loop. So in this way we can uh
+uh make it parallelizable
+but it is generally MP complete problem.
+It is not easy to um identify dependency
+and unless we define the dependency we
+cannot yeah manipulate the loop.
+However, the good news is that many
+common cases can be analyzed very
+precisely at low cost.
+The representative example is this one.
+So typically when we access array the
+index is computed in this form.
+the i is the uh induction variable or
+loop index. Then uh from this I we
+compute the index of an array by using
+this formula in this form.
+Then if any if we are accessing
+uh the same array with different index
+in this form then uh by simple GCD test
+we can uh check whether there is a loop
+dependence uh exists or not. Here if one
+uh statement access array with this
+index and the other statement access the
+same array with this index then we can
+test whether there is a loop carried
+dependence exists or not uh by checking
+this equa
+[Music]
+A
+divide D minus B then uh there exist a
+dependence.
+So you can yeah imagine that if we have
+uh yeah basically this is a kind of yeah
+line like this. So uh yeah the i uh
+means the index uh the x uh locations
+and uh uh so uh if a there is any
+overlap then it could there could be a
+uh yeah
+uh yeah dependency.
+So let's take a look.
+Let's say we are computing uh in this
+way. So then we have these two index
+array index and they are in the a fine
+form. So we can use the gcd test.
+So when we plug the the numbers to the
+GCD test, the GCD between A and C, A and
+C uh here A is two and C is two. So the
+GCD is two and D minus B is -3. So uh
+the GCD does not divide uh this value.
+So that means uh even though we are
+extending these two indexes like this
+and but there is no overlap uh between
+these two indexes.
+we can apply the
+uh the concept of renaming to uh
+manipulate the loop.
+We can uh in the processor we use the
+register renaming to address the force
+dependencies.
+We can do the same thing in the uh loop.
+So if we identify some force
+dependencies then by changing the name
+uh we can eliminate uh the force
+dependencies.
+Let's see this example
+here. There are some true dependencies.
+Y I is computed here but it is used by
+S3 and S4. This is true dependency. We
+cannot reorder the execution of these
+statements.
+But in the blue
+X I used here but overritten in the
+following statement.
+And here the same y is read here but
+overritten by the following in following
+uh statement. If we are running these uh
+statements in this
+uh order in this form then uh we must
+keep their uh yeah execution order
+otherwise the y may read an old value or
+not some uh yeah wrong value.
+So uh but they are not true dependency
+only the name uh overlaps that's why
+their execution um order must be
+pre-observed. So if we change their name
+then we can break eliminate this type of
+uh dependency
+and there is another type of dependence
+uh that is output dependence.
+Y is written here but here again this is
+written again in S4
+this is right after right dependency.
+So by renaming the array we can um
+manipulate this group to uh enhance the
+uh dependency
+I mean the uh parallelism
+by changing y to t some different name
+uh because there there are these are a
+true dependency we must also rename
+these
+uh access.
+So uh in this way we can keep the true
+dependency but uh this anti- uh
+dependency the right putter right
+dependency can be uh broken and we also
+uh and also we by changing y we can
+break this uh dependency and also the
+dependency
+and to address this one we change the
+name of this memory access. So in this
+way uh we can uh eliminate some false
+dependencies but keep preserve the true
+dependencies.
+But you can also recognize that uh if we
+want to parallelize this actually we
+need to have more memory because uh if
+we have only xyz then we need uh 300
+elements in the memory but by renaming
+uh the array that means we have we need
+the same copy of that array in the
+memory. So by renaming the array now we
+have five arrays. So we need 500
+elements uh that should uh should be uh
+reserved in the memory. So there are
+always tradeoff. So by paying more
+memory space we can uh yeah increase
+improve the uh available parallelism.
+And this is another example of uh
+manipulating the uh loop and uh
+here let's look at this loop then it is
+uh it cannot be uh parallelized because
+uh there yeah this basically this some
+uh some
+variable because of this variable
+It is look it uh yeah has a look carried
+dependence because when we read some it
+is produced by previous uh previous
+iteration. So uh if we are running this
+loop in this uh format then we have to
+execute all the iterations uh
+sequentially.
+But if we change this root in this way
+and list we can parallelize this loop.
+In this rule we are multiplying these
+two variables just uh independently
+and this sum now has some kind of a
+partial product. And then using another
+loop we are just
+some uh uh just adding up all the
+partial products.
+So uh it is not fully parallelized but
+still yeah this multiplication
+is parallelized but the addition is
+still uh serialized.
+But this kind of operation is known as
+an uh reduction. So this is very typical
+pattern in many uh yeah uh linear
+algebra.
+So for this kind of a pattern there is
+some well-known techniques to
+parallelize
+uh the reduction operations. One example
+is this one.
+Instead of serializing
+one uh 10,000 iterations,
+if we use uh manipulating this loop in
+this way, then we can uh parallelize and
+list by factor of 10. Uh because now we
+are uh some we are we are uh we
+partially
+uh adding
+uh the uh 1,000
+partial
+sum.
+This is kind of a partial sum. And then
+we can
+they they can be in they we can uh some
+we can add
+yeah for example 100 elements
+uh yeah we can group the 10,000 elements
+uh into
+uh 10
+into 10,000 elements. Then uh if we have
+10 processors then each processor sum 10
+thou uh thousand elements and then
+finally we can add only 10 uh
+sequentially. So in this way uh we can
+partially parallelize the reduction. So
+you can see that these uh fully serial
+uh loop can be gradually parallelized
+and at the last we have only 10
+iterations
+left to be paral to be serialized. So uh
+there are some known techniques to
+maximize the room level parallelism. But
+in this uh subsection we uh by three
+examples uh we uh and these three
+examples are very common uh patterns. So
+uh but uh there as I mentioned it is a
+MP complete problem to identify just
+every uh loop carried dependence but uh
+by using this technique uh we uh some uh
+common cases can be found and
+manipulated relatively uh easily.

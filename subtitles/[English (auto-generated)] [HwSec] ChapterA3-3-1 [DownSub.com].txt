@@ -1,0 +1,260 @@
+The instruction level parallelism is
+limited by branch instructions because
+before reserving the branchy uh branchy
+instructions we cannot go forward. So uh
+one of the techniques to address this
+problem is branch predictor. before
+reserving the branchy uh we can predict
+whether the branchie will be taken or
+not based on the history or pattern.
+So branchy predators are pretty uh has
+have been extensively
+uh studied. So there are many
+derivatives of the branch predictors
+and without the branch predictor the CPU
+would need to wait for uh each branch
+decision uh yeah potentially waiting
+about 10 to 20 clock cycles. So uh
+because the modern processors have long
+pipelines.
+So there are mainly three types of
+branch predictors uh nowadays available.
+The first one is static prediction.
+Uh it uses very simple rule uh without
+any history. So it is um yeah fixed uh
+strategy.
+For example, uh if we if a branch is uh
+if the branch is taken if the program
+counter goes backward then it is
+predicted to be always taken. This is
+basically observation that uh this kind
+of branch instructions is usually used
+in the loop and for the loop typically
+because we have to go through the
+iteration for more many times. the
+branch is likely to be taken and go back
+to the beginning of the uh iteration
+only when the root terminates the branch
+is not taken. Based on this observation,
+we simply predict that if the branch go
+backward, it is uh yeah supposed to be
+the loop condition and uh it is likely
+to be uh taken. So it is very simple uh
+yeah static uh prediction
+and uh this is the most uh popular
+strategy but there could be other uh
+yeah patterns we may uh exploit
+but the more popular way is the dynamic
+prediction based on the actual running
+history of a branch uh we can predict
+the next one
+and as I mentioned there are also many
+different ways to implement this dynamic
+prediction but the most the simplest way
+uh is to keep just one or two uh bit to
+keep the previous history. If we have
+only one bit that means uh we keep the
+history of the uh right uh the previous
+uh branch. So if uh this particular
+branch instruction was taken then we
+predict that this branch will be taken
+again otherwise yeah vice versa or if we
+have a two bits then we can keep uh we
+can keep four uh previous uh uh yeah if
+we have four yeah two bits then we can
+keep two uh Yeah. Uh previous branch uh
+resolution. So uh one bit is for right
+before uh the uh branching uh resolution
+and the the other bit will be the bit uh
+the uh
+two times before uh the branch
+resolution.
+And there are also some more advanced
+techniques.
+So uh modern CPUs combine multiple
+approaches.
+So uh branch target predictor also
+implemented uh because when we uh when
+the branch is taken then we have to
+compute the branch target as well.
+So uh
+uh it takes time to compute the branch
+target. So uh while we are predicting
+the branch uh would be taken or not uh
+we also predict the branch target
+and some predictors employ neural
+network or other yeah
+multiple uh history length.
+These advanced techniques
+yeah improve the accuracy but with the
+cost of hardware cost hardware area and
+also power consumption. So when we
+design this kind of uh advanced
+techniques we always need to keep the
+balance among performance overhead
+power consumption and area cost.
+Modern processors usually achieve more
+than higher than 95%
+uh on most works.
+This is the simplest uh form of dynamic
+predictors. The upper one this one uh
+uses only one bit. So uh for example
+this one is zero and this one is encoded
+one. That means when uh the previous uh
+this particular branch instruction was
+taken in the previous execution then uh
+the history register keeps one to
+predict uh the next time it will be
+taken.
+But actually it turns out not to taken.
+And now the this history register keeps
+zero.
+That means uh in the next time it will
+be predicted not to be taken.
+And this is uh using two bits. That
+means we keep uh two uh yeah history
+of the branch resolution. So uh this can
+be encoded for example 0 0 1 1 0 and 1
+1. So whenever this can be implemented
+actually as a counter. So whenever
+branch is taken then the counter
+increments and whenever it is not
+actually taken it decreases. So uh if
+the counter value is uh bigger than uh
+01
+or uh larger or less than 01 then yeah
+it is uh predicted to be taken. So uh I
+am showing the uh implementation of
+dynamic predictors as FSM uh but it can
+be uh implemented as a counter and
+comparator that's actually more yeah
+popular way to implement this kind of a
+simple branch predictor
+but this branch simple branch predictor
+works well for especially the uh loop
+the branch instructions in the loop. But
+sometimes
+uh if we consider the correlation
+uh between branch instructions then we
+can uh improve the accuracy even higher.
+For example, in this uh example
+uh this code if a is two then a becomes
+zero. If B becomes E B equals to 2 B
+becomes zero and if A and B are not
+equal then do something. But when we
+take closer look at these kind of uh
+branch instructions then what we can
+observe is that for example
+uh if both these two branches are
+uh
+yeah here.
+So,
+so if this branch is not taken that
+means uh yeah not taken
+that means a is two and it becomes zero
+it is executed here. So if this is not
+taken and also this is not taken then uh
+both a and b become zero and that means
+this will yeah never taken.
+So uh depending on the branch resolution
+result or previous uh yeah branch
+instructions
+uh in some cases not always in some
+cases we can predict the
+resolution of this branch instruction
+for sure.
+So by if we can find exploit this kind
+of correlation then we can uh we can
+find opportunities to improve the
+accuracy of the um uh branch instruction
+branch prediction.
+So this is the implementation of uh this
+kind of uh yeah
+uh branch predictors that exploit the
+correlations uh among branch
+instructions. So it is called two level
+branch predictor. It has global uh
+history register that keeps the history
+of all uh globally the branch
+instructions globally. That means in
+case of simple branch predictors we keep
+the history of each instructions
+individually. So we don't consider their
+correlation. But in order to if we want
+to look at their correlation then we
+need global uh history register that
+keeps track of the uh branch resolution
+results of the other uh yeah branch
+instructions as well.
+So we need more bits uh of uh yeah to
+keep
+the uh yeah yeah global uh history. So
+we have a pattern history table and this
+pattern history table is to keep track
+of the history of each uh branch
+instruction and uh if we don't use g uh
+global history register then we are
+using only the program counter to index
+in other words to look up the history of
+that particular branch instruction.
+But by combining this global history
+register even though we have the same
+branch instruction depending on the
+global history we look up different
+location in the pattern history table.
+That means
+we keep these four different
+uh pattern history register.
+So depending but it all of these are
+these are the same that means these are
+uh keeping track of the branch history
+of this particular instruction.
+But depending on the global history
+uh we have four entries in the pattern
+history table. So in case of this one
+that means the previous two
+branch instructions were not taken.
+In that case this instruction must be
+taken
+because of this correlation as I
+mentioned before.
+So uh by
+looking up by keeping the global history
+of all the branch instruction and uh
+attaching this global history table to
+the uh index of the pattern history
+table or we can separately keep track of
+the history.
+So in this way yeah we can uh improve
+the performance by considering the
+correlation of buant instructions
+as an example. Let's take a look at the
+example of I core inter core i7. So it
+also uh employs two level uh yeah branch
+predictor
+and it it is a combined approach. So it
+employs simple two bit predictor with
+global history uh predictor and uh it
+also employs loop exit uh predictor.
+So it is another type of yeah uh branch
+predictor. Uh it is specialized in uh
+predicting loop exit because uh when
+loop is uh still going on then uh the
+branching history
+uh is uh a good metric to predict
+whether the branch is taken or not will
+be taken or not. But it always
+mispredict when the loop terminates. So
+this predictor uh is to develop to
+predict when the group will be will
+terminate.
+So yeah it is uh another technique that
+will not be covered in this particular
+course but uh the Intel Core i7 employs
+this kind of technique as well. And
+yeah, it also yeah uses this um uh
+separate predictors for indirect branch
+chins and return addresses. So yeah,
+there are actually many predictors
+employed in core i7 uh to deal with many
+different cases.

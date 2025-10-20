@@ -1,0 +1,245 @@
+The main idea of vector processing is
+yeah quite simple. We are just
+processing
+vector uh using one instruction.
+Uh but uh there could be uh some
+questions or further optimization
+opportunities.
+Uh so in this uh sub chapter uh we are
+going to discuss these uh seven
+techniques uh to improve or to maximize
+the uh usability of the vector
+processing.
+We may not need only one. Uh yeah, we
+could employ multiple functional units
+to process the vector because the vector
+has yeah multiple abundant uh yeah uh
+parallelism then if we have more than
+one functional unit we can uh improve
+the performance even further. So for
+example in in the here uh we have four
+adders. So but instead of by using only
+one adder if we are using four eders
+then obviously we can improve the
+performance uh by uh yeah four times
+four times faster
+and uh
+yeah because we already have some kind
+of controller theuler to provide the
+data to the uh in uh to the functional
+units and then get the result. So uh
+even though we are increasing the number
+of functional units the controller
+overhead is very uh yeah minimal
+and there there could be yeah because
+there's still uh is cost. So we are
+paying uh because we are employing we
+have to implement four uh adders that
+means we need uh yeah more hardware area
+and if the hardware area increases that
+could impact uh clock speed or the
+voltage level energy consumption. Yeah,
+some kind. Yeah, if we want don't want
+to sacrifice the performance. So, but
+this is just general tradeoff. So, if we
+are uh we want to uh do something more
+then we have to pay more. So yeah,
+that's just general tradeoff
+and the length of the vector may not be
+determined at compile time.
+So in that case uh we need to uh yeah
+let the hardware know the length of the
+vector runtime.
+For that purpose the vector processors
+usually support a vector length
+register.
+So uh by uh writing uh the actual length
+of the vector to the to this register
+the hardware can uh know how many data
+uh should be processed by the vector
+instruction
+and typically the maximum length of a
+vector that the processor can process uh
+is limited.
+that is called maximum vector length. So
+if we want to process more than the
+maximum vector length then we yeah it is
+inevitable to split the vector uh into
+multiple vectors. So this is the example
+this MLV or MVL uh is the some kind of
+constant uh that indicates the maximum
+uh vector length. So uh if n is uh
+larger uh than the maximum vector length
+then uh this vl uh is the uh vector
+length register. Uh so uh we can uh yeah
+process only the uh the maximum vector
+length uh at a time. So uh we are uh by
+using this for loop uh we are dividing
+the uh vector into multiple vectors that
+can be uh processed by one instruction.
+And if we are we can support only
+uh vectors without any branch or
+condition then this may not be very
+useful because many um yeah uh many
+loops contain conditional branches
+to solve this problem. The vector
+processor support a mask.
+For example, here uh this computation is
+done only if x is not zero.
+If we are implementing this
+loop without any modification without
+mask register then it cannot be
+vectorized.
+Fortunately by using the mask uh we can
+vectorize this this loop uh as well.
+So uh here
+uh
+by using this special instruction uh we
+can set the uh mask registers.
+So here if uh by comparing this vector
+with this color and only if uh they are
+not the same here this color is zero. So
+only if uh each element in vi1 is not
+zero then this uh elements in the mask
+register is set to one. Here one means
+it is enabled. If zero then is it is
+masked. So uh the operation is not uh
+effective.
+So after setting the vector instru
+vector mask register if we run this
+vector instruction then uh uh only for
+those elements whose corresponding mask
+register value is one is actually uh
+yeah uh in the computation.
+So by using this ve uh red mask register
+we can uh vectorize uh this kind of rule
+with uh conditional branches
+in order to uh read or write a bunch of
+data from the memory. uh we also need to
+con uh optimize the uh the design the
+memory sub uh subsystem to support
+vector uh processing. One
+straightforward way to improve the
+memory access uh the
+banking memory banking is one
+representative example.
+If we split the memory into multiple
+banks then uh we can access different
+banks uh at the same time. So multiple
+independent memory access can be
+supported by different memory banks. So
+in this way we can uh yeah take full
+advantage of the parallelism in memory
+access.
+So it can be useful. It is useful not
+only vector processing but for
+multi-core processing. So if we have
+more than one processors uh in the
+system then the different processors may
+access the memory uh at the same time if
+they are accessing different memory
+bands.
+But still there is a possibility of
+conflicting.
+If multiple
+processors want to access one bank the
+same bank then one of them can only one
+of them can access but other processors
+have to wait. So it is saying bank
+complete and yeah it is yeah always
+happen
+and if all the data that we want to read
+to the vector register is stored in
+consecutive memory space then it is easy
+to fetch them more but it unfortunately
+it may not always. So uh for the
+representative example is
+multi-dimensional arrays.
+Here
+this example is uh the vector uh
+yeah vector
+multiplication
+and uh we have two input arrays. But uh
+this array is uh accessed
+uh yeah if this two-dimensional array is
+uh stored in the memory in ma row major
+order then b can be accessed uh with
+stride of one. So all the elements are
+stored in uh sub uh yeah in adjacent uh
+memory space but in case of D it is not
+we cannot access uh yeah in this way. Uh
+so it has tried of 100. It is separated
+by row size.
+In order to support this kind of memory
+access uh the vector processor support
+this uh nonunistride
+memory access instruction. So here this
+one is road vector with stride. So uh by
+using this instruction we can specify
+uh the uh stride sides with a uh scala
+instruction. So when we are using this
+instruction we have to give the base
+address of the memory and then the
+stride. Then the hardware fetch the
+memory from the base address with stride
+uh the given stride value.
+In really worst case the elements might
+be just spread out in the memory and the
+access pattern is irregular. it is not
+uh with a fixed stride.
+This pattern is often observed in the
+sparse matrix
+to support this kind of uh vector
+processing. uh this index
+uh
+the yeah indexing basically is supported
+and by using this index vector uh we can
+implement get and scatter memory
+pattern.
+For example on the right side of this uh
+slide illustrates the concept of getter
+scatter uh yeah uh access pattern. So if
+for example uh the operands are spread
+here and here then by using this uh load
+vector uh index instruction we can
+gather these in these uh elements to uh
+yeah all this uh to um
+uh consecutive memory space and then we
+can proc process this data uh as as like
+a regular vector processing and then
+store the result uh to uh spread uh the
+original location by using this uh
+scatter uh yeah capability. So this one.
+So uh in order to enable uh implement
+this kind of get and scatter uh access
+pattern we are using this uh special uh
+vector. So uh this vk this uh vector
+stores the index of the uh vector uh the
+element.
+So they yeah they could be just a random
+arbitrary number because uh when the
+vector load instruction this instruction
+read data or yeah write data the actual
+memory target address is computed by uh
+adding the number in the vector of each
+element and the uh base address.
+So in this way we can uh handle the uh
+irregular
+uh yeah locations of the uh vector
+elements.
+And if we uh if the compiler uh is smart
+enough then uh the vectorzation can be
+done automatically.
+I don't know now nowadays the yeah AI is
+pretty good so it might be even smarter
+but uh if the programmer can give some
+hint to the compiler then uh we can uh
+maximize the performance of the
+compiler. So uh in this particular study
+uh we can see that if the programmer
+gives some hint by using for example
+Pragma uh the programmer can give the uh
+yeah compiler uh the behavior of the uh
+the loop then the compiler can uh
+vectorize the loop in yeah more uh
+effectively.

@@ -1,0 +1,202 @@
+In this sub chapter uh we will discuss a
+little bit more details about uh the
+loom unloading.
+uh uh this is one example we will
+discuss uh use as an example and you can
+see that uh each iteration can run
+independently because we don't have any
+uh hazard in uh this code and this is
+the my implementation or translation
+from this C code it first to roll data
+from this location
+and uh add a constant C. This is stored
+in F_sub_2. And after adding uh these
+two uh uh values and then uh it is
+stored uh the same location
+and then the index variable is
+decremented by eight so that we can
+access the next element. And uh after
+checking the end of the loop uh uh the
+branch is taken or not depending on the
+uh comparison result uh between R1 and
+R2
+then uh we can unroll uh this root uh in
+this way. So the first iteration is is
+the same but uh uh instead of check uh
+updating the index variable and the uh
+determining checking the uh termination
+termination condition uh we can run the
+next iteration uh here. So in this case
+you can see that uh the memory location
+where we read the next one uh is uh in
+implemented in this way and we use a
+different register here because we
+already use uh F4. Of course, we may
+reuse F4 uh but in that case a false uh
+dependency may occur then limit the
+execution of parallel execution of
+instructions. So uh because the root
+owner actually intended to maximize the
+parallelism. So we uh want to minimize
+the dependency as much as possible. And
+uh the next iteration uh the this is the
+updated location uh and uh we are using
+uh the different registers again and
+again and because we already accessed
+four elements from the um u memory the
+index variable is uh now decremented by
+32.
+So in in in this case uh uh we just have
+unrolled the row by by factor of four.
+But when we take a closer look at the
+execution time uh then actually
+uh depending on the instruction the
+delay might be different it because
+usually the uh multiplication
+or uh addition may uh take longer than
+other instructions.
+So uh let's assume that uh the floating
+point uh operation
+uh may take this many cycles and the
+load and uh right may take one cycle uh
+and branch takes one cycle. So uh there
+is a hidden cycle in between the
+instructions
+because the load instruction takes uh
+two cycle. Uh so there we can imagine
+then there is a uh stall in the
+pipeline. Uh that is an uh hidden delay
+and the add instruction may takes three
+cycles. So there are two more uh store
+cycles
+we can just express in this way. Yeah.
+So as I mentioned it is just uh delay uh
+it takes longer uh and store instruction
+it doesn't it can be done in a in single
+cycle but this addition may take uh one
+more cycle. So uh when we take uh this
+store in con uh into consideration
+um yeah we this actually need to be
+considered when we reschedu uh the
+instructions.
+So this is a rescheduling uh the issue
+uh the example
+after unrolling the root we can uh run
+multiple instructions at the same time.
+In other words, we can change the order
+of their execution.
+In this way, we can uh reduce the number
+of store cycles as much as possible.
+For example, here that uh we can change
+uh the order of these three instruction.
+Not not three instruction but this one
+precisely
+because you can see that uh this is this
+instruction is totally in independent
+from this first iteration
+because R1 has not been updated and F6
+has never been used. So it doesn't
+matter where this instruction is
+executed. Not exactly this one but we
+may uh run this instruction to here.
+While we are waiting for this
+instruction done we can uh run another
+instruction at the same time. So uh if
+we change order the reorder reschedule
+this instruction to here then we will
+run these two instruction at the same
+time. While the first instruction is
+still running, we we can start the
+second instruction
+and we do the same thing for other
+instructions as well. While we are
+waiting the result from this add
+instruction uh it it takes three cycle.
+So instead of uh waiting for the uh
+waiting for this instruction done we can
+schedule other independent instructions
+like this.
+Then uh we by doing this we can hide the
+latency of instruction. This instruction
+this instruction must be scheduled after
+finishing this instruction. So because
+of the dependency uh but this
+instruction this is instruction they are
+independent.
+So we can reschedu these instructions to
+the slack where the uh pipeline is
+actually stored. So by rescheduling
+uh these instructions uh we can run
+multiple instructions at the same time.
+So when we apply loop on this is some uh
+yeah uh typical steps or things that we
+have to consider. First we have to
+identify independent iterations. If
+there are dependencies between
+iterations then even though we unroll
+the uh group we may not be able to
+increase parallelism.
+Then to maximize parallelism uh whenever
+possible we rename the registers to
+break force dependencies.
+then uh we if possible we can simplify
+the code.
+So maybe if uh there are some extra test
+and branches then uh we don't need them.
+Yeah, if it the root is not unrolled
+then every iteration we need to test and
+uh uh take branches. uh but by unrolling
+uh some instructions may not need uh for
+every uh iteration. So uh we can remove
+and or some adjust some constant
+constants uh to uh uh so that uh the uh
+the new code unrolled code can can uh
+can uh do the same thing before
+unrolling.
+Then in the previous example we didn't
+uh analyze the memory access but uh when
+we schedule reschedu the instructions if
+there are uh memory instructions then we
+may want to optimize the memory access
+pattern because uh especially for DM if
+we have sequential access instead of
+random access then the sequential access
+must give us better performance. So uh
+uh yeah so uh when we unroll and
+reschedu the instructions the uh memory
+access can be also uh considered and
+then finally uh we schedule the
+instructions so that we can hide
+latencies of uh instructions.
+uh but the loop onrolling has uh some
+limitations.
+Um
+the more factor uh we unroll does not
+always give us better performance. So
+when we unore uh loop by factor of two
+and if we unore compared to factor two
+if we unore by factor of four usually
+typically we expect more uh performance
+improvement but even though we increase
+four to 8 16 there is no guarantee that
+we expect performance improvement. So
+the performance improvement usually
+saturates
+and
+yeah it is obvious that uh the code size
+grows
+because we unload
+we need more instructions and there is
+another uh yeah
+issue we have to consider is register
+pressure because we need more
+instruction more registers.
+Sometimes the number of available
+registers uh limits the number of factor
+we unroll. Even though we expect
+performance improvement by unrolling by
+for example factor of eight uh then we
+need eight times more registers. If
+there are
+not enough registers then we may not be
+able to unroll this much.

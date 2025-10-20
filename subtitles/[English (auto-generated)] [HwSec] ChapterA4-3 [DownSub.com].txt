@@ -1,0 +1,145 @@
+The single instruction multiple data in
+short simmed instructions or simmed
+extensions are uh one one way to exploit
+the data level parallelism. Especially
+this extension is focused on uh the
+multimedia applications. That is because
+the operations that the multimedia
+applications usually need are only on
+very narrow data types than 32bit
+regular operands.
+So for example many graphic systems use
+only 8 bit to represent each of the
+three primary colors. So uh when we do
+addition or um multiplication that kind
+of operations on 8 bit data then we
+actually don't use
+24 bit of the register and also the
+instruction. So uh why don't we and also
+we are applying the same operation on
+many data. So in that case uh instead of
+using existing instructions uh if we uh
+exploit this kind of uh characteristics
+then we may find much efficient uh way
+to
+do these kind of operations.
+So if we are assuming 256bit
+instruction format then one instruction
+can uh contain uh 32 8 bit operate
+operand or 16 16 bit 8 32-bit or four
+64bit operands. So uh by packing these
+uh multiple data within one extension
+instruction then uh we can do this
+computation more efficiently.
+Compared to the vector architecture
+seemed instructions has some drawbacks.
+For example, uh seemed extensions have
+fixed number of operants.
+But in case of vector processors, they
+support the vector length register that
+specify the operent count and even we
+can change uh the this register during
+runtime.
+So it is much more uh flexible
+and sim instructions do not support
+sophisticated addressing modes like uh
+yeah non-unit stride or uh scatter
+getter indexing that kind of advanced
+addressing mode are not supported that
+actually limits the compiler
+optimization for memory success
+and conditional execution is usually not
+supported. That means um we if
+yeah that is actually uh in that case we
+have to use just regular yeah
+instructions uh instead of sim
+instruction.
+So these limitations make it much harder
+for compilers to generate sim code and
+increase the difficulty of programming.
+But there are some advantages that's why
+we are still using these uh sim
+extensions.
+First of all they cost very little. In
+order to support SIM extinction, the
+hardware cost is very negligible
+and uh we actually don't need extra
+memory bandwidth to support SIM
+instruction
+because SIMD instructions use only small
+uh sized data. uh it does not consume
+much uh memory bandwidth and because it
+is limited
+uh it it doesn't cross the boundary of
+the memory page otherwise there could be
+a possibility of page vault.
+So if page vault occurs then
+the yeah uh exception occurs and the
+operating system should uh yeah change
+the
+the page table and then it can continue
+to uh do the rest of the computation.
+But in case of sim instruction the group
+of operants are always aligned in the
+memory and they cannot cross the page
+boundaries. So uh this is another uh
+benefit that we are using the sim
+instruction that
+the complexity of the uh operating
+system and also the hardware
+is very uh low.
+at the beginning of the uh
+seeing the instruction the MMX uh was
+that name and it uses only 64bit
+format. So uh we can do the computation
+on eight 8 bit or four 16 bit operands
+but it is upgraded to SSE and now we
+have 128 bit registers and it is even
+increasing uh to AVX. Now we have 256
+bit
+and in the future yeah it is uh
+forecasted that uh we will have
+five 12 bits or even more than 1,000 bit
+extensions.
+Here is an example of MIP's
+sim instruction. So it is not the
+instructions of the x86 uh architecture.
+Anyways, these support uh loading
+processing for
+32bit uh 32bit operands. So this load
+special load instruction loads data
+for
+32-bit data at the same time uh with a
+single instruction and the base address
+is given this regular scholar register
+and then from this address it is reading
+four consecutive data to these registers
+and Then uh we can apply the
+multiplication
+operation to
+those registers from uh F4
+and it is a kind of vectors color
+multiplication. So the uh all of these
+elements are multiplied by f_sub_2 f0
+and we are loading another uh data to uh
+these registers and then uh we are
+adding
+this to this. So it is vector vector
+addition
+and then finally we are storing the data
+back to this base address.
+So this is an example of how to use this
+sim instruction and as you can see we
+can process only four operants at a time
+with one single instruction. So we need
+a root still need a root in order to
+process more than uh four elements
+but we can anyways still reduce the
+number of instructions and also
+in terms of hardware cost it is very
+negligible as I mentioned before the
+hardware scheduleuler and some hardware
+overhead to support SIM inst extension
+is much less compared to the vector
+processor. That's why we are still using
+this uh sim in extension.

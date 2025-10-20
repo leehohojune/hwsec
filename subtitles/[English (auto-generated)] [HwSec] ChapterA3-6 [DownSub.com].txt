@@ -1,0 +1,237 @@
+the out of order execution uh can uh
+allow us to
+uh yeah exploit the instruction level
+parallelism to some degree. Uh but
+because of the control dependencies
+uh the
+uh the
+the amount of the parallelism we can
+exploit uh can be uh limited.
+This is mainly because the frequency of
+branch instruction until we are not sure
+that which path we are going to take uh
+we cannot proceed uh to the uh yeah
+execution of the instruction. So uh this
+is limiting factor of the uh yeah
+instruction level parallelism.
+Of course, we may use the branch
+prediction uh but uh we need a more
+comprehensive solution that not just
+predicting the branch uh resolution. Uh
+we need some integrated method you with
+the out of order execution.
+So uh the speculation uh could be the
+solution to this uh uh comprehensive
+uh uh execution or branch prediction.
+So the speculation works as if the
+branch predictions were always correct.
+It just keeps going on uh assuming that
+the branch prediction is correct. If it
+turns out uh incorrect then uh there
+must be a me mechanism to uh roll back
+or cancel the uh yeah speculated
+uh instructions.
+So it is a combination of uh dynamic
+branch prediction and speculative
+execution and also dynamic uh
+scheduling. So uh we can uh implement
+this by extending the Thomas algorithm
+in order to support the uh the
+speculative execution. Uh we must
+separate result bypassing from
+instruction completion.
+The result bypassing means that uh
+unless
+we are sure that this instruction is uh
+executed
+we don't actually update the result the
+register.
+So uh it can be uh yeah separated from
+the uh instruction completion.
+So it can be done by uh allowing
+instruction to execute out of order. So
+we are still running instructions out of
+order but force them to commit in order.
+That means without this speculative
+mechanism the completion of instruction
+could be also out of order. But by
+forcing the order of the commitment uh
+we can uh implement the uh speculative
+instruction speculative uh execution. So
+it also helps to uh support precise uh
+exception handling.
+So the hardware implementation of this
+mechanism is called reorder buffer.
+The purpose of this rioder hardware uh
+component is to hold instructions
+results between execution completion and
+commit.
+So only when this instruction turns out
+to be correct uh speculation it can be
+committed
+otherwise
+uh it is cancelled.
+So uh we we can use this reorder burper
+uh to keep track of the which
+instruction is on the right path and we
+also can make sure that the uh execution
+of the instructions appear to be in
+order.
+The reorder has uh yeah maintains the
+four fields instruction type branches
+store or register operation
+that means uh which
+uh component this in yeah
+according to which component this
+instruction is going to update uh it is
+uh classified
+and the destination field, the radi
+number or memory address depending on
+which resource this instruction is going
+to update and actual value field and
+ready field
+and uh comparing to the um uh original
+Thomas algorithm it has one more
+substage that is commit.
+So even though the instructions are
+executed and complete out of order the
+commitment the instructions are
+committed in order only after the all
+the previous instructions are committed
+this particular instruction can be
+committed.
+This is the key difference. So with the
+specul spec speculation no instruction
+after the earliest uncompleted
+instruction is allowed to compute
+complete
+and then what happens uh with the uh
+exception. So if any instruction uh
+causes an exception then uh we have to
+wait until it reaches the uh real buffer
+head that means the reorder buffer head
+means this instruction is the next
+instruction to be committed.
+So only when this instruction that
+caused an exception reaches the head now
+we are ready to take the interrupt
+actually generates the interrupt
+and because now interrupt uh exception
+occurs uh we flush any pending the
+remaining instructions
+that means exceptions are recorded it in
+the reorder buffer uh but not recognized
+until commitment.
+So if a speculated instruction raises an
+exception but it turns out that the
+prediction was not correct that means
+this instruction was not supposed to be
+executed. In that case the exception is
+also flushed it is canled.
+So only when an instruction reaches the
+uh ROI head and then uh we uh are sure
+that this is no longer speculative that
+means it is for sure to be executed then
+the exception actually occurs. So in
+this way uh we can keep the precise
+exception. the uh when an exception
+occurs. Now we know that for sure which
+instruction uh generated the exception
+and uh yeah after the exception the the
+following instruction we can make sure
+that the following instructions are not
+actually uh executed.
+And for the speculation we also need to
+consider the hazard in memory. In case
+of register we are also dealing with
+this kind of hazard by the Thomas
+algorithm. uh but uh we also have to
+consider the memory here uh right after
+right after read after right this kind
+of hazard are about the memory access
+not register as I mentioned before uh
+the register this kind of hazard are
+deal by the Thomas algorithm so now we
+are talking about uh this hazard on
+memory
+Okay. So, uh in case of the original
+Thomas algorithm, any update to the
+memory uh is done immediately and also
+register. But in case of speculative
+execution, uh the memory is updated only
+when uh the instruction reaches the ROB
+head.
+and right after to write, right after
+read this kind of hazard are uh yeah can
+be yeah eliminated by the mechanism I
+just mentioned because uh the actual
+memory updates occur
+only in order when the store to
+instruction reaches to the head. That
+means all the memory updates are issued
+in order. So we can avoid AWA and AWR
+hazard. But in case of read after write
+hazard uh we have to restrict the
+execution order a little bit because if
+if the execution is totally out of order
+then the instruction may uh read data uh
+after the right instruction
+uh before the right instruction occurs.
+So, so because the read must be done
+after write is done but by the in out of
+order instru in yeah execution. Uh an
+instruction may read before the write
+occurs that means this instruction is
+reading an old value obsolute value. So
+we have to uh avoid this kind of a
+situation. So uh the load instruction is
+not allowed to execute if any active
+store instructions are still in uh yeah
+in the uh in the uh the real developer
+not the head
+and uh
+yeah ex the the computation of the
+effective memory address should be uh
+done in order. So we have to uh make
+sure that these two restrictions must be
+uh yeah in place uh to avoid read left
+right hazard.
+So this is an example. Uh in the reorder
+buffer uh this uh keeps track of the
+status of the uh instructions.
+In this example, the first two
+instructions are uh the yeah committed
+and the third instruction is still being
+executed but the fourth instruction
+actually completed.
+But here because of the reorder buffer
+uh this instruction
+even though it is already done it is not
+committed because the previous
+instruction has not been committed yet.
+That also affect the
+the value of the register F8.
+FA the value is already available but
+actually FA is not updated yet because
+the third instruction is not committed
+yet and there is no branch instruction
+in this example. This is because the
+fourth instruction may turn out to be
+incorrect. The speculation might be
+incorrect. In that case we have to
+cancel.
+that means the we need to preserve the
+previous value or let's say current
+value of f8. So uh we update the
+register or memory only if the uh
+speculation
+turns out to be correct
+and also the uh the instruction reaches
+the head of the uh real developer. In
+this case, the third instruction is at
+the head of the real developer and as
+soon as it completes and also
+yeah turns out to be uh correct
+speculation then uh it is committed and
+the resource uh register or memory will
+be updated.

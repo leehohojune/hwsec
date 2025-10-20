@@ -1,0 +1,204 @@
+Let's take a look at an example uh that
+illustrates how the Thomas law algorithm
+works. Uh in this example, we are going
+to execute these six instructions
+and uh we assume that there are multiple
+functional units uh in the reservation
+station. You can see there are two load
+store buffers and three adders and two
+multipliers.
+The load store buffer can be used not
+only uh for loading data from the memory
+but also uh storing data to the memory.
+And the adder uh can be used bo for both
+addition and subtraction and multiplic
+multiplier also can be used for
+multiplication and division.
+Okay. Then uh the first instruction uh
+is issued. When uh the instruction is
+issued, uh before the instruction is
+issued, it first look up the reservation
+station to see if the functional unit is
+available. In this case, the load stop
+buffer uh this is available. So it could
+be the instruction could be issued and
+uh because the loadus topper is
+currently being used the busy uh flag is
+now uh yes and uh it is being used for
+loading data from the memory and this is
+the uh memory target address
+and when this instruction is finished it
+then the uh register F6 will be updated.
+So in the register status uh uh uh table
+yeah it is marked with load one
+and the next cycle let's assume that uh
+the load instruction the first
+instruction is uh proceed to the
+execution stage that means uh it is now
+accessing the memory while it is
+accessing accessing the memory. Uh the
+second instruction
+uh is issued. uh this could be issued
+because the second load store unit is
+available
+otherwise it could not issued anyways in
+this example it could be issued and yeah
+the busy signal turns on to on and load
+instruction operation and this is the
+memory target address and uh this
+instruction will update F2. So uh here
+the register two will be updated by uh
+load uh store unit 2
+in the next cycle. Uh yeah, these two uh
+load instructions are still uh un
+running and the third instruction is
+issued
+and uh this is multiply multiplication.
+So this multiplier functional unit is
+used and it becomes busy and it is uh
+used for multiplication
+and uh in it need two operants f_sub_2
+and f_sub_4. In case of f_sub_2 when we
+look at the register status f_sub_2 is
+current or will be updated by load two.
+So uh this value is not available
+currently and uh so the qj this is the
+corresponds to the first ru operand uh
+yeah because the value is not available
+instead the qj uh this field indicates
+that this uh operand will be available
+uh from load two functional unit.
+But in case of F4, it is not currently
+being used. So we can read the value
+from F4 directly and the reservation
+station has that value.
+In the next cycle, uh the same thing
+happens.
+uh in this case uh the fourth
+instruction is issued and uh it also
+takes f_sub_2 and f6 as arguments
+here both uh registers are not currently
+available because you can see f_sub_2
+and f6 are uh from load store unit one
+and two. So uh we are marking that uh
+the two operants uh will come from load
+two and load one respectively and
+currently uh the arguments are the
+values are not available.
+Next cycle let's assume that the fifth
+instruction is issued.
+And here again F0 and F6 are not
+currently available. So it is marked uh
+these operances are will be available
+from these functional units.
+And the final finally the sixth uh
+instruction is issued. Yeah, here are
+basically the same. But you can see that
+F6
+F6 was to be updated by this load store
+unit.
+So it used to be this one. Yeah, used to
+be load one but now it is updated to uh
+add two because it will be overwritten
+by this instruction.
+Is there any problem? Actually
+no because
+these app the previous instructions that
+are using apput 6 are already have their
+dependency in the reservation station.
+In case of sub instruction you can see
+that it keeps track that F6 will
+now we are not using the name F6 but
+only the dependency is preserved. That
+means
+when the result from the load one uh
+unit is avail becomes available then uh
+this adder one can take the the result
+directly from the load store unit. We
+don't have to go through F6. We can
+directly get the result from load one.
+So in this way we can break the right uh
+the read uh write after read dependency.
+It is force dependency. So uh in this
+way we can break this force uh
+dependency.
+But if some other instruction uh next
+instruction is using the result uh from
+F6 then by using this information we can
+uh still keep the uh the uh the
+dependency.
+Yeah, here is what what I am what I was
+talking about. So uh the right after
+right or right after read F6 was uh
+uh used uh yeah for the right after uh
+write uh hazard.
+And here also uh this one is uh right
+after read
+no this is read after write. So this is
+actually real dependency and these real
+dependencies are preserved by uh the uh
+yeah q uh the qj and q k field in the
+regulation station and uh by updating
+this register station this is basically
+has the same effect of register
+renaming. Okay.
+And uh let's suppose that in the next
+cycle the first instruction uh is done.
+Then the result will be broadcasted to
+or through the common datab bus. then uh
+those instructions that are supposed to
+get the result from load one will now
+get actually the value. So you you
+remember that here it is one and because
+it is supposed to take the result from
+load one now the uh actual value is
+available. So the result of the first
+instruction uh is now uh captured by uh
+the reservation station. So uh these two
+instructions now have uh the uh actual
+value of their operands
+and uh let's suppose that the second
+instruction also is done then uh the
+result is broadcasted through the common
+database.
+So now the add one and multiply one have
+the uh opponents ready. So they can uh
+proceed to the execution stage.
+Then let's suppose that the subtractor
+is done before multiplication because
+you know uh usually the subtraction
+takes shorter than multiplication
+then the result of this instruction is
+also broadcasted and that's why the
+addition uh this instruction this
+instruction gets the result from f uh
+the subtraction. So now this addition
+can uh proceed to execution stage and
+you can also see that substraction this
+instruction completes before the
+multiplication instruction. So this is
+kind of out of order execution.
+And in the following cycle let us
+suppose that these two instruction is uh
+no no these two instruction addition and
+multiplication
+finishes at the same cycle. Then then
+what what happens? Uh if more than one
+instructions finish at the same time
+only one of them can access the common
+database and complete. So this addition
+this is for example the multiplication
+this uh has higher priority then it can
+access the common database while the
+addition should wait uh for the next uh
+yeah cycle. So in this case only the
+multiplication this instruction finishes
+and uh in the following cycle the
+addition can uh be done and because the
+multiplication is done now f0 is
+available so this division instruction
+can proceed to the execution stage.
+So uh in the following cycle it this
+instruction can complete
+and finally the division uh instruction
+uh yeah completes.

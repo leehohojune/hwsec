@@ -1,0 +1,156 @@
+Let's take a look at a scale down uh
+example um of the branch pred prediction
+that illustrate how the two level
+branch predictor works.
+The two-level branch predictor has
+global history register here that keeps
+track of the last uh branch resolution
+result. In this example, we have two
+bits that means we are uh tracking uh
+two previous branch instructions. And uh
+just to uh scale down the uh example uh
+we use only two bits of the uh address
+uh the program counter uh so that we
+have uh 16 uh entries for the uh pattern
+history table by combining the uh GHL
+with two bits from the program counter.
+We use four bits to index the pattern
+history table and uh we are using two
+bits of the program counter from bin
+number two to three. Uh because uh the
+program counter is always a multiple of
+four. So the last two significant least
+significant bits must be always zero. So
+we are not using the last two bits. Uh
+so from two uh from the third to fourth
+beat uh we use to distinguish which
+branch instruction uh we are keeping
+track of.
+And uh we are using these four bits uh
+as an index to the uh pattern history
+table. And in this example, we are using
+only one bit to keep track of the uh uh
+the history of one particular branch
+instruction. So that means if uh the
+branch was taken previously then it is
+predicted to be taken again.
+If not taken then the same uh it is
+predicted to be to not to be taken.
+So this is very simple and uh scaled
+down example of uh the two level branch
+predictor. So we assume that uh the
+patternist story table is initially all
+zero that means all the branches are
+predicted not to be taken
+and let's take a look at this example
+code and in this code we can see that
+there are three branches
+and uh they are actually correlated
+because
+uh the first uh branch instruction is
+comparing a with two and the second one
+compares b with two and the third one is
+comparing these two. So if a is not two
+and b is not two then both a and b must
+be initialized
+uh lies to zero. So if these two
+branches are uh are not taken then these
+branching must be taken. though they are
+related.
+But in this example uh this cor this uh
+the purpose of this example is not
+showing the correlation but the the how
+the tool level branch predator works in
+general.
+The address of the branch instructions
+uh are like this shown here. And because
+we are using only the uh two bits from
+uh two to three uh the
+the location the print uh the these uh
+two bits from this address is 01 for the
+first uh uh branch instruction.
+Okay. So everything is just initial
+value. So the global history register
+has a zero and the pro encounter this
+one 01. So uh we are using this entry to
+predict the uh the result the branch
+resolution result and it is initially
+zero that means it is predicted not
+taken
+and uh let's suppose that uh the branch
+is actually taken then uh this pattern
+history table is updated to one and
+global history register is also updated.
+Then let's take a look at the second uh
+branch instruction. At this time global
+history register is 01 and the program
+counter two bits from the program
+counter is 0 0. So we are using this
+entry to predict the branch uh
+instruction. So it is predicted not
+taken
+and let's suppose that the second uh
+branch instruction is also taken then
+this is updated one and the global
+history table is also updated to one. So
+now in from this global history table we
+know that the previous two branches were
+taken
+and let's see the third one. So we are
+using this uh entry and it is not taken
+predicted not taken
+and let's suppose that the branch is not
+actually taken then yeah this entry the
+pattern history table doesn't need to be
+updated but the glo only the global
+history register is updated
+and let's suppose that this keeps keeps
+going on. So uh because this is a narrow
+loop uh yeah this program executes some
+other instructions and then let's
+suppose that yeah this particular code
+is executed again sometime later then if
+we are using you in yeah we are looking
+at the same branch instruction because
+the global history register is
+different. We are looking up a different
+uh pattern history table. So in this way
+we are uh considering the history of the
+branch or previous branch instructions
+as well.
+So in that case yeah it is not taken
+predicted. The previously uh we already
+updated to this entry to one but it is
+valid only when the previous two
+instructions were not taken. But in this
+case because the previous one of the
+previous
+branch was taken. So we are looking up
+different entry
+and if it is actually not taken then
+pattern history table doesn't need to be
+updated but the global history table is
+updated
+and just keeps going on. So in this case
+uh yeah we are looking up this entry
+and is not updated again and then uh
+because these two instructions were not
+taken. So in yeah we are uh we have 00
+in the global history table and the
+program counter of this instruction
+these two bits are always the same. So
+if these two two instructions uh two
+previous branch instructions this one
+and this one is not taken we are looking
+up this one. Uh but we know that this
+register this uh branch must be always
+taken.
+So it is actually taken uh it is updated
+one uh but if uh these two branches are
+not actually taken then we know that uh
+yeah these particular entry must be
+always one because it must be taken. So
+in this way we can uh look up the
+previous uh we can uh we can use the
+correlation between different uh branchi
+instructions.

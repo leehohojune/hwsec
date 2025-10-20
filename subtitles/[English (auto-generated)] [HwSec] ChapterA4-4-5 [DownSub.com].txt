@@ -1,0 +1,156 @@
+Okay, let me summarize the GPU
+architecture by comparing the GPU with a
+vector processor.
+In this slide on the left side you can
+see the architectural diagram of vector
+processor and it is juxtaposed by with
+the uh GPU or sim extension architecture
+both have four lanes or in in yeah in
+other words four uh functional units. So
+uh this part is basically the same and
+both uh architectures support mask. So
+uh it in it means it it is allowed to
+run uh it uh supports some conditional
+branches
+and uh but the difference uh key
+difference I believe is this one the
+program counter that means uh in case of
+GPU we can run multiple threads uh at
+the same time by multiplexing them on
+the same processor. But in case of
+vector processor, it does not support
+multiplexing multi- threads.
+As soon as one instruction begins, it
+cannot be interrupted, interfered or
+multiplexed by all another instruction.
+So we need only one uh program counter
+maintained. But in the in case of GPU we
+need to maintain multiple program
+counters because we are managing many uh
+not many but uh some different multiple
+uh threads.
+So the we need a scheduleuler hardware
+baseduler because we are managing
+multiple threads
+and uh in case of a vector processor it
+has a vector load store unit and it
+directly accesses the memory interface
+unit basically the memory controller but
+in case of GPU it has a load store unit
+but between in between the memory
+controller and loader store unit it has
+address coallesing unit that combines
+different memory access accesses so that
+the DM performance can be maximized.
+So these are this diagram actually
+illustrates very well uh the
+similarities and differences of these
+two architecture.
+Uh let's take a a little bit closer look
+at the differences
+and uh yeah so in in vector processor we
+are calling the vectorzed loop uh a loop
+to be run on a vector processor is
+called vectorized loop. Uh but the in
+GPU it is called grid. Basically they
+are the concepts are the same and in
+vector processor we are using chime or
+convoy to estimate the performance uh
+but uh the GPU doesn't use this kind of
+uh yeah uh this kind of terminology
+and the vector instruction corresponds
+to ptx instruction
+and the Vector processor supports gather
+and scaler memory access.
+The CUDA
+uh
+can access the memory. Uh but it is not
+a kind of G and scatter. But the
+in in case of GPU each thread can access
+anywhere in the uh memory. But if they
+are accessing
+if the programmer can make sure that the
+JSON thread access
+nearby memory location then the hardware
+the memory colesing unit can combine
+them to uh improve the per memory
+performance
+but it is not yeah required
+still works but the performance
+is not guaranteed
+and in the vector processor mask
+registers are available and CUDA also
+the same. uh but from the perspective of
+the programmer the pro one the
+programmer should maintain is the
+predicane register and it has internal
+mask registers
+and uh the vector processor corresponds
+to multi-threaded sim processor or uh
+yeah streaming multiprocessor
+As I shown in the first slide, they are
+different slightly but anyways the
+concept is similar. they are supposed to
+uh run one instruction to compute
+multiple data
+and in vector processor control
+processor
+uh is there uh while the uh GPU has
+thread block processor.
+Uh
+so the thread block scheduleuler assigns
+uh thread block to uh sim multi-threaded
+sim processor.
+But in case of vector processor it does
+this uh assigning block to processor is
+done by the host CPU. It is called the
+control processor in uh GPU uh vector
+process uh domain
+and the scalar processor is also uh in
+the of is means typically the main
+processor uh uh in case of GPU it does
+not have uh separate scala processor but
+usually uh the GPU is used a
+co-processor so there must be a main
+processor system processor. So, uh it is
+yeah uh typically uh yeah they are also
+different color processor and system
+processor but uh they are the most
+similar concept
+and the lanes are yeah basically these
+terminology is are quite similar. Yeah.
+And
+yeah so single lane registers are many
+uh but it is limited for single thread
+but in case of vector registers one yeah
+rain can use all the vector registers
+but the actual physical uh number of uh
+the number of physical registers is yeah
+limited compared to GPU.
+When we compare GPU with the sim
+extension,
+uh the concepts are very similar but uh
+typically
+uh GPU has higher level of uh
+parallelism. So the number of simmed
+processors, number of lanes typically
+much uh more than the simmed extensions
+but the cache is a little bit smaller
+and the memory as well because uh in
+case of GPU uh the hardware
+the processing elements because there is
+a there are more processing elements
+that means there is a tradeoff. If we
+have more processing elements, we don't
+have enough space to have more yeah
+memory. So uh GPU typically has uh less
+memory
+and GPU does not support demanding page
+and integrated
+scala processor and cache coherence.
+But I'm not sure about the yeah very uh
+recent uh processors because I'm not
+sure about some uh recent uh GPU
+architecture supports uh yeah the demand
+paging and cache coherence but uh yeah I
+yeah I'm not All right.

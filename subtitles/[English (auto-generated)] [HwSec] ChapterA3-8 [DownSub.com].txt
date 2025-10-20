@@ -1,0 +1,230 @@
+Modern processors, modern high
+performance processors usually employ
+all of dynamic scheduling,
+multiplication,
+hardware speculation all together.
+By doing this, we can fully exploit the
+instruction level parallelism while
+handling uh all the header by hardware
+itself.
+So let's take a look how those
+techniques work together uh but without
+speculation here but at the following
+slide we will see how the speculation
+helps uh to improve the performance.
+In this example, uh we assume that we
+can issue and commit two instructions at
+the uh same cycle and the processor has
+one address calculation, one au
+operation and one branch uh evaluation
+uh at the same uh uh can be done at the
+same time cycle.
+Okay, then let's see uh and yeah in this
+example we don't employ the rubon
+rolling and uh uh all the instructions
+are just executed uh in uh serially and
+the first instruction is load
+instruction and uh th those two
+instruction the first and the second
+instructions are issued together at the
+first uh cycle
+uh as I mentioned that we are assuming
+that two instructions can be uh issued
+and committed at the same cycle and uh
+because the first instruction doesn't
+have any dependency uh it can move on to
+the next stage uh every cycle uh the
+next stage is uh execute the next is
+memory uh because this is a memory
+instruction and assuming that the for
+example cash hits so uh the memory uh
+staging is done in a cycle. So the next
+cycle uh the result is written to uh
+register two. The second instruction uh
+it was issued at the first cycle but
+because of the data dependency as you
+can see it is reading R2 but it is only
+available after the first instruction uh
+completes. So uh this instruction can uh
+be move on to the excuse stage uh only
+after the first instruction completes
+and the next instruction is store
+instruction
+and uh this instruction together with
+the next instruction
+can be issued at the second cycle.
+uh and the store instruction uh can move
+on to the uh execute stage where the
+branch uh the memory target address is
+computed
+uh because uh computing the memory
+target address uh can be done from uh
+reading uh R1 register that doesn't have
+any dependency.
+So uh we can uh compute the brand uh the
+uh memory target address at the third
+cycle. But in order to store R2
+uh we have to wait until the previous
+instruction uh completes. So the memory
+staging is actually done in the uh
+seventh cycle.
+But the first instruction uh this
+instruction doesn't have any dependency.
+So it can just immediately move on to
+write stag.
+And the fifth instruction is branch
+instruction. It is issued at the third
+cycle. Uh but it also has a dependency
+R2. So it can be uh executed only after
+the second instruction. this is done. So
+at the sec seventh cycle
+the branch is actually determined.
+So that's why the next instructions are
+issued here at the fourth cycle. Uh but
+they are actually executed from the
+eighth cycle.
+Uh so it means uh be because we have we
+we are currently assuming that the
+branch predictor is available but the
+speculation is not currently being
+employed. So because we have a branch
+predictor, we can uh still fetch the
+next instruction assuming that the
+branch uh prediction is correct but we
+don't move on to execute because uh
+without speculation we have to wait
+until the branch is reserved. So uh at
+this fourth cycle uh we are we just
+issued instructions but they don't move
+on to the next sub uh next sub uh stage
+at the following cycle. At the fifth
+cycle the next two instructions are are
+issued but they don't also move on to
+the excuse stage. At the seventh cycle,
+the branch is reserved. And finally, we
+uh we know that these instructions are
+actually uh yeah uh the branches
+actually uh yeah these instructions are
+the correct instructions that we have to
+execute. Then we move on to uh the
+execute stage. So uh the load
+instruction can uh execute can be
+executed but this second instruction
+cannot because it has dependency the
+same dependency of the previous uh
+iteration. Uh but currently the first
+instruction uh was issued uh and it
+doesn't have any dependency. So it can
+also be executed at the eighth cycle.
+And then as soon as the uh eighth cycle
+this R1 uh
+yeah
+and uh actually
+uh this this instruction SD instruction
+uh can begin at the eighth cycle but we
+assume that we have only one address
+calculation unit. So that's why we
+cannot uh execute this instruction here.
+So at the faring cycle it is actually
+executed
+and then because R2 is available only
+after the this instruction is done. Uh
+the memory stage can be done at the 13th
+cycle
+and other instructions are executed in a
+similar way.
+And let's compare this uh with uh with
+those uh processes with spec
+speculation. In order to support
+speculation, we need one more substag
+that is comeit and we need one more
+hardware component reorder buffer. So uh
+we by assuming that we have a real
+developer uh we we can uh uh we can uh
+speculatively
+execute the instructions. So let let's
+take a look at this example and the
+first instruction second instruction
+they are basically not much different
+from the previous example uh except for
+this uh commitment uh commit uh staging
+and the third instruction the store
+instruction
+uh the memory staging is actually done
+at the commit uh staging in case of the
+story instruction because This is uh to
+reserve the right after right kind of
+hazard uh in the memory. So uh only when
+it is time to commit the memory write
+operation the store operation can be
+done. So uh the in case of store
+instruction
+uh the actual memory stage is uh
+combined with the commit stage. But in
+case of read it can be done yeah before
+commitment because it is just a reading.
+Uh but also there is one uh restriction.
+If when this instruction
+uh tries to read something from the
+memory if there is
+uh uh active instruction which is not
+active store instruction at the to the
+same uh memory target address but not
+committed yet then uh is wait.
+Okay. So this is some restriction to
+reser to preserve the integrity of the
+uh memory uh yeah data data in the
+memory. Okay. And this one
+actually completes at the four cycle but
+it can be committed only after the
+previous instructions complete. So uh
+this uh false instruction this one can
+uh commit only at eighth cycle. So this
+is also a little bit different from the
+previous uh yeah uh example
+and here we have a branch instruction.
+Okay. And it is it can be reserved here.
+And the next instruction also can be
+fetched by using the branch predictor.
+But in this case because we are
+employing we employ spec speculation we
+proceed proceed to execute. So the first
+instruction this one uh can proceed
+but on before uh the branch is actually
+committed it is still waiting. So uh
+even if we complete execution of this
+instruction, we wait until the branch is
+actually uh determined.
+In this example, uh the branch
+prediction was correct. So we keep these
+instructions and commit them. So at the
+nine cycle after the branch instruction
+is committed uh we we can commit the
+next instruction immediately otherwise
+we have to cancel uh basically just drop
+this uh execution of the uh instructions
+and then we have to fetch another
+instruction.
+So it will take much longer that's yeah
+brand misprediction penalty
+and uh the next instruction yeah
+basically the same uh it can uh be
+executed only after the first
+instruction this one completes but here
+the dependency is not from the
+commitment but uh from the uh write
+stage. So uh uh we can begin execution
+of this second instruction as long as
+the first instruction completes but not
+committed yet. So this is kind of
+bypassing the result
+and yeah other uh instructions are
+basically yeah uh done uh in a similar
+way. So uh by yeah looking at these
+examples you can see that how the
+speculation uh works and also you can uh
+see how the multiple instructions per
+cycle issuing multiple cycles and also
+uh some uh the yeah dynamic scheduling
+uh works actually together uh to exploit
+the uh instruction level parallelism.

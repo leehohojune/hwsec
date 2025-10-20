@@ -1,0 +1,192 @@
+By using the branch predictor one we
+actually know is the program counter if
+the prediction is correct. Uh but uh
+only the program counter uh may not be
+enough because anyways we need to fetch
+the instruction. So uh if we can predict
+the next program counter then why don't
+we pre fetch the instruction as well. So
+that that's the branch target buffer. Uh
+instead of just uh predicting the
+program counter uh we also keep the
+instructions as well. So uh if the
+prediction is correct then we can
+immediately fetch the instructions from
+the uh branch target buffer. So this is
+a kind of another uh type of uh yeah uh
+cache we can uh regard it as a uh
+another type of cache.
+So uh the branch target buffer is
+actually usable if uh the branch is
+taken. If the branch is not taken
+predicted to be not taken then the next
+instruction is just naturally fetched.
+So uh the branch target purple stores
+the predicted instructions
+uh assuming that this uh the branch is
+uh taken. So let's take a look at the
+flowchart how we use the branch target
+buffer.
+uh if we can find the branching uh the
+instruction uh in the branch target
+buffer. uh if not then uh
+yeah so this is at the instruction fetch
+stage and then in the decoder staging uh
+by using the only branch resolution
+technique if it is employed then uh we
+can determine whether this branch is
+actually taken or not at the uh
+instruction decoder stage. So uh at this
+moment we can determine that if the
+branch is actually taken or not. So if
+it is not actually taken then yeah we
+don't have to worry about that uh
+because uh uh nothing would be need to
+be updated because buffer doesn't have
+the instruction and it's turns out that
+it is not actually taken. But if we
+cannot find could not find the
+instruction at the branch target proper
+but uh it turns out that the branch is
+actually taken then uh we got to fetch
+the instruction and also need to update
+the branch target buffer.
+So it is uh yeah the procedure of this
+uh uh the left side and at the right
+side let's suppose that we could find
+the target instruction at the branch
+target buffer then uh yeah the branch
+target per sends the uh sends out the
+predicted program counter uh to the
+processor core and uh at the instrument
+instruction decode stage the branch is
+determined. If it is correctly uh
+predicted then yeah just yeah we can
+just go on uh without any penalty but
+let's suppose that if the branch is
+actually not taken. So in that case we
+got to cancel the uh fetch the
+instruction and restart from the fetch
+instruction again and also we got to uh
+update the branch target proper as well.
+So uh we have to pay uh some penalty.
+So branch target buffer is anyways
+different from uh branch prediction
+because even though the branch is
+correctly predicted because the branch
+target prepper its size is limited we
+may not be able to find the uh target
+instruction in the branch target buffer.
+So uh let's so we can uh classify the
+cases
+uh by the combination of whether the
+prediction is correct and whether we can
+find the instruction in the buffer. Yeah
+the branch target buffer hits.
+So the first case uh if uh everything is
+correctly uh predicted and the branch is
+actually found in the target buffer then
+yeah there is no penalty.
+But if the branch is not correctly
+predicted.
+So for example this one
+and uh yeah in this case the penalty is
+one clock cycle to update the buffer uh
+with the correct information and one
+more cycle if needed to restart fetching
+the instruction the correct instruction
+uh for the branch and uh if the branch
+is not found not found but uh the branch
+is actually taken then two cycle penalty
+uh is encountered during which time the
+buffer is uh actually updated and uh if
+the branch is not taken and we yeah in
+that case we are we don't use the branch
+uh the and also we don't have any entry
+in the buffer then nothing would happen
+so there is no penalty Okay.
+Yeah. Let's let's take an example. So
+for uh let's assume that the prediction
+accuracy is 90%.
+Uh for the instructions in the buffer
+king rate in the buffer is 90%.
+For the branches predicted taken. So in
+that case uh what is the uh average
+uh yeah branch penalty.
+So uh first we yeah if everything is
+correct and yeah this is this is also
+correct correct prediction in that case
+we don't have a penalty. So one we are
+going to focus on these two cases. So
+let's take a look if the branch is in
+the buffer but actually not taken then
+what's the probability
+buffer hit rate the the rate of this one
+uh is 90% and the incorrect prediction
+uh because prediction accuracy is 90%
+that means incorrect prediction
+probability is 10%. So by uh combining
+these two probability uh this is what we
+have for this case and the third case it
+is branch is not in the buffer but
+actually taken it is 10%. Because yeah
+we are talking about this uh branch is
+actually taken this one. So uh because
+we we don't have the buffer if the
+branch uh is is predicted not be not to
+be uh not to be not taken then we don't
+have the uh instruction in the buffer
+for sure. So in that case we don't have
+to compute the probability of finding
+the target instruction in the buffer
+because if the prediction is not taken
+then we don't store uh the instructions
+in the buffer. So what we need to
+consider is only the prediction uh
+accuracy. So it is 10%.
+In that case uh so the penalty the
+problem the uh expected average uh
+penalty for the second case this one is
+uh 9% * 2 and this case the third case
+is uh 10% time 2 in total 38%.
+So I 0.38
+uh cycles uh on average. So this is the
+average penalty for branch prediction.
+So the by using the branch predictor and
+branch target proper we can uh uh
+improve the performance by speculation.
+So uh by using the speculation we can
+uncover events that would store the
+pipeline early. So for example kashmis
+and uh we can take full advantage of the
+uh instruction level parallelism and uh
+it allows execution to proceed past
+control uh dependencies. So the yeah
+control dependency here means the
+branch. So even though we have frequent
+branches if the speculations
+are uh accurate enough then we can pass
+uh these uh branch uh yeah dependencies
+but it comes with a cost. It takes time
+and energy to execute speculative
+instructions. That means if it is not
+correct then there is a penalty. All of
+these time and energy is waste.
+wasted and uh also we have to recover
+from the incorrect speculation and uh it
+also requires additional resources
+because we need hardware logic for
+speculation and it is really problem if
+exception occurs during the speculation
+may
+significant performance loss.
+So yeah and some attacks actually
+exploit uh this uh situation
+and when we profile uh some benchmarks
+uh what we could observe is that uh some
+integer programs uh has relatively high
+misp spec speculation uh penalty. So
+typically uh uh typically the uh yeah
+floating point programs uh yeah yeah
+exhibit uh the yeah better uh
+speculation efficiency. A.

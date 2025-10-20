@@ -1,0 +1,135 @@
+The second lab is about branch
+predators.
+Through this lab you can you will be
+able to develop your understanding of uh
+branchy predators.
+uh but because this is a lab uh I am not
+going to ask you to modify or develop
+any new uh predict predictor but instead
+what you are going to do is to run uh
+some multiple simulations with varying
+uh simulation parameters.
+So this is what you are going to do. uh
+first you need to build a benchmark and
+that is already uh you used uh in the
+previous lab. So the matrix matrix
+multiplication to do so go to this
+directory and make another directory lab
+two and then place the base jump C base
+C to uh this location and then compile
+and you also need to update the
+configuration script uh because you uh
+you can modify the same we are going to
+use the same uh configuration Python
+file And uh in line 61
+uh yeah here
+9 line 61 the location of the benchmark
+you will need to update this one and
+then 83 this is the uh uh yeah
+instantiation of the CPU model in this
+lab we are going to use the out of order
+processor uh is 03 CPU U and we will
+change the branch predictor to local
+simple branch predictor and we will vary
+these two parameters uh the local
+predictor size and local controller uh
+bits that is actually uh determine uh
+this. So we are going to use very simple
+dynamic predictors and uh the number of
+control bits determine how many states
+we are going to maintain to predict one
+branch.
+This is uh the first one this one is
+using only one bit then uh we we will
+use only we will keep the history of the
+previous uh resolution. So uh if the
+previous the same branch if the uh the
+previous execution was determined to be
+taken then uh we we predict that the
+next branch will be also taken. So this
+is the uh first one but if we increase
+the number of control bits to two then
+we have uh four states. So uh if we are
+here for example uh even though the
+branch is taken only once uh we are not
+uh predicting that it's going to take
+next time at least two uh times it is
+taken then the state actually uh the
+prediction is actually changing to to be
+taken and if we increase the number of
+uh to for example four then we are going
+to have 16 uh states
+and this local predictor size is the
+total
+uh total
+uh memory size to keep the uh state. So
+uh if the local predator size is four
+but or while the local control bit is
+two then uh we will have only two
+uh set.
+So uh yeah to to be more uh easier to
+understand if these two values are the
+same for example four and four that
+means um we have only one predictor
+so all branches in the code will be
+checked by that one s one single uh set
+of predator. So because we will have
+multiple branches usually if all the
+branches are predicted by one single
+counter then you you see that it will
+not be very accurate.
+So but we have a limited budget
+typically. So if we have uh this many uh
+this much s this this size of uh total
+available branch then uh if we reduce
+the number of control bits to two then
+we will have two sets.
+So the number of sets can be calculated
+by local predict size divided by local
+control bit that will gives us that will
+give us the total number of uh set one
+means the uh branch prediction the fsm
+this one so uh that's how uh that's the
+impact of these uh parameters
+And then when you run uh with these
+parameters you will get uh this result.
+Uh this is the baseline matrix matrix
+multiplication. And you see that here
+for example we have three uh nested row
+that means we will have at least three
+branches.
+So this will affect the accuracy of
+branch prediction. This is what we you
+need to do run simulation varying these
+two parameters and and fill the table of
+the next slide. This is the next slide.
+So uh by changing these number of bits
+and the predictor size you will need to
+fill the table. This one is already
+given as an example. But depending on
+the simulation environment, this value
+might be different. Then you will need
+you you can use your own number. That's
+no problem. And the number of total
+number of control bees cannot exceed the
+local predictor size. So you don't have
+to fill uh these cells.
+and then discuss two findings from the
+simulation result and explain why
+because you already have the uh code and
+when you run the simulation you may find
+some trend from the simulation results.
+So uh discuss those two bindings only
+two two is two two findings are enough
+and uh explain why why you
+why we are observing this kind of uh
+trends okay and summarize the simulation
+results basically a table and then uh
+your findings in just one page one page
+is enough So one table two findings and
+explain uh your findings uh by comparing
+the source code you and also the
+mechanism of the uh branch predictor uh
+you will need to explain why we get
+those results and then uh submit your
+report onepage report to RMS.

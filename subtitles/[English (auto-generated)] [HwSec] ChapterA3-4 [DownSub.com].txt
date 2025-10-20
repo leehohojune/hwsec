@@ -1,0 +1,290 @@
+Since the assembly language has a series
+of instructions
+uh that the programmer
+expects to be executed se sequentially
+uh the
+uh static scheduling of the in order
+execution of the instruction is quite
+natural. However, it has some limitation
+uh for performance improvement because
+everything is pipelined and uh in order
+that means if any of the instruction in
+the middle is stored for some reason for
+example for kashmiris then the
+subsequent instructions must be also
+waiting even though they don't have any
+dependency. on the pending instruction.
+For example, let's take a look at the uh
+example code on the right side. So the
+first instruction is division and the
+result of this first instruction is used
+by the next instruction. So it has
+dependency. That means if the first
+instruction is stored, the second one
+must be waiting because it needs uh the
+first instruction to complete
+until it can get started. But the third
+one doesn't have any dependency.
+Even though in reads the same register
+with the second instruction it is not
+dependency because both instructions are
+reading only reading. So even though uh
+the sec third instruction is executed
+before the second one or first one it
+doesn't affect the result.
+So the third one can start even if the
+first or the second instruction is
+pending but the static uh scheduling
+doesn't allow
+to solve this problem the uh out of
+execution uh must be employed.
+So the dynamic scheduling allows out of
+order execution.
+The key idea uh here is to split the
+instruction decode stage. You remember
+that out of five uh uh canonical five
+stage pipeline in processor the second
+one is the instruction decode stage. We
+split the decode stage into two. The
+first substag we may call uh checking
+for the structural hazard and then uh we
+wait for data hazard to clear. That
+means if any functional unit is
+available then the instruction is issued
+and then uh we wait for the uh if there
+is any data dependency on the previous
+in instruction that it should wait.
+Then how how does it allows the uh the
+out of order execution?
+If the for example the first instruction
+uh is issued and waiting for the results
+from the previous instruction.
+If the second instruction can be issued
+because the functional unit is available
+then it can issued even though the first
+instruction is not complete yet. If the
+second instruction can be issued, it can
+be but the second one may be waiting for
+the previous result or if all the
+results are already available then it
+can just complete before the first one
+completes. So in this way we can uh
+allow the out of order execution
+and this can be done uh by hardware
+itself. It doesn't need any assistance
+from the software or compiler. So uh
+even though we are using the same
+software, we can run the same software
+on different hardware and depending on
+the hardware spec.
+Yeah, maybe some processors may may have
+more functional units than other
+processor.
+So depending uh it doesn't uh yeah we
+can run the same exactly same software
+on different types of processors with
+different numbers of functional units.
+So that that's a uh one benefits of this
+kind of dynamic scheduling
+and it can also handle uh dependencies
+that is that are unknown at compile time
+because we are dealing with the
+dependencies runtime. So uh at the time
+uh we know uh the dependency. So uh if
+we know the dependency in advance at
+compile time maybe we can reschedu
+software to uh reduce or break the
+dependency. But if it is not known then
+we cannot uh avoid the dependency uh at
+compile time. But because this is a
+runtime approach uh we don't need it.
+And because of the outer execution, it
+allows to tolerate unpredictable delays
+like uh cashmies.
+But the problem with this approach is
+actually the hardware cost increases a
+lot. But the performance also improves a
+lot. So most of the modern processors,
+the high performance processors uh
+employ the out of order dynamic
+scheduling.
+So as I mentioned before uh in order to
+implement the out of order execution we
+split the decode staging into uh issue
+substaging and read substaging
+and uh it allows dynamic uh scheduling
+of the pipeline
+but it also has some chunk challenges.
+Uh if we want to allow the out of order
+execution then uh we still we uh
+actually need to uh yeah handle this
+type of uh hazard as well. right after
+right grid or right after right this
+kind of hazard are not uh real
+dependency
+but uh we
+if we use the same name of the register
+then we still need to keep their uh
+order of execution even though they are
+not data dependent uh they they are not
+real data dependency but if we break the
+change the daily execution order the
+result uh will be uh different. So we
+have to consider this new uh type of
+hazard
+and exception handling that is uh
+when an exception occur then we need to
+the programmer wants to know where
+exactly when exactly the exception
+occurs. But if the out of the uh ex
+instructions are executed not uh in the
+same order of the program then uh the
+programmer cannot figure out uh what is
+the root cause of the exception.
+So uh for the programmer we have to uh
+preserve the order of execution. That
+means uh even though the instruction are
+actually executed out of order they must
+appear in order to the programmer. So
+that's another uh important requirement
+otherwise it is very difficult for
+debugging or exception handling
+and uh because we have limited register
+set uh this creates another type of
+dependency.
+So um yeah basically it is kind of a
+register pressure.
+So to address these problems one of the
+well-known approach is register
+renaming. By renaming the uh register we
+can eliminate force dependencies. For
+example, uh here you can see that uh we
+have uh yeah here F8. If you look at F8,
+this instruction is reading data from
+F8.
+But here
+it is written by uh this instruction. So
+this is uh right after read.
+So it is not real dependency.
+But if the second instruction this one
+sub instruction is executed before add
+instruction then the result will change.
+So we still need to keep their order
+then limit the freedom of uh the
+parallel execution.
+And another example is this one. So it
+is written here F6 and here F6
+read again return again.
+So it is uh right after write dependency
+basically the same they don't have a
+actual data dependency but if this
+instruction is executed before this one
+then the result will change. So we have
+to reserve preserve their execution
+order.
+But if if we introduce some
+temporal register or rename these
+registers to a different name then this
+kind of force dependency can be
+eliminated.
+On the right side you can see that uh
+instead of uh for example fa
+we now use temporal register t here
+again t
+If we change uh FA of these two
+instructions to the temporal register T,
+then uh the result of this program must
+be just the same.
+But this dependency is broken now. It
+doesn't exist any longer.
+And for the same here
+uh not not here but because this is a
+real dependency so we keep the real
+dependency here again but uh this one
+from here to here this kind of force
+dependencies can be avoided by
+introducing or renaming the register. So
+if we want to rename the register, we
+need more registers. That's why we uh
+have uh register pressure to implement
+register renaming
+to systematically
+rename and reschedu the instruction. A
+uh Thomas law algorithm was proposed.
+In this algorithm uh we maintain these
+three types of uh data structure. The
+main idea is this one a reservation
+stations. For each functional unit we
+keep
+re reservation stations.
+So in this uh reservation station uh we
+keep track of uh the arguments of the
+availability or source of the uh
+operance of the current instruction. If
+the current operation
+uh the operands
+uh the value is available then these two
+field uh keeps those values. But if they
+are not currently available uh and they
+are supposed to be generated by the
+previous instruction then we keep where
+we will get these uh operants.
+So this is the main idea
+like and other yeah fields are just some
+uh yeah auxiliary uh yeah
+information.
+For example, what kind of operation this
+functional unit is going to perform?
+adder the adder can do addition and
+subtraction and the multip
+multiplication functional unit can also
+do the division. So even though we are
+using the same um uh functional unit we
+can do more than one operations. So so
+that's why we need this field and this
+one is this one indicates whether this
+current station reservation station is
+being used or not. And this is for
+memory instruction.
+And if the is this operation this
+instruction is memory operation, we need
+to compute the target address. So this
+field keeps the uh target address
+and the load store buffer. This is uh
+yeah
+just just a load store buffer. So uh it
+keeps track of the uh memory accesses
+and the register file keeps track of
+which registers are currently uh being
+uh used.
+So when you we employ Thomas law
+algorithm then first the instruction is
+issued if uh it's uh functional unit is
+available and also the reservation
+station uh has uh empty slot
+then uh if all the uh instructions the
+operands are available
+then the uh the instruction in the
+reservation station can begin to
+execute.
+And if it is load store the memory
+instruction then it it the instruction
+uh is executed by the load store buffer.
+Then after finishing the execution in
+write the result to the uh to the
+to the to the uh data bus the common
+data bus. So it is a bus that means if
+more than one functional unit finish at
+the same cycle then only one of them can
+actually write the data to the bus. So
+in this way uh
+we can avoid the conflict of the uh
+register update
+and uh by broadcasting the result to the
+common bus because this is common to all
+the functional units uh it is
+broadcasted. So if any instruction is
+waiting for the result can catch the
+result from the uh common datab bus and
+then uh if it becomes available then the
+instruction can begin to execute.

@@ -1,0 +1,226 @@
+There are a couple of different
+approaches to exploit the instruction
+level parallelism.
+Uh the superoscalar approach uh that is
+uh basically running the instruction in
+multiple functional units and uh if we
+have more than one functional unit then
+uh we need some kind of scheduleuler. uh
+the scheduleuler could be classified
+into static or speculative.
+Uh in case of static um uh scheduleuler
+uh we still issue uh instruction during
+runtime but the execution order is
+actually fixed. though it is kind of uh
+in order processor but uh we still use
+multiple functional units. So uh this
+approach the example of this approach uh
+includes MIPS ARM cortex A8 they are
+mostly used for embedded systems
+but we can also uh exploit the out of
+order execution to uh yeah uh improve
+the performance even further. So uh in
+this case uh the dynamic scheduling with
+uh speculation
+uh is uh employed. So uh the order of uh
+program execution instruction execution
+could be out of order. The
+representative examples include Intel
+core or AMD uh and IBM power cities.
+And lastly, this is the focus of this uh
+uh subchapter that is vi or IW that
+stands for very long instruction word or
+just long instruction word. In this
+approach, the uh instruction level
+parallelism is uh exploited by uh
+multiple instructions in the in the uh
+same uh instruction format. So typically
+uh one instruction the length of one
+instruction is depends on the yeah the
+uh the architecture but typically 32 or
+64. In case of embedded system it could
+be 16 but in VW is much longer. So one
+instruction is much longer. That means
+within one instruction we are uh
+plugging into many sol instructions
+basically multiple operations.
+In this case, we don't use uh dynamic uh
+scheduling but the scheduling is static.
+That means uh the execution order is in
+order
+and typically the hazard including some
+data hazard uh control hazard. These
+kind of hazards are uh addressed by uh
+software that means compiler. So the
+compiler has to be very smart to uh to
+handle the header.
+When this V IW was proposed
+long time ago, people uh some people
+were skeptical because the compiler
+cannot be smart enough to handle these
+kind of hazards. But uh through uh
+efforts of various researchers now uh we
+uh yeah they figured out uh the compiler
+techniques to uh enable facilitate the
+vi architecture with the uh help of the
+compiler. the advancement in compiler uh
+the vi was proven to be feasible.
+So the some characteristics of the VW
+architecture includes uh it has multiple
+independent functional units
+and the operations are packaged into one
+very long instruction. actually multiple
+functional units. The these are I think
+it is not unique to the VW architecture
+because the supercale architecture also
+employs multiple functional units. But
+the key difference from supercalar
+architecture uh of the vi is the pack
+packaged instruction into one very long
+uh instruction. Typically one
+instruction can contain more than five
+operations and the leng the length of
+the instruction is around 80 to 120 bits
+is much longer than 16 32 64 bits. For
+example, itanium employs a support up to
+six operations per instruction packet.
+But even though this long instruction is
+available if uh we cannot find
+parallelism then yeah they must be just
+useless. Typically this VW is suitable
+for with is uh very uh well uh aligned
+with loop unrolling technique.
+So uh we can uh employ rubing to uh
+maximize the instruction parallelism and
+then we can issue multiple operations
+uh at the same uh in the uh packeted in
+the one long instruction.
+And these are uh some uh compiler
+technique that uh needs to be uh uh yeah
+supported by the compiler.
+Let's see uh an example. We have a loop
+uh with this code. It is loading some
+data and add
+uh some fixed value to the data and then
+store it to back to the same location
+and this is index and this is uh
+terminal condition uh checking.
+So uh for this kind of r uh we cannot
+directly
+run this loop in the f architecture
+because everything is just serialized
+but we can see that all the iterations
+are independent.
+Uh so iterations
+don't have data dependency uh between
+them. uh so we can unroll the root.
+Let's let's assume that we have uh two
+memory uh references that means we have
+two uh road store buffers and two
+functional point uh units and one
+integer operation. Uh let's assume that
+we can pack all of these uh to one
+instruction package.
+Then after unloading this rule this is
+what we can issue uh in verw
+architecture. So one line here this is
+one instruction
+and for the first instruction we uh have
+these two uh basically because we have
+this uh functional units two memory two
+function for floating point one integer
+operation uh we can unload this loop by
+factor of two
+then we are basically processing two
+iterations
+uh at the uh at a time at a given time.
+So we are issuing these two uh yeah load
+instruction
+uh
+yeah but in yeah okay
+however in this particular example even
+though we have only two memory
+references two functional units because
+it takes some time to access memories uh
+we can actually uh unroll the loop even
+uh with uh even uh higher uh even yeah
+more factor. So in this example the uh
+the rule was enrolled by factor of seven
+and then they are executed using this
+viw uh instruction. So uh the first
+instruction uh issues these uh two
+loading load operations and the second
+one two and the third one two and at
+this moment uh we are expecting that
+this instruction
+completes. So we issue the floating
+point uh operations
+and uh it is kind of a pipeline. So this
+instruction completes the next following
+uh cycle and so on. And also these two
+instructions must be scheduled uh when
+this instruction completes.
+And this instruction this uh decrement
+of the uh the uh the index uh is can be
+done in parallel here. And then this one
+uh checks the uh end of the uh the loop.
+So you can see it seems not easy and uh
+because uh if the compiler is not smart
+enough then this should be done by the
+programmer manually. So uh yeah this
+kind of scheduling is not easy but uh
+now though because of the compiler uh
+advanced techniques uh this can be done
+uh automatically uh by the compiler.
+So when the parallelism uh comes from
+just simple unarning rub learning then
+we may consider vector processor and uh
+the vector in case of a vector processor
+uh in instead of uh issuing multiple
+instruction multiple operations in one
+uh uh one instruction. The vector
+processor can process multiple data set
+with one instruction. So for example uh
+it is similar with sim. Oh yeah that
+actually very similar. Yeah sim is also
+can be classified as a vo w but uh
+anyways yeah there are a slight
+difference between the vo w sim vector.
+So let let me let me just continue on
+the uh explaining the vector processor
+here first. So briefly speaking when we
+want to add uh for example uh 10
+elements in the array then uh if we are
+using the vertical void I w then we are
+issuing 10 operations in one instruction
+but typically because of the limitation
+of the functional unit we cannot issue
+we cannot compute 10 elements at the
+same time but for example five or four
+operations per instruction. In case of a
+vector processor, we are issuing one
+instruction but this instruction as 10
+elements one by one serially. Uh but uh
+the the number of instruction is only
+one. The operations are done uh
+sequentially. So we need only one
+functional unit. So this is the vector
+processor. So difference between the
+vector processor and the uh the uh bu.
+But the bu is good at extracting
+parallelism from less structured code
+and is very uh good uh supports good
+catch performance.
+uh in the it means uh the vector
+processor is good at uh extracting
+parallelism from very structured code.
+So uh the multiple issue approaches have
+become the primary method uh instead of
+the vector processor. But still the
+vector processing is um yeah is good at
+uh very structured
+uh code. So the vector processor uh is
+still used but often added as an
+extension for example yeah extension of
+the uh the instruction or as a
+co-processor. Hey. Hey. Hey.

@@ -1,0 +1,214 @@
+In this chapter, we are going to discuss
+how we can exploit instruction level
+parallelism to maximize the performance
+of a processor.
+Uh mainly we can consider two approaches
+uh to exploit the parallelism. Uh one is
+the dynamic approach that means this
+approach is taken by the hardware. the
+software doesn't need to consider the
+parallelism. The hardware uh if the
+hardware detect that there are multiple
+instructions we can run at the same time
+then the hardware can uh schedule them
+automatically. So uh it is dynamic
+because it does it is determined during
+runtime. The other approach is a static
+approach that is done by the compiler.
+It is done uh at the compile time. So
+that's why it is static and yeah we can
+combine these two approaches. When
+compile the software, the compiler can u
+optimize uh to maximize the parallelism
+and while running the software actually
+the hardware can find the opportunities
+to run multiple instructions at the same
+time.
+But unfortunately the number of
+instructions we can run at the same time
+is pretty limited mostly because of the
+uh branch instructions because uh of
+course if we use uh speculation or
+branch prediction uh uh effectively then
+we can uh effectively increase the
+number of instructions we can uh run uh
+at the same time. uh but it is not
+always correct. So in that case we have
+to pay a lot of penalties mis penalties.
+If we don't use speculation then the
+number of instructions we can run is
+limited by uh branch instructions.
+In other word, we may define a basic
+block that is a straight line code
+sequence with no branches. That means
+when a basic block begins
+uh it it just executes the uh series of
+instructions
+uh without any branch until the end of
+basic block.
+We realize that uh the amount of uh
+instructions within a basic block is
+usually about 3 to six instructions
+because when we profile uh the
+benchmarks
+uh the branch frequency is between 15%
+to 20%. that is translated to three or
+three to six instructions per basic
+block. So even though we can exploit the
+instruction level parallelism
+uh it is quite limited that's why we uh
+look at the loom level parallelism.
+For example, here
+if we look at this loop is uh in runs uh
+yeah 1,00 iterations
+and when you look at actual code you can
+see that uh they are independent
+iteration by iteration. So while you are
+computing x0
+there is no problem to compute x1 2 3
+and fourth
+because they don't have any data
+dependency. So uh in this case we can
+run multiple instructions a large number
+of multiple instructions.
+So it is called loom level parallelism.
+To realize this kind of to exploit the
+loom level parallelism, we need to
+unroll the uh loop otherwise uh they
+should be executed in uh serially and
+the hardware cannot uh automatically
+detect they are their parallelism
+because uh there is a because this is a
+root.
+there must be a branch instruction at
+every iteration. So the size of the
+basis block is very limited.
+By unrolling the group, we can increase
+the size of uh one basic block. In that
+way we can uh increase the level of
+parallelism
+uh yeah but much larger
+but still even if we have a large basic
+block uh the data dependency or control
+dependency we are going to discuss later
+the dependency
+uh limits the parallelism. For example,
+in in this code, we uh in this code data
+is read and written to F1 and at the
+following instruction, it is uh used.
+This is a typical dependency.
+If these two instructions have data
+dependency, we have to keep their order
+of execution. We cannot run them at the
+same time.
+only when the first instruction finishes
+we can execute the next instruction. So
+this kind of dependency limits the
+parallelism.
+And here again this is another example
+of dependency and these two.
+But when we take a close look at the
+dependency
+there is uh some kind of false
+dependency.
+For example, here
+here this first instruction read X and
+the next instruction write X
+because they use the same variable X.
+They look like has a having a data
+dependency. But you can see that
+actually the data uh
+yeah they can run uh
+yeah we we still need to keep their
+order but uh
+yeah but we can avoid this dependency by
+changing the name. Even though we change
+the name uh even though we use y here
+their instruct their the uh the result
+will be the same. So by if we change the
+name with a different name uh then yeah
+we can run these two instruction
+simultaneously or we can change their
+order. If we don't for example here in
+this case even though they don't have
+dependency
+we still have to keep the execution
+order because if we write x first and
+then read x then the result will be
+different because x will read something
+different but this is because we are
+using the same variable
+not because of the true dependency. So
+in this case we can reserve or break
+this dependency by renaming the variable
+or register in hardware uh processor.
+The output dependency uh the same. If we
+write data to the same variable, same
+register twice, then uh actually even
+though we are writing the second one to
+a different register, the result must be
+the same. But because we are using the
+same register, we can re we cannot
+reorder their execution.
+So by renaming the uh register uh we can
+um yeah increase the uh yeah parallelism
+that can be exploited for performance
+improvement.
+So we can classify the data hazard into
+these categories. Let's suppose that I
+instruction I is executed before
+instruction J. Then uh if J uh tries to
+read the res resource before I writes
+it.
+Yeah. Yeah. So it is read after right
+and that that means uh instruction I
+reads data and it is written to uh
+written uh uh by the instruction J. So
+uh in that case uh e yeah
+if the execution order changes then the
+the yeah instruction I may read the old
+value.
+So yeah this is one category of data
+header. The other one is right left to
+right. So we we just saw this uh yeah
+this one uh before
+but right after read this is not true
+dependency because uh
+yeah did we also saw this one in the
+previous slide and uh if we change the
+name of the register then uh this type
+of dependency can be broken.
+And there is another type of dependency
+that is called control dependency. So
+for example here if we have a if
+instruction here then only if P1 is true
+S1 should be executed. That means we
+cannot change the order of execution of
+these two instructions
+because uh it is not determined yet
+whether s1 should be executed or not
+before we execute this first uh if
+statement. So um yeah
+this the this this is actually the
+reason why uh the size of bage block is
+limited because of this control
+dependency uh we yeah we don't know how
+uh how many uh instructions we can
+execute further only after reserving the
+branch instruction we can determine
+which one uh should be in uh yeah
+executed
+But yeah, this kind of dependency can be
+yeah addressed to some degree by yeah
+speculation. Uh just assuming that the
+branch is taken or not taken we we just
+keep just yeah executing instructions.
+If it is the prediction is correct then
+we can keep the result and just keep
+going on. But if it turns out to be
+incorrect then we have to roll back.
+It pays some penalty. Mhm. But yeah
+there are many techniques to improve the
+accuracy of prediction. So uh by using
+uh these techniques we can yeah uh
+address this issue to some degree.

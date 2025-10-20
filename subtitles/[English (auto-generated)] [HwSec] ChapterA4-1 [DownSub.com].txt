@@ -1,0 +1,115 @@
+In this chapter we will uh discuss how
+to exploit the data level uh
+parallelism.
+So there are couple of different uh
+types of uh parallelism
+uh available in the application. In case
+of instruction level parallelism that
+means uh we may find opportunities
+to run multiple instructions at the same
+time. In case of data level parallelism
+it means we have multiple data uh that
+can be processed in parallel.
+Then what's the difference between
+instruction level and data level
+parallelism? Uh when we are talking
+about data level parallelism, basically
+the operation that we want to do on data
+is the same. So for example addition we
+may want to uh add data but uh we can
+uh we want to add many data
+uh in parallel. So basically the
+operation is the same but for the
+multiple data that is often called
+single instruction multiple data
+architecture or instruction. So this sim
+uh sometimes we say we call this type of
+uh parallelism as uh simmed. So uh we
+have observed that many applications
+have this type of u parallelism.
+The most uh representative example is
+the multimedia applications. when we
+process image or audio uh there are
+abundant amount of uh data but typically
+what we want to do is basically the
+same. So we may issue one instruction
+but for multiple data in parallel.
+When we take a little bit closer look at
+this type of uh parallelism then there
+could be slight differences. So uh
+people came up with three derivatives of
+uh architectures that exploit this kind
+of data level parallelism. The first one
+is vector architecture.
+We may say that this is the very first
+architecture that exploit uh sim uh yeah
+parallelism data level parallelism
+essentially uh it is a pi it supports
+pipeline execution of many data
+operations. So uh when we issue one
+instruction then multiple data are
+processed in a pipelineed manner not at
+the same time. So
+yeah anyways we can process multiple
+data with a single instruction but not
+at the same time but it is a you know
+pipelined manner but the sim extensions
+uh these are an extension to the
+existing
+uh uh instruction set and uh in case of
+x86 six. Uh this extension is called MMX
+multimedia extension. It is added in uh
+1996
+and uh uh followed by SSE and AVX.
+So in this case uh one instruction
+uh have multiple data and that data are
+stored in the uh register and they can
+be theoretically executed at the same
+time.
+And very recently the graphics
+processing unit GPU have gained a lot of
+popularity.
+To my opinion, this is just personal
+opinion. It is not because of the
+multimedia or graphics but because of AI
+artificial intelligence. But anyways,
+it's beginning was for uh generalized
+computing platform for graphic
+applications and as I mentioned before
+the multimedia applications have a lot
+of uh data level parallelism. So the GPU
+uh was good uh is good at processing uh
+the data level parallelism.
+So in case uh when we compare the
+available parallelism
+uh the uh seemed instruction seemed type
+of parallelism have uh much abundant uh
+parallelism when we com uh profile
+applications
+and when it it is combined with multiple
+instruction. ction multiple data that is
+often yeah called uh yeah thread level
+parallelism. Uh and the thread level
+parallelism means that we can run
+basically
+uh independent applications on different
+yeah data. So yeah uh it is it sounds
+like a multiprocessing
+Um but when we uh look at
+uh the applications then we could find
+many uh parallelism combining these uh
+the thread level parallelism with uh the
+data level parallelism. So uh we are
+expecting that in after 2020 uh yeah the
+uh SIMD Thai parallelism is more higher
+than the uh thread level parallelism and
+you when we compare the the combination
+of mim and simmed uh yeah it is much
+higher than individual parallelism and
+Yeah, please note that the y the the
+graph the yaxis of this graph is log
+scale. So uh there are many more very
+big yeah difference uh between the
+combination of mimd and mimd and simmed
+or compared to uh the uh individual
+parallelism.

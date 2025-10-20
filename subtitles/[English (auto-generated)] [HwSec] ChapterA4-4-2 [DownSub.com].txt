@@ -1,0 +1,167 @@
+Because the origin of GPU is totally
+different from CPU. Uh its terminology
+is very different sometimes very
+confusing. If you are not familiar with
+GPU terminology uh it it must be very
+confusing. So uh in this video uh I will
+uh compare the GPU terminology with uh
+similar
+uh existing terminology. Actually the
+textbook already gives us this kind of
+summary table. I realize that this is
+really helpful though it is still
+confusing but anyways uh by explaining
+the GPU terminology in terms of existing
+uh terminologies that that's actually
+very helpful. So uh we will go through
+uh the uh terminologies of GPU uh and
+how they are they can be explained in uh
+traditional
+CPU uh terminologies
+pertaining to program abstractions. The
+first terminology we want to look at is
+grid. Here the GPU term grid
+the the closest old term outside GPU is
+factorizable loop. It is basically a
+loop. So in the text book uh it is used
+uh meaning of vectorizable loop executed
+on the GPU. So it is made up of of one
+or more thread blocks.
+So it is a loop that can be
+parallelized.
+And the next one is thread block. Thread
+block itself yeah seems quite intuitive.
+And if we translate this using existing
+terms we can uh say it is a the body of
+a factorized rule.
+So this means it is one factorized loop
+executed on the yeah GPU or in more
+descriptive term multi-threaded sim
+processor
+and uh this vectorzed root uh is running
+on uh yeah multiple thread as of sim
+instructions and they can communicate uh
+w via local memory. So it is kind of
+shared memory shared by multiple
+threads.
+And the next one is cuda thread. The
+CUDA thread means a sequence of simil
+operations or we can say one iteration
+of a uh scolar loop. So this this
+corresponds to one iteration in a root.
+One loop have multiple iterations and if
+it is parallelized it has multiple uh
+thread. So uh in CUDA uh one iteration
+the parallelized one uh is
+mapped to mapped to CUDA one CUDA
+thread. So uh in the text book it is it
+means the CUDA thread means a vertical
+cut of a thread of simmed instructions.
+So it corresponds to one element
+executed by one sim lane. So one
+functional unit
+and uh regarding motion object uh let's
+look at warp this is also very
+unfamiliar if you are not familiar with
+GPU then this is kind of new terminology
+but if we translate this to a thread of
+sim instructions I think this is much
+more easier to understand and uh so it
+is a thread but it contains only sim
+instructions
+that can be run uh that can run on a
+multi-threaded sim processor
+and in GPU the instruction
+uh is called PTX instruction and that
+corresponds to SIM instruction or vector
+instruction.
+It's relatively easier to understand
+and the hardware
+in GPU streaming processor that that
+means multi-threaded sim processor or
+vector processor. But here what's
+important here is is that this is
+multi-threaded
+multi-threaded
+vector processor. So this streaming
+multiprocessor has multiple cores
+but this
+multiple cores can run multiple threads
+uh by uh time multiplexing.
+So this point is a little bit confusing
+because in case of sim processor or
+vector processor we are running one
+thread on a processor at a at a time but
+in case of GPU multiple threads can run
+multiple processing cores.
+So it's kind a little bit different. I
+think this is from the perspective the
+the perspective of hardware
+implementation. This is the main
+difference I think uh of GPU from
+existing vector or assembly instructions
+and the giga thread engine uh is thread
+block scheduleuler and work scheduleuler
+is sim threaduler. That means uh this
+one giga thread engine assigns or
+schedules block to
+streaming multiprocessor.
+So it is scheduling in terms of uh
+blocks but Wululer
+schedules
+uh thread.
+So that that's the main difference but
+anyways they are hardware based
+scheduler of thread or block. So that
+that's the meaning of these two uh yeah
+hardware scheduulers and the thread
+processor is one single uh lane. If we
+compare this terminology to sim or
+vector processors then this means one
+lane one functional unit
+that is called thread processor in GPU.
+And when we are look at we look at the
+memory architecture then uh in GPU the
+memory is classified to global local and
+shared memory. The global memory is
+this memory is used by GPU. So this is
+not the memory in the host processor. So
+uh more descriptive name could be GPU
+memory and uh this works as a main
+memory uh as like main memory to the CPU
+and the local memory is kind of private
+memory.
+So the portion of DM memory is private
+to each thread processor.
+So it is dedicated to or allocated to
+each uh thread processor or sim lane. So
+it is private and it is not shared
+but there are uh explicitly shared
+memory
+and uh it is a local SRAMM for
+multi-threaded sim processor. So it is
+yeah this multi-threaded sim processor
+that is called
+multi-threading
+uh streaming processor in uh GPU. The
+streaming processor has multiple
+processing unit and they share
+fast local SRAMM
+and only they share this shared memory
+is not shared by other
+streaming processors. So this is local
+uh shared memory and uh but but not
+global
+the global memory only the global memory
+is shared by all streaming processors
+but this shared memory is shared by only
+one thread uh streaming processor.
+The local memory is used exclusively by
+one yeah lane one uh thread processor
+not.
+Okay. So the these are some uh important
+uh uh memory the organization in GPU
+and each thread processor has registers.
+though uh it's just a register as usual.
+So it is not much different from
+existing terms.

@@ -1,0 +1,330 @@
+Here
+is one example of vector processor. Uh
+the vector processor processes uh
+multiple data with one instruction. For
+example, uh you can see on the right
+side of this slide that uh we want to
+add uh yeah here this
+example shows that we are adding uh
+array the vector of A and B uh but we
+are adding them individually
+uh element by element. So for example we
+are adding a1 with b1 and a2 and b2
+separately
+uh and so on. So and the result can be
+uh yeah here
+it is shown that c 0 but in this case
+this case is illustration of reduction
+but uh it could be also a vector. So for
+example C1, C2
+and so on. So uh we here we have only
+one uh uh functional unit in this
+example but there could be multiple yeah
+functional units. It is called lanes uh
+in terms of the vector processing. uh
+but uh here even though we have only one
+functional unit we can still process
+multiple data uh with one instruction.
+So that that's how the vector processing
+that the vector processor uh works to
+support this kind of vector processing
+uh the hardware implementation could be
+on the uh left side. So we we need the
+main uh difference from the canonical
+uh traditional
+integer processor is this one the uh
+vector register. So uh you can see that
+we also have scala registers. This is
+just regular uh registers that are
+available to just general processors.
+But we have a set of registers for
+vector.
+Here we are storing the vector uh or
+array. For example, so uh if we
+yeah in for example uh if we are adding
+a and b here uh then we are uh storing
+those elements in the vector registers
+and uh to read and write the vectors uh
+we have a special load store unit. So by
+using this vector load store unit we can
+uh read a bunch of data from the memory
+or vice versa we can uh write vector
+yeah a list of elements to the memory uh
+with uh just one instruction
+and then uh by the hardware uh
+controller These elements are uh
+provided to uh functional unit uh
+depending on the instruction
+one by one. Then uh we are getting the
+results uh from the functional unit to
+the vector registers. And then finally
+the yeah the
+results might be can be used uh scholar
+instructions or uh written to the
+memory.
+So this is the basic concept of the
+vector processing.
+And this is the implementation
+instruction set architecture. Uh one
+example yeah instruction set
+architecture
+to support vector processing. We can
+classify those instructions into three
+categories. The first one is a vector
+vector processing.
+The example in the previous slide is one
+of the uh example of vector vector
+processing because we are adding two
+vectors
+and some eug examples include for
+example add vi that means we are adding
+two vectors and store the the results to
+another vector. So for example here so
+we have two operants v_ub_2 and v3 these
+elements are vectors and uh after and we
+are adding uh each element one by one
+individually and then store the results
+to the destination vector again. So this
+is one example and we also have this
+kind of vector vector processing uh
+instructions
+and the second category is vector scalar
+uh operations.
+Uh we are adding or multiplying vector
+with a scala value. So for example this
+one add v that is we are adding f0 to
+all the elements in v2. So because the
+f0 this is an scala element scalar
+register and it has only one value. So
+we are uh vectors color operation
+means that we are uh doing the operation
+uh with one's color uh and elements of
+the vector. So uh we are uh if we use
+this instruction then we are adding f0
+to each element of v2 and then uh the
+reserves are stored in v1 the
+destination register
+and these are uh yeah operations
+and and also yeah here in case of
+addition the uh the uh the order of the
+operands doesn't matter. But in case of
+subtraction uh subtraction then the
+order matters because uh if we are
+giving this order this order that gives
+us different results. So for example uh
+if we are using this instruction then we
+are subtract f0 from each element of
+f_sub_2 f2. But if we are giving using
+this instruction then we are subtract uh
+subtract
+each element
+of v2 from uh f0.
+So basically this one is bleed 2
+something minus f0 but the this
+instruction is doing f0 minus v uh 2
+each element of w2. So uh because in
+this case the subtraction for the
+subtraction the order of oper matters.
+So we are uh yeah using these two
+different uh different uh yeah
+instructions division also same
+and in order to read or write a vector
+uh we need uh special uh yeah
+instructions. So these are some vector
+uh uh
+yeah vector u memory uh uh instruction.
+So uh here we are loading vector
+v1 from the memory starting uh the
+address r1. R1 is a color register and
+it indicates the base address of the
+array. Then uh from that base address we
+are reading multiple data uh uh to to
+the vector register
+and we are uh going to look at uh this a
+little bit more later. uh but uh there
+could be multiple ways to read multiple
+data. If every element is stored uh in
+consecutive memory space then we are we
+can just read from uh the starting
+address and just uh yeah the the next
+one next to next one. So it it could be
+easy but all the vector
+uh operants are stored in this way not
+in this way. So uh there could be more
+there should be multiple ways to fetch
+uh multiple data from the memory. So for
+example there could be um yeah more than
+uh yeah bigger than one stride. So uh we
+are uh reading data for example from
+address 0 4 8 12 and so on instead of 1
+2 3 4 5 consecutive uh addresses. So uh
+there in that in that case we are using
+uh some uh different uh different uh
+instructions like this. So for example
+here uh this is from this is base
+address and R2 is a stride. So we we are
+if the R2 is just four for example then
+uh we are just uh reading data from the
+memory one out of four uh yeah memory
+space
+and we can also use uh some index here.
+So uh the index could be given as a a
+vector.
+So yeah this is another way. So there
+there are uh some different uh yeah
+memory instructions that support uh
+reading data uh more efficiently.
+And yeah these instructions are also uh
+uh additional instructions to support
+vector processing. So but they are
+basically very similar to uh yeah vector
+vector operations or memory operations.
+So if we are using the vector processor
+then uh we can simplify the uh yeah some
+yeah computation.
+So for example uh uh dp operation that
+is very typical very uh yeah frequently
+used of yeah uh equation. So uh yx they
+are vectors and a uh is scholar. So we
+are multiplying scolar to vector and uh
+add uh by b basically we are
+accumulating uh this value.
+If we
+implement
+computation of this uh equation then we
+need a loop like this. So uh we load
+each element from the memory here and
+multiply it with a scholar and
+uh we are loading y
+accumulate and store and then we
+increase the uh memory index and loop
+index. So this is very typical way to uh
+implement this operation.
+If we implement the same operation with
+vector processing, yeah, that's all. So
+we don't need a loop and uh we are uh
+loading data directly from the memory to
+vector uh register and multiplication
+and addition can be done uh using one
+instruction. Then uh we are doing the
+same operation to all the individual
+elements in the uh vector register.
+So if we are using yeah vector
+processing we all need all we need is
+only six instructions.
+But yeah in uh scholar uh processor we
+need to execute about 600 scholar uh uh
+instructions. Uh if the vector uh the
+length of a vector uh is 64
+to estimate the processing time using
+the vector processor. uh this convoy
+approximation is one way uh to uh uh for
+the uh yeah uh performance estimation.
+So the convoy means a set of vector
+instructions that can execute together
+without any uh hazards. So uh the
+representative examples uh include
+resource constraint and dependency.
+So if we are we can uh run vector
+instructions without any pipeline store
+then uh we say that this is one convoy
+and then the chime means uh
+an approximate time to execute one
+convoy.
+Then uh depending on the architecture
+the actual execution time of one combo
+could be different. Um for example one
+in one one processor may have only one
+functional unit but the other processor
+may have four uh functional units. In
+that case uh the actual execution time
+could be different.
+But by approximating
+uh these con uh the performance by using
+these concepts uh we can uh simplify the
+performance estimation and then if we
+need. So basically this approximation is
+useful to evaluate the performance of
+the uh software program
+independent from the architecture. And
+then finally if we want to
+uh estimate the actual execution time
+more accurately then we can translate
+the chime to uh actual yeah clock cycle
+then we can get the more accurate uh
+yeah estimation.
+And when we are uh estimating the
+performance uh we also need to consider
+training. uh the training means if we
+are running
+uh the vector instructions
+sequentially consecutive way then uh we
+don't have to wait until the first
+instruction the uh execution of the
+first first uh until we wait for all the
+elements done in the first instruction
+because we are processing the elements
+uh sequentially. So even though the
+instruction the we don't have to yeah
+wait until the last one finishes uh
+because this is a vector processing uh
+we are uh processing the elements
+sequentially. So as soon as the first uh
+element finishes if it is used by
+another vector instruction
+uh on different functional unit then
+yeah we can uh yeah execute the second
+instruction as soon as each yeah any
+element is done in the first
+instruction. So it is called uh
+chaining.
+So when we are yeah using chaining then
+uh these instructions can be uh
+classified as uh one convoy.
+Yeah. Let's take a look an example
+here. uh we can identify three convoys.
+So the first convoy is these two
+oh yeah sorry these two instructions
+because they don't have any uh hazard
+there is no dependency and uh no uh uh
+structural hazard that means they are
+using different uh functional units and
+uh by using the chaining uh We can run
+them uh yeah just as if they are one
+vector instruction
+but uh and also we have these two uh
+instructions as the second convoy.
+They are in a different convoy because
+we have a structural hazard uh with this
+one load unit. If we have only one load
+unit. If we have multiple uh load store
+units then maybe we can combine this one
+this instruction uh to uh the first
+combo. But assuming that we have only
+one load store typically yeah load one
+one load store unit then uh we cannot
+run them uh simultaneously. So we we are
+uh yeah consider this as a a different
+convoy but this the this instruction add
+instruction can be chained uh with the
+load instruction and using different uh
+functional unit. So these two
+instructions are uh yeah constitute the
+second convoy and this one is the last
+one. So in uh in this example we have
+three convoys that means it takes three
+times and uh yeah this is a highlevel
+estimation and if we want to compute a
+little bit uh more accurate estimation
+then uh we can uh do that uh by yeah uh
+considering the actual uh number of
+elements and the uh yeah the
+architecture. So for instance uh if the
+vectors uh the length of vectors is 64
+then uh we can estimate the cycle uh
+number of cycles as three * 64 because
+we uh it takes three times and uh each
+convoy process 64 elements and uh if the
+hardware architecture takes one cycle to
+process one element. It is approximately
+uh 192. It takes 192 cycles.
