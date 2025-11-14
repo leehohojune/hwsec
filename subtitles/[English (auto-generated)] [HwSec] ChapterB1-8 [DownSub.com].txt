@@ -1,0 +1,200 @@
+The trusted execution environments not
+only include hardware but also software
+components because the hardware cannot
+do everything and the if even if
+hardware is available we can still we
+still need so the help of software and
+the part of that software must be also
+if we the software part uh need to be
+trusted then it uh constitute the
+trusted computing base
+and uh if we have TCB then uh it could
+be uh it could consist of two part one
+is immutable component the other one is
+mutable. Obviously immutable components
+are those implemented in hardware while
+the mutable components are in software.
+So uh we assume that the hardware cannot
+be modified after yeah manufacturing and
+uh we uh typically implement the root of
+trust or some hardware based isolation
+techniques are uh immutable components
+and the mutable components examples
+include uh some measurement code or a
+testation. Of course, these
+functionalities can be also implemented
+in hardware
+and many T is used mix of these two uh
+types of components.
+If we classify them by function then uh
+these are some uh examples.
+verify of launch that is based on a test
+station typically implemented uh using
+uh the root of trust. The root of trust
+uh is immutable in uh all types of T's
+because the T we if we say T it is in in
+means the hardware implementation.
+So uh in that case we need uh root of
+trust in hardware. So this is a kind of
+by definition root of trust must be
+immutable in all these while the
+measurement and attestation can be
+implemented in uh software because we we
+have rootable trust in hardware. Even
+though the uh mutable attestation
+protocol is compromised uh we can still
+detect the the discrepancies
+and runtime isolation
+uh yeah use uh yeah mutable software TCB
+for CPU context switching and my uh
+memory isolation but also it is
+supported by hardwarebased isolation. If
+we use MPU or MMU, MPU, MMU are
+implemented in hardware. So, uh we need
+to uh use those features. But the
+configuration data page tables they are
+uh managed by software usually. In that
+case the uh the management of that uh
+information should be also trusted or uh
+SGX does not trust the operating system.
+So in that case at least we have to
+check the integrity of those information
+by hardware.
+uh the trusted IO also need both
+software and hardware TCB and uh uh yeah
+even if we are implement but because the
+trusted IO path here means the software
+path because we yeah just by definition
+trust the hardware the for example uh
+PCI SATA we trust them but not the
+software st
+need to have some trusted IOP path
+implemented in software. uh but the TE
+by definition it is not to solely rely
+on software implementation but we need
+some kind of hardware support
+and for secure storage uh we can use uh
+the TPM or software TCB but uh we still
+need to have the root of trust and list
+to store the uh uh the encryption key.
+If the TCB includes some software then
+the TCB size also uh yeah may matter. It
+is not the absolute metric to compare
+the security of the TCB. But uh the
+smaller the TCB size is the smaller the
+out likely to be the attack surface.
+So this is some uh examples of the TCB
+size. The commercial TCBS are likely to
+be bigger and the uh academic TE's are
+likely to smaller because the T yeah if
+it is commercial then it should support
+many uh yeah uh uh features but the
+academic TE's can only focus on the uh
+southern uh specialty
+and from now on we will just take a
+brief look at the uh existing uh TE's in
+terms of uh some uh features. Uh we
+start from the attestation the verified
+lounge. The Intel support both local and
+remote attestations while other uh ARM
+trust zone and keystone the the keystone
+is a academic uh TE. they only support
+remote uh test station because these uh
+Intel uh processors and AMD processors
+are uh used frequently used in cloud
+environment. So in that case uh we
+sometimes need to uh check that this
+application is running on uh the same
+platform or not. But in case of embedded
+system uh yeah we actually don't have
+this kind of requirement. Typically we
+want to just check the integrity of the
+remote application. In that case we only
+need remote testation and the uh root of
+trust could be either dynamic or static.
+Uh Intel processors support dynamic root
+of trust. That means uh it it is
+measuring the integrity of inclave
+application when it is launched. It does
+not assume the trust of the previous uh
+the lower st of the software. But in
+case of ARM and also including AMD uh
+these uh uh yeah architectures
+uh employ static root of trust that is
+uh checking the integrity from the
+booting. So it is kind of a chain of
+trust. Based on the chain of trust uh we
+can make sure that the uh integrity of
+the enclave application uh is preserved.
+Yeah. Here are some examples of how
+existing TE isolate
+uh CPU
+and uh all of the examples in this slide
+employ temporal logical isolation
+technology. So uh the the uh CPU is yeah
+yeah yeah uh isolated temporarily
+multiplexing and logical reinforcement
+uh is employed and uh the inclave type
+is like this SGX
+uh and sanctum uh isolate in yeah
+applications but TDX other other uh
+architectures isolate virtual machines.
+So uh the target of the isolation uh is
+different uh and the trust can be used
+both for both and the software the if
+the TCB includes software the privilege
+level of the software is like this.
+and uh for the memory isolation the uh
+in order to mitigate the software
+adversaries these are some approaches.
+So uh it is a little bit more uh diverse
+but most of the existing uh approaches
+employ uh the logical isolation uh and
+spatial temporal isolation and for
+physical adversary yeah the
+cryptographic isolation is the only way
+and the access control is based on page
+tables that means it is based on MMU
+memory management unit and MPU This is
+only for the embedded system that
+doesn't have MMU. If MM platform has MMU
+then uh we will use the MMU
+and for trusted IO uh these uh does not
+this uh the commercial products do not
+have the uh trusted IO capability
+because especially for Intel CPU uh they
+assume that the operating system is not
+trusted. So uh yeah unless we have
+additional support uh there is no way to
+uh guarantee the trusted IOPath. Uh but
+these ARM processors uh have uh they are
+building the uh root of trust
+statically. That means uh we can assume
+that the operating system is trusted by
+using the chain of trust. In that case
+the operating system can uh be uh can
+use can be used to uh uh establish uh
+the trusted diop path.
+And for CQ strategy, SUGX supports uh
+additional hardware instruction and AMD
+only supports some uh uh primitive uh it
+is kind of yeah uh the hardware support
+and these approaches employ software to
+seal and unseal the data
+and these are some uh uh TCB comp
+composition.
+So uh for example, SUGX uh uh establish
+the root of uh root of trust only in
+hardware that is an immutable and
+basically all these uh TE's employ the
+hardware based root of trust. But for
+measurement uh yeah some architectures
+use uh the software or hardware and a
+testation is typically based on software
+and CPUi installation is also supported
+by either hardware or software uh and so
+on. So yeah this is just a just I am
+showing that uh how these existing teams
+uh employ which uh yeah isolation or uh
+yeah the some uh yeah composition
+techniques.

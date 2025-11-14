@@ -1,0 +1,276 @@
+So far many attestation protocols have
+been proposed. So this diagram
+classifies how we can classify
+uh it show illustrates how we can
+classify those attestation protocols.
+First we can classify them by how we can
+acquire the evidence. the hardware or
+software or hybrid approaches could be
+possible and we can measure the uh
+integrity metric either statically or
+dynamically. Statically means uh we are
+measuring the integrity metric only at
+the uh start or launch of the
+application.
+Dynamic means the opposite. So we can uh
+measure the uh integrity metric during
+runtime and there could be strict uh or
+lose timing constraints uh depending on
+the type of the autheitation protocol.
+Someitation protocol impose uh three
+timing constraint uh because uh if uh
+the protocol allows more time then this
+can be exploited by the diversity to uh
+uh fortify the proof. The the
+straightforward way to traverse the
+memory sp is just sequential from the
+beginning to the end just one by one but
+it is too predictable. So some
+randomization techniques has been uh
+proposed. The autheestation protocol
+could be uh embedded with the
+application from the uh from the time of
+deployment. uh but that is also yeah has
+some um yeah limitation of the uh the
+the fact that the adversary can predict
+the authentication protocol but the
+other approach could be send the
+autheestation code
+yeah on the fly that means the adversary
+cannot predate what kind of aitation
+algorithm will be used So it can yeah
+there are always pros and cons but uh in
+this way we can uh make it harder to uh
+deceive the verifier
+and the program memory and also data
+memory could be unverified verified or
+uh initialized to the known values. And
+the testation protocol typically works
+between one verifier and one prover. But
+there could be one to many or many to
+one uh interaction uh is also possible.
+So let's see the first uh category I
+mean classification that is how we
+acquire the evidence the hardware if we
+use the hardware then the hardware place
+as a root of trust and by assuming the
+root of trust the attestation protocol
+could become simpler. So this is the uh
+some advantages of the hardware
+implementation but there are still uh
+disadvantages including uh we cannot
+expect this kind of a testation protocol
+for legacy devices that are that were
+already deployed
+and we cannot yeah upgrade their unless
+we can upgrade their hardware we cannot
+uh uh employ this protocol uh on the
+existing devices.
+And the attestation protocol even though
+it is implemented in hardware, it is
+still vulnerable to side channel uh
+analysis attacks.
+If we implement uh the autheestation
+protocols in software then it doesn't
+incur any uh such an limitation I mean
+uh it cannot it can be applied to
+existing devices and we without
+uh incurring much overhead I mean the
+manufacturing co in terms of
+manufacturing cost because it doesn't
+need hardware but The challenge of
+software implementation is that we
+cannot assume root of trust uh because
+we basically don't trust the prover the
+entire device then how we can make sure
+that the proof is generated without any
+manipulation it is extremely hard task.
+uh so the hybrid approach could be
+practical.
+we don't assume uh the root of trust the
+entire the big module of root of trust
+but if we can assume a small
+uh part of the uh root of trust
+implemented in hardware then the
+software implementation could rely on
+that small part for example ROM
+typically the embedded system need ROM
+uh to store their boot code and list
+boot code then why don't we have the
+attestation software in the room then
+anyways we can uh trust the attestation
+code then from there we can build the
+chain of trust so this is kind of a
+balanced approach
+balance between security and
+practicality.
+So yeah, this is one option we may uh
+yeah consider
+and the integrity mater can be measured
+statically. That means uh the static
+part of the memory is verified only.
+But it it is very straightforward and
+easy to implement.
+uh but yeah it is uh yeah vulnerable to
+uh attacks such as return oriented
+programming, jump oriented programming
+like that
+because those attacks do not modify the
+program but by manipulating the stack
+the adversaries may launch malicious
+code.
+So the dynamic measurement could help to
+prevent such an such attacks by
+verifying the uh integrity during
+runtime.
+But because of the dynamic objects
+meaning uh data stored in the uh dynamic
+uh stored in the memory because of the
+um yeah dynamic objects it is actually
+not easy to verify the uh integrity
+during runtime
+if we don't uh assume the hardwarebased
+isolation technique.
+Some attestation protocols impose very
+strict timing constraint
+because uh it assumes that it will take
+more time for the malicious prover to
+generate first proof
+instead of uh running the correct uh
+application.
+So uh
+by checking the response time the
+verifier can detect whether the approver
+is lying or not.
+Probably
+the not probably but for sure the
+initial softwarebased testation
+protocols typically employ this kind of
+uh strict timing constraint because uh
+if we implement the attestation protocol
+in software uh we cannot assume the root
+of trust probably this could be uh yeah
+the uh the the only potential not not
+the only but the just visible uh option
+to uh to check the uh the whether the
+prover is lying or not.
+Theoretically it is uh it is good it is
+feasible but in practical
+p practically there could be some
+unpredictable network delays. So from
+the perspective of verifier it is hard
+to determine that the additional delay
+is from the malicious prover or the
+network yeah additional unexpected
+network delay. So yeah it is still uh an
+open research uh question. So uh instead
+of software implementation if we assume
+hardware implementation then we don't
+need this uh strict timing constraint.
+The easiest and yeah straightforward
+way to traverse the memory space is the
+sequential access. we can access the
+memory from the beginning to the end uh
+just uh in order.
+It is easy but uh
+it is also easy for adversaries to
+predict the next memory access.
+So it could be vulnerable to time of
+check, time of use attacks
+because uh once the
+authentication protocol
+go through some region of the memory and
+move on to the next region then it there
+will no there will be no chance of go
+back and read the already red region. In
+that case the prover may modify that uh
+the region that already pass through. So
+uh this is easy to implement but yeah
+vulnerable to that kind of attacks. So
+we can randomize the memory access so
+that the adversary cannot predict the
+next one. So in that case we can improve
+the performance but because it is a kind
+of random access
+uh even though it is a random access we
+have to make sure that all the memory
+contents should be visited at least once
+to guarantee that uh possibil the uh uh
+the probability
+um we need at least n log n memory
+accesses assuming that the memory size
+is n. So that means we need more memory
+access that means it will incur more
+overhead.
+So yeah this is another type of tradeoff
+security and performance.
+There could be a kind of hybrid approach
+that is block based pseudo random
+approach that is we uh partition the
+memory
+space into blocks and only
+the order of blocks is randomized
+but within the block it is sequentially
+accessed. So it is hybrid of the
+sequential and random access.
+The bigger the block size is the less
+the overhead is but
+uh more predictable.
+So yeah the B the block size B is a kind
+of parameter that determines the uh
+security and performance tradeoff.
+The attestation routine can be embedded
+into the prover
+uh at the time of deployment.
+Then we while we are designing the
+attestation routine uh we have to be
+careful uh so that uh if the adversary
+the prover tries to modify makes some
+modification to the attestation routine
+then it should be um yeah detectable
+that means uh modification to the
+attestation routine should result in
+invalid response with high probability.
+The other way we can consider is on the
+fly generation. The verifier generates
+and sends different types of routines
+for each attestation round. In that case
+the adversary cannot predict the um the
+attestation
+routine then it will much harder to
+deceive the verifier.
+Even though we are verifying only the
+program memory, if the program the code
+is not occupying the entire memory
+space, then there are still there are
+always free space.
+If there exists some pre free space then
+the adversary may exploit the free pre
+free pre uh space to uh substitute the
+code or hide malicious code.
+So maybe we can fill the memory space
+with uh known values. But if it is
+predictable then the adversary may just
+regenerate the uh predicted value or if
+it has low entropy then it can be
+compressed
+to uh generate the uh free space. So uh
+even though we are using this kind of
+technique we still need to consider uh
+the adversary may temper uh the memory
+space
+data memory. Yeah the same situation. So
+some uh autheestation protocol do not
+even verify the uh data regions because
+it is not easy. But even though uh some
+protocols try to verify the data regions
+uh the runtime
+uh manipulation could be still possible
+because it is very difficult to check
+the integrity of the uh any updates
+during runtime.
+And yeah, typical
+attestation protocol works just one to
+one. One verifier between one verifier
+and one prover. But there could be one
+verifier to many provers or vice versa.

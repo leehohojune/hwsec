@@ -1,0 +1,142 @@
+Okay, let's take an example that
+illustrates how the directory protocol
+works. In this example, we have three
+nodes and each node has only one
+processor. That means only one cache and
+because it is a node, it has one
+directory. Uh each node has an
+directory. uh and it is not shown here
+but the memory is also uh the uh part of
+that uh each node and the memory space
+is split in this way. Uh the p 0 node
+zero has uh the data from uh the memory
+address is 100 and 108. P1 has 110
+and 18 and P2 has 120 and 128.
+Let's suppose that the uh P 0 reads data
+from 108. Then because it doesn't have
+uh that data in the cache uh a readm
+occurs then the cache controller send
+the request to the home directory.
+Actually this this address uh its home
+directory is in the same node. So uh the
+home directory is this node and uh when
+the directory receives the readmies it
+checks the uh the the state of this uh
+block then it founds that it is in the
+modified state and the owner of this uh
+modified block is P2. So the directory
+send fetch and inval fetch uh just fetch
+uh message to P2 because it is a read
+means it does not have to invalidate the
+block but only change the block state to
+shared state. It is it is uh still
+clean. So it just fetch the new data
+this updated data from the owner uh and
+ask the cache controller to change its
+state to shared state and the fetched
+data is now sent to the requesttor. So
+so that the block is block can be
+updated and the state is changed to the
+shared state. then uh is uh its state in
+the directory is also changed to the
+shared state and the requesttor is now
+added to the sharer
+then let's suppose P 0 updates
+108
+then uh because it is in the shared
+state uh it it the state is now changes
+to the modified state and it is the new
+data is stored in the cache. But uh
+because it is in the shared state, it
+has to notify uh to the directory. Then
+the directory now finds that uh a copy
+of this block is shared with P2. So uh
+it send an invalid message to uh this uh
+uh node two so that uh the cache
+controller can invalidate the requested
+block. So uh this block the state of
+this block is now changed to invalidate
+state and then the directory changes its
+state to the modified state and uh the
+requester keeps the requesttor as an
+owner of this uh modified block.
+Then if the P2 overrides the uh this
+address 108 then yeah basically the same
+thing a similar uh protocol works. So uh
+because it is currently uh in validate
+state it does uh it a rhyme miss occurs
+then in request rhyme miss to the home
+directory because this uh address
+belongs to the uh first node in request
+put a request to the uh right miss
+request to the uh node zero. then uh it
+now uh has the uh it is in the modified
+state and uh it knows that its owner is
+P 0. Then what happens is that uh
+because it has updated block it is send
+fetch and invalidate message to P 0. Uh
+so because this rhyme means uh the block
+should be invalidated and the updated
+new data must be fetched so that the
+directory can send the updated data to
+the requester.
+Yeah, the requesttor will yeah override
+the data the block. But then why the
+yeah the the directory needs to send the
+the data from P 0 that the reason is
+that the cach block is usually larger
+than the uh single memory access. For
+example, the cachibula might be 64 bytes
+but P2 may update only one of them. So
+in that case the remaining order data
+still must be coherent with the uh
+memory. So that's why uh even though it
+is rightness still need to fetch the
+latest data from the owner.
+Then let's suppose P1 reads the data uh
+108 and uh because it doesn't have that
+data in the block uh because this 108
+belongs to the first directory send a
+read miss request to the first
+directory. Then uh the first directory
+checks the state and it is uh in the
+modified state and its owner is P2. So
+the directory send fetch request to P2.
+Then because it's just fetch not fetch
+and invalidate uh that means it is read
+by read request it changes the state
+from modify to shared state and then
+send the updated data back to the
+directory. Then the directory stores the
+new data to the memory and then send
+that data to the requester. Then the
+requesttor P1 uh store the received data
+and change the state to the shared
+state.
+Then let's suppose P 0 writes data to
+address
+120
+then the this block belongs to the third
+uh directory. So uh it just updates the
+data and change the state but because it
+is in the shared state it has to send
+the notification to the directory. Then
+in this directory it bounds that uh this
+block is the copy of this block is also
+stored P1 and P2. So it send invalidate
+message these two uh nodes.
+Then when P 0 writes data in its uh
+its own then uh because it has uh P 0 is
+the only node that has this block. So
+it can be handled just locally. It does
+not generate any uh yeah protocol
+messages.
+But if P2 writes the data uh write new
+data to the same address then uh rhyme
+miss occurs. Then if the rhym occurs
+then it put a request to the directory
+and the directory send um because it is
+in the modified state is send request to
+the uh p 0 uh fetch and invalidate and
+uh after fetching the due data then it
+send to the uh requester.

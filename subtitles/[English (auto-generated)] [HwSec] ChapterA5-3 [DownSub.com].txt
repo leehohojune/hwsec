@@ -1,0 +1,255 @@
+In in this sub chapter we will go
+through uh some case studies that uh
+where we want to profile uh the cash
+performance or including the cash
+coherence protocol.
+So when the cash coherence protocol is
+employed uh we can classify sh some uh
+sharing business. The true sharing
+business arise uh from actual
+communication of data uh through the
+cache coance protocol. For example, and
+if any data is written by a processor
+but read by another processor, then it
+is an uh true uh sharing means because
+uh when the uh the these two processors
+are accessing the same data uh through
+the cache coance protocol. But there
+could be some force sharing machines
+that occur even though these two
+processors do not actually share uh the
+data. This happens when uh two because
+this is uh this happens because the
+block size is usually larger than word
+size. So if multiple words are stored in
+the same cache block then uh the cache
+controllers usually handle uh the cash
+hits and miss uh uh yeah by block. So uh
+even though
+uh it is not necessary
+uh any block can be invalidated
+not by actual data but because
+uh some data the true uh shared data is
+stored in the same block. I will show
+you some example in the next slide.
+So let's assume that uh we have x1 x2 in
+the same block same cache block and uh
+these two block these the cache blocks
+are in the shared state
+then uh if process one p1 writes x1 then
+it is kind of true sharing miss. Uh so
+the P2 is uh the cache block over the P2
+is invalidated because X1 X2 uh because
+both processors have the same block and
+uh P1 writes its block then uh P2 will
+the does that block will be uh
+invalidated.
+But when P2 tries to read X2 then this
+is a forest uh sharing miss because uh
+that block the shared block was
+invalidated
+uh because of X1 overritten by P1 not
+X2.
+So uh
+at this moment the cache mis occurs
+because it was invalidated by x1. If x1
+and x2 are stored in separate different
+cache blocks then uh x1 was invalidated
+but not x2. So in this case x2 will uh
+yeah the cash heat will occur on x2 but
+because x1 and x2 are in the same block
+uh reading x2 raises uh cash miss so it
+is kind of uh forced uh sharing miss the
+same here.
+So uh
+yeah
+because uh
+here again because now but but now by
+reading X2 P2 also has that copy in its
+private cache. But because P1 writes X1
+here again P2 its copy will is
+invalidated again. Not because X2 but
+because X1 and this is a also force
+dependency uh forced uh yeah miss
+because uh it is invalidated used to be
+was invalidated by writing X1.
+But if uh at at the fifth cycle P1 G X
+then it is uh
+this data was coming from P2. So it is
+true sharing miss
+because uh the value written by P2 is
+now read by P1.
+So let's profile let's see some profiles
+of the uh uh some works. Yeah we cannot
+yeah generalize these uh observations
+but we can get some hints or uh insights
+uh from this case study. So in this case
+study three work rows were used and uh
+their uh characteristics are given uh in
+this table and uh the we will use these
+two architectures and their cache
+configurations are uh as follow
+and uh
+yeah but
+Yeah, you you can just refer to just uh
+the yeah configuration here
+and then let's see the result and what
+was observed is that the CPI cycles per
+instruction is very high for OLTP uh
+workload.
+When we look at this uh breakdown result
+uh we can see that only for OLTP we this
+memory access time and L3 access time uh
+is relatively very high that means uh
+the cachy was not so good cash
+performance uh the memory access time is
+very large that that is because of cash
+miss if cash kit occurs then we don't
+have to access the memory but uh the
+many memory accesses mean there are many
+uh cashmisses so
+we profile the L3 uh the impe of L3 a
+little bit further and by changing the
+L3 cache size uh uh the performance uh
+changes were observed
+uh when we increase the L3 cache size uh
+the performance improves only when the
+size is uh grown from one to two
+megabyte but over 2 megabyte there is
+not significant
+uh yeah improvement in cache performance
+and we also have changed the cachy
+uh yeah here here So uh the this is
+profile of uh yeah the the types of uh
+kashmic sees.
+Then uh we can observe that there is not
+much difference
+uh in um yeah for compulsory force
+sharing and true sharing machines remain
+uh largely unaffected but only uh
+instruction and uh capacity machines uh
+were decreased by increasing uh cash
+size
+and this is the profile result when we
+increase the processor uh count. If the
+number of processor grows then yeah it
+is u yeah intuitive that uh we can uh
+expect there must be some uh true uh
+sharing misses because all the cores may
+need to share some data that means uh
+there are some more uh there are likely
+to be more uh sharing misses
+and when we increase the block size then
+uh the uh sharing true sharing machines
+and composing machines are uh decreasing
+uh but not much impact on capacity or
+conflicting misses. So this uh result
+may be a little bit uh confusing because
+when the cache block size increase then
+I think it is more intuitive to have
+more false uh sharing uh because uh yeah
+because
+uh uh there will be higher chance of
+storing the independent data in the same
+cache block because the cash is lot cash
+block is larger. So actually we can
+observe that this false sharing is
+actually a little bit increasing. So if
+we compare these bars but uh the
+decrease in uh true sharing machines are
+more dominant that actually imply there
+must be some locality in L3 cache in
+this particular uh application. So um uh
+it may not be true in other applications
+but in this particular application there
+are some localalities we can exploit in
+L3 cache. So uh the true sharing
+machines could be uh reduced
+and uh the these profile result were
+only from the user level application and
+now uh we uh profile the operating
+system the characteristics of the
+operating system as well.
+uh yeah this uh profile shows that the
+multi-programmed workload that we want
+to test uh has these characteristics. So
+the instruction cache rate uh is higher
+in operating system that that can be
+observed by this uh number. So the
+number of instructions
+uh executed in the corner is only 3% but
+the execution time is 7%.
+And the uh waiting for idle idle I the
+uh idle time uh is actually reduced. So
+that means uh because of the uh caching
+means uh in the instruction cache uh
+actually uh uh increases the execution
+time in uh color mode.
+The actual profile result uh shows uh
+yeah confirms this observation. Okay, it
+is not shown here but uh the usual level
+instruction caching machines are roughly
+one6 of the OS uh cachmate
+and this is the result of the L1 data
+cache miss rate. When we increase cache
+size then the user miss rate uh is uh uh
+affected more than the economy rate. And
+if we increase the block size then uh
+both uh cashellate are uh yeah reduced
+and uh we can observe that there are
+significant difference in m rate between
+the user level application and the uh
+kernel. The kernel initializes all pages
+before location. So it uh it increases
+the composure miss and conor uh actually
+shares data. So uh it is likely to cause
+more sharing misses and uh the user
+processes the user level applications
+uh have coance misses only when those
+processes are scheduled on different uh
+processors. they might be allocated in
+the same processor then uh there will be
+no querance missings but in case of
+kernel because kernel needs to run
+across all cores that's why it is uh it
+uh yeah it is likely to uh generate more
+uh cashm coance kmises.
+So the operating system is much more
+demanding uh uh yeah for the memory
+system
+and when we break down the kernel data
+miss rate then this is what we have. So
+uh in case of compulsory miss uh in case
+of when we increase caches size the
+compulsory miss does not uh be is not
+affected but uh the capacity misses are
+uh reduced
+but the coherence miss is slightly
+increasing that's because the force uh
+sharing uh misses
+and the block size is also affecting the
+compos.
+So uh
+yeah but uh uh
+when the block size is increased and
+then we can uh expect that there must be
+uh some uh querance misses but uh yeah
+but the because the true sharing misses
+is reduced so it could be some yeah some
+uh yeah compensated
+So from this profiling result we can
+observe that the OS operating system is
+much more demanding uh user of the
+memory system. Uh so but it is not easy
+to design a uh memory system for the
+multi-programmed workload because it is
+not easy to predict uh their uh
+behavior. One way to uh address this
+issue could be uh improving performance
+by uh some cachy aware design of the
+operating system or better programming
+environments or giving some more
+profiling result uh assist the
+programmer to aware the uh cache
+behavior. Uh but still it is very
+challenging uh problem.

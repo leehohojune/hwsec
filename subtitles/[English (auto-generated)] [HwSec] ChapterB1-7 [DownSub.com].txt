@@ -1,0 +1,313 @@
+If an application
+uh only does do does uh computation then
+isolation of CPU and memory could be
+enough but many application need to
+interact with external devices.
+The application may need to have some
+input from the user. In that case the
+user uh enter uh enters the data through
+mouse keyboard this kind of user
+interfaces and also the application may
+want to accelerate its computation by
+using GPU. So GPU is another uh example
+of external device or the application
+may access remote uh application through
+network. So then in that case the
+application needs to access the network
+interface card which is also external to
+the processor. So uh if the application
+needs to interact with external devices
+even if the application running inside
+isolated environment is perfectly pro
+protected. If the adversary
+uh manages to manipulate the data or
+computation in the external device then
+uh we cannot fully trust the result from
+the inclave application uh because it
+there are some loopholes in the
+execution of the enclave application. So
+uh there are there is a need to protect
+not only the CPU and memory but also the
+external devices when we want to make
+sure the uh integrity of the application
+I mean the uh external IO is preserved.
+then we have to make sure that the path
+to the external device and also the
+trust device itself
+should be uh yeah trusted.
+So uh for example if we are accessing
+the network interface card uh that is uh
+accessed through a uh levels of uh
+stack.
+The application first need to put a
+request to the operating system. The
+operating system may need to go through
+some internal processing and then
+finally need to access the device
+driver. Then the device driver accesses
+the hardware and the hardware could uh
+also need to go through for example uh
+the uh northern bridge, south bridge and
+some uh yeah system bus like uh SATA
+interface and then finally access the uh
+network interface card and within the
+network interface card also there could
+be multiple path. So all these path
+including both hardware and software
+should be uh trusted. But in our
+assumption we trust hardware. So the
+protocol st of of the software should be
+trusted
+and even though the even if the path is
+protected if uh there are
+vulnerabilities in the device itself
+then yeah there this can be a uh
+surface.
+So uh for example uh we can share GPU
+in the original architecture of the GPU
+uh only one uh CPU processor the context
+can access the GPU. So it is only time
+multiplexed but modern GPUs allow uh uh
+being shared by multiple context. In
+that case, one malicious application
+context may interfere with the result of
+another uh yeah uh application running
+in the same GPU. So if the isolation
+technique is not properly enforced
+inside the GPU the uh trusted IOP path
+isolation of the CPU and memory might be
+uh yeah useless. So the uh the external
+device itself uh must support isolation
+and the other concern could be related
+with the DMA because when we uh the
+external devices are typically accessed
+by memory mapped IO. So in that case we
+can control the access control to the
+memory. We can control the access to the
+external device as if we are controlling
+access to the memory because it is
+memory map IO. If based on the uh
+address we can control whether this
+application is allowed to access this
+peripheral device or not device uh or
+not.
+But DMA is another component that can
+directly access memory and devices. In
+that case, uh we need some mechanism to
+uh filter or control the access from the
+DMA. In case of SGX, the DMA cannot
+directly access the uh the the external
+device. uh the DMA is actually outside
+to the processor but the DMA access
+always need to go through the processor.
+So if sugg
+if we want to use the suggx the main
+board should also support uh suggx
+because uh if the main board does not
+support suggx that means the dma on the
+main board can directly access the
+external device. it is not controlled.
+But uh if we want to enable SUGX, the
+hardware TCB must be able to control the
+access from the DMA. In that case, the
+DMA should always access the external
+device through the processor.
+So the the main board should support
+this feature.
+So yeah the trusted IO is so as you can
+see here uh many things we have to
+consider.
+So yeah uh the trusted device
+architecture uh the device architecture
+itself must protect the enclave data on
+the device itself and uh need to ensure
+that the device cannot leak any
+sensitive data and yeah when we
+implement the device the external device
+then we can apply the same isolation
+approaches to the uh external device.
+And when we look at the path uh we can
+uh here again uh uh enforce either
+logical or cryptographic approaches.
+So the logical uh uh separation can be
+uh implemented uh like uh uh in the same
+way that we isolate the memory because
+uh the most of the uh existing systems
+support memory map IO. So from the
+perspective of the processor the
+external device is also seen as a
+memory. So uh we can uh uh apply the
+same isolation approach uh that uh yeah
+the memory isolation approach to the uh
+yeah the memory map I use
+and the cryptographic approach could be
+uh just end to end encryption. That
+means when we send data we the uh
+enclave application encrypts the data
+and the final the destination device can
+decrypt. So uh in the middle the path uh
+even though even if it is compromised uh
+the uh the sensitive data cannot be
+revealed unless the key decryption key
+is revealed
+and this approach is could be a part of
+authentication and attestation.
+So we in this model in cryptographic
+trusted path uh we are basically not
+trusting the path. We are only trusting
+the end point from the uh enclave
+application to the destination external
+device. Only these two end points are
+trusted but not uh in the middle the
+path.
+So uh we can protect against physical
+attacks because we don't trust the path.
+So even though the bus or any physical
+access is attempt uh we can uh handle
+this kind of attack scenarios.
+The device architecture can also be
+partitioned or isolated by uh temporary
+spatial temporary or cryptographically.
+So basically it is the same approach
+that can be applied to the uh device
+architecture.
+For example, uh when we want to isolate
+in uh applications in the GPU, uh there
+are the uh just a few existing works
+that are especially for GPU uh yeah
+isolation. So in case of graviton it
+employs hardware enforced isolation uh
+and the in case of graviton uh it uh it
+isolates the memory space uh just
+logically uh but uh telekane it employs
+cryptography uh protection and so on and
+in case of PJ there are also some uh
+research works and FPGA can be also a
+part of the system as an accelerator and
+it can be shared by multiple
+applications and uh nowadays the FPJ is
+available even in a cloud. So uh the
+cloud system may have multiple tenants
+and the multiple tenants can share one
+FPJ. So the isolation is also required
+if we want to protect sensitive data on
+FPJ. Uh then the isolation of the CPU
+and memory might be not may not be
+enough
+and the storage. So here storage means
+the permanent uh storage device like uh
+hard disk or SSD
+and when we store data in the storage
+then u the T is usually seal the data
+here sealing means the process of
+encrypting the data before storing it
+persistently to the hard disk. Then
+unsealing means process of decryting the
+data. But we have to make sure that the
+decryption must be uh allowed only for
+the authorized uh inclave applications.
+So uh there must be some binding
+policies.
+Just encryption key knowing the
+encryption key may not be enough because
+it could be revealed. So the binding
+policy may include the identity of the
+enclave or integrity of the enclave. So
+in this way we can protect uh the uh
+data even uh more securely.
+But here the sealing and unsealing does
+not uh guarantee the integrity of the
+data. meaning uh encrypting the data can
+protect can prevent uh unauthorized
+access to the uh data. So create uh the
+uh confidentiality can be uh yeah
+guaranteed but if the the uh adversary
+may temper with the data so it can yeah
+just uh destroy the data in that case uh
+we we cannot guarantee that this the
+integrity of the data. So uh there must
+be another way to check the integrity
+because
+uh the encrypted data look like just
+random numbers.
+Anyways we can yeah decrypt the data but
+the decryption will result in just kabi
+just random data but we don't know
+whether this data is actually valid data
+or not. if we don't have integrity
+metric. So typically the ceiling process
+that's why we need some uh message
+authentication code like uh some uh
+integrity metric uh
+or some berry so that we can check the
+integrity of the encrypted data.
+The ceiling can be done by using
+hardware or software. If we have TPM or
+any kind of hardware uh security model
+then uh we can generate the asymmetric
+key from the hardware and then use the
+hardware to encrypt uh the data. In case
+of TPM, we may use the platform
+configuration registers that are
+available inside the hardware TPM but
+some other types of hardware security
+modules uh support hardware based
+encryption. So if this is available then
+it is much more secure usually
+considered as a much more secure uh
+compared to the software approaches but
+not all the computing platforms have uh
+such a hardware uh based uh security
+modules. In that case we have to use
+software. Then still the TCB the um the
+hardware based the trusted computing
+base uh needs to maintain the key
+because that is the root of trust. If
+the software maintains the key then it
+is just vulnerable. So we don't trust
+the software but only hardware. So the
+hardware must maintain the cryptographic
+key. So the hardware TCB provides the
+key and then the software actually
+encrypts the data.
+So some existing works employ uh these
+approaches and uh
+some TE's like Intel SUGGX uh implement
+provides special CPU instruction for uh
+the the data sealing
+and we as I mentioned we need binding
+policies. Uh so uh how we can identify
+and allow inclave application that are
+uh authorized for the decryption
+unsealing
+one could be same measurement. So oning
+claim with identical measurement here
+measurement means some kind of integrity
+materation.
+So uh if it has the same measurement
+then it is allowed to unseal the data or
+we can check the developer that means
+all inclaves that are developed by the
+same developer can can be allowed to
+unseal the data. This uh approach is
+typically useful if there could be if
+there are multiple enclaves that share
+the the same data. So in that case these
+multiple enclaves must be allowed to
+access the shared data
+and this approach is also useful or less
+necessary for migration. Migration here
+means that uh the application running on
+uh a uh sudden uh physical machine but
+for some reason it is migrated to a
+different uh physical machine. In that
+case the data is moved to the new
+machine. Then the measurement of the
+enclave is also changed because it is
+running on a different platform
+in order to support this migration
+process. Then uh the binding police must
+allow uh this due uh the new the the
+same the same inclation on a due
+hardware platform should be also allowed
+to unseal the data.

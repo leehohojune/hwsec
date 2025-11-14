@@ -1,0 +1,393 @@
+Those
+snooping based coance protocols are
+relatively simple to implement and
+inexpensive but uh it has some
+scalability issues because Snoopy
+protocols require communication with all
+caches on every cashmies.
+So it will need a much um yeah very high
+demand on the network uh bandwidth. For
+example, let's consider a system of four
+four core multiores at 4 GHz.
+Then uh the network bandwidth it needs
+to support the potential memory traffic
+would be between 4 G to 170 uh gigabyte
+per second. It is usually not
+affordable.
+So uh if the number of cores grows then
+uh we have to uh shift the
+memory subsystem to distributed memory
+systems. So in in this uh case then uh
+all the it is a kind of non-uniform uh
+memory architecture. So uh each
+processor can access uh has short access
+time to the local memory or cache. But
+if the processor wants to access
+uh memory in other processors then it
+will take longer. Uh so in this way uh
+we can uh reduce the uh the required
+memory uh network uh bandwidth.
+So this is a typical architecture of
+distributed memory system and uh if the
+directory protocol based coherence
+protocol is employed then uh each uh
+node uh will have its own local
+directory like this.
+So uh for example if multiore processor
+here let's say this processor A wants to
+access its own local memory then it does
+not consume the bandwidth of the central
+interconnection network. In this way we
+can reduce the demand the traffic no
+bandwidth demand on this uh central
+interconnection network. But a if it
+needs to access memory on different uh
+node for example here then it has to go
+through the central interconnection
+network. In in this case it needs to
+consume the me uh network bandwidth. But
+still if the traffic is localized then
+uh those local traffics do not consume
+uh the uh central interconnection
+network
+and uh if uh the directory based
+protocol is employed then uh what the
+directory does is to keep the state of
+every block not only is local cache but
+also the ca the blocks of other
+processors. So by looking at the
+directory we can identify which block of
+which processor or which cache actually
+has the copy of that corresponding
+block. In this way uh we can uh
+eliminate unnecessary broadcast because
+the broadcasting
+uh consumes very high bandwidth of the
+network.
+So the simplest easiest way to implement
+this uh this mechanism is to keep a bit
+vector for uh the blocks in the caches.
+So the bit uh the one bit in the bit
+vector corresponds to one block of a
+particular cache. So in this way uh we
+can keep that uh we can keep track of
+which blog is uh currently being uh yeah
+yeah retained by which uh cache.
+So the directory keeps track of the
+state that means uh the state of each
+block could be one of shared uncashed or
+modified.
+So in if the block is in shared state
+then one or more nodes have the block
+and uh but it is still clean that means
+it is uh coherent with the contents in
+the memory.
+If no node is uh storing that
+corresponding block then the state is
+uncached
+and uh if any node updated those blocks
+then uh they are in the modified state.
+But in this case the protocol make sure
+that exactly one node has the dirty
+copy.
+So as I mentioned before in order to
+implement this kind of keep tracking uh
+the which uh node has which block the
+easiest way could be just employing a
+big vector. So the size of the big
+vector would be uh the memory the number
+of memory blocks times the number of
+nodes. Then
+uh by keeping the this number of bits
+then we can keep track of uh the status
+of the block.
+So uh the directory based protocols are
+uh can uh tolerate for multiprocessors
+with uh less than a few hundred
+processors. So I believe that a few
+hundred must be very large number uh of
+processors. But if we need more then uh
+even the directory based protocol cannot
+afford uh more than a few hundreds then
+we need uh a little bit different uh
+some advanced uh techniques.
+The message types in directory protocols
+are shown in this table. Let's just
+quickly go through what kind of messages
+are uh yeah uh transferred in this
+protocols. The rhythm is so here what
+you need to remember is that local cache
+is where the uh a particular
+cache block is being accessed. So from
+the local cache some reccast are placed
+in the local bus or the uh central uh
+interconnect network and the home
+directory is the act the uh the
+uh the the node that keeps
+uh the the
+so the home node actually here home node
+means where that requested block is
+stored in the memory. So in the cache
+the copies of the memory are stored but
+in distributed memory system uh the
+memory basically the memory space is
+separated. For example, node A keeps
+memory addresses from 0 to let's say
+1,000. But when the node B uh stores the
+memory address from 1,00 to 2,000, the C
+node C keeps no uh address from 2,00 to
+3,000. Yeah. in this way. So if I want
+to access for example uh address uh 2010
+then uh the if it is not cachy then I
+have to uh access the memory in node C.
+So if the requesting the local cache is
+in node C then it is just local traffic.
+But if it is not in C but somewhere else
+then it is a remote access. It will take
+more time.
+So the home directory means the home
+node the directory in the home node.
+Okay. And remote caching is somewhere
+else.
+So let's see if in the local cache uh
+there occurs uh readmies then uh the
+local cache needs to send the readmies
+request to the home directory where the
+request block is actually stored.
+Then uh this rhythm miss should contain
+where this miss occurred. So the the p
+that uh has the actual readm and the
+address we which data it needs. So this
+is the readm request uh from local cache
+to the home directory and rhyme is
+basically the same and invalidate
+message is sent to from local cache to
+home directory. So the invalid message
+does not have to be broadcasted now. So
+it is sent to the home directory and
+then uh the home directory if necessary
+here the next message this message is
+from home directory to remove caches. So
+when the home directory receives
+invalidate message then by checking the
+directory the bit vector it can identify
+which node has the copy of this block.
+So instead of sending broadcast message,
+it is uh sending a targeted message
+targeted invalidate message to only the
+node that has the copy of this block
+and uh a fetch message can be sent from
+the home directory to uh the remote
+cache.
+So uh
+this is required when uh any uh node
+wants to share uh wants to read the same
+block that is stored in the remote cache
+and fetch and invalidate message. uh
+yeah in this in this this message uh is
+sent from the home directory when right
+occurs. I will explain this again in
+while looking at the uh state transition
+diagram and in this uh directory based
+protocols data can be directly sent from
+the memory or uh from the cache. So uh
+this is handled by the directory.
+So uh caches states uh are shown in this
+slide and basically the cache states are
+same with the uh snoop based protocols
+modified MSI modified shared and
+invalidated state invalid uh states. But
+what is different here is that the
+triggering transition of the state can
+be not only the processor but also lo
+the directory. So that's a little uh
+difference but the major difference is
+this one. Uh the rhyme miss is not uh
+broadcasting but uh the targeted
+uh messaging uh but yeah instead of
+broadcasting right misses we can now uh
+send targeted message to the nodes uh
+where the request block is uh stored. So
+the in terms of caches state it is
+basically the same with the uh snoop
+based protocols
+but here we have a directory. So in
+directory based protocol the the half of
+the protocol is implemented by the
+directory
+and the directory can receive three
+requests uh rhymis rhyme and data
+writeback.
+When the directory is uncached state, if
+it receives a readmies, then uh it send
+data to the requesttor the uh the local
+cache
+uh and uh it adds the request block a
+requested node to the sharer
+here
+and the state of this particular block
+is now changed to the shared state. So
+this is the one of the core function of
+the uh directory block
+adding the requested node to shareers.
+So the sharers here can be maintained uh
+by a bit vector. That means uh uh by
+indic by adding uh by turns by turning
+on the bit uh to
+uh turning on the bits of this
+corresponding uh bit then uh it
+indicates that this block is shared by
+this cache P node P. So uh in in this
+way we can keep track of which node is
+uh keeping this block
+and while the directory state is
+uncached and a right mis occurs then
+this is what happens basically the same
+send data to the requesttor uh and uh
+because this is a home directory uh it
+has the uh it has the data in its local
+memory. So after reading fetching the me
+uh data from the memory it sends the
+data uh to the requester and makes the
+requesttor owner uh if this directory
+based protocol supports the owner state
+and changes to exclusive uh state that
+is basically modified state. So this
+means this particular block is now
+currently in exclusive state. And uh
+this owner uh this indicates which node
+keeps the uh the the updated block.
+And if this block is in shared state
+while it is in shared state if rhythm is
+occurs that means uh
+yeah rhythm is occurs so then uh this is
+what happens that means uh some other
+cache because it is it is now shared
+that means some caches some nodes
+already have the uh this block but read
+occurs means another node which does not
+have this block uh now wants to read
+this block. So this this home directory
+sends the data to the requesttor and add
+the requesttor to the sharer. So this is
+adding the sharer
+and uh if rhyme occurs
+rhyme occurs and this is what happens.
+So uh it is shared state that means it
+is clean. So we don't have to write back
+the data. So the home directory reads
+the data from the memory because it is
+coherent. And then uh but uh still we
+have to invalidate those uh shared
+copies because the requesttor
+uh is updating that block. So uh
+invalidate all sharers because this uh
+this um directory keeps track of which
+nodes have the this block. So it can
+send targeted message to those nodes
+and then make the requester the owner
+and the state is changed to exclusive
+state
+and while the directory is in exclusive
+state. If right mix occurs then uh first
+it fetches data from the owner because
+if this block is in exclusive state that
+means uh there must be a dirty block in
+the cache. So the directory needs to
+fetch that dirty data new data from the
+owner and then it stores uh it it
+fetches the data and send it to the
+requesttor and add both the owner and
+the sharer uh as a and the requesttor as
+a sharer and uh changes this state to
+the shared state because it is a rhythm
+mean it does not update the block. So uh
+those two uh uh nodes have the same copy
+now.
+But right if right m occurs then in that
+case the uh the directory request fetch
+and invalidate to the owner because now
+the owner instead of the owner the
+requesttor has the upto-date data. So uh
+but before updating the data the uh the
+the latest data is in the owner node. So
+it is fetched first but it should be
+invalidated and then the fetched data is
+sent to the requester and then uh it the
+directory makes the requesttor the owner
+and data ripening request uh can be
+received in that case uh just update
+just uh the right the data riping means
+uh when cash wants to flush it dirty
+blocks
+then uh it can send the uh dirty block
+to the home directory. Then the home uh
+home directory uh this directory uh will
+update the memory and then change it to
+the uncashed state and then clear all uh
+sharers. That means um yeah because it
+is yeah yeah in this state yeah even
+though I say clear sharers but there
+must be only one uh shareer the owner uh
+because it is an inclusive or exclusive
+state.
+So what I just described is the basic uh
+directory protocol but there must be
+yeah there are many uh derivatives from
+these simple uh basic uh protocols
+uh for further optimizations.
+So for example we can directly forward
+data from the owner to the requester
+instead of uh passing through the home
+directory. So in this case we can reduce
+the number of messages and uh we can
+reduce the latency
+uh by avoiding memory updates on clean
+uh replacement.
+So uh in yeah in this case uh
+so in this case we can reduce the
+latency by avoiding uh unnecessary uh
+memory updates because we are just
+directly folding the data or we we may
+consider employing some special uh yeah
+messages from uh for the uh uh chain
+changing the shared state to the
+exclusive state
+and uh we also may have some uh
+implementation challenges. Um so for
+example how to handle nonatomic memory
+transactions memory transactions may
+split into multiple uh sub transactions.
+So in this case the uh the protocol
+uh if it does not if these um split
+transactions cannot handle automically
+then it may uh yeah cause some uh
+problems and the cash coordinance
+protocol often if it is not uh designed
+properly then it may have some
+deadlocks. It used to be very um yeah
+how I can say popular research issues
+because uh if the directory or any cash
+coils protocols are very comp
+complicated. So if we cannot uh if we
+are not careful enough to avoid the
+deadlocks then it may happen. So the re
+research questions were uh how to de uh
+deter uh how to identify potential
+deadlocks in the uh protocol
+and uh there must be some efficient way
+to managing multiple uh message types
+because we have seen only we we saw a
+very simple directory protocol but uh
+for optimizations
+uh we may need much more message types
+then handling those message types might
+be uh challenging especially when
+implemented in hardware and uh so uh and
+uh for yeah forward progress is also
+related with deadlock or it is
+especially uh referred as a live lock.
+So in case of live lock something
+happens uh in the protocol but it does
+not proceed. So it is another uh uh
+situation that we must uh avoid.

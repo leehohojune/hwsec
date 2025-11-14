@@ -1,0 +1,194 @@
+If we have multiple processors and each
+of which has its own private cache then
+this cash coance problem occurs. Uh if
+the cache is shared by multiple
+processors then yeah all the processors
+will look at the same contents of the
+cache. So there will be no problem. The
+problem is the private cache because
+each processor accesses the memory
+through its own private cache. The
+private cache is not shared by other
+processors. That means uh different
+processors may see different values even
+at the same location of the memory.
+If this occurs then the program will
+yeah result in some unexpected
+value. So uh we have to make sure that
+all the uh caches have the same memory
+the data. So
+that is called cachy coherence.
+Let's look at this example here under
+the uh the the bottom side of this
+slide.
+So we have two processors in this
+example A and B and each processor has
+its own private cache.
+At the time zero, process A writes one
+to memory location X.
+And and in this example, let's assume
+that this is write through cache. That
+means as soon as any data is written to
+the cache, it is copied to the memory.
+Then uh at at time one processor A reads
+from X then because
+uh it has X in the private cache. So the
+cache hits and the processor A reads the
+value of X from the cache.
+But uh and let's assume that at time two
+processor B reads X and uh it so far it
+doesn't have X in the cache. So caching
+miss occurs then the cache controller uh
+fetches X from the memory. In the memory
+the value X is stored as one. So it is
+feted from the memory and then uh
+through cache the processor B reads one
+from X then let's suppose processor B
+rise zero to X then it is right through
+cache so both cache and memory are
+updated to zero
+but as you can see Here
+in in the cashio of processor A the
+value the the variable X the value of
+variable X is still one.
+So at this moment if processor A reads
+the data from X then what's going to
+happen? Processor A will read one from
+his cache because the cache has already
+the value cash hits.
+So we have to avoid this kind of
+situation. The same problem occurs when
+uh A writes one to X. Here
+the B the cache of processor B is zero.
+So this value is different from what
+processor A writes. So the cache here we
+can say that these caches are not
+coherent. So we have to make sure that
+uh these caches have the same value.
+Precisely this cache querance must meet
+these requirements. The first one is
+read after write consistency.
+Any read by your processor to a location
+it previously wrote must return the
+value in wrote before. assuming no other
+processor rights to that location in
+between.
+So this is typical consistent
+consistency model that the program or
+the software is expecting.
+Any value is written to the memory then
+if we read from the same location then
+we expect the same value must be
+returned. So this is one uh requirement.
+The second one is right propagation.
+Any read to any location that follows a
+right by another processor must return
+the written value
+as long as sufficient time has passed
+and no other rights occurred. So if in
+other words if any value is updated by
+any processor then must be
+propagated to other processors.
+And the last one is right serialization.
+rights to the same location by multiple
+processors must be seen in the same
+order by all processors.
+So it may not be easy to determine or
+ordering all the right events if the
+rights are h happening at the same time.
+Here the requirements is that the order
+of rights must be same
+for all processors
+otherwise different processors will read
+different values depending on the order
+of right requests. So uh when multiple
+rights are coming to the same location
+they must be ordered and the order must
+be the same for all processors. So all
+these uh requirements must be met in
+order to maintain the coherence of
+caches.
+Here another important concept is
+consistency. It is slightly different
+from coherence though coherence defines
+what value can be returned by a read
+operation to a specific memory location.
+So it is focusing on a single memory
+location but the consistency
+determines when a written value will be
+visible to other processors. So here
+what is important is when when the
+written value must be propagated.
+So it is basically concerns
+uh a relationships between different
+memory locations. So the coherence
+ensures all processors see the same
+sequence of values and maintains that we
+have only one single memory location.
+But in case of consistency it defines
+ordering rules for memory operations and
+it affects how programmers reason about
+parallel code.
+The strict the strong consistency model
+enforces that the memory
+operations must be fully synchronized
+but it will
+degrade the performance very
+significantly.
+So we often employ relaxed consistency
+model. In that case, the software or
+programmer must explicitly
+use some synchronization primitives such
+as mutex or semapore to make sure the
+memory operations must be synchronized
+somewhere. It is not explicitly uh not
+implicitly but explicitly
+uh yeah maintained.
+So these are a little bit different but
+anyways this coherency and consistency
+through these mechanisms we can make
+sure that all the processors multiple
+processors have the same view of the
+memory content
+to realize the concept of cash
+coherence. Uh we people the researchers
+have developed coherence protocol
+mainly we can class classify these
+protocols into directory based and snoop
+based
+based protocol is
+by monitoring the traffic on the bus the
+cache controllers automatically
+maintain the coherence
+So it is usually suitable for small
+scale uh multiprocessor systems because
+all the cache controllers must must be
+able to monitor all the traffics.
+But if the number of processors or
+number of caches grow then it is
+practically impossible for all
+controllers to monitor all traffic. So
+in that case we uh inevitably use some
+case some kind of uh directory based
+approaches.
+So here in directory based approaches we
+have a directory
+either centralized or distributed.
+The directory maintains the co uh the uh
+sharers of any cache block. Then instead
+of um all cache controllers monitoring
+all traffic only the uh cache
+controllers that have the copy of a
+particular block
+they are only informed notified when any
+updates or any events occur.
+So uh it is more efficient.
+So uh but we can also yeah uh classify
+these directory based pro approaches
+into one centralized directory or
+distributed directories.
+So uh we will discuss f focus on the
+snoop based uh protocols first uh in
+this sub chapter and then we uh I will
+introduce the directory based uh
+protocols later.

@@ -1,0 +1,167 @@
+In the multi-processor
+systems,
+uh because of the memory consistency
+model, the compiler may have limitations
+on rescheduling the memory access uh
+yeah instructions
+because uh in order to preserve the
+memory consistency especially the strict
+sequential consistency. Uh the compiler
+cannot freely reorder the memory access
+because if the memory access uh the
+order of memory access changes then it
+may result in uh different results.
+So uh there could be yeah uh limitations
+for the compiler to optimize the uh
+performance but in implicitly parallel
+programs like high performance forrron
+the synchronization points are already
+known. Then the compiler can make sure
+that only those instructions that are
+that do not need uh the synchronization
+uh then it the compiler can change the
+order of those uh instructions.
+Uh so if the relaxed consistency model
+is employed then the compiler may
+uh improve the performance more may but
+it is not uh fully verified. So it is
+still an open research question
+but the speculation the hardware
+speculation actually helps to improve
+the performance. In other words
+speculation highs latency in strict uh
+memory consistency model.
+The processor may uh change the order of
+memory references
+but on if invalidation
+arrives before commitment then processor
+may invalidate
+those affected instructions and run the
+execution again. So uh because these
+speculation mechanism already have a
+reorder buffer and commitment uh
+mechanisms we can use those mechanisms
+for the uh memory uh to make sure the
+memory consistency model.
+So yeah uh the hill one of the
+researcher in this area of the vocated
+sequential or processor consistency
+uh is still good if the speculative
+execution is employed because uh the uh
+the yeah speculative execution actually
+gives us aggressive implementation gaze
+that is comparable to the performance
+gain of relaxed models.
+And because we if we already have a
+speculative processor
+uh to
+uh support
+sequential consistency model, the
+hardware implementation overhead is just
+a little
+but it also gives the programmers
+uh a simpler programming model. That
+means the programmers can uh they are
+yeah it is much easier for the
+programmers to reason uh the uh think
+the analyze the behavior of the multi-
+multiprocessor programs. So there are
+many benefits and uh we can reduce still
+or we can achieve comparable performance
+to the uh relaxed models
+the R yeah 10,000 this model is one of
+the uh example then used the out of
+order execution or speculative execution
+capability uh to support the sequential
+consistency
+and another uh optimization possibility
+or let's say yeah I mean the while when
+we employ cash querance protocol and if
+we have multi-level caches then uh this
+consistency
+between different levels to uh maintain
+the consistency of different levels of
+caches may also incur many uh coherence
+misses. One potential
+uh solution to this uh situation is uh
+inclusion.
+The multilevel inclusion means every
+cash level should be a subset of the
+next level.
+That means uh in other words for example
+the content of L1 should be always a
+part of L2.
+Reversely the the data in the L2
+uh yeah all the data in the L1 should be
+in the uh L2 because typically L2 is
+larger than L1. So the if we maintain
+this kind of a property uh it is called
+cachy inclusion.
+Many multiprocessors actually enforce
+this inclusion
+uh because uh it can reduce the number
+of the number of querance uh machines.
+If we don't use this kind of inclusion
+then uh yeah actually the inclusion uh
+yeah the drawback of the inclusion
+mechanism is that we always have
+duplicated
+um yeah data in the caches. So the
+effective size of the cache is reduced.
+But still because of reducing the the uh
+cash equion
+mechanism give us better performance. So
+uh many modern processors enforce this
+inclusion property.
+But it is not as easy as it sound
+because the more different level caches
+may have a different uh block size. For
+example, here let's assume that LB
+level two the L2 block size is four
+times L1. Let's suppose that L2 has for
+example
+uh to simplify the discussion let's
+let's assume that the L2 block size is
+four byte four words and the size of L1
+is one word
+then uh L1 let's suppose L1 contains a
+blocks at all X
+and X + B where x is modular. So x is a
+multiple of 4 b. So this is the uh
+relationship between these two uh cache
+blocks. Then let's suppose that uh
+block y maps to the same location as x
+in both caches then cash miss occurs
+both L1 and L2. Then L2 has uh fetches
+four B bytes.
+So yeah here we assume that four words
+and replaces the blocks X X + B X + 2 B
+and X + 3 B because it has four words.
+It replaces four words in L2.
+But L1 has cachy. The cash size of L1 is
+only one word. That means L1 replaces
+only block X. One word. That means now
+L1 still has X + B. But L2 does not
+because as I mentioned in this L1
+replaces X but not X + B.
+But L2 actually replaces both replaced
+both X and X + B. So they are not in L2
+but in L1. So this is a violation of the
+inclusion property.
+So in order to maintain inclusion with
+different uh block sizes done then the
+higher cash levels must be always proved
+during the lower level replacements
+happen. So here for for example
+after L2 fetches replaces these blocks
+then uh this information must be sent to
+L1 so that the L1 cache controller
+invalidates this uh block. In this way
+we can yeah this is only one example of
+maintaining the inclusion property. Uh
+but uh yeah there could be yeah other
+method but uh with this simple method we
+can make sure uh the inclusion uh
+property is maintained uh even for
+different uh block sizes in uh different
+levels of caches.

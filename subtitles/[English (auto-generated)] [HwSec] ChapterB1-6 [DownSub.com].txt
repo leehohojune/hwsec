@@ -1,0 +1,266 @@
+to implement the trusted execution
+environment. Memory isolation uh is
+another key uh component that the team
+must uh implement. uh but memory
+isolation compared to CPU isolation, it
+is much more challenging because uh the
+we typically the modern pro processors
+have a hierarchy of memory subsystem
+including cache um ofch memory uh
+translation translate logoite buffer um
+and also Um um we also need to protect
+those uh translation structures that is
+uh that are page tables uh stored in the
+memory as well. So uh because there are
+many components we have to isolate or
+protect uh it is very uh challenging.
+So in case of CPU isolation
+all virtually all tees use the same
+approach but uh memory isolation
+strategies are uh quite diverse.
+So that is uh the strategies are diverse
+because mainly because uh t is uh
+consider different types of uh yeah
+threat model.
+So this is the classification of memory
+isolation. Um and on the right top side
+of this slide the uh adversarial model
+is illustrated and
+depending on the uh the threat model we
+consider uh the different teams employ
+different types of uh yeah isolation
+approaches. Here for example uh when we
+want to uh protect the inclave memory
+then against the softwarebased attacks
+like this here you can see this one
+another uh application that is not in
+the enclave and another enclave and
+system software if we are considering
+this type of only software based uh
+adversaries then uh the these approaches
+are uh yeah typical. So uh the full
+currency this kind of uh yeah existing
+works uh employ logical and temporal
+isolation and these approaches employ
+cryptographic uh isolation approaches.
+That means uh the uh the uh memory is
+basically encrypted
+uh to protect their confidentiality as
+well as uh integrity and it is spatial
+temporal isolation. That means some
+regions of memory could be uh shared but
+with different uh cryptographic keys and
+multiplexed.
+So uh if it is purely temporal then uh
+only one of the uh inclaves can access
+the uh memory at a given time. But if it
+is spatial temporal then some part of
+the memory can be accessed by the one
+enclave and the other part could be
+accessed by another enclave while the
+rest of the memory can be accessed by uh
+the just regular applications. So this
+is a temporal uh uh spatial uh yeah
+isolation. But the those regions that
+are currently being used by for example
+inclave application A and B those U
+memory regions might be uh used by
+inclave C later. So it is kind of
+temporal isolation. So most of the
+existing TE's use spatial temporal
+approaches and only a few uh a little
+handful of just a little number of uh
+TE's use the cryptographic approach
+approaches while most of the existing
+TE's use logical isolation
+and this logical isolation can be
+enforced by uh existing memory
+protection unit and uh yeah management
+unit that will be discussed in uh the
+next slide and the TCB memory isolation
+is also uh uh against these
+softwarebased attacks can be also
+classified in this way. So because it is
+TCB memory this is uh the uh the main
+memory uh it yeah here this is uh
+includes the cache but this is the uh
+main memory that are typically
+exclusively used by the uh the uh
+inclave I mean the uh the hardware uh T.
+So the hardware T also needs some memory
+not the application but the memory TCB.
+So because for for example of the in
+SUGGX SUGX maintains some metadata for
+inclaves
+such as uh enclave ID or uh yeah some
+the memory uh yeah allocation
+information that kind of things. uh but
+that this metadata is not the part of
+the application itself but it is
+metadata maintained by the uh TE TCB. So
+it has some memory region that can be
+exclusively uh accessed by the TE.
+So it is also u t typically yeah it it
+is uh the spatial um yeah isolation is
+employed that means a part of the
+physical memory is always dedicated to
+the TCB
+that means that part of the memory
+cannot be used by other applications
+because the TE should keep maintaining
+the metadata. So, uh dedicating the
+memory reason for the T uh yeah makes
+sense in this uh in this sense
+and still there could be some temporal
+or spatial temporal approaches are still
+visible. uh uh in that case we can uh
+yeah if we dedicate some uh memory to
+the TCB then that cannot be used by for
+other purposes but if we allow
+multiplexing some areas then uh we can
+uh we can uh optimize the memory usage.
+So in this in this perspective it has
+some advantage but the controlling
+mechanism will be much uh complicated.
+And if we consider the adubos from the
+uh bus to the bus that means the adubos
+have the physical access to the device.
+So in that case the cryptographic
+approaching is the only way we can or
+only way uh protecting the data in the
+memory. Uh because the if the adversary
+is able to physically access the device
+then uh it the adversaries can bypass
+the uh logical isolation techniques that
+are typically implemented in hardware.
+And the memory protection mechanisms can
+be implemented in memory protection unit
+or memory management unit. Uh the modern
+processors already have one of these two
+components in the processor. Typically
+some embedded systems that have limited
+resources uh employ uh the memory
+protection unit and the memory
+protection unit as its name suggest it
+is only for memory protection but in
+case of a memory management unit that is
+for memory translation virtual to uh
+physical address translation. So the MMU
+is for some high performance uh
+processors but the MPU is usually
+employed by lowend uh yeah
+microprocessors for uh embedded systems.
+So in case of MPU only the uh access
+control uh mechanisms are implemented.
+So uh we can add a little bit more uh
+information to the MPU to protect the uh
+memory uh space used by the inclave
+application.
+But the typically the MPU has limited
+capability
+and it has limited number of memory
+regions it can support because if we
+want to uh support more uh the fine
+grained memory regions then uh we need
+more information
+uh but as I mentioned it is typically
+for low-end processors that have limited
+resources So uh it has just a limited
+number of memory regions and that's
+that's why it is suitable for coarse
+grain uh yeah protection
+but MMU has more capabilities of uh
+specifying the uh proper properties of
+memory pages and also uh support uh
+multiple uh ways to manage the page
+tables and uh the page the size of one
+page is yeah may not be just fixed it
+could be flexible in that case we can uh
+control the granularity of the memory
+protection so it is much more suitable
+for fine grained protection
+and it is also important to note that
+the access control information like page
+age tables also must be protected
+because even though the access
+controller is enforced by the hardware
+MPU or MMU, if the access controller
+information itself is modified, then uh
+the intended policy cannot be enforced
+and those page tables are also stored in
+the main memory. So uh that is a part of
+the TCB uh the part of the memory that
+is exclusively used by TCB.
+But for some uh yeah T is like SGX
+uh the operating system manages the page
+tables. That means the op in in case of
+Intel SGX the operating system is not
+trusted. In that case the page tables
+are managed by untrusted software.
+So the hardware cannot fully protect the
+page tables because we don't trust the
+operating system. In that case, the
+hardware uh SGX only enforces some
+property of the page table
+or the uh ARM SUV employs the reverse uh
+page table uh that checks the integrity
+of the page table by hardware.
+This is the cash isolation approaches.
+You can notice that all of these
+approaches are only uh logical uh
+isolation because if we employ
+cryptography isolation then the
+performance overhead could be excessive.
+So uh this is the only uh yeah approach
+we can consider for uh cach isolation
+and uh because the caches
+uh onchim memory uh we don't consider
+physical access to the on memory. Of
+course it is possible. It is possible.
+Uh but here typically it is not
+considered because if the adversary
+wants to uh physically access the on
+memory inside a uh chip then uh the
+adversary will need to have very
+expensive equipment and also it takes a
+lot of time and effort. Uh so uh the
+adversaries are not typically supposed
+to do though
+and uh in case of local cache that means
+it is a private cache. So uh yeah many
+approaches use the temporal isolation
+while the shared cache can be accessed
+by shared by uh multiple enclaves or uh
+normal applications. We may consider
+spatial uh isolation. That means a part
+of the
+shared cache can be dedicated to the uh
+inclave applications.
+In case of translation locite buffer uh
+yeah it is also uh uh typically the uh
+the logical isolation is used. Uh here
+again that if we employ cryptographic
+isolation is performance overhead could
+be excessive and we can still consider
+spatial partitioning and uh temporal
+partitioning. Special partitioning means
+that uh some dedicated TLBs per logic
+processor can provide uh special
+partitioning.
+uh but in case of temporal partitioning
+uh only one processor use the TLB and if
+the context is switch it then the
+previous uh TLB entries are flushed
+so that the uh the the next the next uh
+context cannot uh find the remaining
+information from the previous one
+but there could be hybrid approach. So
+uh some part of the TLB can be flushed
+not the entire TLB but only partially.
+So in that case only uh the TLB entries
+that are used by the current inclave
+applications should be uh just flush uh
+from the TLB. So instead of flushing
+everything it will save time. So uh it
+is kind of shared approach. I I mean the
+hybrid approach.

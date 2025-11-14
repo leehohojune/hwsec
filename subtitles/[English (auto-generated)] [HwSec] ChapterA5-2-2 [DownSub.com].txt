@@ -1,0 +1,274 @@
+Many snoop based co protocols are based
+on write invalidate. In this protocol,
+the cache block is invalidated
+when any rice on that block is update uh
+observed if that block is stored in the
+cache. So that uh the caching miss can
+occur when the processor tries to access
+that block then uh because the caching
+miss occurs the cache controller uh
+would fetch that block from the memory.
+So in this way we can maintain the
+coherence of the cache. So let's take a
+look at this example. Initially let's
+assume that the variable X is stored in
+the memory whose value is zero.
+The when the processor A reads X then
+cash mix occurs. So the uh cache
+controller of processor A fetches the
+value from the memory
+and then uh let's assume that processor
+B also reads X. So the processor B's
+cache also fetches that data uh from the
+memory.
+Then
+sometime later processor A writes one to
+X.
+In that case uh yeah in this example the
+caches write back cache. So uh the value
+of the cache block is written to the
+memory when caching miss occurs or some
+other events.
+So uh when processor A writes one to X
+only it private cache is updated because
+it is right back cache but
+processor B also has that block.
+So that block is invalidated. Now
+processor B doesn't have X in the cache.
+So later when processor B wants to read
+the X then caching miss occurs. So uh
+but in that case uh because cash uh
+because processor A has the updated
+value it is first written to the memory
+and then it is fetched uh to the cach B.
+So this is very typical uh scenario when
+the cache invalidate protocol is
+employed. There is an alternative
+approach that is right update protocol
+or we we say write broadcast protocol.
+In in this write update protocol when
+processor A writes one to X then instead
+of invalidate this cache block the the
+actual value is transferred to the cache
+of cach B.
+So later if cash B reads this cash block
+then cash hit. So we can lower the cache
+miss but the problem is this helps when
+processor B accessesses the same block
+but it is not guaranteed
+if cach processor B doesn't access that
+cache cache block then uh the update
+of the cache block is basically wasted.
+So it consumes
+considerably more bandwidth of the bus
+or any interconnected network.
+So yeah, it depends depending on the
+application. If many memory locations
+shared by uh multiple
+processors and they are 10 uh yeah
+likely to access those memory locations
+very frequently then that this must be
+effective. But in in many other types of
+applications this probability is not
+very high. So uh just invalidate the
+shared cache block is usually enough
+and does not
+hurt the performance. Yeah. Uh
+significantly. So the ride invalid
+protocol is the most popular protocol uh
+for snookbased protocols.
+So in the simple list uh the basic the
+uh the protocol is MSI protocol. MSI
+stands for modified, shared and invalid.
+They are the names of the states.
+When the cache block is in modified
+state that means that block has been
+updated. It is a dirty block
+and uh we are assuming that the caches
+are right back caches. So uh that dirty
+block is uh currently inconsistent
+with memory. So the memory contents is
+different from the cache content
+and uh because this modified block is
+has the exclusive ownership. So when
+cache miss occurs then this data must be
+supplied to the memory because this is
+right invalid protocol not write update
+protocol. Uh the data is not directly
+transferred to the cache but only to the
+memory.
+The the the other state is shared state.
+A block is the copies of block is stored
+in multiple caches
+but the copy is clean.
+So this value matches with the memory
+and if any update occurs then the uh
+this state is changed to modified state
+and invalid state indicates that this
+block is not valid.
+Typically when uh this blog is shared if
+any write request uh occurs then uh the
+the written block the state of the
+written block is changed to modified
+while the states of other caches are uh
+invalidated
+as we just saw in the previous example.
+This is a transition uh diagram.
+So when uh
+read hit
+either in state shared or modified it is
+just a normal hit. So the cache
+controller uh just serves this read
+request. But when read mis occurs uh
+this read mis occurs when the state is
+invalidate invalid state because this
+block is not in the cache then this is
+treated as a normal miss. So it the
+cache controller fetches the data from
+the memory through the bus and then uh
+store it in the uh cach uh in the cache.
+When uh state is shared and if the
+rhythm is occurs that means it is a kind
+of uh comfortingness. So it is also I
+think uh considered as a normal miss
+and yeah modified state as well. It is a
+conflius.
+And if the blog is shared state and
+write heat then this uh this state is
+modified uh is transit to modified state
+and other
+uh caches if they have this block must
+be invalidated. So the cache controller
+place invalidate messages on the bus so
+that all the cache controllers can
+invalidate this block
+and rhyme miss right misses yeah they
+are just treated as normal misses
+but this state can be uh changed by the
+request from the bus as I just mentioned
+the any block. If the block is updated
+then the cache controller place
+invalidate request to the uh on the bus.
+Then uh this invalidate message uh if
+that block is in the shared state then
+this shared state must be changed to
+invalidate state.
+And uh when the
+uh if any block is in the shared state
+but rhythm is occurs if we the cash
+controller observe that read occurs on
+uh by other cache controllers. Here
+important assumption is that I I as I
+mentioned in the snoop based protocols
+all the cache controllers can observe
+all the trafficics uh from other cach
+controllers through the bus. So this
+means rhythm is means this rhythm is
+occurred
+in the another different catch
+controller
+and in the another controller
+uh when rhythm is occurs on the block
+that this particular this controller has
+whose state is s then yeah This cache
+controller doesn't have to do anything.
+But if this the block is in the modified
+state but other cache
+yeah request rhythm rhythm occurs then
+because this controller this cache is
+the owner of this particular block
+it must write back that block to the
+memory so that this This cache another
+cache
+then request readmies can read the
+updated data from the memory.
+Then this state is changed to the shared
+state because uh now uh the data the
+dirty block is flushed to the memory. Uh
+so it is now be became has become clean
+and then it is shared by another uh
+cache. So it is in the shared state
+and yeah basically the same to this
+rhyme miss.
+So uh
+yeah
+so when this block is in the uh modified
+state but another controller uh request
+rhyme miss then uh this block must be
+right back to the uh cache and then this
+block is now invalidated because the
+other cache uh
+uh updated this block
+and this one. Yeah, also uh if I have a
+shared state, I I have the block uh in a
+shared state but on that block right mix
+occurs then yeah it must be invalidated.
+So this is basic uh invalidate based
+protocols. There are some extensions to
+this protocol.
+One is messi.
+So there is another state called
+exclusive state. So if any block is in
+the E state, it can be written without
+generating any invalidates.
+Which means in the basic MSI protocol
+uh if any cash m occurs and then uh any
+cache has a clean block even if it is
+not shared by any other caches it is
+still in the shared state. So there is
+no distinguishment
+between
+uh uh how many based on how many copies
+are shared currently.
+If this cache controller is the only
+controller that has the copy of this
+block
+and it is updated then we don't need to
+place invalidate message on the bus.
+But in MSI protocol it should. But in
+MESI protocol if any block is
+exclusively stored in the cache
+controller then the cache controller
+doesn't invalidate other doesn't need to
+invalidate other caches.
+So it yeah it helps uh reducing the
+memory uh unnecessary
+uh the network traffic
+the the more uh additional optimization
+could be uh employing a owner state.
+So in MSI and MESI protocols when there
+is an attempt to share a block in the
+modified state then the state is changed
+to a shared state
+and the block must be written back to
+memory.
+But in a uh M ESI protocol the block can
+be changed from the modify to own state
+in the original cache without writing it
+to memory. That means
+the uh the
+the the actual value the content is
+directly transferred from the owner uh
+cach cache to the shared cache.
+So it is a kind of combination of write
+invalidate protocol and write update
+protocol. So in this case uh it is
+partially employing the right update
+protocol
+but there are some limitations on the uh
+in the snooping protocols
+because all cash controllers must be
+able to observe all cash at the
+tracking.
+it is not uh scalable because the shared
+bus
+is likely to become a bottleneck
+as if the number of processors grow.
+So typically practically
+uh it can be supported it can support up
+to eight uh yeah high performance course
+and every cache must process every
+coherence request.
+Yeah. So if the number of processors
+grows then uh the directory based
+solution is more uh yeah preferable.

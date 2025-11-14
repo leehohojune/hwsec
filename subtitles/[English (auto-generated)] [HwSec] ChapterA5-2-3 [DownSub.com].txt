@@ -1,0 +1,156 @@
+Okay, let's take an example that
+illustrates how the MSI protocol works.
+The MSI protocol is the very basic uh
+invalidate based protocol that has only
+uh MSI
+uh state.
+So uh in this example we have three uh
+processors and each processor has its
+own local private uh cache and their
+their coherence is maintained by that uh
+MSI protocol
+and uh we have we don't have any shared
+cache and there is only one uh L1 cache
+uh in terms of levels and uh The next
+level is directly the main memory. So
+the basically the main memory is shared
+by all processors and this is the
+scenario
+that this example will work on. Uh so
+the processor zero read and write one
+and two uh as well uh the uh some memory
+addresses and let's see uh when the
+processors uh access the memory in this
+way then let's see how the uh coherence
+of the caches can be maintained.
+Okay. So let's see that uh when uh
+processor zero reads 120 then initially
+the P 0 doesn't have uh this uh block uh
+that contains the address 120. So uh one
+of the cache block is allocated to this
+address and the state is changed to
+shared state because it is read it does
+not modify the cache block. So uh it is
+uh in the c uh shared state. The shared
+state indicates that this block is
+clean.
+So uh the cache controller of P 0 places
+rhymies on bus and uh this data uh this
+data is fetched from the memory and
+stored in the cache block.
+Processor one doesn't have this address
+120 in cache control uh cache blocks but
+P2 has 120 here but it is in uh shared
+state so it doesn't uh have to have to
+do something anything on this block it
+it can uh retain uh the state in shared
+state
+next let's assume that process zero
+writes 80 to 120 address 120. Then uh
+because P 0 has the block 120 here
+uh it just writes that uh the new data
+to this block
+and yeah here it is assume that the
+older caches are right back caches
+and
+uh because it is a shared state uh the
+invalidate messages is the invalidate
+messages placed on the bus and as I
+mentioned just in the previous slide uh
+P2 has the same block in shared state so
+it is invalidated now it state is
+changed to invalidate state
+next let's assume that P2 now writes uh
+overrides the data. Actually, this is
+the same data. But yeah, anyways, let's
+see that uh P2 doesn't because this
+block has been uh invalidated. P2
+doesn't have that block now. So uh now
+the cachy controller allocates one block
+for 120 and the state is m state
+modified state because it is not clean.
+It is uh yeah modified. So it is state m
+and then uh because uh in order to uh
+process the rhyme request uh the p2
+places a rhyme miss on bus and when p 0
+the cache controller of P 0 observes the
+rhyme miss on 120 then uh the cache
+controller of P 0 uh write back that
+block because it is a dirty block. So uh
+it uh writes the due data to the memory
+and changes the state from modified to
+invalidate
+and then P2 actually fetches the data
+from the memory.
+And as you may remember if we have M
+oesi
+uh protocol then actually instead of
+writing back the dirty data new data to
+the memory uh this cache will deliver
+the new data directly to P2. But now we
+are talking about MSI the basic very
+simple MSI protocol. Uh in this protocol
+the dirty block is flushed to the memory
+and uh this new uh day the uh the cache
+controller that has the new data fetches
+that needs the new data fetches the data
+from the uh memory
+and let's suppose that P1 read uh this
+block and uh because
+uh the P1 doesn't have any valid block
+for this address a right miss occurs
+and when a right miss occurs then uh
+this cache uh controller has that block
+in modified state. So
+yeah something similar occurs here.
+This uh new data is uh written back to
+the memory and then from the memory P1
+fetches that data uh and uh the state is
+changed to shared state because it is
+not modifying the block. Uh uh that
+means that block is still clean. So the
+state is changed to shared state.
+And here also uh because
+in the previous uh example
+if rhyme miss occurs and uh
+that means uh because of the rhyme miss
+if the cache block is uh written back
+then the uh that block uh has been
+changed to invalidate because new data
+will be written. written to another
+different cache but in this case because
+it is uh written back to the memory
+because of read means so it doesn't have
+to be invalidated
+so the state is changed to shared state
+that means P 0 still keeps this block
+because it is clean so it doesn't have
+to be uh invalidated
+Next let's assume that P 0 writes 48 to
+uh this block and it is in shared block
+and it is uh written. So it is uh the
+its state is modified uh now changed to
+modified state and because it is a
+shared state uh the invalidate message
+is uh placed on the bus and because this
+cache has a copy of this block so that
+block is invalidated.
+Then let's see P 0
+uh writes uh 78 to 130 then because it
+doesn't have that block valid block so
+uh this block is allocated and right
+miss occurs then uh other caches doesn't
+have any copy of this block. So these
+two caches do yeah do do nothing and uh
+P 0 just uh writes the new uh keeps the
+data in its own uh private cache and the
+state is changed to modified state.
+But when P2 writes uh 78 to the same
+block then it state is changed to
+modified state. uh but uh here this P 0
+has the uh that uh the same block so it
+is uh invalidated and the data is
+written back to the memory
+and then P2 writes the data to its uh
+local cache private cache and the state
+is changed to modified Eight.

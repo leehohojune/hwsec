@@ -1,0 +1,268 @@
+Cachic coherence ensures that multiple
+processors see the consistent view of
+memory. Uh but it does not determine or
+answer the question when uh must a
+processor see the value updated by
+another processor.
+So uh this the answer to this question
+determines what properties must be
+enforced among uh reason and rise uh
+yeah uh to different locations by
+different processors.
+This question may look very simple
+because intuitively
+or simply speaking
+any updates if any updates are
+propagated to all the processors
+immediately then what what's the
+problem?
+So yeah that could be one option but as
+you will be seen later performance
+overhead could be uh substantial that's
+why people and also it is not always uh
+essential we may relax this condition a
+little bit then we can get a lot of
+performance improvement so that's why
+the researchers uh are considering other
+types of memory consistency model. It is
+different from coherency because we have
+to make sure coherence all the time. But
+in case of consistency, we may relax the
+consistency a little bit to uh depending
+on the situation it could be allowed. Uh
+but consistency eventually all
+processors must see the same contents in
+the memory that is coherence. But when
+it could be a little bit misaligned and
+if we allow this kind of uh temporal
+misalignment then we can enjoy the
+performance drastic performance
+improvement. Let's see some example
+here.
+For example, processor one initially a
+is zero and after finishing some
+processing it updates a to one and it
+test if b equals zero and then yeah
+proceed to the next uh yeah block. P2 do
+does the same but in the opposite uh
+way. Initially B is zero and after
+finishing some computation B is updated
+one and it test if A equ= zero or not.
+If the strict consistency model is used
+that means all the updates are
+immediately
+seen by other processors. Then both P1
+and P2
+uh yeah there cannot be situation
+that both
+uh statement both if statements
+uh to yeah evaluate their conditions are
+true.
+that means there will be no way that
+both A and B are zero uh and proceed to
+the next step.
+So for example, let's see let's uh
+assume that P1 goes first and then let's
+say yeah
+after yeah doing here
+uh
+yeah let's assume that P1 uh completes
+the computation but P2 uh has not
+started yet then B is zero.
+So this condition is met. But at this
+moment a equ= one a is one. So uh after
+p2 ran this part and then test a a is
+one. So uh yeah so it cannot do uh this
+part
+and vice versa. And also for example if
+P P1 is has executed for example until
+yeah here and then P2 is executing and
+uh if it finishes uh somewhere for
+example here then uh if yeah if P1
+continues uh is execution then anyways
+is yeah at this moment. Yeah. When B is
+tested then uh A is one already. So it
+this condition cannot be met.
+Okay. So uh this this cannot be uh yeah
+both P1 and P2 there cannot be uh it is
+impossible for the P1 and P2 uh those if
+conditions are evaluated uh as true
+but let's suppose that the right imate
+can be delayed that means even if a is
+updated here it is not immediately seen
+by processor 2. Then after updating
+B1
+while it is it enters uh the uh after
+finishing this evaluation it may proceed
+to uh execution of something but this
+this update B1 is not propagated
+immediately to processor one. Then uh
+processor one also can enter this uh
+yeah statement
+and sometime later this value is
+yeah uh received from P2.
+Then the question is should this
+behavior be allowed
+and if so under what conditions?
+If the memory consistency is strictly
+uh enforced then this situation cannot
+happen but if we allow then the
+performance can be improved and also
+depending on the application or
+situation there will be no problem even
+if we allow this kind of behavior then
+if we want to allow then under what
+condition that that's the key question.
+So let's see if we enforce sequential
+consistency that is the most strict
+consistency then it requires uh
+execution results any update on the uh
+yeah memory uh location
+uh should be same the same as if the
+memory occasions by each processor were
+kept in order as if and accesses among
+different processes were arbitrarily
+interled. So even if processors are uh
+yeah updates memory locations
+arbitrarily
+the uh execution results must be seen as
+if just uh one uh processor has updated
+the data. So basically every processor
+see the same sequence of the memory uh
+update.
+To implement this any processor must
+wait if any processor updates any value
+in the memory then in must wait until
+all other processors are receive
+invalidation
+actually the invalidation is complete.
+So if the number of processors grow then
+you can imagine that this could uh yeah
+incur significant performance uh
+degradation.
+So this is a simple calculation.
+I'm not yeah going go through all the
+details but yeah when we just estimate
+the performance penalty then yeah the
+performance uh yeah penalty will be uh
+very significant
+but when we observe synchronized uh
+programs this is what uh uh we found
+uh most multi-threading or
+multi-processing
+uh programs are typically
+synchronized.
+If because if they are not properly
+synchronized then the result could be
+unpredictable. Depending on where and
+when we run the result might be
+different. So in order to make sure that
+the behavior is deterministic
+uh programmers usually synchronize
+uh those processes properly and also
+programmers typically use standard
+synchronization libraries rather than
+creating their own mechanisms. So if we
+uh based on these two observation what
+is uh proposes uh relaxed consistency
+models there are couple of different
+types of consistency. So for total
+ordering, partial store ordering, we
+ordering
+uh actually there are many uh
+derivatives.
+Uh but let's see for example total store
+ordering means only the store the order
+of the store instructions is uh
+preserved.
+So in that case this read after write
+dependency is not uh always guaranteed.
+But this mechanism is actually based on
+the observation that most of the
+existing these synchronization
+uh pro uh programs actually make sure
+that this uh is uh yeah this happens
+as we see uh if we are using lock and
+unlock mechanism vex or this kind of
+synchronization mechanism typically we
+protect take a uh critical section uh
+that make sure that only one processor
+uh updates a particular value. So in
+that case uh we are basically ordering
+uh the right to the this particular
+shared variable
+if yeah the orderable updates of
+unshared variable doesn't matter. So we
+are not yeah talking about those uh
+variables but only the shared variables
+and typically we are concerning the
+order of updating this value typically.
+So uh if we are keeping the order of
+writing then uh it is yeah a little bit
+relaxed version of the uh of the uh
+synchroniz synchronizing the uh
+synchronize uh the sequencer consistency
+uh but it is a relaxed consistency
+because we are only keep the writing
+orders of a shared variable.
+So this is one example and the other
+ones are u yeah some other uh relaxed
+consistency models are available because
+there are too many uh different models
+we are not going to discuss all of them
+but I am just giving you one uh just uh
+representative uh example. So here the
+key idea is that because uh the
+programmers usually use standard
+synchronization libraries and
+synchronized multi- uh process
+processing systems.
+uh we can only
+uh make yeah by ma yeah based on this
+observation if we keep the con if we are
+uh keeping the consistency
+uh only uh for those uh uh variables
+um
+uh controlled by the synchronization
+mechanism that could be enough. So that
+that's the basic idea.
+We are keeping consistency model
+only for those controlled by explicit
+synchronization
+mechanisms.
+So that that's the key idea by assuming
+this kind of consistent model uh we can
+reduce the performance penalty.
+So modern processors typically support
+some form of relaxed uh consistency
+model. Uh so the programmers can use
+standard synchronization libraries and
+uh by using those standard uh libraries
+the programmers can make sure uh which
+consist model uh is currently being
+used. But from an alternative viewpoint
+uh what is what was claimed was that if
+the speculative execution is employed
+then the uh even if we are employing the
+strict uh sequential consistency the
+speculation actually helps to improve
+the performance because
+just move on to the next uh execution
+only if
+some uh invalid date invalid
+uh result
+is coming then we can just roll back and
+then do do the computation again. So
+this is basically the uh basic concept
+of the speculation. So we can do the
+same thing for the memory operations
+and also the compiler can also help this
+spec speculation a little bit. So uh
+this is still an open question. Uh
+yeah, depending on the compiler
+technique and special speculation
+technique, uh we may still uh use the
+strict consistency model. Uh but in some
+cases if the speculation is not strong
+enough then the relaxed model uh might
+be still useful.

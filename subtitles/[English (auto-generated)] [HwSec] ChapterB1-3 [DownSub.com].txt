@@ -1,0 +1,491 @@
+In typical attestation protocols we have
+three types of entities. The first one
+is the verifier who wants to to
+outsource the computation to remote uh
+prover
+and uh the prover is the uh the entity
+that actually computes the uh the given
+uh task and uh returns the proof of the
+computation.
+uh and the adversary wants to uh
+manipulate the result so that it can uh
+deceive the verifier. So the target of
+the adversary is uh uh deceive uh yeah
+deceiving the verifier.
+We may also consider the third party uh
+certificate authority uh uh as an
+another entity. But this is not specific
+to the authentication protocol because
+the CA is assumed because uh this
+protocol the attestation protocol
+typically works on digital signature. So
+that means we need uh the PKI the public
+key infrastructure. So uh that's why we
+need the certificate uh authority. But
+yeah that's that's for PKI not the
+attestation protocol. So when we are
+talking about the entities in the
+testation protocols typically we are
+talking about the three entities here.
+And this is a typical
+uh structure of the aestation protocol.
+Uh as I mentioned we have a verifier and
+another the counterpart is prover.
+uh because the verifier verifies the
+result of the prover in this system uh
+we need to trust the verifier. If we
+don't trust the verifier then yeah there
+is no root of trust here. So uh yeah
+that that's not uh yeah we the this
+protocol cannot work uh basically and
+the prover is basically untrusted device
+and the prover should verify itself that
+the computation uh is correct.
+The typical process is this. The
+verifier generates a random challenge.
+Then uh the approver receives the
+challenge and uh it generates proof of
+the uh its computation and then returns
+the response to the uh verifier. Then
+the verifier
+uh can uh learn that the uh computation
+of the prover is correct or not by
+checking the response typically proof.
+Then the prover
+uh the response how the response is uh
+generated that that is proof how the
+proof is generated.
+uh there are many different types of a
+testation protocols. So I will uh
+explain the typical
+uh uh attestation protocols.
+Typically uh the aestation protocols
+focus on the memory content
+more specifically typically code because
+uh the yeah anyways the computation is
+done by running the code. So if the code
+is uh not modified from the initial um
+yeah uh original code then we can trust
+the computation result. So the code is
+stored in the memory. Uh the prover
+measures the integrity metric of the
+code typically hash value. The prover
+computes the hash value of the code in
+the memory and then uh with the digital
+signature of the hash value uh it
+generates the proof. Then the verifier
+checks the proof. That means it first
+checks the signature and then uh it
+checks the hash value. That means the
+verifier should have the reference
+integrity metric. That means the
+verifier should already have the uh
+correct hash value of the code.
+Uh sometimes so this is very typical um
+uh yeah a destation protocol. But in
+some protocol only computing the entire
+memory space I mean the code region of
+the memory space um yeah may not be
+enough because I will explain this later
+but because of some attacks by the
+prover because we are not trusting
+prover so the prover may misbehave
+in that case to prevent that kind of
+misbeh behavior.
+Uh the there this uhation protocol could
+be interactive. That means um the
+verifier
+sends the challenges not only just once
+but iteratively.
+Here the iteratively means that it send
+the challenge to the prover and receives
+from the rest uh provers the response
+from the prover and then based on the
+response it generates challenge uh again
+until it finishes repeat this process uh
+until the end. So the new challenge is
+computed from the response. The approver
+cannot predict the next challenge. So in
+this way uh we can reduce the risk of
+the uh malicious prover. In that case
+the verifier should have the entire code
+in the memory. So uh that means uh it
+checks the integrity of the memory
+improver by basically comparing the all
+the contents in the memory uh within the
+verifier. So uh that's another approach.
+But if we use hardware then the hardware
+can isolate the execution of the prover
+then uh the um initial measurement could
+be yeah enough.
+So this is some assumption as I just
+already briefly mentioned this in the
+previous slide. the verifier cannot be
+compromised by the attacker.
+In a sense, this attestation protocol
+works for verifier.
+So the verifier uh yeah because the
+yeah the verifier is the who need this
+protocol. So uh we don't assume that the
+verifier could be compromised
+and the to verify the result of the
+prover the verifier should know the
+expected state of the prover and also
+the hardware architecture of the prover
+that means uh and also the here the
+expected state means the integrity the
+reference integrity metric Typically the
+integrity metric is measured by hashing
+the memory that means the uh the value
+in the memory is basically the state of
+the computation. So uh that means uh the
+verifier should already have the
+reference integrity metric and uh if we
+are using the hardwarebased testation
+protocol then the prover should know how
+the h the hardware in the prover works.
+That is what the the the third line
+means. So uh the proof generated by
+prover uh the verifier should already
+know that how that proof was generated
+and uh the adversary cannot reverse
+engineer the pros uh software and
+hardware. It is basically blackbox. What
+the adversary can observe is uh the uh
+yeah the yeah here the adversary is uh
+could be the malicious approver.
+Though the prover uh the malicious
+prover can has have full control of the
+prover's memory but it cannot reverse
+engineer the hardware software
+especially it cannot temper with the
+hardware. This is important assumption.
+Yeah, because if the prover can reverse
+engineer the software, then the prover
+uh can yeah can generate the authentic
+result without executing the software.
+So if that is possible then the
+testation protocol is not necessary. So
+we don't assume that but prover may
+temper only distort or
+uh yeah deceive the verifier but not
+reverse engineer the by not uh reverse
+engineering the software
+then the attestation protocol are
+required to meet these uh requirements.
+The authenticity uh city means that the
+protocol should allow the verifier to
+confirm the source of the uh response.
+We usually do this by checking the
+digital signature
+of the proof. The proof is generated by
+the prover. If the hardwarebased
+attention protocol is employed, it is
+relatively easy because the uh hardware
+uh generates the digital uh signature
+and as I as I just mentioned before, we
+assume that the uh the adversary cannot
+modify hardware. So we can trust the
+digital signature. But if software
+uh only the the aestation protocol is
+purely implemented in software then we
+need another mechanism to make sure that
+the digital signature or something else
+uh was generated by the authentic uh
+prover. So sometimes it is not easy
+that's why so basically in this course
+we are focusing on hardwarebased
+security techniques. So uh here also for
+the aestation protocols we are focusing
+on the hardwarebased autheestation
+protocols. In that case the proving
+authent authenticity
+uh is quite straightforward. And the
+next one is autoomicity that guarantees
+uninterrupted execution
+preventing memory modification or
+parallel computation. That is uh when we
+are using hardware then this is
+typically uh guaranteed by the trusted
+execution environment or more
+specifically the isolation technique.
+The unfoldability
+means that uh the adversary
+should not be able to produce the same
+response uh faster than uh the
+attestation protocol
+here. The reason why the faster is in
+this uh statement is that uh if we are
+using hardware then we don't have to
+worry about that because the hardware is
+usually much faster than software but uh
+in general there could be softwarebased
+autheestation protocol then if the
+adversary can generate the proof faster
+than the testation protocol then the the
+adversary may um yeah deceive the
+verifier with a false um yeah proof
+and the third fourth one is dynamicity
+that is uh the proof should be the
+result from the actual uh actual
+execution.
+Okay. Uh not just the static memory but
+this is also uh from the uh yeah uh
+software implementation uh uh software
+implementation of the authentication
+protocol. If we are using hardware as I
+will be explain a little bit more in the
+next slide that by checking the uh yeah
+initial state of the proto uh memory
+could be enough because the another
+mechanism the isolation technique can
+guarantee the uh integrity uh during
+runtime.
+Anyways, uh in general including the
+software implementation,
+uh the attestation protocol should be uh
+working on the actual running system and
+the determinism means that uh the
+verifier reaches always reaches the same
+result independently.
+There there could be some uh uh monteo
+algorithm that is based on uh uh
+probability proof
+some yeah some attestation protocol
+guarantees for example 99%
+of chance of the correct execution not
+100%. In that case uh even if we are
+learning the same protocol again and
+again sometimes
+sometimes the result might be a little
+bit different
+but
+but that's not uh what we expect from
+the attestation protocol
+in the very beginning of the attestation
+protocol uh the code integrity was
+measured. The code integrity
+could be measured by hashing uh the code
+region of the memory.
+As I mentioned in the previous slides
+that the verifier if the verifier uh has
+the reference hash value then by
+checking the hash value is enough to
+check the uh integrity of the code and
+the uh during runtime
+uh many uh embedded system as well as
+the desktop or server system uh modern
+processors have the uh security features
+the memory protection features that
+prevent the uh code from uh being
+tempered. So
+by checking the integrity of the code in
+at the initial state then that could be
+enough. But later on some researchers
+found that the computation result could
+be distorted by data manipulation. Even
+though the code integrity is guaranteed
+if the attacker manipulates the data
+then the computation result might be
+different from what is expected.
+So uh the inte so the testation protocol
+evolves into
+uh checking not only the code integrity
+but also data integrity.
+But
+uh the data the the memory region for
+data are being uh constantly modified
+while the program is running. So uh it
+is not easy to measure or determine when
+the integrity should be measured.
+So ideal situ ideally
+whenever the data is modified then the
+memory is modified updated then the
+integrity should be measured again but
+it will incur significant
+uh yeah yeah uh unacceptable
+uh overhead and also then the verifier
+should keep the reference integrity
+metric for every case of the uh yeah
+state.
+So it is yeah yeah yeah practically
+impossible.
+So what we can do at best is that
+initially we reset the memory regions to
+known values for example or zero. Then
+we can verify the integrity of both code
+and data. But it is hard as I mentioned
+to verify the integrity during runtime.
+But there are still some protocols that
+try to address this issue. But there is
+always tradeoff. Then if we want to
+measure the uh runtime integrity then
+there could be uh remarkable very
+drastic uh performance degradation.
+So the hardwarebased solution could be a
+practical and viable uh candidate
+solution.
+In hardwarebased testation protocol, the
+hardware measures the integrity of the
+code and data and the integrity metric
+can be uh measured only uh at the
+initial state. The runtime integrity is
+guaranteed by isolation tech another
+hardwarebased
+uh security technique. So uh by
+combining a testation and isolation we
+can guarantee the integrity of the uh
+application execution
+but still there are some po potential
+attack vectors.
+the adversary may tries to premputee
+the uh uh the proof.
+So uh it can save some time uh to temper
+to forify the to counterfeit the proof
+here. Again this is not only for uh yeah
+this in in case of hardware based
+testation this is basically uh
+impossible uh because the hardware
+measures the integrity metric. Then the
+prover Yeah here we are saying prover as
+the malicious software running on the
+prover uh system device. So yeah the
+prover cannot modify hardware. So the
+these kind of premputation cannot be
+done. But here we are talking about the
+general autheestation protocols.
+So in that case if the testation
+protocol is implemented in software then
+the malicious software could uh yeah
+premp compute some operation so that it
+can save time to uh to uh to counterfeit
+the proof
+and uh they in in a similar way the
+adversary may generate valid response.
+despite the memory is modified. It is
+not uh not not it is basically uh
+compromised. Even though the memory is
+compromised the correct proof could be
+generated.
+That means the uh approver may try to
+hide the modification to the memory.
+This can be done in in this way while
+yeah the proof generation cannot be done
+ad once. So it it needs to read the uh
+memory space. It takes time. So while
+the test station protocol reading a part
+of the memory, the adversary may modify
+another part of the memory. And at the
+moment that the protocol uh now uh reads
+the uh modified memory, then it just uh
+recover the memory contents to the
+original one temporarily. And then after
+finishing the um yeah reading the memory
+uh it can um modify the memory again. So
+this is called time of check time of
+user attack.
+When the time of check
+by the autheestation protocol the memory
+is compromised but uh the memory is
+clean the integr uh yeah
+clean but when the time of use the uh
+modified memory is used.
+So uh in this way the prover can deceive
+the verifier
+and if the prover can modify the stack
+and the protocol the attestation
+protocol doesn't check the contents in
+the stack then this kind of return
+oriented programming or you know uh uh
+jump oriented programming that kind of
+uh attacks are possible.
+So this is a type of memory
+manipulation.
+So if the uh approver has sufficient
+memory space free space then adversary
+can hide some malicious code and data in
+the free space and the authentication
+protocol works on the uh the uh the the
+the original memory space but uh the
+malicious uh data and code is in a uh
+unused free memory space. In that case,
+uh the autheestation protocol cannot
+detect the malicious code and data in
+the free space because the verifier
+doesn't expect to check this unused
+memory space.
+You know, as I mentioned this briefly,
+the data substitution could happen. So
+some case the uh while the me testation
+protocol is not working on specific
+region of the date memory the malicious
+prover may substitute the uh yeah
+contents in those regions
+and if even though there is not enough
+space in the memory the prover the
+malicious prover may generate the memory
+space by compressing the existing data.
+So in that way it can h uh uh have the
+uh yeah free space.
+Another thread is on the network side
+and uh the prover
+uh even though the approver is not
+malicious the there could be an
+adversary in uh in between the approver
+and verifier.
+So here in this slide what we are
+talking about is the uh uh adversary
+that works on the network traffic.
+The adversary may try uh replay attack
+but you know the replay attack can be
+easily mitigated by nuns. So when the
+verifier send the challenge then it
+should be uh yeah with a random number
+nons so that it cannot be reused in the
+future and there could be uh some
+collusion.
+So that means some compromised node may
+collaborate to compute valid response.
+So uh yeah the prover is modif uh
+compromised but the correct uh proof can
+be generated by another node. So this
+kind of coordination can be done in the
+network uh to deceive the verifier and
+impersonation can be also happen. So uh
+the proof the verifier is expecting the
+proof from for example device A but the
+actual uh some device B the malicious
+device B uh impersonate uh device A. So
+this is always happen and yeah in a
+similar sense the proxy computation is
+also possible it is a kind of yeah
+impersonation. though these kinds are
+still feasible.
+So in this video I explained some broad
+range of the testation protocols uh uh
+including both softwarebased and
+hardware based protocols and I should
+say this area I mean the attestation
+protocol it is still an in yeah active
+research area. So many protocols are
+being proposed and also uh many
+researchers are working on uh improving
+the testation protocols.
+So there are many uh various types of
+test protocols. But from the perspective
+of a hardware implementation actually uh
+the hardware itself if we assume that
+hardware based trusted execution
+environment then the attestation could
+become a little bit simpler because as I
+mentioned before uh what we uh need to
+verify could be only the initial state
+of the uh yeah inclave application.
+and the runtime integrity can be
+guaranteed by another security
+techniques. So uh the so that that's why
+the uh existing trusted execution
+environments uh support the remote test
+station typically for the initial state
+of the enclave application at the launch
+time.

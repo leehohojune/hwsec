@@ -1,0 +1,249 @@
+One of the key capabilities of TE is
+verifiable launch. That means uh when we
+launch a an enclave application, there
+must be an mechanism that allows the
+user or the verifier to validate the
+integrity of the uh enclave application.
+Uh so there are many uh softwarebased
+attestation protocols but uh when we are
+talking about TE uh it is typically uh
+usually means hardware implementation of
+isolation and various uh yeah hardware
+based uh security techniques. So uh here
+the verifiable lounge means that uh the
+hardware actually uh provides some
+mechanism that can uh make sure that the
+integrity
+uh uh the the the inclave application uh
+has not been compromised.
+To do so uh we need uh some kind of root
+of trust
+that is uh actually measuring the
+integrity of the application.
+Uh if we don't trust this um yeah root
+of trust then we cannot trust the proof
+the integrity metric. So uh there must
+be a part of the component that we can
+the part of the system that we can trust
+that is called root of trust that is a
+starting point. From there we measure
+some kind of cryptographic fingerprint
+of the inclane.
+Here we are talking about launch. So uh
+the initial uh uh state is uh being
+verified and the runtime integrity is
+guaranteed by isolation technique.
+For now let's focus on the initial uh
+state. And finally the root of trust uh
+provides a proof of the integrity of the
+uh uh initial state of the claim uh to
+the verifier.
+So if we want to send some sensitive
+data to the enclave application then
+before we are sending the sensitive
+information we have to make sure that
+the enclave application is what we
+expect otherwise we don't we should not
+uh send the uh insensitive information.
+Delta may need two uh approaches of uh
+uh establishing the root of trust. The
+first one is static uh root of trust
+that is typically
+uh uh implemented in the booting
+process.
+When the booting code is executed, the
+hardware measures the integrity of the
+booting code. Here integrity typically
+measured as a by hashing. So if the
+hashed value of the booting code is the
+same identical with what is stored
+already measured and stored in a system
+somewhere in the system. If they match
+then uh we we uh the uh processor uh
+yeah continues on running the booting
+code.
+Then now we have verified booting code.
+Then the verified booting code checks
+the integrity of the next level uh yeah
+program for example system software like
+operating system then uh when the op the
+integrity of the operating system is
+verified then the OS verifies the
+integrity of the application. So this is
+called chain of trust because we check
+the integrity step by step uh based on
+the assumption or verification of the
+previous the underlying uh stage of the
+uh system
+and the other way uh the other approach
+is dynamic one dynamic root of trust in
+this model we don't trust any um
+software before establishing root of
+trust. So in this model we don't trust
+the booting code and system software
+including the OS. Intel SGX assumes this
+model
+in as Intel SGX uh it does not uh it
+assume that the operating system is not
+trusted.
+Then when the application launches then
+at that moment the integrity of the
+application is measured by hardware. So
+in this model the hardware plays as a
+root of trust.
+So most TE's use uh the static root of
+trust.
+The representative example is ARM ARM
+trust.
+But the commercial
+uh the desk the the commercial processes
+like Intel and AMD actually employ
+dynamic root of trust
+because they the uh threat model of
+these uh commercial uh processes include
+uh the threats from uh compromised
+operating system and the book mode.
+The process of the measurement uh is uh
+yeah consisting of these three steps.
+The first one is uh initial measurement
+from the uh uh root of trust. each
+component in the chain of trust measures
+the next component before transferring
+the control. So uh this is yeah here as
+you can see it is uh assuming the uh
+static uh root of trust but the same
+process may apply to dynamic root of
+trust because even dynamic root of trust
+there could be multiple stages of of
+measurement. So uh we have to first make
+sure that the root of trust is correctly
+established and then we measure the uh
+integrity metric
+uh before uh execution
+and then uh the measurement should be
+stored securely somewhere in the state
+because the keys are typically
+implemented In hardware, the hardware
+protected uh registers
+can be used or uh the some uh memory
+regions may be used to uh store the
+integrity material. Then the hardware
+must ensure that this integrity material
+cannot be tempered with.
+Then a testation protocol
+through the aestation protocol the
+verifier can verify the integrity of the
+init uh the inclave application. The
+verifier could be local or remote. If
+the verifier is local that means the
+verifier is in running in the same
+system. Then the the local testation
+protocol verifies that the inclive
+application is running on the same
+platform.
+So in this local test station uh some
+symmetric cryptographic algorithms are
+usually used and it is yeah uh more
+efficient compared to remote testation
+but it is typically limited to
+intraplatform
+verification but the remote testation or
+test station allows verifiers
+uh from uh remote location. It does not
+have to be on the same uh platform. As
+long as it is connected over the network
+uh it can locate anywhere
+and uh it uses uh a symmetric uh
+cryptography
+uh some kind of digital signature
+and it often not always but often
+involves certificate chain verification.
+uh because if we are using a symmetric
+uh cryptography and digital signature uh
+we need some kind of uh public key uh
+yeah infrastructure
+uh then that means uh we need
+certificate to validate uh the uh public
+keys
+and the remote testation is supported by
+many uh TE solutions. s because uh
+it is remote attestation but it can be
+still used locally and also the local
+attestation
+uh may not include verification of the
+integrity of the enclave application.
+rather it verifies only the fact that
+the inclu
+application is running on the same
+platform.
+It is still meaningful because if the
+inclu application is running on the same
+platform that we already know then we
+can expect what kind of security
+features are applied to run this inclave
+application. So it is still meaningful
+to check only that the application is
+running on the same platform but because
+it does not guarantee the integrity of
+the application we still need the remote
+attestation. So that's why this
+testation technique is supported by many
+uh tees. there could be different um
+approaches or implementations of the
+remote attestation. On the right side of
+this slide, uh it can show it shows many
+different types of uh yeah trusted
+execution environments including
+industry and academia and they have um
+they support many different types of
+remote testing protocols.
+The attestation report that is generated
+by the root of trust uh include yeah
+some basic information like inclave
+measurements TCB and nuns nuns is
+especially uh important for freshiness
+that means it is preventing the replay
+attacks and we may include some extended
+information for example runtime time
+attributes like SMT enabled or disabled
+that kind of information and some
+software version numbers, TCB version
+numbers or migration policies.
+Sometimes the migration is not allowed.
+Sometimes yeah allowed. So that kind of
+information also uh need to be included
+in the testation report. And there could
+be some custom data like public key
+certification
+protocol is based on digital signature
+or channel uh establishment data or some
+application in specific information.
+Provisioning secrets into enclaves is
+often the final step of launching and
+there could be uh two main approaches.
+The first one is pre-attensation
+provisioning. So some TE's allow
+includes uh to be provisioned with the
+secret area prior to a testation. that
+means secret data including the uh
+initial enclave state and it reflected
+in the measurement. So uh we can verify
+not only the integrity of the code of
+the enclave but also uh the secret data.
+And to enable this we need to uh deliver
+uh the Yeah. Yeah, it must be encrypted
+before delivery
+otherwise it is yeah open to the public
+may be open to the public and post
+attestation provisioning means that uh
+before secret data is provisioned the
+attestation uh protocol must be passed.
+So uh inclave applications
+uh pens uh pen custom data to the
+aestation report then the data uh is uh
+authenticated during uh the attestation
+and then
+that uh secret is used to establish uh
+secure communication channel.
+It is typically implemented by
+exchanging uh yeah secrets.

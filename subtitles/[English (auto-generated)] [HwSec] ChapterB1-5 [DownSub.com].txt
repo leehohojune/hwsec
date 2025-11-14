@@ -1,0 +1,253 @@
+The runtime isolation technique is one
+of the key capabilities that the trusted
+execution environments must provide.
+It uh protects the confidentiality and
+integrity of sensitive computations and
+data during the incl uh execution by
+preventing other potentially malicious
+software from tempering with the
+execution of the enclave applications.
+For example, the malicious another
+inclave or malicious system software may
+temper with the memory uh data uh that
+is being used by the enclave
+application. By doing this, the
+malicious software
+may interfere the result of the enclave
+execution. So the hardware
+uh prevents access uh from those
+malicious uh software. Uh so uh of
+course the operating system is also
+separating memory access by using the uh
+uh virtual memory management
+or memory protection unit. But it it is
+not um yeah I should say perfect because
+uh the operating system is still in uh
+implemented in software that means if
+the ad adversary
+uh manages to obtain the high privilege
+then it can modify even the operating
+system. So uh if the same isolation
+technique is implemented in hardware
+then it's much more hard or difficult to
+modify.
+So the isolation technique is one of the
+key uh technique that uh the uh trusted
+execution environments uh must provide.
+The isolation
+uh requires isolating both CPU and
+memory
+and uh we need to consider two uh
+strategies. The first one is how we
+should partition.
+It can uh it can be either temporal,
+spatial or uh hybrid. And the next
+question is how we can enforce that
+division. It could be logical or
+cryptography. I will explain this uh in
+the next slides.
+as is as their name suggest the temporal
+partitioning means um multiplexing the
+access of resources. So at any given
+point only one context has exclusive
+access to a certain uh particular
+resource.
+This is a temporal uh partitioning. But
+uh the spatial partitioning in the other
+extreme, the spatial uh partitioning
+means that uh we have multiple resources
+and one particular resource can be
+accessed by
+just exclusively one context or multiple
+context.
+So it is dedicated partition and uh
+because we have multiple resources so uh
+they can be accessed in parallel. So
+this is the other extreme spatial
+partitioning. But you can simp yeah
+imagine imagine that if we partition
+resources specially then there will be
+much more overhead because if we want to
+maintain two then we have we need to
+have two identical resources. But if it
+is shared temporarily then uh even
+though we have only one resource then it
+can be shared by not shared but
+multiplexed by multiple context. So
+there could be a hybrid approach that is
+called spatial temporal partitioning. So
+some resources are dedicated uh but
+others may be uh multiplexed or these
+spatial or temporal partitioning can be
+uh dynamic dynamically change it during
+runtime.
+Then if we determine how we
+partition the resource then uh we have
+to determine how we can enforce the uh
+partitioning.
+The logical isolation or the logical
+partitioning means that by using the
+hardware mechanism we enforce the
+partitioning. Here enforcement of
+partitioning means that preventing any
+uh unauthorized
+unauthorized context from access uh the
+yeah particular resource on the
+protection.
+So we have to uh implement
+uh the hardware mechanisms that check
+the authenticity
+of the access or we can uh uh identify
+the application that is trying to access
+this resource. Then we have to uh
+determine whether this success should be
+allowed or not. All these mechanism
+basically it is a kind of access
+control. This access control and
+identification mechanisms must be
+implemented in hardware logically. So
+that is logical uh isolation.
+The other one is cryptographic
+isolation. We give keys to uh enclaves
+or any application that
+uh is potentially uh accessing the uh
+the given resource. Then uh by
+decryptting the or checking the uh the
+key
+for example by checking the digital
+signature or uh the yeah message
+authentication code uh we can uh
+determine whether this should be allowed
+or not.
+So uh it can also if we are using
+encryption then we uh by using this
+technique we can also um uh guarantee
+the confidentiality.
+So it is um more yeah it it is it incurs
+more overhead obviously compared to the
+logical isolation because it needs
+encryption and decryption it takes more
+time
+but uh sometimes we have to use this
+technique especially if the adversaries
+uh can access physically access the
+resource Then the logical separation may
+not be enough because even though uh the
+logical separation means the enforcement
+is enforced by hardware but if the
+adversary can physically access the
+resource then the hardware mechanism can
+be nullified. For example, if we uh uh
+enforce a certain part of memory, the DM
+main memory DM uh then the software
+cannot access that part because the
+hardware prevent their access. But if
+the adversary physic can physically
+access the DM then the adversary may
+just detach the DM and then plug it into
+a special equipment and then read the
+data bypassing or nullifying the
+hardware protection. So under these
+circumstances
+the hardware mechanism cannot prevent
+those um adversaries from accessing the
+memory. So in that case the encryption
+is the only way uh to uh protect the
+sensitive data
+for CPU.
+uh the if we are talking about the CPU
+isolation
+most of existing CS use temporal
+partitioning with logical enforcement.
+So yeah, as I just mentioned before,
+there could be temporal spatial hybrid
+partitioning and the enforcement could
+be either logical or cryptography. But
+for CPU isolation,
+the existing teams use temporal
+partitioning with logical enforcement
+because in case of CPU
+if we use special partitioning that
+means we uh implement another dedicated
+core only for uh the enclave
+application. Obviously it will incur uh
+yeah very high uh hardware cost and if
+we employ another dedicated
+processor then
+uh in my personal opinion there is no
+need to use the trusted execution
+environment. We cannot code it as
+trusted uh TE it is just a separate
+system. So uh the temporal partitioning
+uh is more reasonable for CPU isolation.
+And if we employ cryptographing
+enforcement then that means to for every
+instruction execution execution of
+instruction
+encryption or decryption must be carried
+out that will yeah incur un yeah
+excessive overhead. So it is not
+acceptable. So the logical enforcement
+is practically the only option we can uh
+yeah take.
+So for temporal partitioning that means
+uh the different uh applications
+uh may run on the same processor. So
+what when the processes the applications
+are uh switching their context uh we
+have to implement secure context
+switching mechanisms that saves uh
+context of the uh incl
+uh context securely.
+uh not revealing any potential yeah
+information to uh the uh untrusted
+applications
+uh by context switching while switching
+the context
+and uh the processor also needs to
+uh um yeah there must be different
+appropriate levels of playability. and
+or CPU mode. So uh so that some
+unauthorized
+software cannot access or uh yeah cannot
+access the resources that are currently
+being used by the uh inclation.
+So by using the temporal partitioning
+and logical reinforcement we can
+minimize the performance overhead uh
+compared to other approaches as well as
+the hardware cost.
+Commercial processors often add new
+execution modes uh that means new levels
+of uh privileges to support tees.
+uh
+but in most academic uh TE is rely on
+just existing privilege levels uh and or
+firmware for secure context switching.
+So it's just depend it is just
+implementation uh yeah choice I think.
+So this diagram shows uh some different
+approaches of the commercial uh
+processors that how they use the
+different levels of privilege to
+maintain the uh stacks stack of uh
+software.
+So for example, Intel SGX runs the
+enclave uh as an user mode. So the
+enclave application is running the with
+a user uh privilege but in case of Intel
+TDX because TDX is for isolating virtual
+machine. So the uh uh sim mode it is
+called the sim mode uh it is equivalent
+to incl uh application in SGX. So uh
+while it is running in sim mode then uh
+it is privilege may have as high as uh
+the hypervisor
+armcc is similar because it is also for
+isolating virtual machines. So it covers
+from the uh uh the hypervisor privilege
+operating system and all the way up to
+the application level. But IBM PF uh has
+uh even cover uh even more so even uh
+more uh it utilizes even uh broader
+range of the user privileges.

@@ -1,0 +1,293 @@
+In this chapter we will discuss the
+trusted execution environment.
+The trusted execution environment ensure
+T is a secure area with a processor that
+ensures confidentiality and integrity of
+coded data and TE is usually provide
+isolated execution of trusted software
+components from them from uh protecting
+them from the rest of the system. So
+typically TE supports these four
+capabilities. The first one is a
+verifiable launch of the uh execution
+environment. That means uh when any
+program is executed in the isolated area
+typically called inclave then uh we we
+can make sure that that code the
+integrity of the code executed in the uh
+uh enclave. So the verifiable launch of
+the execution environment one of the key
+components of TE and the second one is
+runtime isolation. Even if the uh
+execution environment or the uh program
+running in the uh yeah enclave is
+verified initially when it is launched
+during runtime. while it is running the
+integrity could be uh compromised.
+So the hardware make sure that it is
+running uh in a isolated environment.
+That means even uh other enclaves
+applications or even the system software
+cannot modify or access the memory uh
+regions that are being used by the uh
+incl uh program.
+And the third one is trusted IO.
+The program the enclave application may
+need to uh communicate with external
+world through uh IO the input output
+system.
+then there must be a trusted path to the
+uh periphererals
+otherwise because of the compromised IO
+even though the application is running
+correctly the result may not be uh
+guaranteed. So uh the trusted IO is a
+third uh key component that should be
+guaranteed by TE. The last one is secure
+storage. Storage is typically shared by
+all the applications in the system not
+exclusively
+used by the enclave application.
+That means we have to make sure that any
+data stored in the storage should be its
+uh integrity and confidentiality should
+also maintained.
+Typically uh these data are uh encrypted
+by the inclation
+but encryption alone cannot uh it it can
+guarantee confidentiality but not
+integrity but still adversaries may u
+change the data or destroy the data. So
+uh there must be some integrity
+checking or preserving mechanisms should
+be available.
+Then you may wonder why at is necessary
+because if we want to uh execute in a
+separately I mean the isolated
+environment then why don't we have a
+separate processor?
+Yeah. just we can employ another
+hardware processor and run those uh yeah
+sensitive applications on a separate
+hardware. Then why we have to logically
+separate a uh memory region then why do
+we need this?
+Yeah, the simple answer could be just
+saving the cost because um yeah, we can
+reuse many uh hardware resources if we
+logically separate the uh the uh
+execution environment and also we can
+run the same application.
+uh
+if for example if we are employing SUGX
+then one application could consist of uh
+yeah enclave part trusted part and also
+un untrusted part in that case there
+must be communication between these two
+parts. If they are running physically
+separated hardware then the
+communication overhead could be yeah
+unaffordable.
+So they must be if they are running in
+the same hardware cheap then yeah the
+communication overhead could be
+minimized. So that that's another reason
+and uh there are some uh uh yeah demands
+for these uh uh this kind of trusted
+execution environment. Typically it is
+you it is known to be useful in cloud
+environment because uh we have multiple
+tenants usually tenants on the same
+server uh but they are they should be
+separated. So in that case uh the of
+course the hypervisor and the operating
+system separates the processes.
+Uh but because they are software
+uh the hardware implementation is
+usually considered as a a more secure
+way to enforce uh the separation the
+isolation and by using the hardware
+isolation technique we can reduce the
+trusted computing base. The trusted
+computing base means the part of the
+system then we have to we must trust
+that means if this TCB is compromised
+then we basically lost the root of
+trust. So uh if we have small TCB that
+means the attack space is getting
+smaller. By using these hardwarebased
+isolation we can reduce uh the TCB. So
+that's another reason why we are uh yeah
+nowadays the tees are getting more
+popularity.
+Yeah. So very recently as you can see uh
+the new uh yeah T's is uh the number of
+T's coming up uh are is uh increasing
+and uh they there are four uh
+representative instruction set
+architecture and there are also some
+custom instruction architecture for TES
+but this custom architecture is from the
+academia and these are uh yeah this risk
+five is still in only used in academia
+but it has potential to be
+commercialized but the these are the
+three is uh instruction set
+architectures are very uh well-known
+commercial architectures and they also
+uh provide tees uh especially in recent
+uh years.
+But there could be uh a little bit
+confusing terminology. So let me clarify
+the terminology first.
+Enclave means
+uh it is an isolated
+uh execution environment.
+Uh Intel calls this inclaves. That's why
+I am saying inclaves. But uh AMD uses
+secure encrypted VMs instead of include
+and ARM CCA uses lums or trust lits and
+ARM trust zone uses secure word
+against normal word. So different uh
+architecture
+uh vendors use different terminologies
+but in this uh yeah in this video or
+chapter in this course I will call them
+enclaves.
+So the enclave which basically means a
+isolated execution environment
+may be more easier to understand could
+be isolated memory but isolated memory
+alone may not be enough to express all
+the implications of the inclaim. So the
+isolated execution environment could be
+uh more a precise uh definition.
+So um yeah I will use in clay
+and TCB means uh trusted computing base.
+then this means the all hardware and
+software components they must be
+trusted.
+So uh we actually
+uh
+that if we have TCB
+then
+we have some other components for
+example other software then uh we can
+implement verification or um the
+security techniques in TCB to verify or
+uh
+yeah detect malicious behavior of other
+software.
+That means we are trusting TCB and uh
+when we are implementing security
+techniques we always need something to
+trust.
+It is always better to keep the TCB
+small because uh yeah as I mentioned
+before the smaller TCB means the smaller
+the text space is and TE it typically
+refers to the hardware implementation of
+the enclave. Uh so uh yeah that that's
+the little bit different definitions. So
+uh the T typically means the
+architecture or hardware that enables
+the uh operations of enclaves.
+When we are talking about T's then this
+is the system that we assume
+here.
+uh t is usable only uh if multiple
+uh applications can run. So
+and nowadays this is you typically
+uh some cloudbased environments are
+typically assumed.
+So uh there are uh in in case of
+hardware
+uh we may need uh some multiple we may
+assume multiple multi-core processor
+system and there is a say cache and IO
+uh peripherals and op memory and on top
+of these uh on top of these hardware the
+software components include hardware and
+hypervisor and operating system. So
+these are typical
+uh the architecture hardware and
+software architecture that we assume
+and the software stack also uh has
+different level of privileges.
+The privileges
+are enforced by uh hardware. So x86 have
+uh ring 03 and so on and arm uh risk
+five power pc they have different ways
+to uh manage the uh privilege levels
+and these are some adversary model and
+uh if we want to keep this being claim
+secure then there could be uh some
+adversaries in the system.
+There are there could be some malicious
+enclave
+running application in an inclave does
+not necessarily means that the inclave
+application is benign.
+What the TE ensures is that the the
+integrity of the application and the
+integrity of of the application is
+maintained maintained during the during
+runtime. It does not uh guarantee that
+it is malware free. So there could be
+malicious enclave and the malicious
+enclave could try to compromise
+the uh uh the benign inclave under
+protection and the unpreed
+software may try to attack the inclave
+and the system software including the
+hypervisor
+hypervisor or operating system may also
+be compromised
+and if we are relying on only
+softwarebased techniques this kind of
+malicious system software attacks cannot
+be prevented because we don't have any
+TCB now if we don't trust hypervisor or
+uh operating system then what what can
+uh prevent
+malicious
+system software because the system
+software itself is compromised then what
+what we can uh anchor our solution
+security solution too.
+But if we have a hardware based
+mechanism even if the software system
+software is compromised uh the we cannot
+the attackers cannot modify the
+hardware. So uh we can still uh trust
+the hardware
+and from peripherals
+uh the adversaries may inject some uh
+yeah invalid or malicious messages to
+the enclave. If the enclave accesses
+external data through the peripheredal
+then uh by manipulating the peripedal
+there is a possibility of the
+adversaries to manipulate the data and
+the behavior of the enclave uh
+application
+and uh
+the adversaries may have physical access
+to the OPI communication. application
+bus here.
+If the adversaries have physical access
+to the system, for example, desktop or
+server, then the adversaries may
+directly access the interface between
+the processor and the memory, the off
+memory DM. Then uh by physical access
+the adversaries may prove read the data
+between the process and memory or uh
+temper the data.
+And finally while the system is booting
+up it is not shown in the diagram but
+while the system is booting up other
+advisories may uh yeah modify the
+booting process and configuration. So
+this is another way for the adversaries
+to compromise the inclave applications.

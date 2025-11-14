@@ -1,0 +1,359 @@
+In the multi-processor
+systems,
+uh there could be multiple processes or
+multiple threads that uh share a same
+data. In that case, we may need to uh
+make sure that those shared data uh
+should be uh consistent.
+uh if uh the consistency of the shared
+data could be broken if multiple threads
+uh update that uh shared data uh uh at
+the same time. Uh typically
+if a shared data is read by one
+processor and update or for example
+increment the data for example in this
+counter then uh before the first
+processor the first thread uh writes
+back the updated value to the memory if
+the second thread read uh the old value
+and increments it then uh uh the second
+process second thread may override the
+value of the first uh thread. So uh to
+in in that case even though both uh
+threads incremented the same shared
+counter but the result is actually
+increments of just one uh increment by
+one because the second thread overrides
+the the uh the updated the value updated
+by the first uh thread.
+To prevent uh this kind of uh race uh
+situation, we have to make sure that uh
+reading uh shared from the point where
+reading the f the shared data until the
+point where it is actually written.
+uh this uh section should be
+should be executed by only one thread.
+To do so we need some synchronization
+uh mechanisms.
+Typically these synchronizeration
+mechanisms cannot be implemented purely
+uh software instructions just uh regular
+instructions.
+The synchronization the synchronization
+mechanisms usually require hardwarebased
+primitives.
+Typically the processor provides uh uh
+some special instruction that are uh for
+only for synchronization. It is not used
+for computation or anything else but
+only for uh synchronization.
+If the hardware has this kind of
+hardwarebased synchronization
+uh instruction then uh the
+synchronization mechanisms can be built
+based on these hardwarebased
+uh instructions.
+If the number of processors is just
+small or the situation
+uh has a low contention then uh this
+might be uh just enough. Uh but in high
+contention uh situations
+u
+maybe the number of processors are uh
+very large. In that case uh this
+synchronization mechanism could be a
+performance bottleneck. Uh as will be
+seen in the next slides. Uh the this uh
+synchronization mechanism will cause
+many coherence misses. uh in uh yeah if
+the processors are interconnected
+through the cash coence protocol.
+So uh so we need that that's the reason
+why uh many researchers come came up
+with different types of uh
+synchronization mechanisms. We will go
+through couple of representative
+examples uh in this subsection
+and the basic the very simple
+hardwarebased
+um synchronization instruction is lock
+and unlock. So that's the is to uh the
+and straightforward implementation of
+the synchronization mechanism.
+to support lock and unlock mechanism.
+The hardware instructions could be yeah
+one of these. The first one is atomic uh
+exchange.
+We have a value in the memory and
+another value in a register. And the
+hardware make sure that the exchanges
+exchange of these two values
+should be done atomically. That means
+uh this instruction cannot be
+interrupted in between uh before these
+two values are exchanged.
+So
+uh we can use this for the lung
+mechanism. Uh for example, if zero
+indicates free and one indicates
+available and if the uh memory has value
+zero then what we can do is that uh we
+have one in a register and then tries to
+swap
+exchanging the value uh the one in
+register and zero in memory. Okay. And
+it is always done atomically. So if it
+is successfully exchanged then the
+register value will be updated uh to one
+then the software can know knows that uh
+can realize that it is successful. But
+if this uh value this this uh
+for example this is a key and the key is
+already claimed by another thread then
+the the value in the memory location is
+one and the processor the thread uh that
+wants to claim this key also has one in
+register. So even if the exchange is
+successful
+uh what the thread will get is one. So
+that indicates that other some other
+thread already claimed this key. So this
+thread must retry this uh yeah exchange
+until it succeeds. So by using this uh
+yeah instruction atomic exchange we can
+implement the login online mechanism.
+The other one is similar but a little
+bit different that is test and set.
+So here uh the hardware actually reads
+data and test if this is zero or not and
+then only if it is zero it yeah sets it
+yeah it changes the data to one and
+returns
+uh returns some value that indicates it
+was successful
+if there if the test fails
+that means uh the value in the memory is
+already one then it returns some failure
+uh value. So uh in this way uh we can uh
+implement the wrong mechanism. The other
+the third one is fetch and increment.
+The uh it reads any uh the given memory
+location and auto atomically increments
+it. So if it is uh zero then it is uh
+yeah it it is not claimed it is free and
+it returns zero if nobody claim the key
+uh but uh and we at the same time the
+value is incremented. So uh if any
+thread uh successfully claim the key
+then it gets zero and the value in the
+memory is incremented to one. But if
+other thread
+already claimed the key then
+the value in the memory must be non
+zero. for example one or two then
+then it will increment again and the
+thread will get non zero value. So yeah
+it indicates that it uh it must retry to
+claim the key uh until it succeeds. So
+these are some representative examples
+of lock and uh how to implement lock and
+unlock mechanism based on uh this kind
+of hardware instructions.
+And this uh yeah all the examples in the
+previous slides uh provide
+uh uh
+those mechanisms have uh
+yeah guarantee then reading and updating
+some memory location atomically.
+But in in this slide
+uh we have load link and store
+conditioner two instructions.
+The benefit of separating
+reading and writing is that uh we can
+reduce the number of cashes because if
+reading and writing happens uh at the
+same uh time then the the cashmies may
+uh the both read and write there is a
+possibility of uh both re read and write
+cashises occur. But if we separate this
+then uh we may not need to uh generate
+cash readmiss because if the cash block
+is in the shared state then we don't
+have to generate rhyme miss because if
+for example exchange instruction is used
+and if cashmiss occurs then both read
+and write cash misses always occur but
+if we separate load and store then only
+uh we we can yeah reduce the number of
+cash misses.
+Let's see how it works.
+When we read a data from the memory then
+it is kind of uh linked or locked. It is
+not uh strictly locked because when we
+store some data to the same location the
+store instruction may succeed or fail
+based on the situ based on the
+condition. The condition is
+in if other processor updates the same
+location in between load and store then
+the store instruction fails.
+If no other processor
+uh has updated the location then uh the
+store instruction succeeds. So in this
+way we make sure we can make sure that
+this particular location can be updated
+by only one processor
+and the benefit of this mechanism is
+separating load and uh store
+instructions.
+And if we have this kind of
+hardwarebased uh synchronization
+instructions then we can build uh other
+types of uh primitives using these load
+linked and store conditional uh
+instructions.
+So uh this uh the code here here uh this
+uh code is the implementation of the
+atomic exchange.
+So for example uh
+we read this R1 indicates the memory
+location where the lock variable uh is
+stored and it read the data from this
+location to R2 but it is load with
+linked or locked.
+Then the hardware keeps that this uh
+this location
+uh is
+uh
+should be under monitoring
+and it uh
+it stored R3 to the same location
+conditionally
+and because hardware is monitoring this
+memory location. The hardware can
+determine whether this location was uh
+updated or not before this processor
+updates this uh location.
+So if for example it succeeds then R3
+yeah uh
+R3
+equals to zero. So it uh tries again.
+If we succeed then uh we can uh move on.
+So uh so in by using this implementation
+uh we can actually implement uh the uh
+atomic exchange by using uh these two
+instructions.
+Another example is this one fat chain
+increment. We can also implement these
+uh hardware primitive by using load
+linked and uh store conditional uh yeah
+instructions. Here is the uh code.
+We read the data from R2 and increment
+it and then store conditionally.
+So if we succeed then uh we can move on
+but otherwise uh by checking the result
+uh if we fails then we try again.
+So we can also implement this new uh uh
+the fetch and increment
+mechanism using uh these two
+instructions
+and let's see how uh how uh how how the
+cash querance protocol works if the uh
+lang mechanism uh is working. Uh here
+the example is the atomic exchange the
+swap instruction not the load link then
+to conditional but here the the log
+mechanism is implemented using the uh
+exchanging the atomic exchanging
+instruction.
+Let's suppose uh initially P 0 has
+locked and P1 and P2 also wants to lock
+uh lock the uh critical section for
+example
+and uh yeah at the next step let's
+assume that P 0 unlocked
+uh then P1 and P2 receive the
+invalidating messages. this and because
+P1 and P2s are also try to uh uh wrap
+the uh get the lock then what P1 and P2
+is executing is to these two
+instructions. So it is just Kim reading
+the same memory location again and
+again. And uh after
+uh unlocking P 0 uh by P 0 this uh
+memory locations
+uh uh the the cache block of these
+memory location is invalidated.
+So P1, PQ, P2 uh yeah uh experience the
+cashmies
+and let's suppose that P2 gets the cash
+block earlier than P1
+then P2 move on to uh the swab
+instruction
+while P1 is getting uh the data this one
+R2 but P2 is already uh here it is uh
+exchanging the data then cashmis also
+occurs. So uh because in this update
+uh here uh at this moment while P1 is
+reading this cache block it is uh shared
+state because of until now.
+Yeah, before executing the swap only.
+Yeah, this this cachy block is clean.
+But because swap uh is executed now the
+caching block of P1
+uh gets uh should be invalidated because
+uh P2 updates that cash block
+and uh after succeeds
+uh swapping P2 ent critical section and
+then uh now P1
+keeps reading the that that block. And
+now uh this P1 is only accessing that uh
+cache block.
+And uh if when P2 completes the critical
+section it will unlock uh then the
+memory location will be updated and then
+uh after Kashmir P1 can now uh move on
+to the exchange uh instruction. So uh
+you can see that uh there could be
+multiple uh yeah many uh uh cache misses
+uh coherence cashmies because basically
+the lock variable is shared by all
+processors.
+But if we implement load uh load linked
+and store conditional then uh we can
+reduce the number of cash misses a
+little bit more. Uh because
+uh when
+processors test if uh this in this cache
+loca this location
+uh is
+uh yeah the memory location the uh check
+the value of the memory location uh it
+can uh it does not uh incur any cash
+miss uh because it is it keeps just
+reading the same value
+until some processor actually update the
+value. So uh this loop this loop forms
+spinning loop that is checking the
+current lock variable and this uh loop
+uh reserves the race condition that
+means only one of the processors succeed
+updating the value.
+So uh only uh when processor actually
+succeeds updating the value caching the
+cash invalidate mechanism the cash
+invalidate messages are uh broadcasted.
+But if this load and store conditional
+are not used but the exchange
+instruction is used as we saw in the
+previous slide then every time when any
+processor just uh execute the swab
+instruction exchange instruction the
+cash miss occurs whenever whether
+regardless of uh whether that is success
+or not anyways executing The exchange
+instruction incurs km misses and
+invalidate messages. So uh by using this
+load link then store conditional uh we
+can reduce the number of querance misses
+uh in this way.

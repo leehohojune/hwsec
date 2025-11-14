@@ -1,0 +1,250 @@
+In this chapter we will going to discuss
+thread level uh parallelism.
+While some researchers actually
+predicted the end of uni processor
+advances in very early in 1916s.
+But we have observed that uh the uni
+processor uni processor performance has
+uh growth
+very significantly uh during 19 uh 80s
+to 2000
+uh this time period. But by about 2005,
+the industry actually recognized that
+the unique processors now uh facing uh
+some physical and practical limitations
+and then uh we have to shift to the
+paradigm of multi-processors.
+So in 2005 the in in the Intel
+developers forum the president actually
+uh state stated that uh the Intel will
+dedicate all their future product
+development to multi-core designs. Now
+we have
+yeah now we are very familiar with
+multi-core processors but about 20 years
+ago uh there is no such uh processors
+but now we already have seen that uh the
+most of the processors uh I mean the
+typical not the embedded systems but
+some uh the desktop and mobile phones
+have multiple cores. So now it is a
+mainstream the processor architecture uh
+in commodity uh yeah products
+and why there are many reasons. The
+first one is as I just briefly mentioned
+uh the the return return on investment
+is diminishing. That means uh there is a
+limitation in
+exploiting the instruction level
+parallelism.
+So it is not uh that in other words we
+have already fully exploited the
+instruction level parallelism
+and the cloud computing. That means now
+there is a growing demand that uh we
+have to run many applications at the
+same time on a processor shared by
+multiple tenants.
+In that case uh instead of focusing on
+single processor if we have
+uh even though they each core is
+slightly slower if we have many
+processors multiple processors then
+actually we can expect more performance
+improvement because we have to run
+multiple independent thread. or tasks or
+applications.
+So and in even in desktop we are running
+different applications sometimes at the
+same time even though we are using
+apparently one application but in
+background multiple threads are running.
+So in this environment
+uh instead of
+putting effort in
+improving single processor performance
+uh even though each processor core has
+lower performance if we have more
+processors then we can expect more
+performance improvement.
+Data intensive applications also drive
+the multiprocessing
+uh paradigm
+because data intensive means we also
+need yeah many uh applications and
+threads running in parallel. So in that
+case the multi-core processor is more uh
+yeah more uh more suitable in this uh
+yeah situation
+and desktop the performance also uh
+saturated
+uh uh with one single uh processor. So
+yeah as I just mentioned even in desktop
+environment we are running multiple
+applications uh concurrently
+and there are some other drivers of
+multipprocessing.
+Even before commercializing the
+multi-core processor, many researchers
+already work on researching the
+architecture of the multi-core
+processor. So now we have better
+knowledge of how to design and use the
+multi-processor
+uh effectively.
+And this is a practical reason the
+design re that means instead of if we
+are if we want to improve the
+performance of a single processor we
+have to redesign the processor every
+time when we want to design a new
+product. But if we simply want to
+increase the number of cores then we can
+yeah copy and paste the existing design.
+But of course it is not enough. The yeah
+interconnecting them and some supporting
+hardware logic still need to be modified
+but the main core can be yeah not just
+totally reused but many parts of the
+existing design can be reused. So this
+is another very important uh yeah reason
+why the multipprocessing becomes uh
+popular.
+So this uh new ship to the
+multiprocessor
+drives uh the thread level parallelism.
+So now the programmers also the
+programming model or programming
+language should consider should support
+the uh multi-core processing hardware.
+So that that that that actually has uh
+yeah great impact on the uh not only the
+processor industry but also the
+computing including software system
+software application everything the
+computing uh industry paradigm
+when we have multiple cores then uh we
+uh need how to interconnect them.
+There are many different there can be
+many different ways to uh interconnect
+multiple cores but we can lawfully
+mainly classify them into two
+categories. One is symmetric
+multiprocessors. Typically this kind of
+architecture can be found uh within one
+chip.
+In one chip we have multiple processors
+but we have only one single main memory.
+So all the cores basically share the
+main memory.
+But because all the processors are
+within one chip the number their number
+cannot be very large. Typically less
+than eight but nowadays even more than
+eight 1632
+yeah can be implemented within one uh
+chip.
+So we because we have only one shared
+main memory uh it is often called
+uniform memory access because all the
+cores have the same latency to any
+location in the memory.
+So when we say multicore
+typically it means multi-processor
+within one chip.
+and all existing multi-ores
+are basically uh employing this type of
+architecture.
+This is a distributed shared memory.
+Still the memories are shared but they
+are not unified.
+Each processor has its own memory
+close to them
+and there is a separate interconnection
+network.
+So if one processor wants to access it
+own memory, it can be uh accessed very
+uh quickly. But if this processor wants
+to access memory here then obviously it
+takes much longer
+but still it is allowed. So all the
+memories are shared but their access
+time is not uniform.
+So this type of
+architecture is of also often called
+nonuniform memory access in short numa.
+So this type of architecture is often
+found when we uh constitute a system
+with multiple chips. So one chip has uh
+this this means one chip and this is
+another chip and they are connected
+through a separate interconnection
+network.
+But there are still some challenges
+where uh even though we can physically
+integrate multiple processors if we
+cannot fully exploit them it is yeah
+useless.
+But the problem is uh there are some uh
+challenges. The first one is
+uh we may have limited speed up even
+though we have multiple coursees. This
+example shows that we want to achieve 80
+time speed up with 100 processors.
+Yeah, it is just I think reasonable
+expectation because we have 100
+processors then even if we cannot
+achieve 100 times faster
+um 80 times could be achievable.
+Yeah, I think this is an yeah reasonable
+expectation.
+But in order to if we want to achieve
+this much speed up then
+99.75%
+of the uh application should be
+parallelizable
+up to 100
+independent tasks
+otherw in other words only 0.2 25%
+of the application can be serialized
+otherwise we cannot achieve 80% speed 80
+times speed even though we have 100
+coursees so because this is because of
+the amas law and uh typically most
+applications do not have this much
+parallelism.
+So we we are under yeah yeah yeah uh the
+pressure of choosing either uh uh
+limiting the number of processors or
+maximizing the available parallelism.
+So this is very important challenge
+otherwise we don't actually need many uh
+processors.
+The other challenge is communication
+latency.
+This is applicable only to numa
+non-uniform memory access
+because
+yeah in numa architecture it takes much
+longer when we access remote memory.
+It depends on the actual implementation
+but it may cost around this much cycle
+or even one 500 uh cycles.
+If we estimate the performance impact
+let's suppose that just 0.2% 2% of the
+instructions require remote memory
+access then the performance can drop by
+3.4 times.
+So this is very small portion but still
+it had it is impact is not negligible
+and this estimation does not consider
+contention. Contention here means if
+multiple processors wants to read access
+the same memory then only one of them
+can access and others should wait it
+will increase the number of the the
+latency then this number would become
+even worse. So this is another uh
+challenge that must be addressed
+especially if we want to employ the
+non-uniform memory access architecture.
