@@ -9,3 +9,7 @@ B1 https://claude.ai/share/fc917f87-d496-4917-bb3e-eaa32107ae72
 B2 https://claude.ai/share/6687d0aa-69e5-4b7b-b35a-662f4ff8db29
 
 B3 https://claude.ai/share/5de29a37-9a18-4ae3-ae33-dc1078851e06
+
+B4 https://claude.ai/share/8c889e93-3021-47d2-9cf4-c4c7c11f4dfe
+
+B5 https://claude.ai/share/165dd79a-cb89-4bde-aeba-50adb5fc50aa
