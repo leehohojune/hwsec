@@ -1,0 +1,260 @@
+Since the puff is one of the major
+research area uh in hardware security,
+there are so many different types of
+puff. So I cannot go through all of them
+in this uh course but I am going to
+introduce some of the representative uh
+derivatives
+here. Uh this is a derivative team of
+the ringulator puff.
+The normal regular uh conventional
+ringulator is consist of just one way uh
+uh series of not gators and then one
+just wire to form a ring and the
+physical placement is also the same.
+We usually use a standard cell um
+implementation for the SMOS technology.
+That means in uh actual layout of the uh
+semiconductor consists of a uh rows of
+standard cells. So here this is a
+standard cell row and this is split into
+uh cells. And in the next row there are
+some uh yeah gate. So uh it is natural
+to place this is not gate not gate not
+gate and then putting a wire to form a
+ring. So this uh physical placement is
+very natural to implement the ring
+oscillator. But the problem uh the
+researchers found later is that if we
+place the ring oillators like in that
+way then there is a uh physical
+phenomenon that the JSON uh ring
+oillators
+uh synchronize.
+So
+the here we exploit the uh delay
+variance between different ring
+osillators but eventually they converge
+and all of the not all but most of the
+ring oillators
+u uh yeah generates the same output. So
+um that uh that is one of the known
+problem in ring osillator
+implementation. So to overcome that
+limitation this is a uh one uh
+derivation derivative. So instead of
+placing all the notgate in one row here
+it has two rows. One from this direction
+and the other to this direction. And
+these two row implementation prevent uh
+they mitigate the negative impact of the
+adjacent
+uh negative in inference between uh
+adjacent ring osillators.
+And uh the next one this one is uh it is
+also just a um ring osillator but here
+we have challenge in every staging
+instead of uh using not gate here x or
+gate is used. So uh only if the
+challenge of this uh stage is one it
+works as like uh the inverter. So it
+inverts flips the input to the output.
+If it is zero it just bypass the input
+to the output. So uh even though we have
+only one ring like this uh depending on
+the challenge we can generate different
+types of ring oscillators and that means
+uh if we want to achieve the same level
+of entropy randomness this
+implementation will uh cost much less
+hardware. So uh this is an cost
+effective efficient implementation of
+the uh ring osillator
+and this osillator this uh puff is
+combination of ring osillator and puff.
+So it is a ring basically and uh it
+forms a ring but within a ring we can
+see that there is a mox here. So
+depending on the challenge a different
+gate is selected. So like this uh puff
+uh with just small area of hardware cost
+we can uh achieve we can implement much
+more diverse of uh path and this is also
+uh exploiting delay uh variation. So uh
+if the path changes then the delay is
+likely to change and uh from those
+various different path depending on the
+challenging we can generate much variety
+of uh responses. So uh it is uh intended
+to uh develop a cost efficient high
+entropy output.
+So yeah the this kind of puffs are have
+been uh yeah proposed and this puff is a
+little bit different puff because uh
+here uh when the challenge is given this
+yeah here it is not random challenge but
+just one. So when this challenge is
+asserted let's say then this is
+connected to clear and this is connected
+to preset. So uh this output will become
+zero and this one is one.
+But here
+the how it works is that uh because this
+is latch the output is connected to
+input here. So input is zero. So this
+one should be changed to one but at the
+same time because this is connected to
+here
+this input should be generate or
+propagated to the output. So this one
+should be changed to one at the same
+time. So there are a little bit I should
+say conflict in the output
+and
+when the challenges is deasserted then
+now this is cleared and then the output
+of these two led sheets uh is now
+depends on the input only input not not
+not this uh uh yeah reset signal. So it
+uh eventually
+eventually
+uh converge to 011 but nobody knows
+which value it will converge. So this is
+one of uh this is a kind of a a little
+bit different type of uh puff uh
+compared to other delay puffs.
+We can if we implement a t puff but it's
+entropy is not high enough then this is
+what we can uh yeah consider. So instead
+of uh using one puff we have different
+types of puff and then we may choose
+just one of them then by yeah but this
+will cost much more in terms of hardware
+cost. uh but we can easily improve the
+randomness the entropy of the uh output.
+As I mentioned there are so many
+different types of puff but uh most of
+the puffs are just research uh products
+so they have not uh been commercialized.
+The main problem is the stability
+because the puff is utilizing variation
+and the variation is very easily uh
+affected by the environment like
+temperature.
+But this is Bapov is uh
+uh yeah as long as I know this is the
+first commercialized puff and this is
+commercialized in Korea.
+So the uh principle of the puff is not
+delay. uh but here you can see this via
+is through silicon via here via means uh
+we have uh when we implement a
+semiconductor chip it is it consists of
+multiple layers and within a layer we
+use wires to interconnect uh when we
+want to connect but uh we still need to
+connect uh layers in uh Yeah. So inter
+layer connection is still uh necessary.
+So in order to connect one point uh
+connect uh
+wires in different layers we use via. So
+this is a vertical hole connecting
+different layers. So here this this is
+one layer and this is another layer and
+we uh we some kind of drill uh this
+layer to connect them.
+So this is called through silicon via
+TSV and the via puff is utilizing the
+variation in the via implementation.
+So uh we use the doping or uh some uh
+yeah some yeah microwave based based uh
+the yeah process to implement the uh
+these uh layers and uh there is a
+variation in uh implementing the via. So
+depending on the variation some beer is
+successfully implemented. So the this uh
+point and this point is connected but in
+some case it is open. It is not
+connected. This one and this one is not
+connected.
+So uh but in order to make it stable
+then we uh make we can yeah make it
+stable but uh in uh for to implement v
+uh puff uh they intentionally
+uh yeah grow the via only
+just just enough level just enough level
+of uh yeah length so that depending on
+the variation it could be short or open.
+So this puff utilizes not the delay but
+the uh the some
+uh the via implementation. So it is very
+robust to the environmental change
+especially temperature.
+So th this kind of structure is not
+affected by temperature. So that is why
+I believe it it could be uh
+commercialized.
+And the other fact is that here on the
+right side you can see many yellow dots.
+These dots are vas that are used for
+implementing puff.
+And the location of via cannot be it is
+not easily uh predicted. So there are
+thousands of VAS and uh if the attacker
+wants to measure them if the attacker
+physically access this chie can measure
+whether this via is currently connected
+or not. Uh actually the output of puff
+can be measured but there are so many uh
+vas in this uh yeah yeah yeah capture
+you can see so
+it is impractical for the attackers to
+measure them all and basically they
+don't know which via is actually used
+for puff.
+So in this way they uh have some robust
+mechanism against physical attacks by uh
+yeah some this kind of physical attacks.
+Another type of different type of puff
+is a memory based puff. So s RAM can be
+also used as a puff.
+So the randomness
+uh uh is uh yeah uh yeah random
+[clears throat] random reset occurs when
+the um SRAMM
+is power up
+as you know when a memory in is booted
+then uh its value is unknown
+nondeterministic so we we Before using
+any memory, we always need to initialize
+the variable the memory content.
+But in case of SRAM, even though it is
+random, it is when the SRM boots up
+the same cell is likely to have the same
+value, same reset value.
+So by learning this uh fact uh
+researchers uh came up with they they
+realized that we can use SRM as a puff
+because the the value the risk value of
+the SRM cannot be predicted and uh it is
+random but
+the same cell has the same uh reset
+value. So that is why we can use the
+SRAM as a puff.
+Not only SRAMM but other types of
+emerging nonvolatile memories are also
+have some uh characteristics that can be
+used as a puff. The PCM phase change
+memory may have some variance
+in cell uh the resistance uh is uh has
+some variance
+and other uh some uh RM or MREM STM they
+also have some variances
+uh that can be exploited for puff.
+because all these memory utilize
+different physical structure uh uh and
+how they are implemented is out of scope
+of this course so I don't go yeah
+explain details about them but what I
+want to say here is that we can
+implement puff using memory Hey.

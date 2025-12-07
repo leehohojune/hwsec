@@ -1,0 +1,372 @@
+In this chapter you will learn physical
+unconable function in short puff.
+To my understanding I feel like puff is
+a kind of holy grail in hardware
+security field because many solutions
+are assuming there exist a puff in the
+system. Puff solves many problems, many
+security problems because it is uh not
+only generating random number but also
+can be used for other purposes.
+So I believe in yeah it I feel like it
+is a kind of holy grail. uh but in uh
+academia many puffs are have been
+studied and proposed but in commercial
+uh as long as I know only a very limited
+number of puffs uh have been
+commercialized. The main reason is is u
+stability.
+Uh it it is utilizing a variation
+physical variation. Uh it is hard to
+make it stable. So that could be a main
+challenge of puff. But anyways uh as if
+we can uh employ a puffer in the system
+it is very useful that's why uh we want
+to discuss this in this uh uh yeah in
+this chapter.
+Then what what is puff?
+uh the main functionality
+of the puff is generating keys or random
+number from a complex physical system.
+So it is kind of a true random number
+generator but the difference from the
+true random number generator is that it
+generates random number based on the uh
+given input. challenging. So uh we can
+draw diagram like this. We have a
+physical system and uh the challenge is
+given then based on the challenge it
+generates response. The response should
+be should look like a random number
+but if the challenge changes then the
+response must change accordingly and if
+the same challenge is given the same
+response must be generated. So that's
+why I said it should be stable even if
+we we give the same challenge if the
+response is different then we cannot
+fully exploit this we cannot use this
+only for true random number generator.
+So uh manufacturing puff is much more
+challenging than the true random number
+generator because the true random number
+generator uh the only requirement is to
+have a high entropy. Uh but in this case
+uh the response must have high entropy
+as well as be being stable.
+And the other important characteristics
+is requirement is this one. So the
+physical system here this is kind of a
+function because it generates output
+based on the input but it should not be
+predictable.
+If we it is predictable or
+mathematically
+modeled then the autoer can replace or
+simulate this system. then uh that
+that's the security
+uh requirement. So uh the uh the this
+system should not be predictable so that
+the takers cannot
+uh predict its uh response.
+But the other uh important requirement
+is easy to measure. That means uh The
+verifier must be easy to check the
+validity of the response.
+Yeah, it is kind of it looks like a
+conflicting uh requirements because it
+should not be predictable but easy to
+validate.
+So usually uh if we use this puff as a
+authentication method then a challenge
+and response protocol is usually
+employed. That means the verifier keeps
+a database or lookup table that stores
+pair of challenges and response. It is a
+golden model and we have a a large
+number of pairs. So the verifier
+randomly selects a challenging and send
+it to the puff or a system that employs
+a puff. Then the puff generates a
+response. Then the verifier compares the
+response with the table. and if the
+response matches and it it passes the
+authorization uh protocol. Of course, it
+should not be just once but uh yeah many
+times.
+So yeah, this is one way to use the puff
+and uh there are multiple uh ways to uh
+use the puff and we will discuss uh them
+uh in uh yeah in uh later.
+So the yeah definition or some
+characteristics or requirements of a
+puff is like this. It is a physical
+random function and uh that is based on
+a physical system is it it does not have
+to be silicon implementation. There are
+puffs that are implemented in uh some
+based on laser or some other uh physical
+system
+and it should be easy to evaluate and
+the output must look like a random
+number and it should not be predictable
+even though the even if the attacker can
+uh access the puff physically.
+Then how how we can implement this kind
+of a puff? Uh here it shows a
+subwavelength
+based puff.
+This is uh yeah kind of uh joke. I think
+one you see is not one you get. Wizywig
+is a tweaked version of Wizzywig. I
+think you are not very familiar with
+Wizzywig. Wizywig means what you see is
+what you get.
+Nowadays everything is Wizywig. And what
+that means once you have a for example
+uh a word document on the screen when
+you print it then you can get identical
+doc identical paper printed paper.
+Nowadays it is very natural obvious but
+about 20 or 30 years ago it was not.
+What you see in the screen is different
+from one you get in from the printer
+because at that time the terminal is
+very limited and only text could be
+displayed and what you actually get is
+some graphical yeah uh some graphics
+include graphics so it cannot be um
+shown on the screen So they are
+different but because while the
+technology advances now the graphing
+user interface
+is uh yeah very popular and if if we are
+using graphic user interface then what
+we can see on the screen can be
+identical with what is printed in on the
+paper. So that is called wiz. What you
+see is what you get. But here what is uh
+what we exploit to implement puff is
+what you see is not what you get because
+this is a kind of uh let's say uh
+uh the uh blueprint
+the design of a circuit
+and uh because it is the uh uh the
+blueprint. But if we implement this in
+on silicone then what you actually get
+is not completely identical with your
+design. This is because of process
+variations.
+Process variation happen occur because
+human cannot control all kind of
+physical factors
+because the silicone is manufactured in
+very small scale nanocale
+there are many factors that cannot be
+controlled.
+So even though we are using the same
+design using with the same equipment on
+the same die
+the result the manufactured
+chip might be different.
+So it is very heavy problem for the
+designers because this is related with
+the yield of the process. Yield means
+does uh uh simply saying it is a kind of
+success rate of manufacturing.
+Even though we are manufacturer
+uh let's say for example if we
+manufactured 100 chips but
+even though we are using I I said before
+the same equipment same die some chips
+works but some don't
+so the ratio of working chip over the
+total number of chips is called yield
+rate. So if the process is stable enough
+then the yield can be for example 90%.
+But if it is not stable yet then the
+yield could be as low as for example
+10%. Then if the yield is very low 10%
+uh it the uh yeah the return on
+investment ROI is very low. So it cannot
+be used for commercial uh manufacturing.
+The reason why the yield is low is
+because of the variations.
+Even though we are using the same design
+because for the uh yeah uncontrolled
+physical phenomenon
+uh some devices don't work.
+This is because variations. So it is
+very headache problem.
+But the puff
+uh is basically
+uh is from a uh kind of exploit this
+headache problem as an opportunity.
+So
+uh instead of considering variations as
+a u physical phenomenon that should be
+uh mitigated
+the puff actually takes advantage of the
+variation.
+Even though we are manufacturing
+transistors, no two transistors
+have the same exactly same parameters.
+The delay could be slightly different or
+the power consumption could be slightly
+different. They cannot be completely
+identical.
+Of course, it is it depends on the
+resolution of the measurement tool.
+If we measure let's say delay only in
+for example nancond order then
+these two transistor delay the delay of
+these two transistors might be the same
+for example 1 ncond and 1 ncond but if
+the resolution is higher then it could
+be if the measurement the the resolution
+of the measurement is for example
+picoscond Then uh this one transistor
+that uh the delay of transistor A could
+be uh 1,1 picoscond but the another uh
+the tren the delay of another transistor
+could be 1,2
+picoscond. So uh in large scale they are
+same one ncond but in smaller scale they
+are slightly different one picoscond
+difference.
+So the variation is like this. There is
+a slight difference.
+So uh we exploit this uh variation to
+generate random number and this
+variation is not predictable because the
+variation is caused by uncontrolled
+physical factors. So the human cannot
+control. So it is truly random and
+unpredictable.
+This is pretty good. But the challenge
+is as I mentioned before
+if when we give the same input the same
+output must be generated but this
+physical variation is
+significantly affected by the
+environment like temperature.
+So even though we are giving the same
+input if the temperature is for example
+30 degree
+[clears throat]
+it generates
+output a for example but
+in the at the degree of 10 it may
+generate different output. So it it is
+in that sense it is very challenging
+but anyways it is very uh yeah useful
+for many uh use cases. So that's why
+many researchers are uh intensively
+working on this area.
+One example is this one delay puff.
+Delay puff uh is utilizing the time
+difference the delay difference of two
+circuits. For example, here we have a
+combinational circuit and this is the
+puff place as a physical uncon function
+and we give some challenges.
+Depending on the challenge the
+configuration of this circuit changes.
+So the data path or the types of uh
+gates
+it can be reconfigured uh based on the
+challenges. Then we give input a rising
+pulse
+at this moment for example. Then
+depending on the delay of this
+combination circuit, the time of
+generating output purse could be
+different as I yeah uh illustrated
+before it could be 100 1,001 picoscond
+or 102 picoscond. So very slight
+difference. So this is one uh example of
+puff that exploits the variations in
+delay.
+The ideal puff should not be uh
+predictable or manipulated by physical
+attacks. But in reality
+uh some yeah there are so many different
+types of puff. So it may not be
+applicable to a southern puff but but
+for some puff may be vulnerable to
+noninvasive attacks.
+Uh so here uh we classify the physical
+attack into invasive and noninvasive
+attack. The invasive thing means somehow
+we physically
+change the shape of the chip. It could
+be only the package or the die can be
+also manipulated.
+If the attacker can changes the puff the
+chip itself then the attacker may change
+the puff delay or even destroy the puff.
+So this is kind of invasive attack but
+the invasive attack is very challenging
+or uh I should say uh impossible.
+[clears throat] Okay. Yeah, we can
+destroy puff but if we destroy puff then
+yeah usually
+yeah because the security measures are
+based on puff. If the puff does not work
+then yeah we cannot uh yeah bypass the
+puff.
+But if the attacker can manipulate the
+puff delay, then the attacker may uh
+modify the puff to generate what the
+article wants. But it is yeah extremely
+challenging because the output of the
+puff is affected by uncontrollable
+physical factors.
+Yeah. The attacker human
+can hardly modify the output but the
+some kind of invasive attacks are uh
+might be uh possible. The noninvasive
+attack uh means that it is not changing
+any physical shape of the chip.
+For example, the side channel attacks
+are representative examples.
+Uh one example is fault injection
+attack. So it can uh the attacker may
+just uh inject a sudden um yeah for uh
+sudden noise by using laser or x-ray
+that kind of uh things. uh the uh the
+attacker may uh uh manage to uh yeah
+manipulate a certain signal
+or the proving attack could be also a
+non-invasive attack. The attacker just
+measure the signals in the chip.
+Then uh there are very there is a very
+expensive equipment tool
+whose resolution is extremely high but
+very expensive. So that measurement tool
+can measure the delay of the circuit in
+for example ftoc order. Then the article
+may measure the output the delay of a
+certain path of the puff. Then
+the article can predict the output
+because if the puff is based on delay
+variation.
+So uh this kind of noninvasive
+non-invasive attack is still possible.
+But in order to for example proving
+attack the
+uh the path signal path must be exposed
+to the uh top layer of the chip
+because the chip is usually implemented
+as layers and only the thumb layer is
+exposed to the extern. I mean the
+outside and the inner layers are
+not accessible
+without removing the thumb layer. But if
+the thumb layer is removed then the chip
+doesn't work. So the uh attacker cannot
+measure the timing.
+So it is limited but still possible. So
+uh that's uh yeah what I say
+noninvisible text are still possible.
+Yeah but it is still uh limited.

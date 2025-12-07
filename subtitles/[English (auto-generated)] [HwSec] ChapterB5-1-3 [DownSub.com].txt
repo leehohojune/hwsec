@@ -1,0 +1,345 @@
+In this sub chapter we will discuss
+about ring oscillator puff. This puff is
+based on ring osillator and we have
+multiple oscillators and uh depending on
+the challenge we select two of them and
+then by comparing their uh frequency uh
+we finally generate 011.
+So let's see uh how one ring oscillator
+works. This is one ring oscillator
+and uh it has a series of inverters
+here. It is yeah omitted here but uh
+let's say for example we have three
+inverters in serior like this.
+Then uh when uh this input here here if
+let's say uh uh here let's say here an
+on input is rising like this let's put
+here so this is a b c d then when a
+changes from zero to one then after a
+gate delay of this not gate
+The B will be inverted like this.
+And then the C C will change it after
+and D will change it a little bit later.
+Then uh if this is uh connected again to
+the as an input to a then it will uh
+inverting again. So basically the output
+of uh the final this line the output D
+will just oscillate like this zero uh if
+we have a an old number of uh inverters
+but if we have only inverters then we
+cannot control the input that's why we
+have um uh yeah the end gate here. So
+only if uh this gate is enabled this
+ring osillator osillates generates
+output otherwise it just generates zero
+it doesn't uh yeah osulate.
+So this is the basic operation of one
+ring oscillator. it the name as name
+suggest it has a ring structure like
+this and uh it is the output is
+osillating so that's why it name is ring
+osillator
+and uh we have multiple osillators like
+this their structure is identical
+but the difference is the oscillating
+frequency
+because this oscillating frequency
+depends on the uh delay of each gate
+but the delay of each gate uh has some
+variation.
+So the variation may have slightly
+different uh values. So the frequency
+the frequency of uh the output
+uh of ring oscillators uh is cannot be
+100% uh identical. So that is the point
+that we want to exploit uh for
+generating uh random output.
+So for example uh let's suppose that uh
+this uh yeah as I mentioned depending on
+the challenge we choose two osillators
+out of n
+so for example let's say uh the first
+mox is connected to osillator one and
+the second one is connected to for
+example osillator 2. So let's say like
+this then it is connected to a counter
+that means because the output of the
+oscillator it just looks like a clock.
+So by uh the output of the oscillator is
+gen provided as a clock to the counter.
+So for example ling oillator one
+osillates like this but the osillator n
+osillator two oscillates like this. Then
+for the same period of time the number
+of rising edges of osillator one and two
+will be different.
+If these outputs are used as a clock
+then the output of the counter will be
+different. So the output of the counter
+would be the number of rising edges
+during uh a given time and uh for the
+given the same period of time if the uh
+counter value of this one is larger then
+the output will be one otherwise the
+output will be zero. So the uh whether
+the output is zero or one is uh depends
+on uh which oscillator oscillates faster
+and that depends on which oscillator
+oscillators are selected
+and the frequency of the oscillator
+depends on the uh delay variation of the
+notgate.
+So this is the basic idea of this ring
+oscillator puff and this puff also uh
+utilize utilizes the delay uh variation.
+The advantage of the ringulator puff
+include that it is relatively
+uh stable.
+Uh but uh if we choose to close ring
+osillators then uh they may have some
+interference.
+So let's say we we have one two three
+four blah blah blah n if we choose this
+one and this one then because they are
+physically
+far away then their frequency is likely
+to be uh independent. So their
+difference would be likely to be uh
+large. But if we uh choose this one and
+this one for example just next to each
+other uh then uh their frequency is
+likely to be similar and this is known
+as lock uh yeah lock in uh phenomena
+that eventually their frequency becomes
+identical.
+So there is a known physical phenomenon.
+So uh to prevent this kind of a
+situation uh we when we choose the ring
+osillators then uh we need to choose uh
+uh far away uh two osillators then
+locate far away
+and the other one is uh one osillator
+there are multiple oscillators so there
+could be one oscillator that doesn't
+produce table output. Here's table means
+uh varying the environment like
+temperature their frequency
+is affected a lot. Then uh depending on
+the temperature the frequency could be
+different. Then uh com depending on
+which operate ring oscillator is
+compared against the output might be uh
+different even though we are using the
+same challenge. Um yeah the output could
+be different depending on the
+temperature. So we don't this is not a
+desirable situ output situation. So uh
+but uh here uh the we have a multiple
+ring oscillators and if we uh find that
+some of the osillators are not stable
+then we intentionally exclude them uh to
+give when we give challenges. So by
+doing this we can stabilize the ring
+oillator puff. So what I'm talking about
+is one osillator but the puff consists
+[snorts] of multiple osillators. So
+if some of the oscillators are not turn
+out to be not stable then uh we can
+build stable puff by excluding unstable
+unstable ring osillators. So this this
+ring oscillator has very good uh
+advantages uh because we make the uh
+puff stable by removing unstable
+components
+and because its structure is pretty
+simple. It is just a series of uh
+inverters. So it is easy to implement uh
+both by for both AZ and FPGAs.
+So and also it has only ring uh the uh
+inverters and the number of ring
+oscillators we can uh yeah choose and
+also the stages the number of inverters
+within one oscillator can be also uh
+parameterized. So in in for that sense
+we can keep the ring oscillator puff
+very small in terms of hardware cost. So
+uh it is usually considered that uh
+ringos pul is very uh cost effective uh
+solution.
+So there are many papers uh proposing
+different types of ringulator puff. uh
+but in this uh slides I will uh
+introduce uh one of the uh initial uh uh
+the research experiments. It is done on
+uh xylink vertex for fopj. So not easy.
+So as I mentioned it is uh yeah it is
+easy to implement uh in uh FPJ and this
+experiments is done on with uh FOPJ.
+uh the authors of this paper placed uh
+1,24 ring oscillators in each FPGA
+uh as a 16x 64 array
+and each ring oscillator consists of
+five inverters and one end gate
+and because it is FPG every logic is
+implemented using the lockup table and
+The goal is to know if the puff outs are
+unique and reproducible. Here unique
+means this the uniqueness of the puff
+output is measured by the uh interchip
+variation. Uh
+yeah, the author generated 128 bits and
+uh they compare uh they measure the
+heming distance between uh outputs of
+two different FPGAs.
+Uh if the heming distance is large that
+means uh they are different much
+different and if the heming distance is
+small then they are very similar. So uh
+when we measure uh the heming distance
+is large enough from different FPGA
+while we have the same result small
+heming distance from the same FPGA then
+uh we can use this uh app uh puff for
+identification.
+First they com me measure the interchip
+uh yeah var variation and the result is
+shown in this graph.
+The response result is given as a bar
+purple bars.
+they measure 102 bits and the this is
+the uh uh percentage uh the the
+probability
+of getting for example 55 difference and
+uh it is pretty much uh but for example
+just this much I think this must be 47
+uh it is very small and Yeah, on average
+the difference was of
+difference was
+59 bits out of 128 bits. So uh it is it
+corresponds to 46 uh%.
+So about on average 46%
+of bits are different from different
+FPJs
+and this blue line is just a fitted
+curve binomial just distribution.
+So it it is just parameterized to fit to
+the actual
+experimental result the purple bars. So
+this is a kind of approximation.
+Anyways, what is important here is that
+average in touch variation is about 46%
+or 59 bits
+from different FPJs.
+But for the same FPGA, they measure the
+difference changing the temperature from
+20 to 120 and they found that it is
+about 0.6
+six bits or 0.47%.
+So compared to the uh inter inchip
+variation uh that is shown uh in the
+previous slide the intrachip variation
+this is intraip variation is much lower
+that means uh we can expect stable
+output from the same uh fopj.
+So from different FPJ we can uh expect
+different enough outputs while we can
+expect the same very similar output from
+the same FPGA. So uh this experiment
+demonstrate that the ring oscillator
+puff uh is uh useful for uh uniquely
+identify one FPJ.
+But the reliability of ringulator puff
+not only ringulator puff but all kind of
+semiconductors basically uh affected by
+not only the temperature but also aging.
+Aging is one uh yeah one of the major
+factor that affect the result of puff or
+any kind of semiconductors.
+But uh in usually the regular
+semiconductors we don't much worry about
+actually some chips uh need to consider
+the aging effect but most of the digital
+circuits do not much worry about the
+aging but uh what we are talking about
+is the puff that is the uh variation
+just small variation could affect the
+output of the puff. So we need to
+consider uh the aging effect of the ring
+oscillator puff. The aging is affected
+by this physical phenomenon uh like
+negative bias temperature instability
+hot carrier injection uh temp dependent
+dialectric breakdown I don't know what
+they mean uh they are just uh some some
+physical penant but I I have no idea
+anyways for these reasons uh the
+electrical
+characteristics of semiconductor. Yeah.
+Uh specifically the transistor changes.
+So the output of the uh puff can be
+affected and because the ring modulator
+puff utilizes the delay variance uh the
+impact on the delay is what we need to
+consider.
+Uh
+uh in general
+when time goes by the delay delay is
+likely to increase.
+Invertly
+if delay increase that means the
+frequency decreases
+because the aging effect the circuit is
+likely to slow down. So this is the
+situation and in general
+different even though the slope is
+different they are likely to be similar.
+So as long as uh yeah here the graph for
+this one is the frequency of lingu x and
+this is why
+uh as long as their uh relative
+speed frequency
+is maintained retained the delay impact
+uh doesn't actually uh affect the output
+because the output is generated only
+comparing by comparing
+uh uh which is the uh the faster.
+So even though the time goes by uh x is
+still faster. So if the situation is
+like this uh it does not have any
+problem.
+But if we keep going here then this may
+happen there could be a crossover point
+then a after this movement the output
+will be flipped. So this is actually the
+problem.
+So uh
+so researchers came up with uh this
+aging resistant ringulator puff.
+So uh instead of just one uh ringulator
+in this design there is a reference
+design.
+Of course, we cannot completely
+eliminate the aging effect because it is
+inevitable. But by using this enabled
+signal if we don't use a particular
+ringulator then we can just uh yeah keep
+it uh just stable because the aging
+effect usually occur when the gate
+output of the gate switches 0 to one or
+one to zero.
+So uh it is just keep uh inverters or
+the output just stable just selectively.
+So uh this enabled signal by using this
+enabled signals we can precisely control
+the oscillating the uh signals
+um but it is quite yeah as I mentioned I
+don't really fully understand the
+physical phenomenon of the aging effect
+so uh I don't know what exactly how
+exactly it prevents I mean the uh the
+uh the mitigate uh the uh aging effect
+uh alleviate uh aging effect but uh it
+is it cannot be fully eliminated but uh
+it is just uh reduced. So by using uh
+this fine grained control of the
+oscillation

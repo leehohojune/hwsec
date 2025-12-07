@@ -1,0 +1,185 @@
+we can use a path for a random number
+generation.
+Uh so in this sub chapter we will
+discuss how to use the puff as a true
+random number generator. So what why we
+need this random numbers uh that is uh
+described in in this slide.
+Uh obviously for cryptography random
+number is very often used uh especially
+as a nuns. Nun is used to prevent a
+replay attack because uh the nun uh
+guarantees the freshness of the uh any
+communication data and uh if whenever a
+new message is sent the nons is attach
+it so that that that uh same message
+cannot be reused in the future.
+There are actually uh some uh incidents
+that uh
+that was uh yeah attributed to the uh
+predictable uh nons. So uh for example
+uh some credit cards uh the uh the uh
+their authentication mechanism is based
+on uh challenge and response protocol.
+Then [snorts]
+uh the when a challenge is given they
+should be fresh. Otherwise the attackers
+can uh observe and record the challenge
+and response pairs. Then uh if the same
+challenge happens to be generated then
+the um attacker can uh yeah reproduce
+the response or uh even worse case is
+this uh the attacker can actually
+predict the response if the prover use
+uh just predictable random number.
+So uh I don't actually remember very
+precisely but uh this kind of authentic
+protocol was implemented some system uh
+and uh the standard uh actually doesn't
+dictate that this nons should be random.
+So they just use the random as a
+increasing uh some some kind of sequence
+number. So the nons is just increasing
+uh by one every time it yeah uh performs
+the uh protocol. So uh the noise can be
+predicted
+by exploiting this uh information. The
+arter uh could bypass this
+authentication mechanism. So uh the
+unpredictable random number is sometimes
+uh critical to make sure that these
+cryptography based uh mechanisms are
+secure
+and the next use case could be uh
+scientific computing. It is well known
+that Monte Carlo algorithm uh can be
+used for uh to solve NP hard problems.
+So MP hard problems you know uh it
+cannot be uh efficiently solved within
+polomial time. In that case by using
+Monte Carlo algorithm uh we can reduce
+the uh amount of uh yeah computation.
+But if this random number is not uh uh
+yeah not well distributed then the
+result from the Monte Carlo algorithm is
+not uh as good as the uh actual
+solution. So uh in this case the quality
+of the random number is very important.
+And um so gaming rotaries they also need
+a fair uh yeah random number system. So
+uh here again uh the quality of the
+random number is very crucial and if for
+example gaming or lottery rotary uh if
+the random number is predictable then
+yeah there must be someone who exploit
+that things.
+So yeah true random number is crucial
+for these applications.
+But in many um uh yeah computing systems
+uh it is not easy to generate actual
+true random number. So sudo random
+number is very often used. So the pseudo
+random number generator
+uh is uh utilizes a uh polyomial time
+computable function
+that what that function does is
+basically expands a short random
+string to a wrong string that appears
+random.
+So the uh base uh short random number is
+called seed. So from the seed it
+generates random number not random
+number but some numbers then look like
+random.
+So it is naturally random because it is
+deterministic
+and that depends on the initial value
+seed. So if the same seed is given then
+the sequences of the uh generated
+numbers are predictable
+but it is still useful because uh good
+uh pseudo random number generator uh
+still guarantees that uh even though the
+article record some uh sequences of the
+output uh it is very difficult to
+predict the next one
+and the computation time
+the generation of the random number uh
+is very fast. So anyways it is still
+good but uh if the seed is exposed or
+the function is exposed then the
+attacker could um yeah there is a
+potential issue.
+So the puff could be a source of the
+true random number generation.
+The puff is based on the physical
+phenomena uh especially the variations
+then but the variation could be delay
+variation or some voltage variation or
+metastability that there are many
+physical phenomena that we can use for
+uh entropy.
+So it is based on the physical uh
+natural parameter. Uh it is it should be
+impossible to algorithmically
+generate the number. Uh actually that
+means the articles cannot predict the
+next uh yeah the next uh random number.
+So in this uh slide uh this yeah this
+picture shows one example uh that
+generates a random number uh based on
+some radioactive radiation. Basically
+there are some uh requirements for uh
+good uh true random number. The entropy
+uh source must have high entropy.
+It could be for example some thermal sh
+noise. Yeah brownian motion nuclear
+decay. This kind of physical phenomenon
+can be used as a randomness
+and uh we need some mechanism to harvest
+this kind of u physical phenomenon from
+this physical uh natural phenomenon uh
+to generate a random number
+and this mechanism does not disturb the
+physical process otherwise for example
+uh If we want to measure the entropy uh
+the measurement process can for example
+uh destroy or degrade the physical
+process then we cannot use it for a long
+time. So that is the requirement of the
+harvesting mechanism and if necessary
+the some postprocessing mechanism could
+be uh employed.
+some for example some mask uh
+imperfections in entropy sources or uh
+some tolerance uh if we need uh uh some
+tolerance to the uh tempering or
+environmental change. So this is just
+pro postprocessing if necessary
+and typically we are using the true
+random number generator by a digital
+logic digital circuit or processor
+modern uh computing systems are
+typically digital systems. So uh the
+design should be digital
+at least the output of the random number
+generator should be digital and the
+harvesting mechanism should be simple.
+Yeah, it is for just cost efficiency. If
+it is too complicated or require too
+much hardware cost then it is not likely
+to be employed. So the harvesting
+mechanism should be simple so that we
+can reduce the uh implementation
+overhead.
+So that means compact and efficient
+design uh will be uh desirable.
+Uh and this also benefits uh us that in
+that the uh analysis could be possible.
+Yeah. If yeah we we it takes too much
+time and effort to analyze very complex
+u yeah circuit. So uh if we have a
+simple design then uh we can uh
+thoroughly uh analyze the uh uh the
+quality of that true random number
+generator. Three.

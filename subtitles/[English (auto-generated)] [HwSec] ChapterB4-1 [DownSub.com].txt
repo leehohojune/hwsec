@@ -1,0 +1,372 @@
+In this chapter we will discuss hardware
+security module. Hardware security
+module is a separated module from the
+processor and uh because it is
+separately designed it is compatible
+with any kind of processor and uh there
+are many different types of hardware
+security module HSM and the TPM trust
+computing module is a standard it is uh
+it is protoc local and internal
+operations are standardized by trust
+computing group and uh it is standard
+but TPM is uh a kind of HSM. So HSN is a
+broader uh broader
+broader
+uh concept
+and I should say TPM is a specific
+implementation of HSM uh but it is a uh
+it follows a standard.
+Then what what is the hardware security
+module? It is a dedicated physical
+computing device and because it is a
+computing device some HSCM has its own
+small processor is a kind of a separate
+system. So uh the the uh if it has a
+processor that means it also needs the
+in order to run the processor we need uh
+several components like uh memory and
+some uh system bus and interrupt
+controller
+something like that. So uh it is a small
+system I should say and it is uh
+separated from the uh processor. Uh the
+reason why I am emphasizing on separated
+from the processor means is that
+uh here I am saying processor that means
+a software. So the HSN is separated from
+software and that's why it is secure
+against softwarebased attacks
+and then what it exactly does it is uh
+most of the HSM I used to say all HSM
+are basically
+uh cryptography engines. So it encrypts
+and decrypts uh the data
+but it is a um it is hardware based
+implementation. Though it plays as a
+trust anchor because it is usually more
+uh difficult to tamper with hardware
+especially from the remote you uh by the
+remote attackers who can only access the
+device uh remotely that means only
+through uh software. So uh because the
+uh it is a separated uh device and uh
+the autoer can access the HSM only
+through the uh standard interface the
+API that is provided by the HSM uh the
+their capability is very limited. So uh
+the HSN uh place a uh trust anchor uh
+for the uh remaining of the uh system
+but there is a limitation always uh
+because I am saying that it is secure
+against softwarebased attacks but not
+physical attacks that's that's the
+limitation uh because The hardware
+defense mechanisms are basically
+uh logical separation and if the
+adversary can physically access the HSM
+they can temper with the hardware. Of
+course, it is not easy but still
+possible and uh even though they don't
+actually tamper with the hardware, they
+can analyze the side channel information
+to extract the secrets stored in the uh
+HSM. So the physical attack uh is not uh
+what the HSMS can defend against.
+Uh so that is the one important point
+and the second one is uh key protection.
+The basic function of HSN is encryption
+and decryption.
+For encryption and decryption we need a
+key. then
+the key management is the key of the
+encryption system because if the key is
+revealed then the encryption
+cryptography is just u nullified. So how
+can securely store a key is very
+critical problem if we want to use
+cryptography to protect any data or
+system.
+But the problem here is that if the key
+is a a kind of password that can be
+given by the user then uh only if
+necessary the user can provide the
+secret but uh some systems
+need the
+uh
+uh this is a kind of machine uh
+authentication. So uh in order for a
+device to run correctly for example if
+the
+code is encrypted then it must be
+decrypted
+before it is it can actually run but
+that decryption key is not the user
+password but a key stored in somewhere
+in the device. So this is very typical
+situation.
+Then even though the code or any kind of
+data is encrypted because the key is
+stored must be stored somewhere in the
+device then from the perspective of the
+arter the as soon as the artaker manage
+to uh get the key all the defense
+mechanism
+can be just broken.
+So the key management is very critical
+issue.
+HSM does it. HSM keeps the key secret
+securely in its uh own uh memory
+and that memory cannot be accessed
+through the software interface. That's
+why I said that the HSM is secure
+against softwarebased attacks because
+through software there is no way to read
+the key inside the HSM because the HSM
+does not provide any kind of software
+interface to read directly read the key.
+So in this way HSM protects the key.
+Here again if the attacker physically
+access HSM then the attacker may
+uh decapitulate the uh hardware and then
+directly
+or for example by using some laser
+imaging tool. uh the arter may directly
+read the contents of the memory through
+uh by using a special equipment tool.
+So yeah, the HSM cannot defend against
+this kind of physical attacks but still
+it is secure against software based
+attacks
+and uh the most enterprisegrade
+HMS are certified under uh certain
+standards such as FIPS or CC. Uh yeah
+there are couple of uh security uh
+certificates.
+So uh these certificates require DHSM to
+uh be able to defend against uh for
+example side channel analysis attack and
+uh some kind of uh limited
+uh uh level of physical attack and also
+the actually the certificate requires
+many procedural
+uh uh Yeah. Uh requirements for example
+uh in order to access the uh physical
+facility like um some yeah building uh
+there must be a lock in the door. So
+this kind of a process and there must be
+a dedicated security personnel. So this
+is another just procedural uh
+requirement and there is a also a
+technical requirement that I already
+mentioned like uh defense mechanisms for
+size general analysis attacks like that.
+So all of these uh provide a secure
+foundation for the HSM.
+If we compare uh HSM against
+softwarebased cryptography uh we can uh
+yeah the items we can compare uh will
+look like this
+security level yeah HSM based solution
+is very high because uh the here temper
+means tempering with the code by
+software. So uh it cannot be tempered by
+software based attacks but the uh
+softwarebased solution
+uh could provide some modulate uh level
+of security depends on the OS because
+the operating system um uh has some
+security features but uh some uh rich OS
+the uh may have strong security
+capabilities but uh some realtime oes uh
+some low-end devices uh may not have a
+strong uh capability in that case even
+though we are using softwarebased uh
+cryptography uh it may not be as strong
+as hardwarebased solution the key
+protection hardware HSM
+uh the main key idea is like this the
+key never
+never
+exposed outside the hardware. So
+whenever if the HSM
+uh needs to encrypt data,
+the data is received from the uh host
+and then only the encrypted data is sent
+uh back to the host. So why this uh
+exchange between HSM and the host is
+data and encrypted data not the key
+because HSM can do
+encryption by itself. So it does not
+have to give the key to the uh host. So
+uh this is the key idea of the HSM. So
+it is secure because the key never
+leaves HSM.
+But softwarebased solution may uh be
+vulnerable because the key must be
+stored somewhere in the device and if
+the software needs to use the key it
+should be loaded to the main memory. So
+um yeah this opens an alt tech surface
+for the articles.
+Uh so the tech surface actually can be
+minimized if HSM is employed because the
+HSM provide a limited range of API for
+software. So the attackers can
+come up with some artic vectors only
+using those APIs.
+So the text surface is usually very
+limited
+and compared to hardware softwarebased
+solution have broader range of surface
+and HSNbased solution offers uh some
+consistent uh performance.
+uh I cannot say that it is always faster
+than the software implementation because
+uh the hardware it depends on the
+performance of the hardware. Uh so uh
+because of some reasons for example
+manufacturing cost or something uh the
+execution speed of HSM might be even
+slower than softwarebased
+implementation.
+uh but it is consistent because it is
+dedicated hardware it does nothing else.
+So uh we can expect the consistent
+performance as software bas solution
+offers variable performance and yeah it
+could be faster slower but it may
+fluctuate
+and the cost uh hard because the HSM is
+a separated hardware so it cost more
+because uh the designers ers or
+manufacturers need to purchase one more
+component. So it cost a little bit more
+but if we use software based encryption
+or cryptography it is running on uh
+processor and memory so we already have
+uh in that case there is no more cost.
+Of course, it depends on the situation
+because adding another function to
+software may need more memory or even
+more powerful processor because the
+performance is not enough if the
+resource is not enough. So it depends
+but we can uh manage uh the level of the
+cost.
+So the HSM is best fit for mission
+critical or regulated uh IoT
+environments and software based
+solutions may be uh good for lightweight
+environments. But I I I cannot fully
+agree this classification because it
+depends because TPM is already many uh
+desktops and servers are already have
+TPM and uh some lightweight environment
+may also require uh FS uh the HSM. So
+yeah, it all depends on the types of HSM
+I should say.
+So the main role of HSM is cryptographic
+operation and key management.
+So the key management here is that it is
+not only storing the key uh because it
+should be able to generate a key
+otherwise how there must be some
+interface to inject the key or seed and
+list seed so that the HSM can derivate
+uh necessary keys from that uh seed
+And uh for some HSM uh because HSM
+uh carry uh uh P asymmetric cryptograph
+cryptographic algorithms that means uh
+they are typically used for digital
+signature and uh in order to verify the
+digital signature we need public key
+infrastructure. For the public key
+infrastructure we need to verify the
+certificate. So the HSM some HM
+uh have uh the capability of verifying
+or stoing certificate
+and all of these can be used for
+authentication. So some device
+[clears throat] some HM uh have a
+capability of identity verification
+uh or mutual authentication. So uh if in
+that case the yeah the HSM will be more
+expensive because it has more functions.
+So it depends on the uh requirements.
+This is the basic architecture of HSM.
+Uh as I mentioned uh HSM may have a
+small secure CPU processor but not
+always because some [clears throat] HM
+has only this cryptographic processor.
+So this is a processor but often
+implemented in uh dedicated hardware the
+application specific IC A
+and to if we have a processor we need uh
+memory and also uh some interfaces
+and uh depending on the requirement uh
+if we have a true random number
+generator then uh we can use this uh as
+a seed for the uh the
+the uh cryptographic keys.
+So uh the here the secure memory uh it
+also some HSM have encrypted memory
+uh because uh if it is not encrypted uh
+then it may uh in May uh uh yeah that if
+it is encrypted it it can defend against
+uh some some kind of physical attacks
+that uh where the attackers try to
+extract data uh directly from the memory
+because if the memory is encrypted then
+uh even though the uh attackers directly
+read data from the memory uh the data
+cannot be decrypted
+and secure CPU is another component and
+uh it is secure because uh it has some
+secure boot and some other uh yeah
+advanced security uh features
+and
+somehow the HSM need to be connected to
+the host. So these are the interface to
+the host. It could be USB, IQC, SPI.
+uh the these IQ CSPI or ISQL S they are
+onboard communication interfaces and USB
+can be used just yeah in many uh yeah
+proposes
+and the secure cryptographic processor
+that is dedicated hardware as I
+mentioned and uh because this is a
+dedicated hardware uh if uh this could
+be a limitation of HSM because uh if the
+HSM particular HSM has for example RSA
+and ECC and not AES then we may not uh
+uh use that HSM for uh yeah accelerating
+AES because it doesn't have AES uh
+secure uh cryptography processor so uh
+it is a dedicated hardware component of
+the HSM and uh true random number
+generator. Uh this is uh yeah random
+number generator can be uh very useful
+because if we want use only pseudo
+random number generator then uh
+yeah
+there are many good pseudo random number
+generators. uh but if the seed is
+exposed then the random sequence might
+be predictable because it is pseudo
+random but if we use if we have a true
+random number then uh it is totally
+unpro predictable but true random number
+is good but is hard to implement so
+that's the challenge of uh
+implementation issue
+And some HSM may have general purpose uh
+input IO uh IO or input output. Uh so it
+is a kind of extensibility.
+So uh the HSM already has the hardware
+interface for the uh host but uh some
+yeah in some case uh the user the
+developer may want to extend its
+capability or uh interface then uh we uh
+yeah the general purpose IO can be uh
+newest.

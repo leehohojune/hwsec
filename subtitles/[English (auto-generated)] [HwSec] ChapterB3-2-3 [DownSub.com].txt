@@ -1,0 +1,221 @@
+You can regard TDX module as a
+hypervisor in the sim mode. In other
+words, a kind of a trusted hypervisor.
+So as you can see in this diagram, the
+TDX module uh is actually corresponds to
+the hypervisor in the normal mode. So
+the TDX module is inside the SIM module
+which is under the protection of uh
+Intel uh TDX. So this is a software
+module and it is Intel signed and CPU
+tested software module. So uh and this
+is uh designed to leverages uh
+leveraging the uh security features of
+the uh TDX processor.
+And the TDX module has uh two sets of
+interface functions. One is for the host
+side interface for uh the hypervisor
+outside of the sim mode. So this one and
+uh this interface uh is using sim core
+and sim return.
+So by calling sim core the hypervisor in
+the normer mode can uh put a request to
+the TDX module and the uh hypervisor can
+the result from the TDX module through
+uh sim return and the other interface is
+for the uh TDS. So this includes VM
+launch TD core. So the TDX module can uh
+put a request to the TD the virtual
+machine using BM launch. So this is
+basically uh just initiating the virtual
+machine uh and the TD the virtual
+machine can uh put a request to the TDX
+module kind of hypervisor by using the
+TD core.
+The TDX module is loaded uh in a two
+steps.
+The MPC loader this is the root root of
+trust. So this is uh kind another kind
+of software module uh Intel
+authentication authenticated
+code module ACM. So all ACMs are Intel
+signed modules uh then run within the
+internal RAM of the processor and it is
+a kind of uh yeah software and uh it is
+uh authenticated
+by Intel trusted execution technology
+TXT. So this is an old technology but uh
+now it is integrated with TDX. So uh by
+using this technology uh this uh Intel
+authenticated code module uh is verified
+and uh this place as a root of trust and
+from here it verifies and load pim
+loader and then it actually lose TDX.
+after verifying the integrity of the
+TDX. So it is a twole loading process
+steps uh to for uh the TDX module.
+The TDX module uh is responsible for
+managing the entire life cycle of TDS uh
+and it also maintains the metadata for
+each TD instance. So here this is the
+global data structure for the TD uh TDX
+module. So uh there is one TDX module uh
+and uh the TDX module has one uh global
+key. So this data structure is protected
+by the global TDX key and these other
+data structures highlighted with green.
+These data structures are in uh
+maintained uh separately for each TD.
+Therefore, each TD has its own key and
+these data structures the metadata is
+encrypted uh by that uh key. So uh order
+uh this is a cryptograph cryptographical
+isolation of the metadata.
+There are many uh fields in this
+metadata but let me go through uh so
+some uh important uh data structures.
+First one is uh TDR that stands for
+trust domain root. So this is the main
+data structure for the maintained by the
+TDX module and it uh includes the
+encryption key information and TDCX
+uh references and uh it is protected by
+the global private key of the TDX
+module. And the next one is TDCS control
+structure and uh this is for uh TD
+management. So uh it includes MSR the uh
+uh status register and uh SCP
+uh the secure uh extended page table
+root and uh this inc this uh data
+structure is encrypted with the uh uh TD
+private key
+and the next one is uh TDVPN
+destin for virtual processor uh state it
+is it is in the BCPS scope that means uh
+this is stored uh this is an
+architectural state of the processor so
+uh these are uh some hardware uh
+registers
+so it includes uh uh some uh yeah this
+kind of uh yeah uh data structures And
+the security PT is uh the EP means the
+extended page table uh that is used to
+translate the virtual memory to the
+physical memory. Uh and because this is
+a CQP that means it is protected by the
+uh the private key.
+So uh even though the untrusted
+hypervisor
+uh or the uh the the untrusted operating
+system uh manages the page table uh
+because the this is encrypted by the uh
+private key uh of the TD and uh in the
+TDX the hypervisor the TDX module
+actually place a uh uh place uh as a
+hypervisor. So uh the address
+translation by the hypervisor is
+performed by uh the TDX module. So uh
+here uh because this is about the
+virtual uh machine uh there are two uh
+steps of address translation. The
+virtual address of the guest system is
+translated to the physical address of
+the virtual machine. Virtual uh virtual
+yeah guest machine. Uh that is done by
+operating system. the guest operating
+system and the uh physical address of
+the guest machine now is translated to
+the physical address of the host
+machine. This is done by the hypervisor
+and the uh TDX module uh is actually
+does this job uh in the uh TDX TDX
+Hypervisor TDX module and all the TDS
+virtual machines are software. So uh if
+we run all of them on a limited number
+of physical processes processors then we
+need to uh switch their context. Then uh
+because it is a trusted execution
+environment, we have to uh be careful
+when the context switching occurs
+because if the uh states of the
+protected application remain uh after
+context switching then uh from those
+information uh some info you know
+sensitive information may leak.
+So uh first let's look at the uh uh the
+context switching between the hypervisor
+and TDX module. In TDX a hypervisor is
+uh required to interact with the TDX
+module uh for managing the TDS.
+Uh for this uh the sim call interface
+functions are used. When the function uh
+sim call is made uh the trans processor
+transitions from the BMX rune mode to
+the simx root mode as you may remember
+in the previous slide and uh the TDX
+modules SIM transfer BMCS the virtual
+machine control structure is loaded
+so that for the corresponding
+TD. So this uh V CMS uh is for uh yeah
+is managed uh for each TD
+and this VMS is a means of switching the
+context execution context between the
+hypervisor and the TDX module. And here
+the diagram shows that how the uh uh the
+TDX module finds the corresponding uh
+SIM transfer VC VCMS. So based on the uh
+the base address uh each SIM transfer
+VCMS uh the size of each BCMS is 4
+kilobyte. So uh by using uh this index
+uh the ttx module can find where the
+corresponding vcms is loaded.
+Then uh we also need to look at the
+context switching between TD and TDX
+module. In traditional virtualization,
+the hypervisor handles uh VM exits and
+uh that is controlled by uh the VM's
+transfer VMS
+and uh the problem with this approach is
+that the VMS
+uh contains the CPU state. That means uh
+if we don't trust the hypervisor then
+the hypervisor can observe the current
+state the CPU state and this is the
+problem if the uh virtual machine is
+under protection and we need to uh keep
+it confidential then in that case uh uh
+revealing its CPU states to the
+untrusted hypervisor could be a problem.
+So in TDX this uh mechanism
+uh yeah here is the mechanism that is a
+little bit different from the
+conventional uh virtualization.
+uh the when the call is made from the TD
+then it is designed to trap into the TDX
+module and uh it is controlled by TD
+transfer CMS. So this TD transfer BCMS
+with is within the SIM mode and it is
+encrypted by the um by the TD's private
+key. So uh because it is encrypted by
+TD's private key and the private key is
+not exposed to the hypervisor. So uh uh
+TD transfer VCNS is not accessible. uh
+by the untrusted hypervisors. So in this
+way in TDX uh the context switching
+information uh is uh is kept uh to be
+confidential.
+The uh TDX or main has a mechanism uh
+which is called keyhorse. This is for uh
+the sharing data.
+So some memory buffers need to be used
+to pass data through SIM course. In that
+case uh we the uh the TDX module need to
+map
+is uh internal address space to the
+buffer. So uh this is done by uh using
+the keyhole. The keyhole region is a
+reserved region address range within the
+address space of TDX module. So it can
+be used uh as a reference to the buffer
+uh which is used uh yeah between uh the
+TDX module and the hypervisor.

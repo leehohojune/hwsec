@@ -1,0 +1,183 @@
+Uh this is a typical
+uh structure of a noise based random
+number generator. This is a uh rand
+random noise uh source and this could be
+yeah many yeah kind many things
+basically and this is a noise and then
+this noise is compared to uh some
+reference and the output is finally uh
+sampled uh and stored uh in this D
+flip-flop and then it is uh the output
+is gener generated from this uh yeah D
+flip-flop. So the final output is
+digital output zero or one and it is uh
+synchronized to a uh this clock. So uh
+this analog or any kind of uh physical
+natural uh phenomena can be captured uh
+to a digital output. So this is very
+general uh general structure of the
+noise based uh random number generator
+and the quality of this random number
+generator depends on this noise uh
+source. The noise sources uh have some
+requirements. uh it should not be uh
+yeah well characterized or controlled
+otherwise yeah the attacker may uh
+predict the output of this uh random
+number generator
+and uh amplification may introduce
+[clears throat]
+some bandwidth limitation or uh
+nonlinearity
+and multiple nearby uh random number
+generation ator may synchronize.
+So if we have only one random number
+generator that could be okay and we can
+yeah uh generate uh many bits as many as
+uh we want. Uh so yeah if it is possible
+then we need only one random number
+generator that's okay but uh if we need
+multiple random number generators and
+they are physically located nearby then
+they tends to synchronize that means
+they are likely to generate the same
+output. though uh that is because some
+interferes
+and uh even though we employ multiple uh
+random number generators actually the
+entropy is not high uh enough we expect.
+So these are some requirements or
+challenges uh that we need to address uh
+when we design noise based random number
+generator.
+This is one example. So this part could
+be uh classified as a yeah noise uh part
+and in this design the t flip-flop is
+used. So the how it works is that uh
+whenever clock ticks uh the output
+flips. So if it is currently zero the
+next uh clock edge it changes to one and
+the following clock edge it changes back
+to zero. So it it is not depend on the
+input but just whenever uh clock ticks
+uh it generates it flips the output. So
+this is a T flip-flop
+and it is connected to this uh yeah uh
+comparator and uh yeah the this is a uh
+simple uh some yeah uh noise source and
+uh it goes through low pass filter. Uh
+so the low pass filter means very small
+variations is just uh attenuated
+and then by using this holding switch
+and capacitor uh this is uh actually
+uh uh uh holding the uh noise the the
+value.
+So uh during this purse uh it uh it
+uh it it accumulate the uh the noise
+into the capacitor and depending on how
+much uh noise it accumulate uh it
+generates zero or one. So uh this is uh
+one example design of the noise based uh
+yeah random number generator.
+And this is another example uh Intel
+designed this kind of random number
+generator and uh it is not kind of no uh
+yeah uh noise based random number
+generator. uh but Intel uh actually
+designs this kind of uh random number
+generator and it employs two uh stable
+states uh that is by uh interconnecting
+these two inverters
+and uh this is actually the structure of
+SRM. So it works very yeah similar to
+SRM SRM puff utilizes
+power on randomness. So when this uh
+circuit uh initially uh yeah turns on
+then uh it is uh uh the output of this
+circuit should saturate to logical zero
+or logical one. But nobody knows which
+value it saturates.
+So um by using this feature we can
+generate a random number.
+But the challenge is this uh the
+unpredictable output is uh guaranteed
+only if this circuit is actually
+completely symmetric.
+If there is a small bias then the output
+is likely to generate always the same
+value.
+So it is not truly random.
+So yeah it is not easy to design or make
+sure that everything is symmetric. So
+that's the challenge of this type of
+random number generator.
+And this is a kind of optical uh random
+number generator. This is a laser
+source. And uh this is the delay of the
+uh yeah purse I mean the laser and uh by
+comparing their delay. So this is this
+is you see this uh go through uh here
+and yeah this is a a kind of copied
+version and this uh measures the um
+interference between these two uh yeah
+uh laser uh light and then by comparing
+this it generates the final uh output
+digital output.
+So uh I yeah frankly don't know exactly
+how this circuit works but why what I
+want to show you here is that um the
+optical laser can be used as a noise
+source for random number generator not
+yeah we [clears throat] don't have to
+always consider only uh digital I mean
+the uh transistor based uh circuit
+electrical circuit But uh some optical
+uh yeah phenomenon can be used for
+random number generator.
+Another example of none electric uh
+noise source is the quantum effect.
+Theoretically uh if we can uh design
+this kind of uh quantum based random
+number generator theoretically it could
+be perfect uh because the
+the probability of generating zero or
+one is perfectly uh 50/50. So it is
+completely unpredictable but yeah in
+reality it is not [clears throat] easy
+to design but anyways theoretically this
+is very good candidate for the uh true
+random number generator. This is one
+example of such a um quantum based
+random number generator.
+Uh this this is uh called beam splitter.
+So this light comes here and the photons
+have uh some polarizing
+uh polarized. So they uh spin either uh
+in clockwise or counterclockwise
+but the uh the probability of their uh
+polarization direction uh is just
+equally uh uh yeah random just split in
+half. So by using this v this phenomenon
+uh in this design the beam splitter is
+employed. So depending on the
+polarization
+uh yeah direction uh it classifies
+uh if the uh it classifies the photons.
+So if the polarization is horizontal
+then it goes to this path and if it is
+vertical then it goes to this path. So
+uh the photon is uh split uh to
+different path depending on the uh
+direction of the polarization.
+Then uh it is uh feed into this switch
+and depending on which uh way the photon
+comes it generates zero or one. So in
+this way we can generate zero or one
+based on the polarization status of the
+photon and theoretically it is just half
+and half. So it is perfect random uh
+generator.
+So this is another example of uh
+utilizing other types of natural
+phenomenon to generate a true random
+number.

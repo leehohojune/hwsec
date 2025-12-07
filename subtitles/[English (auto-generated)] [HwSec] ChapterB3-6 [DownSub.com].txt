@@ -1,0 +1,265 @@
+In this sub chapter we are going to look
+at keystone
+uh which is an example from academia.
+The main purpose of the uh keystone is
+customization.
+So here the problem that the keystone
+wants to address is the fixed design
+point.
+And uh it actually mentions only the
+commercial uh TE's SGX, Trustone, SEV
+all of these are uh commercial TE's of
+course because they are yeah commercial
+TE uh the they are they do not open
+their design to the customers. So it is
+yeah obviously uh just fixed uh
+functionalities
+but because uh these keystone is
+developed from schools academia uh they
+offer the uh very flexible design and
+opensource so the users can uh customize
+the tea uh depending on their uh
+requirements.
+and what can be configured or customized
+uh could be include uh uh the trusted
+computing base and threat models. So
+depending on the threat model uh if we
+want to we if we do not want to defend
+against some kind of uh threats then
+maybe we can just uh decided to
+uh exclude some T features. So for
+example, if we don't need to address the
+trusted IO uh because uh this uh
+platform is only uh intended to uh
+protect some computation not the
+interaction with the external world then
+we don't actually need to employ the
+trusted path uh related uh features. So
+this is one example of the uh uh
+customization based on the threat model.
+So uh the goal of the uh another example
+could be like this. In case of suggx the
+uh protect the size of the protected
+memory region uh it is uh yeah uh
+the processor reserved the memory.
+So the size is fixed and uh yeah when it
+is evolved to the uh second version uh
+SGX uh it is actually configurable but
+the the option is only two. So the
+smaller one larger one and that's it. So
+uh but uh anyways yeah it is kind of a
+fixed uh configuration because if the
+user wants to even larger uh uh process
+reser memory then but uh there is no way
+to increase the size of uh PRM
+and also uh because it is uh only the uh
+propriety ISA the instructions
+architecture. So yeah, if we want to add
+or changing instructions, it is not
+possible.
+So that's why the keystone
+uh is uh motivated.
+Uh so in the authors the developers of
+the keystone is targeting at uh
+customizable uh TE uh so they it is
+analogous to the software defined
+networking uh so instead of fixing the
+protocol if it is defined as a software
+then we can change or customize the uh
+network protocol. So in a similar way we
+can customize T based on uh uh the uh
+requirements.
+So the design principles of case to
+include the hardware reinforced memory
+isolation.
+uh if if you are not very familiar with
+TE uh the first technique that uh you
+can come up with is memory isolation
+because the memory isolation is the key
+feature of T basically isolation
+isolation is very important feature of T
+and that should be provided imple uh
+hardware implementation because
+softwarebased memory isolation is
+already we have because the hypervisor
+operating system they all support
+isolation of the memory space but
+if it is perfect then we don't need
+hardware based isolation but as you know
+there could be many vulnerabilities in
+software implementation of course in
+hardware implementation there could be
+vulnerabilities but uh usually the tech
+surface is very small because even
+though there is a vulnerability it is
+much harder to exploit. So anyways uh
+the hardwarebased memory isolation is
+one of the key feature that the keystone
+also provides
+but what is important uh difference from
+existing ones is customization. So the
+even though it is enforced by hardware
+it is still uh configurable so and
+customizable. So that is one important
+feature. And the second one is uh if we
+allow customization
+uh especially runtime then the privilege
+uh management is very important because
+if the attacker manages to uh acquire
+high level privilege then the attacker
+can change the configuration of the
+hardware. Then uh the auto attacker can
+circumvent the existing protection
+mechanism. Even though it is a hard uh
+enforced by hardware if it is not
+configured properly then the hardware is
+basically becomes useless. So uh in uh
+trust zone uh the trusted layer of
+software is uh defined and they they as
+as I mentioned the key purpose the
+difference of the keystone is uh
+customization.
+So it is based on modularity.
+So all the dependent layers uh offer
+clean abstractions and maintaining uh
+compatibility with existing uh flability
+levels. So uh yeah these are some uh
+design principles that keystone is
+following
+unlike vendor species. Uh keystone
+supports various workros across embedded
+device mobile platform and even cloud
+servers without uh platform lock in. So
+uh because it is provided as a open
+source and it is customizable
+uh if the developer wants to target this
+keystone uh to uh any kind of device
+then they can. So it is one uh yeah
+customization uh example and the the
+second one is TCB size. The modular
+design allows minimal TCB for uh simple
+applications and depending on the
+requirement if the uh developer wants to
+have more features for complex
+applications then uh the uh uh the size
+of TCB could be increased but just
+easily.
+So the threat models can be uh yeah
+defined uh based on the requirements and
+depending on the thread model uh the
+designers the developers can choose
+which features must be included or not.
+The architecture is uh shown on the
+right side of this slide and the uh
+baseline is the trusted hardware. Uh the
+keystone is developed by m making
+modification to the risk 5 opensource
+processor and some other hardware
+features and roots trust are included
+and the right upper to the hardware
+layer AM mode motion mode uh layer uh is
+implemented. uh it is with the highest
+privilege level and the security monitor
+SM only the SM can configure the
+hardware and uh yeah so this place as a
+part of TCB trusted computing platform
+uh uh base
+and on top of M mode security monitor
+the S mode system software is running
+in the untrusted domain the operating
+system uh is running with S mode and the
+user applications are running in U mode
+and in in clay uh that is under
+protection has a runtime in running in
+the S mode. So uh this is a kind of
+system software to support inclave and
+as you can see here the inclave
+does not running on operating system. So
+the runtime can be considered as a
+simplified version of the operating
+system.
+So if you think about the suglave
+is still running on operating system but
+we don't trust the operating system but
+still enclave applications rely on the
+uh services from the operating system
+but keystone does not
+the memory isolation of keystone tone is
+implemented based on the PMP the
+physical memory protection feature
+provided by risk file. So PMP itself is
+not a new feature of the keystone but it
+is a memory protection mechanism of risk
+five and the keystone leverages this PMP
+feature for flexible and dynamic memory
+isolation.
+Uh so the definition of the regions
+memory regions uh is flexible and uh it
+it also it is flexible in terms of its
+size because regions can may have from
+four byte to the entire DM. So the uh
+size of the memory region uh is very uh
+flexible
+and it can be also reconfigured during
+runtime. So the dynamic reconfiguration
+is also uh supported. Here is a an
+example is given and this is the
+physical memory and if if it is running
+in the untrusted context that means just
+running just regular applications then
+uh this part is still occupied by the
+security monitor the highest level uh
+yeah software and this is for uh inclave
+uh applications. So the normal
+applications cannot access this uh
+memory region
+and uh if the the first this enclave is
+running then the enclave is only it can
+access its own memory and this one is
+untrusted memory region and uh this is
+uh identity identified by this
+permission flags. So uh the enclave in
+enclave context only this region this
+this memory reason uh the enclave E1
+application can access by checking this
+uh yeah permission flag and other uh
+memory regions uh the inclave one E1
+doesn't have a permission uh it is uh
+specified by uh these flags
+Kisto still provides other types of T
+primitives. So the secure booting and uh
+the root of trust measures the image of
+the uh SM the security monitor the most
+important uh for I believe uh because it
+is the with the highest privilege and
+then uh it also supports some secure
+random number generator based on the
+hardware source of uh uh randomness for
+example CPU jitter uh and DM decay.
+These are uh some nondeterministic
+uh random uh yeah uh it it is generating
+some random signals uh based on the some
+physical uh variations
+and the remoteestation
+uh and sealed storage they are just yeah
+normal yeah conventional uh security
+features of keys and trusted timer
+because Uh the timer plays very
+important role for embedded system
+especially uh for the real time
+operating system because the real time
+operating system uh works uh by by
+receiving the time tick from the timer
+uh it triggers uh context switching or
+counting the or checking the deadline
+that kind of things. So if the timer is
+manipulated then the system may not work
+as expected. So uh the trust this
+keystone uh provides some trust uh timer
+and uh secure delegation means the
+handling exceptions securely. It
+includes secure context switching and uh
+secure uh yeah interrupt handling. So uh
+this is also just uh uh another
+important uh uh key features that the
+keystone provides.

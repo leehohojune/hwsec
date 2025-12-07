@@ -1,0 +1,335 @@
+In this sub chapter we will discuss uh
+the ARM trust jone.
+The main concept of ARM trust zone is
+relatively simple. Uh it supports two
+state. One is secure state and the other
+one is non uh secure state. Uh often
+called secure world and normal word.
+So basically the hardware separates
+everything based on uh its state. The
+purpose of this sec separation or
+isolation is to protect the secure world
+from uh some potentially malicious
+program in the normal world. And here in
+each world uh each world has its own
+operating system or own uh runtime
+environment.
+So
+it it is uh also another difference from
+uh Intel SGX because uh in case of Intel
+SGX it separate the uh the the process
+application. So the operating system uh
+is only one there is only one operating
+system. Similarly in TDX
+uh it is se isolating virtual machines
+and uh but still the host uh the the
+basic infrastructure the base or host uh
+the
+yeah the host system is basically
+basically common but in uh in In ARM
+trust zone
+each word has its own operating system.
+So as illustrated in this diagram uh
+here uh in cortex a a series uh it is
+typically when we say
+the trust zone or trust zone then
+typically we say this architecture.
+Yeah, this one. So you can see here that
+it has two OSS
+and the secure OS is often called rich
+OS and I I I mean the nonsecure OS is
+the rich OS the normal OS and the secure
+OS that that means the secure OS uh
+provides some limited capability and
+there is a secure monitor uh inside the
+secure world uh the non normal world
+communicate with the secure world
+through the secure monitor. So this
+place as an interface between the two
+world
+but in case of cortex M series it has
+this architecture as shown in this
+diagram and because the cortex M series
+is usually for low-end devices IoT
+devices so
+it may not be able to
+accommodate
+afford for two operating systems. So uh
+that's why it is uh uh yeah the
+architecture looks like this. And uh in
+case of cortex a uh series in this
+architecture when uh hardware interrupt
+interrupt occurs then uh it is separated
+basically and here uh separated here
+means that uh which interrupt is going
+to which word is predetermined
+here as well. But in this case uh it's a
+little bit more flexible uh because uh
+while even let's say in the normal world
+a thread is running but uh the interrupt
+can be handled by the interrupt handler
+in the secure world. So because it is a
+kind of low-end uh processor uh uh yeah
+in order to uh reduce the response time
+this kind of architecture is employed
+because uh in cortex a uh we have a
+secure monitor. So uh when interrupt
+occurs this secure the interrupt handler
+should go through the secure monitor. So
+it takes more time but in case of Cortex
+M series this in this architecture uh
+the interrupt uh the it takes a a little
+less time to uh handle the interrupts
+and opts
+project uh yeah software project that uh
+then uses utilizes the uh hardware based
+ARM trust zone and uh this is just an
+kind of reference software architecture.
+This is not the only way to use the
+trust zone because the trust zone uh is
+provided as a hardware. So the software
+architecture could be uh and the more
+more important thing here you need to
+remember is that the uh the company ARM
+is providing processor
+and the customer
+customer
+designs their own hardware and software
+based on the ARM processor. So
+but the ARM trust zone this technology
+is provided by the ARM company and
+how to design the hardware and software
+is totally up to the customer not the
+ARM company. So
+um this is a kind of just reference that
+uh this is the intention of the arm
+thrust but this is not the only way to
+utilize uh the arm thrust zone. So that
+is what I want to say here. So this is
+not the only way or only architecture
+for the arm trust zone.
+Okay. So uh but here still it is
+separated two word two word and
+uh yeah this is the secure monitor
+interface between the two word
+and here the trusted voice is running
+and here uh a uh rich is running and uh
+when the client app uh CA needs to
+communicate with the uh trusted app in
+the secure world. Then the CA need to
+use the T client API in the user level
+uh library. Then uh through this API in
+in the corner it uh you using the OPT
+driver uh it makes some calls to the
+secure monitor. Then the secure monitor
+uh send that message to the operating
+system and then uh finally trusted app.
+This is a a little bit higher view of
+that communication mechanism.
+The CA and TA communicates communicate
+mainly based on shared memory. So here
+you can see here the client application
+CA uh yeah allocates a shared memory and
+then uh it is passed to the uh TA and
+the TA also need to map this shared
+memory uh to its own memory space
+and uh
+so the Here
+uh the client application actually opens
+a session first that is a connection
+between CA and TA and this is uh this is
+done uh by
+uh authenticating
+uh each other. So uh in order to
+communicate with the TA uh the CA first
+uh checks its integrity by checking uh
+some integrity metric
+then once the session is open then by
+using the command it can keep
+communicating.
+So the unit of communication is called a
+command and once the session is open
+then there could be multiple commands
+and if a large amount of data is need to
+be delivered then it is done by using a
+shared memory
+and this is booting sequence and not a
+big deal but it is Yeah, the main uh
+main focus is like this. So uh CQ world
+boot first and then normal world boot.
+So that is just simple uh yeah uh I mean
+simple uh principle. So the
+basic uh boot loader is loaded and then
+the CQ world boots then normal world
+boots and then the secure monitor is
+running and uh this is the starting
+point after the booting process
+and when the each step we can see there
+are four steps and each step is verified
+crypto cryptographically that means uh
+basically this uh booting uh using the
+secure boot technology. So this
+bootloader the integrity metric of the
+bootloader is checked before uh it is
+actually running. Then the boom loader
+checks the integrity metric of the
+secure word. And then uh only uh the
+only if the integrity metric matches the
+secure boot can boot and while the
+secure world is booting it checks the
+integrity of the normal world. So by
+checking the integrity of the next step
+uh we can uh build a chain of trust
+and this uh one-time programmable uh
+techniques generate unique keys for each
+device component. that means uh it is
+not the same for all kind of uh product
+products.
+So when we manufacture
+devices then they are just uh uh
+manufactured in the same process. So uh
+in that case we we need some method to
+program them unique key distinguishing
+each other. So even though we have the
+same product uh if we have two different
+devices then each device has its own uh
+key.
+Otherwise if one if all the device in
+the same uh product line
+has the same key then uh if any any of
+them is compromised then all the devices
+also uh become and risk. So uh we have
+to program different keys to different
+device.
+So that can be done by OTP technique and
+the OTP technique is not the only one
+technique but uh include uh uh several
+uh yeah techniques for example uh efuse
+efuse technique is only one time
+programmable memory. So uh after
+manufacturing
+a device the efuse is reset then we can
+change its value only once. After
+changing the value
+there is no more uh yeah chance no more
+way uh of updating the value. So this is
+called one-time programmable memory or
+one time programmable technique. So by
+using this technique uh we can program
+different uh values to different devices
+even though they are manufactured in the
+same process
+and this is the uh hardware support.
+The
+what actually the processor provides is
+very simple only this one bit
+is it in a secure mode or just normal
+mode nonsecure mode
+there is only one bit signal from the
+processor uh in the uh in the hardware
+design and it's it yeah how to use this
+bit is totally totally up to the
+customer. As I mentioned before, ARM the
+company ARM is a provider of processor
+and it is the customer who designs the
+rest of the system. So the processor
+what the processor provides only this
+information.
+the processor is running in a secure
+mode or nonsecure mode. Then by using
+this information the hardware the rest
+of the system needs to isolate their its
+uh resources.
+For example, uh here in case of RAM, the
+memory
+if we use this information,
+then the memory controller may allow
+some region. For example, here this
+memory region can be accessed only when
+the secure
+uh the secure
+yeah it is actually nonsecure bit. So it
+one means it is not secure in normal
+world but zero means it is running in a
+secure mode. So only if this bit is zero
+this region of the memory should be uh
+accessed can be accessed. So this can be
+enforced by the hardware memory
+controller but
+it is just up to the customer. If the
+customer
+doesn't want to isolate the memory then
+it can just ignore this bit
+and the uh peripherals as well. So if it
+is in the normal world uh these
+peripherals are not accessible that
+means uh some hardware mechanism some
+abittor or monitor here uh security
+controller uh this controller controls
+if uh only these uh peripheral devices
+can be accessed only if this NS bit is
+zero.
+So this is how we use this information
+and it is up to the customer who designs
+the rest of the hardware and once the
+hardware is designed then the software
+is built on top of that architecture and
+the OPT is just a one example of how the
+software architecture then uses the ARM
+trust zone.
+But the ARM, the company ARM provides
+not only the processor but also some uh
+some components, hardware components for
+their processor. uh because uh if yeah
+even though it is up to the customer the
+customer can use ARMS
+components as a library and
+it is much much more convenient for the
+customers who want to design their
+hardware uh by using just the library
+from the ARM company because The ARM
+company designs both processor and the
+components. So it must be compatible.
+So it is much more just yeah convenient.
+So they the ARM uh provides
+uh many uh the components uh but here it
+includes this kind of memory controllers
+that um exploit that supports the
+hardwarebased isolation I mean the trust
+zone.
+So in this memory controller uh it is
+called truss zone address space
+controller in short tz as ac uh asc.
+It allows dynamic classification of
+memory mapped devices as secure or not.
+That means depending on how it is
+classified, if it is class classified as
+secure, it can be that device can be
+accessed only if the processor is
+running in secure world
+and it can be dynamically class
+classified. That means during runtime
+uh the software actually can change the
+classification
+and TZMA that stands for trust zone
+memory adapter divides onchip memory
+into secure and nonsecure
+hubs. So uh by using this technique uh
+we can uh isolate isolate on chip memory
+and we also need to uh isolate the
+interrupts.
+The generic interrupt controller handles
+secure and unsecure interrupts
+uh uh while preventing unauthorized
+access. So the uh interrupt controller
+itself should be controlled uh by the
+secure in the secure mode. So uh and
+some interrupt can be uh sent to the uh
+normal world but when it is sent to the
+secure world uh it should go through the
+secure monitor
+but it yeah in in the opt architecture.
+So uh the yeah in in trust zone the
+interrupt uh handling uh should be also
+uh designed uh carefully that that's
+what I want to say here.

@@ -1,0 +1,173 @@
+This slide shows the overall
+architecture of TDX
+and uh this
+sim mode
+within the sim mode uh the
+the software the hypervisor and virtual
+machines are protected and outside the
+sim mode they are just regular normal
+virtual machines.
+In normal virtual machines if we
+supported by Intel uh Voy uh it has two
+modes VMX non mode and VMX rune mode. In
+the BMX rune mode, the hypervisor is
+running and in the BMX non-run mode, uh
+the voucher machines are uh running and
+uh if
+this uh
+yeah under this model
+uh the virtual machine and the
+hypervisor communicate by uh VM lounge.
+BM exit, BM resum uh these kind of uh
+instructions
+and uh this architecture this
+architecture uh is similar inside uh the
+sim mode. So basically the architecture
+is the same but uh the hypervisor is now
+replaced by TDX module and PIM loader.
+So uh this TDX module and PCM loader
+they are Intel signed uh yeah
+application software basically
+and uh this uh TDX module and loader
+they are running inside the same uh VMX
+root mode and the trust domain TD uh is
+running in SIM VMX non mode. So uh the
+architecture is basically the same but
+uh they are under the protection uh
+within the uh sim mode and the sim mode
+and the normal mode uh they can be uh
+transit uh trend uh can be uh switched
+by using sim call and sim return uh
+instructions.
+The memory is partitioned into normal
+memory, secure memory and shared memory.
+The secure memory is uh used for storing
+sensitive data including the memory and
+CPU state uh and also the sensitive
+information about the TD and there is a
+shared memory for IO but this is not
+protected.
+So uh this is for IO. So I will explain
+this one uh when I explain the uh TDX IO
+model
+and uh the
+secure memory is partitioned into uh by
+TDS. So different TD has different uh
+cryptographic key to encrypt uh its own
+memory paging. So it is done by uh HK
+ID. Uh so the HK ID space is partitioned
+at the booting time
+and each TD receives a unique private uh
+HK ID uh that is bound to the encryption
+key. So the uh memory is partitioned
+The memory confidentiality and integrity
+is uh maintained by these two
+mechanisms.
+Uh
+in the physical memory there is an TD
+owner bit that indicates
+or that is intended to detect
+unauthorized rights uh at software
+level. So this will be the set one for
+TD uh rights
+if it is clear then it is allowed the
+external rights are allowed. So this is
+kind of logical enforcement. The other
+one is cryptographic enforcement.
+uh we this TDX computes and attaches 28
+bit MAC message authentication code on
+each cash line.
+So uh by checking the MAC we can uh
+check the integrity of each cash line.
+So by using these two mechanisms, TDX
+uh TDX guarantees uh confidentiality and
+integrity. But unfortunately neither can
+detect replay attacks because that means
+uh if the adversary
+uh keeps the previous data and metadata
+Mac and uh even though new data and MAC
+are generated if the adversary roll back
+rolls back uh to the previous data and
+or the metadata then the TDX cannot
+detect. So this is this is kind of
+replay attack.
+To prevent the replay attack we may
+introduce nuns to guarantee freshness we
+can include nuns the random number to
+the Mac. But I don't know why uh but
+maybe maybe the designers of Intel TDX
+may uh may not find may think that this
+is not costefficient because uh adding
+nuns could increase the hardware cost
+significantly while uh there is little
+risk of um replay attack. I don't know
+for sure but I just yeah just just my
+yeah guess
+under the TDX IO the uh the TDX also has
+some uh security features for trusted IO
+under the thread model of TDX the
+hypervisor and peripheral devices are
+not trusted. So they cannot access the
+TD private memory. So uh if the TD wants
+to send the data to the device then the
+TD must explicitly share memory for IO
+by setting the shared bit in the uh
+guest physical address.
+Then uh
+the TD this is the the responsibilities
+of TD.
+Some properties are guaranteed by the
+TDX hardware or T including TCB. But the
+TD the trust domain the application
+running inside the protected virtual
+machine is developed by the tenant. So
+uh it is not under the control of Intel.
+So the Intel just requires the TD do
+these things
+before leaving the trust boundary. The
+IO data must be sealed
+and the TD should place the sealed data
+in shared memory so that the peripheral
+devices can read it.
+And when the TD receives
+IIO data then it must validate it.
+And
+TD should use only the hardened drivers
+that means it is uh authenticated
+drivers otherwise the yeah device driver
+may be u malicious.
+This is the process of the remote
+attestation.
+The process itself is very just
+conventional. It is usual. The remote
+party. This one is the verifier and it
+send a challenge to the TD.
+It includes nuns.
+Then the trust domain TD
+uh the attestation agent inside TD
+receives this challenging.
+Then uh in request pull request of TD
+report to the TDX module
+and it uh by uh interacting with the
+quoting claim it receives the quote.
+So that means the TDX module uh it is
+not shown here but the TDX module also
+ask the hardware to generate the report
+and then uh the TD returns the quote
+from the quoting inclave
+uh and it sends the quote to the remote
+party. The remote party need to check
+the signature first generated by the
+hardware and also quoting enclave. Uh
+because it is a kind of uh uh signature
+requires public key infrastructure
+and certificate
+that ensures the uh ownership of the
+public key. So the Intel uh issues the
+certificate. So by provisioning the
+certificate with Intel PCS the remote
+party the challenger checks verifies the
+signature and then the quote. So by uh
+interacting uh with the TD and Intel uh
+PCS the remote party can verify the
+signature and the quote.

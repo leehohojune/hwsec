@@ -1,0 +1,220 @@
+ARM CCA is the next version of ARM trust
+zone. The CCA stands for confidential
+compute architecture.
+Similar to SUGX2TX,
+uh CCA is evolved to isolate virtual
+machines. So uh it it is in a sense
+analogous to the TDX compared to uh the
+uh yeah arm trust zone.
+The arm trust zone uh separates into two
+worlds normal word and secure word. In
+CCA two more words are introduced.
+It is lum word. This is for uh isolating
+virtual machines and root word.
+It it it is now in the highest uh
+privilege level uh to managing all the
+system and the other words
+and this uh in in the LUM world uh we
+need uh the LUM world manage management
+uh program and on top of this the
+virtual machines are running. So in in
+the CCA it is called LUM LUM virture
+machine and uh you can see that the uh
+pre level prevail level two is in the uh
+hypervisor level and the first level is
+operating system level and the lowest
+level is the user application.
+So the normal world is yeah just uh
+normal standard uh operating system and
+applications and the CQ world maintain
+this is uh intended to keep the uh
+compatibility with trust zone I I think
+and the root node is a due uh uh node a
+due mode and uh it it is running in the
+highest level. So it it is responsible
+for trusted booting and world context
+switching
+and the LUM world is the I should say
+the key feature of the CCA because in
+the Lum world there are multiple virtual
+machines and uh they are protected by
+the hardware mechanism.
+The hardware includes uh the uh yeah the
+this diagram shows the hardware uh
+architecture and what is highlighted
+with gray box is the additional
+components uh uh adapted yeah employed
+to support CCA
+the granular protection check this one
+and this one uh this is an extension of
+the memory management unit MMU that
+checks the um yeah that authorize the
+access to the physical address
+that is done by using this uh granular
+uh yeah yeah the granular protection
+check and uh so if it maintains an
+information
+of the yeah access control information
+that this part of the memory can be or
+cannot be accessed by this word.
+So if uh it detects any violation then
+it raises an exception and does not
+allow accessing that uh region. So in
+this way the GPC isolates memory space
+uh between different words
+and the memory protection engine this
+one encrypts the entire memory space and
+uh
+the memory encryption context MEC allows
+different memory region.
+uh encrypted with different uh
+encryption key. So each uh uh so uh by
+in that means that the memory is
+encrypted twice. So the entire memory is
+encrypted with one key and each uh some
+memory region in the realm world can be
+uh encrypted with uh its unique key.
+So the granular protection table is used
+by granual protection uh check that is
+within the MMU and it is basically a
+table stored in the memory and this
+memory can be accessed only by the rune
+root run root word.
+So it is it it is very uh similar to the
+page table the translation virtual
+memory to physical memory translation.
+uh and uh
+and the MMU is uh translating uh virtual
+address to physical address by referring
+to the uh page table. And the G uh GPC
+checks the uh the
+uh the checks the
+validity of accessing this physical
+address by referring to this granular
+protection table.
+And uh because the granular protection
+table is now uh is implemented is stored
+in the memory that can be accessed only
+by the rune word. Anyways, it is stored
+in the memory that means it can be
+dynamically
+uh change it. So it has a flexibility
+uh of uh yeah modifying the granular
+protection uh information and because it
+is uh stored in the memory it has
+unlimited number of regions in trust
+zone this memory isolation is supported
+by hardwarebased memory controller and
+uh because it is a hardwarebased based
+memory controller it has fixed size for
+storing the access control information
+but in CCA it is stored in the memory.
+So as long as the memory space is enough
+uh there will be no limitation in the
+number of regions uh in the uh yeah GPT
+and uh that also allows core specific
+configuration. So different core each
+core may have independent memory
+partition settings.
+So uh it is uh the fine grained
+controller uh can be also uh uh
+possible. So uh so the we can bind the
+DMA device to specific VM. That means
+only uh yeah for example this particular
+VM can acet can access the can uh use
+the DMA or a particular uh DMA device.
+But there is still limitation.
+uh the currently the CCA GPC doesn't
+support uh separating read and write
+permission.
+So it is only whether it can be
+accessible or not but not specifically
+it allows read operation but not write
+operation for example. So it is not uh
+distinguish
+uh does not distinguish read and write
+permission. So that that's one uh uh
+limitation current limitation
+compared to trust zone. Uh this is uh
+table summarizes
+uh the differences
+in in case of memory isolation both
+trust user and CCA support access
+control for processors and DMA.
+uh but uh trust zone doesn't have uh
+isolate between the priv privilege level
+one and two and uh three. So this EA3
+the highest uh privilege level is
+introduced in the CCA.
+So uh the memory isolation
+configuration can be changed only in uh
+EL3 in CCA. While in trou the uh EL1 and
+two in the CQ world uh can change the
+configuration of memory isolation.
+Remember that uh EL1 and two corresponds
+to the operating system and hypervisor.
+So they are system software. Uh so only
+the system software can change the
+configuration.
+NCCA
+supports hardware assist memory
+encryption but not trust zone. But here
+uh I should say
+if Yeah.
+Trus zone is a hardware support from the
+processor
+and the memory controller is also
+provided by the ARM company. But that's
+not the only memory controller that the
+hardware designer can use. the hardware
+designer may want to
+uh may uh yeah encrypt the entire memory
+by employing a different type of memory
+controller. So if that then um yeah even
+trone while trust zone is being used
+still the memory can be encrypted but it
+is not the standard uh protocol of the
+truss zone that that's what I mean here
+so uh but in case of CCA uh the standard
+design already includes the memory
+encryption but not uh trust zone.
+Peripheral isolation is similar to the
+memory isolation
+and it can be configured only uh EL3 in
+CCA uh and uh in in case of trust zone
+it can be done only in uh EL1 and two of
+the secure world.
+TR zone support
+uh interrupt isolation but not CCA. That
+means uh so the interrupt in intrusion
+the we can configure the interrupt
+controller to uh where this interrupt
+should go. So which word uh can receive
+uh this uh individual uh interrupt?
+But yeah, it is not included in the CCA.
+In a sense, it is already included
+because the CCA covers
+uh also cover the DMA world and secure
+world. So yeah it it is a yeah it is
+very subtle uh difference but uh for
+sure in trust zone it is included
+and the CCA supports hardware
+assistation.
+It is not discussed in this uh sub
+chapter uh but uh because this hardware
+resistation
+is very typical uh yeah compared to
+other uh uh TE's like SGX TDX
+the hardware based
+uh is pretty yeah similar because the
+hardware just measures the um
+hardware measures the integ integity
+metric of virtual machine and signs on
+it and by verifying this information the
+verifier can uh authenticate the
+integrity of the virtual machine.
+Yeah, it it is basically the same. So uh
+uh I don't go through the details of the
+uh yeah the testation technique but the
+CCA actually uh yeah includes this
+hardware assistation technique.

@@ -1,0 +1,148 @@
+In order to launch SUVM the secure
+virtual machine uh securely three
+conditions uh must be met. The first one
+is the platform the hardware platform
+must be verified and the second one is
+the virtual machine must be authorized
+to run and the last one is integrity.
+I in in just my personal opinion the
+second condition this is the one of the
+uh outstanding
+uh yeah feature because uh in order T is
+usually the integrity is only verified
+based on a testation techniques and uh
+local attestation is also useful for
+verifying the platform. column where the
+inclave application is running. So uh to
+some degree this the first condition is
+also uh checked in order uh some other
+ties but the second one uh is uh I
+believe I think uh in my opinion uh it
+is a an um yeah uh difference uh key
+difference from other uh tees
+and all of these must be checked when
+the control flow enters into the secure
+mode by uh ultra call of ESM.
+So the platform verification uh is uh
+done by the TPM and uh it involves some
+uh yeah key symmetric uh seed uh uh yeah
+stored in the TPM. So the TPM is a
+hardware module that uh provides some
+cryptographic functions uh by dedicated
+hardware and the key is uh it key can be
+generated and stored in the uh hardware
+module. So uh it is uh for that reason
+it is considered very secure uh because
+uh the key in the key the private key
+cannot be read by software interface. So
+in only through software
+attack uh there is no way to extract
+keys from the TPM
+and if the encryption is necessary then
+only the data is sent to the TPM and the
+uh the TPM the hardware it is a separate
+hardware and it has its own encryption
+engine. So it just returns the encrypted
+data. So what is exchanged is only the
+original data and encrypted data or
+decrypted data. So uh the key is never
+uh under the path of the communication.
+So by using this TPM uh the platform
+verification can be uh done
+and for the virtual machine verification
+SVM uh a lockbox mechanism is used. This
+is also based on TPM but this is uh
+intended to verify
+uh whether this SUBM is authorized to
+run on this particular platform and uh
+in order to identify the platform
+uh the TPM is uh yeah uh used.
+uh the the lock box uh is a symmetric
+seed wrapped in a public key and it is
+associated with a private key in the
+target systems TPM. So the private key
+is stored in the TPM and it is unique to
+that platform and the private key is
+never
+uh yeah exposed to the outside.
+So uh by using this mechanism we uh can
+make sure that this SVM is authorized to
+run on this uh particular platform.
+And the verification steps include uh
+the TPM extract symmetric seed from the
+lock box and the form state verified
+through the TPM platform configuration
+register and uh this configuring
+register. Yeah, this is uh a standard
+function of the TPM and TPM is a uh uh
+it provides a standard interface and
+standard functions. Uh so uh by using
+the TPM capability the PF authorize any
+uh SVM uh to run on this on any uh
+particular platform
+and this is the process of generating
+lockbox.
+uh first uh we need to extract and
+authenticate the TPM storage key uh from
+the target machine and uh we uh validate
+the platform first. So uh by by hashing
+uh by using the hashy value uh the and
+it is compared against the uh vendor
+manifest uh we can make sure that this
+hardware uh is provided from a trusted
+vendor and then now we can move on to
+generating the lockbox. So the lockbox
+is a symmetric seat and it is encrypted
+by the public key of the TPM and TPM the
+hardware itself
+uh yeah encrypts the symmetric key uh by
+uh public key and the generated uh
+encrypted seed is now inserted uh into
+the uh ESM operand of SBM so that when
+the Assubu EM launches uh it can be uh
+yeah verified.
+The local attestation process is very
+similar to other uh yeah TE is uh and uh
+yeah so actually the local attestation
+includes the verification and
+authorization of the SVM. So uh it
+generates
+uh hm key and symmetry key from the
+seed. So this seed is from the uh the
+lockbox mechanism and then checks the
+operand payload first to verify the
+integrity of the operand and then uh the
+uh by using the symmetric key we can get
+the integrity data and then verify
+actually and then uh we can validate
+components using uh this symmetric key.
+And this is a booting process. And this
+booting process is also uh kind of
+standard chain of trust. So uh it begins
+with immutable code and it goes through
+uh several steps and before moving on to
+the next step
+it always checks the uh verifies the
+integrity of the next step. So for
+example here so this is boon loader
+before jumping into the boon loader
+mutable boon loader this immutable it is
+uh kind of uh hardwired or stored in the
+room so it cannot be modified and the uh
+immutable boot code uh checks the
+integrity of mutable book bootloader and
+then uh
+Yeah, before jumping into the host
+bootloader, this mutable bootloader
+checks the integrity of the host
+bootloader and so forth. But by the
+integrity checking is done by using some
+hardware key or CQ boot jumper. Yeah.
+Yeah. Different mechanisms. But uh the
+main principle here is that uh we need
+to check the integrity of the next step
+before jumping into the next step. So
+this is a very standard uh protocol of
+the uh chain of trust. So the uh IBM PF
+actually employs this kind you know
+secure booting mechanism.

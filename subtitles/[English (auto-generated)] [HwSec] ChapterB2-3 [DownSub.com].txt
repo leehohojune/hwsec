@@ -1,0 +1,369 @@
+Intel SGX
+like other uh trusted execution
+environment uh provides very strong uh
+security guarantees.
+Uh it is pretty good at checking the
+integrity of application when it is
+launched and preserving its integr
+integrity and also uh encrypting data
+which we is stored in the memory and
+storage but uh it still has a
+fundamental
+uh vulnerability or let's say limitation
+that is uh
+anyway some resources must be shared
+shared by untrusted application and
+including the operating system. So uh it
+cannot be completely
+separated from the untrusted
+applications. There are uh known
+vulnerabilities.
+Most of the known vulnerabilities are
+about uh breaking the confidentiality
+of the inclive application by analyzing
+the timing uh side channel information.
+the timing side channel information is
+available because some resources
+must be shared. So uh it is not
+guaranteed that uh as soon as the
+trusted application the enclave
+application wants to access a resource
+if the resource is currently being used
+by another application it takes time or
+vice versa that is more important when
+while the trusted application is
+accessing one resource for example
+simple memory or cache. If another
+application tries to access the same
+resource, then it will take more time.
+That actually gives us a hint that the
+enclave application is currently
+accessing that particular resource. So
+by measuring the timing difference
+uh we can infer whether the inclave
+application is currently access which uh
+resource.
+So it is a kind of fundamental
+limitation.
+If we want to eliminate this kind of
+side side channel information then we
+have to physically separate everything
+from the untrusted part of the system
+then it is nothing but just employing
+another processor. So uh yeah th this is
+kind of uh yeah inevitable limitation I
+think but there are still uh efforts
+mitigating these uh limitations but for
+for this particular um yeah sub in this
+particular subsection uh we will discuss
+what kind of uh surface uh is being uh
+Yeah, have been uh reported.
+We then categorize the attack surface
+into
+by which part which resource by or which
+resource the attackers can infer some uh
+sensitive information. They can uh
+measure the timing difference accessing
+uh page table uh precisely speaking the
+uh yeah
+uh fault the page fault and cache and
+branch prediction. So whether the branch
+is predicted correctly or not we can uh
+measure the timing and DM how long it
+takes to access the DM and inclave
+interface as well. So uh we will uh look
+look at how uh these attacks are visible
+and by utilizing what what kind of
+features.
+As you can see here uh the existing uh
+auto surface is as I mentioned before uh
+the
+attacking on timing I mean the uh
+confidentiality by analyzing the uh
+timing uh side channel information.
+The most most of the existing works have
+been focused on the CPU cache timing
+analysis.
+There are whole bunch of papers that uh
+are uh discussing
+uh what kind of texts are available or
+feasible and how to mitigate them.
+As you know the CPU cache is employed uh
+because of the speed gap between the
+processor and the main memory. Uh we
+temporarily store recently used data in
+the cache and if caching miss occurs we
+have to fetch the request data from the
+next level of the memory hierarchy. it
+takes much longer than uh cash heat
+occurs that that's the point uh that is
+exploited by the adversaries.
+Uh if the adversaries can measure the
+time difference uh between the hits and
+miss then the attacker can infer the
+memory access pattern of the inclave
+application. By analyzing the memory
+access pattern, the attackers can
+extract some sensitive information like
+encryption keys.
+There are uh several ways to measure the
+timing difference. Uh the first example
+is prime and prove attack.
+It first initializes the uh target cache
+sets with their own data. It is called
+priming the cache and then uh it waits
+uh it is waiting for the victim process
+excuse and uh if the victim process
+access
+um a memory that is that conflicts with
+the attacker's data then the data of the
+attacker will be evicted and then the
+requested data will be fetched from the
+memory.
+And when the attackers rude their data
+and uh measures the access time, if it
+can uh it takes much longer to reload
+that data, that means that cache line
+was evicted by a by the victim
+processor.
+So uh the attacker can now uh yeah know
+learn that this cash line was accessed
+by the victim process.
+By repeating this process the attacker
+can figure out the memory access pattern
+of the uh process uh the target I mean
+the victim process.
+So uh once the attacker figures out the
+memory access pattern then if the memory
+access pattern is dependent on the
+sensitive information then uh the
+sensitive information can be uh
+inferred. For example if yeah this is
+very representative example of side
+channel analysis. For example, uh the
+victim process may for example call
+function A if some sensitive information
+is true
+then uh but the function A is stored in
+somewhere in the memory. So uh by
+analyzing the cache timing if the
+attacker learns
+whether the memory address of function A
+was uh accessible or not. The attacker
+can learn whether the sensitive
+information is true or not. So by
+analyzing by in uh in this way the
+attacker can extract some insensitive
+information
+for prime and prove tech. uh the
+uh
+the attacker should has have some
+knowledge of LLC the last level cache
+slice mapping because the last level
+cache is shared by multiple processors
+and there are some rules to map the
+slice of last level cache uh to the uh
+course
+And uh it should yeah obviously uh be
+able to create eviction sets and but it
+does not need any shared memory because
+it is only on the shared last level
+cache and it works in cross core
+scenarios. That means even though uh the
+attacker's process is running on a
+different core uh from the victim
+process, it still works.
+Another representative example is flush
+and reload update. It is it is similar
+but a little bit different in yeah maybe
+in reverse way. So uh it the attacker
+first flush the old cash
+that are likely to be accessed by the
+victim process
+and then the victim or yeah process
+excuse and uh because the cash is now
+empty then the uh victim uh will uh face
+some trigger some cache uh caching miss
+and fetching uh the data from the
+memory.
+Then the attacker reload the shared data
+and uh if we takes shorter then the uh
+it means that cach line was accessed by
+the victim otherwise it is not accessed.
+So in this way uh it is similar but kind
+of a little bit different. So by doing
+this the attacker can uh learn the
+access pattern of the victim process.
+Yeah there are some minor yeah
+derivatives of the uh yeah attack
+techniques method
+the aict and time attack. uh in this
+attack in this method the attacker
+measures the victim's total execution
+time after evicting specific uh caching
+lines. So uh it it does not measure the
+individual uh access time of the cache.
+So uh it it is only measuring the total
+uh execution time. This method is useful
+if the attacker does not have uh the
+privilege or capability of running the
+uh the attack process
+uh at the same time or at the
+concurrently with the bit process. The
+next one is flush flush attack. uh in
+this model in this method uh the arter
+measures the execution of time of the
+flush instruction itself that is uh if
+uh cash flushing is done very quickly
+that means the data was already flushed
+slow means it was in cash. So in this
+way uh we can also learn uh the whether
+a uh specification line was used or not.
+AIT and reload it is combining eviction
+with reload uh measurement. So the
+attacker evicts data uh and then victim
+process runs. Then the attacker checks
+if their data was replaced or not. So uh
+it is another derivative of the uh other
+uh yeah uh
+yeah it is very yeah similar but a
+little bit different uh derivatives of
+this uh the uh uh the previous uh the
+the method in the previous slides.
+Some method requires both victim process
+and the attacker process running on the
+same core.
+In that if uh it is possible then uh it
+can access the attacker can analyze the
+access pattern of the L1 cache because
+these two processes are running on the
+same core. They share the same L1 uh
+cache
+and typically L1 caches are virtually
+indexed. That means uh the attacker does
+not uh need to be understand the virtual
+to physical address mapping and LLC
+uh yeah slicing
+uh yeah slice mapping.
+It is relatively simpler and uh shows
+high accuracy because uh the uh access
+pattern is immediately
+uh reflected on the L1 cache. But the
+arter should be able to schedule on the
+same core uh with the victim process.
+But cross core attacks mean uh victim
+and attacker processes
+may run on different cores.
+So it should target at the last level
+cache.
+Last level caches are usually uh
+physically indexed. So the attackers
+should know uh how the virtual pages is
+mapped to the physical pages and also
+how the LLC is mapped to different
+coursees and it also
+uh it is suffers from some noise because
+or yeah it is more difficult to analyze
+the access pattern because uh the last
+level cache is successed only if the
+higher level L1 and L2 caches
+uh yeah cash mis occurs. So uh it is
+much more challenging but more realistic
+in multi-tenant cloud environments where
+the attackers is much harder to get the
+uh privilege or capability of scheduling
+a specific process on a specific uh
+core.
+And as I just said that the attackers
+can uh analyze the access pattern then
+uh to be more precise the access pattern
+can be categorized into these uh three
+types. The first one is tra traced
+driven uh attack that is the most
+knowledgeable attacker
+knows the access pattern and the exact
+order of the memory access. So uh it is
+it is the most detailed information but
+obviously it is hardest uh to obtain.
+uh but uh in practic practice the
+attacker still is uh capable of having
+some snapshots of the caches state but
+the attacker don't know their exact
+order only whether the victim is
+accessing this memory uh or not but not
+the exact order especially if the only
+the last level cache uh can be accessed
+then uh depending on the memory access
+pattern the order of accessing the last
+level cache may vary. So this is kind of
+more more uh practical uh attack
+category. And the last one is only
+analyzing the execution time of the
+sensitive application not the actual
+precise memory access pattern.
+And if multiple cores
+has its own private cache
+uh the their coherency must be
+maintained. The catch coance protocols
+are employed for that purpose. depending
+on the state of the cache coance
+protocol. It also takes uh time
+and instead of directly uh flushing or
+uh invalidating
+uh the cash line by exploiting the cash
+querance protocol. uh the the
+uh adversary may uh change the state or
+uh measure the uh time to access the
+specific kitchen line.
+So for example if uh yeah it is very
+similar with the the last level cache uh
+access time. So uh if cashi hits then if
+the big team uh previous previously
+accesses a sudden cash line and the
+attacker access the same cash line then
+yeah it takes much less time because of
+cash hits otherwise it takes longer. In
+a similar way uh even though the victim
+process is running on a different core
+uh the L1
+caches their uh state is maintained by
+the cash querance protocol. So uh by
+exploiting the cash querus protocol uh
+the victim process uh the attacker
+process may uh infer some may measure uh
+the timing difference uh of the
+accessing the cash line.
+The DM based attack is similar to the
+cachebased timing attack because in DM
+DM has a row buffer that is for that
+works place as a um yeah cache accessing
+the DM rows. So uh the
+uh the the protocol of accessing the DM
+is like this. We first send the row
+address and then uh the entire row is
+fetched from the memory cells uh to the
+row buffer and from the row buffer we
+actually access the data. So in the row
+buffer the lastly access the most recent
+recent data is temporarily uh stored. So
+it is is like a cache. So uh in a
+similar way with the cash timing attack
+the attackers can measure the timing
+difference of accessing a um yeah DM
+row. So it is still possible uh but
+there are some limitations. The first
+one is actually the main memory DM is in
+the last level in the memory hierarchy.
+So all only if all the memory caches
+uh miss then the last level memory is
+accessed. So there are much uh noise and
+uh the data is actually most of the uh
+hot data which is actively accessed the
+hot data is stored in the cache not
+memory. So yeah because of this
+limitation the DM based attack alone
+cannot
+uh give high resolution of memory access
+pattern. Uh so it is usually used with
+uh combining with other types of tech uh
+method.

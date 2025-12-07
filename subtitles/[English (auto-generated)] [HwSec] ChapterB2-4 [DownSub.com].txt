@@ -1,0 +1,127 @@
+to support virtual memory. Uh Intel
+employs hardware based memory management
+unit. Uh [snorts] and uh the MMU
+refers to the page table to translate
+the virtual addresses to physical
+addresses.
+But the problem here is that the page
+table is maintained by the operating
+system and under the Intel SGX thread
+model the operating system is untrusted.
+So uh the operating system may
+manipulate the page table and uh measure
+some timing differences or uh yeah
+timing differences uh of the page for
+then it can infer a memory access
+pattern of the uh victim process.
+Uh so not only the page table but uh
+segmentation units or uh translation
+lucaside buffer TB which is also can be
+considered as a cache or maintain uh
+state information that can be uh
+exploited by the attackers.
+So uh yeah that that is one another uh
+surface that the adversaries may uh
+exploit
+the page for driven attacks uh exploit
+the page for exceptions uh to infer
+sensitive information.
+So the attacker uh first need to learn
+the base address where the target
+application binary is loaded. Then the
+attacker manipulate the page tables to
+uh restrict the access of the uh victim
+process. That means uh when certain
+pages are uh if those pages are accessed
+the page fault should occur.
+So when actually the page fault occurs
+then the operating system is supposed to
+replace the uh mapping change the
+mapping. So the operating system can
+learn whether this particular page was
+successed by the victim process or not.
+So in this way the attacker can figure
+out which uh pages the victim process is
+accessing.
+Uh but this is uh yeah you can easily
+imagine that it has some limitation
+because the memory access pattern here
+is uh the granularity is only the size
+of the memory page.
+So uh but uh still even though the
+granularity is uh not very fine uh many
+papers uh this reveal actual report
+report that uh we can still infer uh
+sensitive informations from for example
+text documents or Jtech imaging or even
+crypto. graphic keys.
+So it depends on the implementation
+uh but uh because existing yeah
+implementation do not consider this kind
+of tech vectors um yeah it they are
+actually vulnerable.
+another uh useful I should say uh yeah
+goal of the uh page for based attack is
+version identification. So even though
+we don't uh extract all the details or
+some sensitive information from the uh
+victim application.
+Yeah. Even the version number even if
+the attacker manage to identify the
+version number uh the specific uh
+implementation of the application then
+uh the it actually gives yeah very
+useful information to the attacker.
+So if yeah especially if the victim
+application is a open-source application
+then by just identifying its number
+budget number oh we can actually get the
+source code of the victim process. So
+from there the attacker can uh yeah uh
+yeah find vulnerabilities and uh tries
+to come up with an effective attack
+method to the uh victim application.
+Uh another uh some uh yeah
+tricky uh yeah method is sneaky page
+monitoring. I I is I am saying tricky is
+that this is it does not incur any page
+vault.
+uh but
+uh by combining existing OTN method on
+page table cache and DM
+uh it overcomes limitation of individual
+tech vectors.
+So that is because for example if we
+exploit if the uh page table based text
+is likely to trigger many page boards.
+So uh the the the one of the well long
+mitigation method is just counting uh
+the frequency of page fault. If the
+number of page fault is too many
+then it is considered as a potential
+attack. So by uh circumventing by to uh
+nullify this type of mitigation method
+uh this uh sneaky page monitoring does
+not require page for but just uh observe
+the uh page access flag of the uh page
+table entry.
+It depends on the implementation or
+architecture, but some page entries in
+the page table has a flag that indicates
+whether this page was accessed or not or
+some dirty flag that this page was
+updated or not. By only observing those
+flags, the opter can still figure out
+whether this page was accessible or not.
+It does not need page vault
+and its granularity is not very fine. So
+by combining
+other attack method like cache or DM uh
+yeah timing attacks uh the attackers can
+still uh yeah extract some sensitive
+information.
+as an example uh it reduced the page
+fault uh incurred interrupts from 71,000
+to only 1,030
+for attacking eddsa
+u yeah algorithm

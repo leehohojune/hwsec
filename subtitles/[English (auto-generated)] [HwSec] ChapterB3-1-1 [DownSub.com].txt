@@ -1,0 +1,307 @@
+In in this sub chapter uh I will go
+through the uh details about AMD SE uh
+one of the uh commercial TE's.
+The SUV has uh three uh versions. Uh not
+very uh specific versions but overall it
+have uh three it has three uh kind of
+versions. The first one is uh as it name
+uh suggests it is secure encrypted
+virtualization that yeah the SEV uh
+stands for uh secure encrypted
+virtualization and this is the first
+version and as its name suggest it is
+for uh yeah secure virtualization
+while Intel SGX focuses on protecting
+processes. Uh the SEV AMD actually
+selected to targeted
+security virtual machines at the time
+and nowadays as well. Uh the cloud
+environments uh were very popular. So
+they decided to provide protection
+techniques for virtual machines. The
+first version only uh focuses on the
+encryption
+and the in the following year it has the
+next version that includes encrypted
+state. So that version uh is called
+SVES.
+So it has added some protection
+mechanisms for CPU register uh state. So
+in addition to encrypting the virtual
+machine the memory space of the virtual
+machine now uh it can protect the uh
+register state uh used by virtual
+machines.
+So uh by employing this technique it can
+prevent
+prevents hypervisors some malicious
+hypervisors from seeing actively used
+data uh of the uh virtual machine. So uh
+the the state of the virtual machine is
+protected from potentially malicious uh
+hypervisory. The latest one is SEV SNP.
+SNP stands for secure nested paging. So
+the nested paging means um
+the guest OS
+does paging
+the
+the virtual to physical memory
+translation.
+But the hypervisor also does the
+translation. So there there should be
+nested paging.
+Then uh because the hypervisor
+manages the uh address translation
+but in AMD SEV the hypervisor is not
+trusted. So there could be some uh tech
+vectors that can be uh yeah exploited by
+the malicious hypervisor. So the
+hardware uh provides some protection
+mechanisms against this kind of attacks.
+Briefly speaking, the SEV
+separates the memory into private and
+shared memory space which is indicated
+by a single bit C bit in the physical
+address uh address yeah format.
+The actual location of the C bit depends
+on the implementation but could be the
+top
+the most significant bit of the physical
+address because the most significant bit
+is often not used. If we use for example
+64bit
+machine then because the physical
+address is limit the physical
+memory size is limited the upper bits of
+the physical address is usually just
+zero. So the most significant bit the
+top bit of the physical address is
+usually not used. So we are using that
+bit to indicate whether this memory uh
+space is encrypted or not.
+So uh by using this mechanism we can uh
+protect the memory contents from uh
+being leaked to unauthorized
+applications
+as the thread model of the SCV
+uh is look like this and the diagram on
+the right side of this slide illustrates
+which part of the system is trusted.
+uh while others are not.
+In SUV only the hardware
+uh and the form running on the uh the
+the the
+uh yeah the basic uh IO for
+uh is trusted and the virtual machine
+protected by the SCV hardware is
+trusted. but not all of others including
+CPU BIOS, device driver, hypervisor
+and some cloud management software
+and external uh PCI devices
+and uh the scope of the protection is
+against uh confidentiality and integrity
+attacks.
+which is could be uh uh committed by
+malicious
+uh existing other virtual machines or
+hypervisor.
+Yeah. So those untrusted
+uh software
+among those threats the uh the SEV has a
+strong
+precisely the SEVA SNP has a strong uh
+protection mechanisms against memory
+mapping threats.
+So this diagram illustrates what kind of
+threats could be uh yeah uh committed.
+So on the left side of the diagram is
+the virtual addresses virtual uh page of
+protected application.
+Let's suppose it has virtual page number
+one and two and it is currently mapped
+to the physical address of P1 and P2
+and uh
+if so that means these physical address
+are
+should be only uh should be uh dedicated
+to the protected application. That means
+some there could be an attack where the
+virtual address of the malicious
+application
+is mapped to the physical page of the
+protected application.
+If this happens then the malicious
+application can access the physical page
+of the protected application. So that
+means this malicious application may uh
+change the contents of the memory or
+read the memory.
+It should not uh allowed and the other
+part is this one. So it is currently
+mapped to physical page number two. But
+the malicious operating system or the
+malicious hypervisor may change the
+mapping to other uh physical address and
+because from the perspective of the
+application
+it is accessing the same virtual uh page
+but it is its actual content could be
+different because it is mapped to a
+different physical address physical
+page. So if this physical page has some
+malicious code then the protected
+application may execute the then
+malicious code.
+So these kind of attacks are available
+to defend against those attacks.
+The SEV SNP employs two mechanisms. The
+first one is this one reverse map table
+and the other one is uh validation which
+will be explained in the uh next slide.
+So the first uh the reverse map table is
+uh a kind of inverted page table. So the
+ta page table the traditional page table
+translates virtual memory to physical
+memory space.
+physical address. So that means the
+table is indexed by virtual address but
+the reverse map table translates from
+physical address to virtual address. So
+the table is indexed by physical
+address. So that's the uh data structure
+or the meaning of the reverse map table.
+Then how can we use this? That is
+because the page table the traditional
+page table is maintained by the
+hypervisor
+but the reverse map table is managed by
+the trusted hardware. So what we do is
+this when the uh virtual address is
+translated to the physical address then
+by using the reverse map table the
+hardware checks whether this translation
+is valid or not.
+So in this way we can detect uh if the
+um the the same physical address is
+mapped to different virtual address or
+not because we already have the entries
+in the reverse map table. So if we look
+up the same physical address but get the
+different virtual address from the
+reverse map table then that means
+two different virtual addresses are
+mapped to the same physical address. So
+it it should not be allowed. So uh by
+using this reverse map table
+uh the page table based text
+by the malicious hypervisor can be uh
+detected. This reverse map table can be
+used uh for both native and uh SMP
+booth. The in the native mode that is
+just translating virtual address to
+physical address just standard pag
+tables that is uh here uh it is for uh
+just native uh execution of any
+application including the hypervisor.
+But the uh SEV SMP VM mode is uh nested
+translation because uh in the nested
+translation the virtual address of the
+guest system is first translated to the
+physical address of the guest system and
+then it should be translated again to
+the uh physical address of the host
+machine. So there should be two
+translations that is called nested uh
+yeah paging and it is supported by the
+hardware.
+So uh when the nested uh paging is uh
+yeah executed then the reverse map table
+can be used to check the uh physical
+address of the guest uh guest machine
+in the same way with the uh native uh
+paging. So basically we are checking uh
+checking whether this physical page is
+mapped to
+uh one virtual address or uh multiple uh
+pages.
+The other mechanism is p page
+validation. This is for checking whether
+the mapping has been changed or not.
+Once the virtual page is mapped to a
+physical page, it should not be changed
+if it is on the protection.
+This page validation guarantines that or
+detects if the mapping is changed.
+If the physical pages the number of phys
+available physical pages is not enough
+then some physical pages may be swapped
+to the disk. This is paging. But when uh
+the application works and the
+application need to access the swapped
+page, that page must be reloaded to the
+uh physical memory.
+If this physical memory is used by
+protected application then this page in
+the disk must be reloaded to the
+original physical page otherwise uh it
+cannot be cannot pass the uh the
+checking mechanism the validation
+mechanism of SEV. E
+when an uh PI hypervisor assigns a page
+to guest system using uh PM RMP the
+reverse map table RMP update
+instruction. Then the uh assigned paging
+initially initialize to guest invalidate
+invalid state. Then the guest validates
+the page using p validate instruction.
+Then the guest uh invalid state is now
+changed to guest valid state. Then the
+guest system can use this memory page.
+But there is one very important rule
+that is one time rule. The guest virtual
+machine gu
+should never validate the same physical
+address page more than once. So uh even
+uh if this is allowed then when the
+mapping even though the mapping even if
+the mapping is changed if the guest
+machine validate that paging then
+nothing happens. So uh it cannot detect
+the remapping attack.
+So if the one-time rule is strictly
+enforced then uh this slide illustrates
+how the uh memory remapping attack can
+be detected. Here memory remapping
+attack means the the virtual address the
+virtual page of the uh protected
+application is uh
+changed. the mapping is changed from one
+particular address one particular page
+to another which is not allowed.
+For example, here in this diagram the uh
+the
+guest
+uh physical address is currently mapped
+to uh physical address A. This is of the
+guest system. This is currently mapped
+to the physical address space of the
+host X
+and the guest system validated
+uh this space. So it is recorded in the
+reverse map uh table
+and let's suppose that the hypervisor
+changes mapping from X to Y. This is not
+allowed.
+And when the guest system access for uh
+this uh memory page A then now it
+accesses the physical address of uh Y in
+the system. But the hardware uh when
+when the hardware lookups this uh
+reverse map table and it it it finds
+that this page has never been validated
+then an exception occurs. So in this way
+the hardware can detect if the
+hypervisor
+uh unauthorized
+uh yeah changes the mapping which is not
+authorized.

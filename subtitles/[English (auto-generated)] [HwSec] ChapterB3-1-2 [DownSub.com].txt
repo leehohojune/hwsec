@@ -1,0 +1,204 @@
+The SMV uh offers an additional feature
+to allow guest VMs to divide their
+address space into four hierarchical
+levels that is called uh that are called
+vulture machine privilege levels. VMPL
+the VMPL0 is the highest privilege and
+the VMPL3 is the least privileged one.
+So by using this feature the virtual
+machine can uh enforce some
+hardwarebased
+isolation
+an additional abstraction layer uh for
+uh security controls.
+So if this is available then there could
+be uh some applications use cases
+uh because the VMPL
+is enforced by the hardware and VMPL0 is
+the uh highest uh yeah privilege level.
+It can be used as a uh secure hypervisor
+virtualization.
+So uh
+yeah by using this feature the the
+hypervisor itself can be uh act like a
+biometal hypervisor
+and another application could be
+emulation of AIPC
+APIC the advanced programmable interrupt
+controller.
+So it is provided by the hardware but
+when we use the hypervisor the
+hypervisor provides emulation of this uh
+hardware component
+but in the SCV threat model we don't
+trust the hypervisor so that means the
+adversary the malicious hypervisor may
+manipulate the interrupted controller
+and the hypervisor may inject some uh
+malicious event to the virtual machines.
+So instead of the hypervisor
+if we can use the uh buomp zero in a
+voucher machine inside the voucher
+machine then uh we can um provide some
+trusted uh AIPC emulation
+and uh
+if The guest system does not is not
+aware of the SEV
+in terms of SE. Yeah, in SEV term, it is
+not enlightened. That means it does not
+work uh with the it does not the guest
+system does not fully exploit the
+advanced features of the SCV.
+Then uh we can use VMPL0
+as an intermediary
+uh yeah layer for uh the guest
+hypervisor communications
+for example handling some uh exceptions
+or the uh encrypt bit management.
+So uh in this way uh we can uh protect
+or isolate some uh parts of the system
+using uh this FUMPL0 because the VMPL VM
+itself
+uh is inside a trusted domain trusted uh
+part of the system while the hypervisor
+is not trusted. So uh instead of instead
+of relying on the hypervisor if we
+offload some functions in the hypervisor
+into the protected voucher uh machine
+using VMPL0 then we can now implement
+the some functions of the hypervisor in
+a trusted way.
+So, SCV uh SCV
+uh provides two additional modes for uh
+interrupt and exception handling.
+Uh the first one is restricted
+injection. It disables
+uh the traditional the conventional
+virtual interrupt queueing uh and
+partially disables the interrupt
+injection uh interface. Instead, it
+introduces another exception vector HV
+and it is only allowed to inject that
+new exception vector and it works like a
+doorbell. So uh the virtual machine and
+hypervisor
+uh can communicate via para virtualized
+uh way uh through the shared memory. So
+uh the virtual machine can uh just check
+the uh queue and then process the uh
+interbore exception. The alternate
+injection allows just standard virtual
+interrupt queuing but uh it is
+controlled by the guest not the
+hypervisor because as I mentioned again
+the we don't trust the hypervisor but
+the guest virture machine under the
+protection of hardware SUV. So the guest
+controls the standard virtual inter
+queuing
+for this new fields in the encrypted
+virtual machine save area VMSA
+uh is in uh introduced and the new
+fields
+uh stores some metadata and interum
+related data uh uh yeah in The VMSI
+AMDS we also support uh a testation.
+Uh
+the attestation is a part of a launch
+process. The process uh begins with
+initial unencrypted unencrypted imaging
+and the high provisor asks the AMDSP
+which stands for AMD secure processor
+the hardware to install initial pages.
+Then the hardware as AM AMDSB
+cryptographically measures the contents
+and metadata uh to into launch uh
+digest. So uh by checking the launch
+digest uh we can verify the integrity of
+the uh virtual machine imaging only if
+it is verified in launches.
+So the guest owner supplies signed
+identity block associated with the
+virtual machine. The IDB contains uh
+some fields to uniquely identify the
+vulture machine and only if the vulture
+machines matching with the expected
+digest can be associated with IDB and
+launch it.
+The attestation process is very just
+typical.
+So uh the remote party uh request
+uh the the attestation and the virtual
+machine generates a report
+uh by asking to the AMDSP hardware. So
+the hardware generates report signed
+with uh some key and then the voucher
+machine returns the report to the uh
+remote party. Then the remote party can
+uh yeah verify the uh report.
+In case of the original, the first
+version of SUV and the SUV,
+they only provide the attestation
+at the launch time
+before uh it actually begins. But SCV
+SNP
+uh supports the test station at any
+time.
+SEV also supports VM migration.
+Migration means an application
+on a virtual machine running on uh a
+physical machine can be migrated to
+another physical a different physical
+machine.
+Typically uh if any application is under
+the protection of hardware, it is not
+easy to migrate the this uh yeah program
+but because this is a virtual machine
+and the virtual machines are usually
+used a cloud environment and in cloud
+environment uh to maximize the resource
+utilization the migration is actually
+very useful. So the SEV targeting at
+yeah protecting virtual machines also uh
+yeah pro offer uh the migration of the
+protected virtual machine.
+It is done by introducing another
+virtual machine which is called
+migration agent.
+The migration agent itself is another uh
+virtual machine under the protection of
+SEV
+and uh
+each virtual machine should be
+associated with one MA so that the MA
+can work with the VM to migrate it to
+another machine. But yeah, single MA can
+manage multiple uh VMs.
+The MA determines the uh systems
+uh policies.
+So it uh it
+it communicates with the MA of the
+destination virtual mach destination
+system uh to negotiate whether this
+virtual machine can be migrated to there
+or not depending on the uh policy
+and uh it also support flexible
+migration timing.
+So the source and destination machines
+don't need to be online simultaneously.
+The MA can hold the virtual machine
+state.
+Yeah. Temporarily or even into long-term
+storage
+so that the virtual machine can be uh
+restarted.
+Yeah. Sometime later. So it offers
+flexible migration timing which is
+mainly contribute uh attributed to the
+migrate the presence of the migration
+agent
+and while the transport occurs the MA on
+the source machine authenticates the MA
+on the destination machine so that they
+can uh establish a secure Panner for uh
+secure transfer.

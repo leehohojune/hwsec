@@ -1,0 +1,323 @@
+the hardware security modules can be
+deployed in
+different forms. So in this sub chapter
+uh we will discuss how HSMS uh can be
+deployed. Maybe we can say that how HSM
+uh be integrated with the existing
+system because HSM is basically a
+separated hardware module that is in
+charge of uh security. So the first one
+is FG integrated HSM or device
+integrated HSM. So this offers the
+minimal latency for timesensitive
+operations because uh this type this
+type of integration is the closest uh
+way to integrate HSM with the existing
+system. the the closest actually the the
+most uh close uh uh method is to
+integrate the HSM within the device.
+So for example in let's let's consider
+some IoT or industrial IoT system. So I
+will uh use this example throughout this
+sub chapter.
+And in IoT environment there could be
+various types of uh devices including uh
+sensors, actuators and some processing
+uh solvers, database and many things.
+So if the HMS integrated then the HSM
+could be directly integrated with the
+sensor for example. In that case because
+the HM is HSMA uh HSM is actually within
+the device uh it offers minimal uh
+latency or it could be uh integrated
+with an edge device
+in IoT environment. uh the sensors may
+not have enough computing resources to
+uh interact with or fully utilize the
+HSM. So uh the sensor devices only have
+sensor and very lightweight
+communication module not nothing else.
+So in that case a kind of edgy device
+collect data from the sensors and then
+do some process. So in that case the HSM
+can be integrated with the edge device.
+So this deployment type is the closest
+way to the actual device.
+So uh it can easily provide local data
+protection because the HSM is within the
+device and uh it also guarantees
+enhanced the security for these
+distributed environments because each
+device has its own HSM
+and because the HM HSM is within the
+device it does not consume the network
+uh yeah bandwidth. So it can reduce
+network overhead and because they are uh
+yeah integrated with the device uh they
+can do by themselves that means uh
+autonomous operation is possible but it
+has some challenges because uh compared
+to the cloud environment uh I will yeah
+yeah explain the cloud deployment ment
+uh method uh but it yeah in where the
+HSM is only deployed in the cloud.
+Though compared to the cloud-based
+deployment, it has limited scalability
+because uh if we want to add more
+devices then those devices must have HSM
+and uh because it is kind of distributed
+so it is not easy to manage them all.
+Of course it is possible but if the
+number of devices grows then it will
+become complex
+and the device has resource constraints.
+So uh the device uh devices may not
+fully exploit the capabilities of the
+HSM
+and uh typically the sensors are
+deployed close to the actual physical
+system.
+So there those devices are likely to be
+exposed to the physical uh access of
+attackers. So for example the one of the
+IoT
+example could be uh some uh distributed
+energy resources. So uh for example uh
+some solar panels
+because solar panels are just placed
+outside of a building
+and uh compared to let's say uh data
+center
+uh the solar panels
+of course they have they must have some
+physical security uh yeah mechanisms But
+let's say compared to the data center it
+is within the building and there are
+many doors. So compared to the data
+center solar panel site must be easier
+to access penetrate by the attacker I
+mean the physically uh penet penetrate.
+So uh it is more likely to be exposed to
+physical attacks
+and also it is not easy to uh make a
+distributed um management policy.
+But yeah the I am just talking just uh
+IoT environment uh that the the total
+whole system must be coordinated in some
+way. But uh the HSM can be just employed
+independently. In that case, those
+challenges are not applied. For example,
+your cell phone
+has a kind of HSM. So, but uh cell phone
+does not need to uh interact is not
+always required to interact with other
+cell phones. So, it can just work
+independently. In that case the yeah
+some of these limitations may not be
+applicable.
+The second way to deploy HSM is onremise
+deployment.
+It is there is a server within the site
+and the HSM is employed in the server.
+So this is a kind of onremise cloud. You
+may think uh like that. So uh
+for example as I mentioned I am just uh
+giving you an example of uh IoT. So
+let's say for example smart factory in
+the factory there is a onremise cloud.
+Then the onremise cloud has HSN but not
+the devices in the site.
+So uh
+in this case uh because it is still a
+kind of centralized management. So uh it
+is much easier to develop and enforce
+policies
+but it it is still close to the device.
+So uh it offers still a low latency
+and um if there are many regulatory
+requirements then it it is it could be
+uh uh a good option because uh it's much
+easier to managing uh the policy
+but it also has some scalability
+limitations
+uh because uh anyways the onremise cloud
+must be maintained by the uh user. So if
+uh the user wants to increase the the uh
+system then the the user also need to
+increase the capacity of the onremise uh
+cloud. So that means uh it needs high
+capital investment
+and somebody needs to manage the cloud.
+So uh and also yeah uh
+even if it is possible if we want to
+expand the capability uh in requires
+some complex uh infrastructure
+expansion.
+So as like other software systems,
+cloudbased
+deployment could be one uh promising
+option because um yeah it can yeah the
+the benefits of using cloud-based HSM is
+the same with just cloud-based any kind
+of solutions.
+So uh from the perspective of users
+they don't have to worry about the
+infrastructure of the cloud because the
+cloud service provider will take care of
+them take care of it. don't uh the users
+don't need to worry about and if the
+user want to uh increase the capacity
+then
+they just they what they need to do is
+just to pay more and the cloud service
+providers will increase their uh uh
+capability
+and uh typically the cloud services are
+uh yeah duplic
+how I can say yeah duplicated or uh for
+tolerant so uh their service are likely
+to be highly available
+and the users don't need to uh manage
+the physical hardware the HSM itself
+and it can be just globally uh
+accessible
+but because the cloud service uh is
+remotely provided it will uh yeah in may
+uh incur increased latency.
+So uh if there is a time-sensitive
+uh service that has to use the HSM then
+this may not be even uh not applicable.
+uh and also even though on in on average
+the latency is tolerable but uh it is
+not always guaranteed because as you
+know uh network latency depends on many
+uh factors. So there could be a just
+spike in network latency or even not
+reachable. If it is not only
+timesensitive but also mission critical
+then yeah we cannot yeah use the
+cloud-based deployment
+and
+the users
+don't have any control over the physical
+hardware.
+So it could be good because yeah they
+don't have to worry about it. But the
+downside of this is they don't have any
+control
+and all the data sent to the cloud could
+be
+potentially uh compromised. So potential
+uh data sovereignity concerns may arise.
+Uh we can mix them all. So uh
+just not not just uh one uh solution uh
+we may uh yeah mix them uh in a
+distributed way. So in that case uh
+compared to the EG device
+or device integrated HSM uh it is more
+uh a little bit better to manage them
+centrally and compared to the onremise
+HSM uh it is more resilient and scalable
+and compared to the cloud service yeah
+it offers deployment flexibility ility.
+But if we mix combine them, the real
+challenge is this the seamless
+synchronization of keys because for
+authentication
+and uh encryption
+uh we need keys. But if all the keys are
+within the same um yeah environment then
+uh we can keep the same key uh for uh
+the service. But if we mix different
+services different services need uh may
+have different requirements of the keys.
+So we need uh a uh yeah
+complicated
+uh key management system. So as you know
+this is not easy and if we have a
+central key management system that could
+be the uh yeah potential uh attack
+surface. So from the perspective of the
+attackers oh yeah the the the central
+key management system could be the first
+target.
+So you know there are always tradeoff.
+So this table summarizes the uh
+deployment method. Uh in terms of
+latency
+uh the Etg or devices integrated
+uh yeah deployment has uh the lowest
+latency but on premise deployment also
+offers very low uh latency and uh but
+the cloud-based
+uh uh yeah deployment
+uh may have high network latency of
+course compared to other solutions.
+latency that it has longer latency. But
+the more problem is that uh the worst
+case scenario the worst case latency is
+not uh guaranteed and the distributed
+deployment uh have some moderate latency
+and uh in terms of scalability
+the cloud-based scale cloud-based
+solution and distributed deployment
+offer high uh scalability but H uh on
+premise they have limited scalability.
+Uh but in case of controllability
+uh the ATG or device integrated method
+offers localized control. uh but they
+have full control over their own uh
+device but they are not uh they it is
+not easy to coordinate them control them
+in a coordinated way
+but on premise and uh yeah on premise uh
+uh this has a offers a full control uh
+but the cloud-based
+uh deployment ment uh the user still has
+full control but not physical access. So
+as much as the cloud service providers
+allow. So I think it is depends on the
+uh cloud service providers and in the
+distributed deployment. Yeah, the
+control is also distributed
+and costwise
+if the HSM is integrated with each
+device then yeah uh
+each device must have the uh yeah HSM
+and uh it could be uh it will in it will
+be included to the manufacturing post
+and because each device has its own its
+own operation. So from the perspective
+of the user who is just purchasing the
+device and integrate them to make a
+system uh initially they the user uh
+user of the system
+uh don't actually pay much to make the
+system because each device has already
+the the yeah HSM
+but in case of on premise the user need
+to build a onremise cloud. So it need uh
+initial investment but in case of a
+cloud-based environment yeah just pay as
+much as the user use
+and the distributed way that depends on
+the architecture. So there are many uh
+yeah levels of distributed. So it
+depends on the architecture and the
+availability
+uh so the cloud-based
+uh deployment model offers the highest
+availability because the cloud service
+providers usually maintain the uh cloud
+environment. uh but in other cases
+distributed method could be uh um more
+uh available than other solutions but in
+case of GN on premise uh because yeah uh
+it it is the responsibility of the user
+who make sure the uh availability of the
+system. So uh if the user uh can pay
+more then yeah they can employ the same
+way how the cloud service providers
+maintain a availabilities
+but typically it cost much more. So it
+depends on the yeah design I should say.

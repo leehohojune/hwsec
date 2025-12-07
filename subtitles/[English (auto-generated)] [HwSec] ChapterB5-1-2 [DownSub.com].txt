@@ -1,0 +1,183 @@
+an arbit puff is one of the
+representative example of uh the pop
+implementation and it uh take advantage
+of the delay variation.
+So it consists of a series of boxes as
+shown in this slide. Uh and uh each box
+uh receive a control signal uh that is a
+challenge. So depending on the challenge
+the path is actually formed differently.
+For example, here you can see that uh
+when the uh yeah first you can see that
+there are series of moxies. So this is
+the first stages, second staging and
+yeah nth stage and each staging these
+two moxins uh have uh choose one of the
+path from the previous staging. So here
+in this example a blue path is formed
+here in this way and the uh red or
+orangey path is formed yeah here in this
+path and
+they take a different path uh depending
+on the challenging and uh
+because these two path go through the
+same number of moxes. So their delay
+must be uh very similar
+but because of the variation uh it is
+not guaranteed. So uh if
+the top path if blue path is faster then
+we can say that uh for example so here
+is this blue and orangey and this is
+faster than the orangey path here and
+this blue path is uh uh connected to the
+data and the orange path is uh connected
+to the clock and this is a d flip-flop.
+So uh if this blue path is vector like
+this then uh this d flip-flop fetches
+the input uh at the rising edge of the
+orangey uh yeah path. So it uh fetches
+uh samples data at this time. So the
+output becomes one. But uh if blue is uh
+slower than the orangey then uh the edgy
+will be uh will occur at this moment. So
+uh at the rising edge of the orange path
+zero will be uh yeah fetched sampled. So
+uh if the blue is slower then the output
+becomes zero.
+So uh whether the output is one or zero
+depends on the which path is faster and
+uh the latency is uh heavily depend on
+the uh the uh late uh the uh process
+variation. So uh by using this process
+variation uh in delay uh we can generate
+a random number and the path uh can be
+reconfigured by the challenges. So uh
+here in this example the path is like
+this but uh by changing the challenges
+the path could be different.
+So uh and if the number of stages is uh
+large enough then there could be many uh
+challenges so the output of this puff is
+very unlikely to be uh predicted.
+So uh this is one very representative
+example famous example of delay puff.
+Then the question is does this really
+work? Then uh through experiments the
+researchers actually proved that uh this
+can be the orbit of can be used as a uh
+stable uh uh authentic uh cater
+to prove that we have to um prove two uh
+aspects.
+Yeah. One important uh aspect is whether
+uh we can distinguish different chips
+using this the uh the output of the abit
+puff. Uh the the the other one is uh
+whether the same chip generates the same
+output uh uh yeah stably.
+If the output changes from the same chip
+then we cannot uh rely on these output
+for authentication or identification. So
+we have to check whether these two
+requirements are met or not. for that uh
+here in this let's say paper the authors
+uh implemented actually implemented that
+a top puff uh using TSMC uh foundry and
+uh they applied 100 random challenges
+and then measure the output.
+So the challenging because uh the 100
+challenges are given the generated
+number of bits is 100 in total and out
+of 100 they measure uh two chips x and y
+and they measure the heming distance of
+these responses from different chips.
+And they found that the distance the
+heming distance between X and Y the
+different chips is about 24.
+So uh out of 124 yeah it it depends but
+uh if we compare this and this uh this
+is large enough the difference is large
+enough compared to the uh variation.
+Uh so uh here let's say let's see this
+one first. So when they measure the
+output from the same chip the average
+heming distance is less than one bit. So
+yeah compared to 24bit of different chip
+if it is stably keep generating the same
+output but with just one bit difference
+then we can distinguish we can use this
+for identification of chip X. This error
+rate could be tolerated by employing
+some kind of error correction code. In
+that case one or two bit or yeah
+depending on the parameter of the uh ECC
+the error correction code we can fix uh
+this this number of error bits.
+If these two numbers 24 and 0.9 is too
+close for example uh this difference is
+only two bit or three bit then if we
+employ ECC then uh it is very it is uh
+becomes more difficult to distinguish X
+and Y but because the difference 24 and
+0.9 is large enough uh we can rely on uh
+we can use this for identification
+and the output can be uh affected by
+environment. Typically the temperature
+is the major the primary source of uh
+variation. So they uh uh measure the
+heming distance of chibx the same chip
+but varying the uh temperature and then
+they found that the difference is about
+two. So here it is larger than this
+because the variation of the temperature
+affected the output but it is still very
+uh low compared to this number 24. So uh
+from this environment we can conclude
+that uh the we can use the abit of to
+identify uh uniquely identify uh chips.
+They performed a little bit more
+experiments. This is uh about a detailed
+uh analysis result of uh the uh
+variation.
+So uh this is the uh measurement noise
+from the same chip. So I said that it is
+about 0.9 bits then that is uh
+distributed here. So you can see then
+most of the uh measurement is uh yeah
+placed in very narrow range of the uh
+the this chart and uh they measure the
+difference here X and Y and you can see
+that it uh it it is distributed a broad
+range of heming distances.
+So on average it is about 24 25 bit.
+So uh you can see that uh by using this
+we can distinguish X and Y.
+And the other experiment is to verify
+that the output still generates uh
+stable output. So they measure the same
+heming distance the distribution of the
+heming distance at uh yeah 21 100 uh 25
+uh degrees C and compared to 20° the
+difference is about 3.5 bit
+and at the previous slide I I said it is
+two bit because at the time the
+temperature was 70 uh degree so uh The
+authors actually changes the uh
+temperature uh and then uh depending on
+the temperature they found that uh the
+number of difference uh varies but at
+most about 3.5 pi uh bits and they also
+measured the noise from the voltage
+variation because the input voltage uh
+is supposed to be stable but yeah in
+reality it has some vari variation. So
+uh about assuming 10% voltage variation
+they measure how many uh bits are
+different and they found they observed
+about four bits. So it is still much uh
+less than compared to the difference
+between different chips.
+So as a conclusion uh the abit of puff
+is one of the strong candidate of the uh
+uh authentication or identification
+method uh exploiting the process
+variation.

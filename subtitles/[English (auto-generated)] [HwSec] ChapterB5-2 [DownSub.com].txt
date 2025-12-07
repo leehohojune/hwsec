@@ -1,0 +1,184 @@
+POU has many potential applications.
+That's why researchers have intensive uh
+yeah work on studies on this uh uh in
+this topic and uh because this puff can
+be used as a fingerprint of any device
+that is not clonable that means it
+cannot be tempered nor uh fabricated.
+So we can use the puff uh for
+authentication
+or uh uh yeah secret generation.
+So uh that is a primitive function and
+based on this we can uh build uh some uh
+applications like this. So for example
+it can be used for anonymous
+computation. For example, Ellis wants to
+run some computation on Bob's computer,
+but uh Ellis wants to make sure that the
+result from Bob uh is correct.
+Then this is this kind of uh application
+is uh often called verifiable
+computation. So uh the Bob needs to send
+uh not only the result but also the
+proof of the result uh so that Ellis can
+verify whether the result is correct or
+not. And when the Bob returns the uh
+result the uh Bob can uh send the
+certificate using puff. Uh so so that
+the valis can verify the result because
+it is signed by the some information
+from the puff it cannot be
+fabricated. So uh because puff if the
+Bob if Bob has a puff in uh in the
+computer uh at least can make sure that
+this computer is done on the Bob's
+computer not anywhere else because the
+puff cannot be um yeah fabricated
+and uh we can use puff for software
+licensing as well. So there for example
+at least wants to sell Bob a program
+that can run only on Bob's a certain
+chip or yeah any kind of a system
+then the chip can be identifi identity
+by a puff. So uh
+in some uh software and some software is
+extremely expensive.
+For example, uh in order to design a
+chip, there are some tools that should
+be used to design a chip
+that is often called EDA tool. E
+electronic design automation tools.
+Usually ED tools are very expensive
+and the vendor EDL tool vendor wants to
+make sure that uh this particular
+software should be used only for the
+only by the customer
+not anyone else.
+That means uh the vendor wants to
+prevent malicious customers from
+distributing or uh copying their tool to
+someone else.
+So that can be done by using puff
+because uh the puff cannot be
+duplicated. So if we um make sure that
+this software can run only on uh sudden
+uh puff then uh we can make sure that
+this can uh the program can cannot run
+anywhere else.
+They are just an examples and uh the
+puff can be used for many other
+applications.
+And a little bit more technically uh how
+can we use the puff for authentication?
+There could be multiple ways but the
+most uh popular example is the
+challenging response protocol.
+The puff is basically a random function
+that generates random output from the
+given input. So uh
+before authentication
+uh we the verifier who wants to
+authenticate the path the verifier
+has a database
+that has a series of yeah the pairs of
+challenging response from that puff.
+So um the the response from a uh
+specific challenging must be different
+uh with different path. So uh by
+checking the uh correct response for the
+uh uh given challenge, the verifier can
+verify whether this uh puff is uh what
+we actually expect.
+Uh
+because
+to make it secure verifier needs to have
+a large number of uh yeah pairs
+otherwise uh there could be a replay
+attack uh because uh if this protocol is
+used over unsecure communication channel
+so the attacker may record the
+communication between the approval and
+verifier and uh accumulate the challenge
+and response pairs.
+And the if the attacker uh happens to
+observe the same challenge that was uh
+used before then the article can uh
+because it has already been recorded.
+the article can uh yeah interfere and
+yeah interrupt and uh yeah yeah yeah
+impersonate the puff authentic puff. So
+uh if we have only a limited number of
+pairs then this challenge and response
+protocol cannot be secured.
+So that's why we can use this challenge
+protocol only for strong puff.
+We often classify puffs to strong and
+weak puff depending on how how uh high
+the entropy is the output of the puff uh
+is. So
+weak puff can generate only a limited
+number of different outputs. So in that
+case uh yeah we can generate only a
+limited number of challenge and response
+pairs.
+So it is not suitable for uh challenge
+and response protocol. This is useful
+secure only for strong puff that can
+generate a large number of challenging
+response pairs.
+But still we can use the weak puff for
+authentication
+that can be done by using the signature.
+So uh if we want to authenticate a
+device using a weak puff then what we
+can do is that from the weak puff we can
+generate a uh key pair the uh the key
+pair for digital signature. So the
+public key is published and the private
+key is used to uh sign uh make the uh
+digital signature.
+So the verifier can verify
+uh or authenticate the puff by checking
+the digital signature. So uh still if we
+have a weak puff we can use uh digital
+signature for authentication mechanism.
+But the limitation of this protocol is
+that uh we need to use some kind of
+digital signature scheme. For example,
+RSA, ECDSA, this kind of encryption
+algorithm.
+These kind of in cryptographic
+encryption algorithms are often
+vulnerable to side channel analysis
+attack. So even though we employ puff
+and puff uh is not is secure against um
+side channel analysis attack but the
+encryption algorithm may be vulnerable.
+So uh that that's one of the limitation
+uh of using the weak puff
+and this slide shows that how we can
+generate a key from a puff.
+If the puff is uh uh stable enough then
+we can use the output of puff just
+directly as a key but usually it is not
+yeah stable. Even though we are st we
+say that this puff is stable that means
+the number of uh having distance
+uh uh is very small uh but it is not
+always zero. So to mitigate this kind of
+a situation uh the error correction code
+is often used.
+So uh we can put the ECC the error
+correction code uh to the uh output of
+the puff. So then we can make sure that
+the output of the puff is stable
+otherwise we cannot use the puff as a uh
+key generator because yeah we don't if
+the key is different then it cannot be
+verified.
+So this is one uh way to uh yeah to uh
+use the puff for key uh I mean uh key
+generation. Uh especially if the puff is
+weak puff then uh by uh using the
+digital signature scheme we can uh use
+the puff for authentication.

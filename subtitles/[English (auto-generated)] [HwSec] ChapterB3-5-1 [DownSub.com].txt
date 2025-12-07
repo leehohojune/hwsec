@@ -1,0 +1,179 @@
+PF is another type of T uh developed by
+IBM. PF stands for protected execution
+facility.
+PF uh tries to address these challenges.
+Uh first one is balancing isolation and
+confidentiality.
+So isolation
+uh is not so uh we yeah PF tries to
+separate this.
+So uh
+sometimes uh in order to uh preserve the
+integrity
+the isolation could be just enough.
+But for confidentiality also uh in case
+of uh just logical separation isolation
+uh the confidentiality also can be uh
+guaranteed but the logical separation
+may not be possible uh may not uh enough
+may not be enough to prevent some
+physical access. And so depending on the
+scenario and the threat model we can
+separate uh the isolation and
+confidentiality.
+So uh they provide a uh balanced
+solution to uh minimize the uh overhead
+of the TE.
+And the second challenge is application
+changes
+uh because the software layer the
+software
+uh should be uh changed in order to uh
+exploit the security features of tees.
+Uh it is non-negligible. That's the
+problem. there are
+huge changes
+uh to uh make the existing application
+running in on uh TE.
+So yeah, I think it is not it is
+inevitable but uh should be minimized.
+So that's the second challenge and the
+last one is life cycle management
+in order in order to make the
+application secure some additional
+techniques like a testation secret preh
+provisioning and integration
+uh these new features
+are employed for security But if we want
+to update or let's say apply security
+patch then the attestation and secret
+provisioning
+might be uh required to be done again.
+So it is in makes harder for the
+developers or the maintainers to uh yeah
+manage the application. So those are
+some challenges that the PF tries to
+address.
+The key idea of PF is introducing
+ultravisor. So the ultravisor is a even
+higher level system software than the
+hypervisor.
+So the ultravisisor is still a former
+but uh with the highest privilege.
+So this former manages the hardware
+reinforced access control.
+So that that is the key idea of the of
+PF and the PF is supported in the latest
+power 9 chip. So that's uh this
+instruction set architecture is the
+power processor
+and uh it demonstrates that the
+combining access control for isolation
+with cryptography for confidentiality
+creates an effective confidential
+computing approach. They claim
+in PF there is one more bit indicating
+whether the CPU is in a secure mode or
+in a normal mode. It is stored in the
+machine stain register. Here this S bit
+uh this is uh indicating whether it is
+in the secure mode or uh normal mode.
+So for example
+uh if it is secure mode and hypervisor
+uh enabled then it is ultravisisor mode.
+But in case of just a regular hypervisor
+the secure mode is not this bit is not
+turned on.
+The objective of the ultravisor the the
+responsibility of the ultravisor is the
+isolation and uh the security of the
+computation.
+The system management is still the
+responsibility of the hypervisor. The
+ultravisor is only focusing on the
+security. Isolation is also considered
+as a security. So basically the
+ultravisor is responsible for the
+security of the uh system.
+The hypervisor uses ultra coursees to uh
+managing the security sensitive uh yeah
+facilities.
+So in this diagram you can see that the
+hypervisor can use ultra core to
+interact with the root provider. So by
+doing something uh before doing
+something or while doing something if it
+is related with the security or
+isolation then the hypervisor calls the
+ultra core to uh yeah to interact with
+the ultravisor.
+So uh yeah in secure state if it is
+running in the secure state even
+hypervisor cores are delivered to the
+ultravisor and then uh it is passed to
+the uh yeah hypervisor.
+So here uh you can see that in SVM the
+virtual machine running in the secure
+mode. Uh if it cores hypo core then it
+is uh delivered to the rootvisor and
+then it is it is delivered to the
+hypervisor.
+So uh the ultravisor
+uh make sure uh this function is secure
+but in the normal virtual machine
+because the uh the hypervisor is
+directly delivered to the hypervisor
+but the interrupts can be uh delivered
+to directly to the SVM here or to the
+ultravisor but not The hypervisor
+PF uses security domains to enforce uh
+access control. The hypervisor and
+normal VM share one domain in normal
+memory. Uh but each secure VM gets its
+own domain in secure memory. So by doing
+this uh the secure virtual machines are
+protected from hypervisor and also other
+uh yeah vms
+and the hypervisor is also protected
+from all VMs.
+The secure memory is identy.
+Yeah. This bit the location of this bit
+depends on the implementation. But in
+power 9 it is implemented using the
+higher address uh high order address bit
+like 15th bit of the address and uh
+hardware enforces only uh the uh the sec
+if the process in the only processes in
+secure state can access the secure
+memory. So it is uh enforced by the
+hardware and the ultravisisor can
+control the partition table control
+register uh pointing to partition table
+uh in secure memory. So uh by checking
+the uh this table we can uh changing the
+configuration of the SQL memory.
+the confidentiality is managed by these
+uh mechanisms.
+So uh the page table uh the as suv and
+page tables uh
+when when the access occurs the context
+switching occurs then uh these are uh
+yeah invalidated
+and uh ultravisor encrypts data and
+copies to the ordinary just to regular
+memory if necessary. So uh because of
+the uh the access control mechanism I
+explained before it is a logical
+separation and it can be used for the uh
+confidentiality as well. Uh but uh the
+secure memory may not be enough to store
+all the required data. In that case we
+the ultravisisor has to uh yeah uh has
+to offload some data in the secure
+memory to the normal memory. In that
+case only if this is required the memory
+the data stored in the normal memory
+should be encrypted
+and uh in if it happens then yeah uh the
+uh page table entry for the ordinary
+memory should be valid for hypervisor

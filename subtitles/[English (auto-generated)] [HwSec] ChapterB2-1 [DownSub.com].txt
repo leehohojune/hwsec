@@ -1,0 +1,353 @@
+In this chapter, we will take a little
+bit closer look at Intel SGX and its
+security vulnerabilities. Even though we
+are implementing security techniques in
+hardware, it yeah it cannot be perfect.
+So there are some known uh
+vulnerabilities. So we will also discuss
+uh what kind of vulnerabilities have
+been found
+uh uh in injeudes
+integrity protection, confidentiality
+and isolation assurance that are
+yeah uh the typical objectives of uh
+trusted execution environment integ uh
+in order to protect integrity
+uh the SUGX
+uh can detect provides some detection
+mechanism of integrity violations.
+So if any unauthorized application
+including the system software uh tries
+to uh modify what is the resources used
+by the inclaim then uh the hardware
+mechanism can uh should protect uh
+prevent or detect uh such attempts.
+So that includes the memory the yeah the
+memory is the most important part the
+resource uh but also uh the accesses to
+the uh the the data in the storage
+and uh confidentiality also should be
+guaranteed. Uh
+so the isolation by isolating or
+preventing access from other
+unauthorized
+uh applications or system software we
+can logically ensure the uh isolation
+and that means uh the data used by the
+inclave application cannot be revealed
+to other uh unauthorized applications. s
+and uh there could be some uh data that
+need to be stored in the uh memory that
+is not on the exp uh protection. We will
+discuss this later and also uh we may
+need to store the data in the storage
+that is shared by all applications. In
+the case we have to employ cryptographic
+isolation mechanism. That means
+basically we are encrypting the data
+and uh so if there are multiple enclaves
+then they can be should be uh separated
+and also the enclave is also isolated
+from other uh parts of the uh the
+system.
+the uh the execution model of SUGX
+includes uh these features. The first
+one is the SGX applications
+uh consist of two parts normal untrusted
+region and a security critical enclave
+region.
+Uh the enclave application is not
+running just uh as a single part. It
+always begin with the normal untrusted
+reason and it uh changes or enters the
+inclave execution by using a special
+instruction.
+And after finishing or in the middle of
+execution of the enclave the trusted
+part then it can uh go out or call the
+untrusted part. So basically SGX in case
+of SGX the applications
+uh are uh running uh going into and out
+of the enclave regions.
+So the when the host process initiates
+an enclave application then it lose the
+data and uh the code and data into the
+protected memory and then after checking
+the uh its integrity their integrity uh
+in launches the application
+and the code uh executing within the
+enclave can access the process reserved
+memory that is dedicated to the enclave
+application.
+And uh when the enclave uh functions
+complete then the result uh must be
+returned to the host process while
+enclave contents remain protected in
+isolated memory space.
+This is the organization of the memory
+uh in SGX.
+Uh here you can see that the in the DM
+the main memory a part of the memory is
+reserved as a processor reserved memory
+and this is a physically identified that
+means uh the address space of the PRM is
+determined by its uh physical address.
+So the hardware can easily
+uh protect or prevent other unauthorized
+software or even DMA from accessing this
+region because this is a physic based on
+we can determine whether this address is
+in PRM or not by its physical address
+and in the PRM there is a part that uh
+EPC See enclave page cache. This is used
+by the enclave application and other
+part of the PRM is used by the uh
+enclave uh TCB. Uh so in this region the
+enclave TCB uh stores the metadata
+and uh in in EPC
+uh it is basically cache. though uh
+different enclaves may uh may uh have
+allocated memory paging in this region.
+So you can see here that uh some uh
+enclave
+uh pages can be mapped to the EPC and
+the inclave. Yeah, this is the enclave
+pages and it can be stored in the uh
+EPC.
+In other words, the enclave memories may
+not be all of the inclave memories
+cannot be stored in EPC because the size
+of EPC is limited and cannot be
+dynamically
+extended.
+uh the size of the PRM actually is
+determined at the booting time
+but but not runtime. So even though we
+we don't have enough EPC we cannot yeah
+increase the its size in that case we
+have to store the inclave memory in uh
+unprotected region of the main memory in
+that case to protect that uh that uh
+data we have to encrypt so that other uh
+applications cannot access that data.
+And from the perspective of virtual
+memory
+uh the uh the
+from the host application
+uh some memory space cannot be accessed
+and it is only uh can be accessed by the
+inclave
+of virtual memory and uh So yeah as I
+mentioned the application
+in even inclive application consist of
+the two parts one is uh untrusted
+uh part and the other one is trusted
+part that's why even uh but anyways they
+are uh in the same application so they
+have the same vure memory space and uh
+this part this part can be accessed only
+by the thrusted part inclave
+application. It is determined by uh uh
+this e uh ea ly
+and uh this yeah this virtual memory
+space
+uh should be mapped to the physical page
+so that we can actually access
+When this virtual memory page is stored
+uh loaded to the uh physical memory, it
+should be stored in uh EPC.
+This page mapping is maintained by
+system software the operating system.
+But here the the main assumption of the
+SGX is that we don't trust the operating
+system.
+So there is no guarantee that the
+operating system maps this virtual
+address of the enclave application to
+the correct EPC area. That's why we
+define EL lang. Uh so the hardware can
+check that the uh the operating system
+uh is actually doing uh correctly. uh
+the
+uh by checking the if uh the virtual
+address within the uh range defined by E
+range and if it is not uh yeah mapped to
+EPC then the hardware can detect.
+So it is direct mapping but if uh this
+address cannot be allocated to EPC then
+it it needs to be stored in the DM but
+it is through a different mechanism.
+I yeah I will explain this later in uh
+following slide
+and there are some other critical data
+structures that are maintained by uh
+SGXT uh TCB
+uh the Sic that is SJX enclave control
+structure stores very uh critical data
+about one inclave application that
+includes the dedicated PC pages uh and
+some uh ID and some uh yeah information
+the uh management operations
+and TCS stands for thread control
+structure that enables concurrent
+execution within uh inclaves.
+So each TCB stored in a dedicated EPC
+page for thread management. NSSA
+uh stands for state save area and it
+securely stores the context of the
+hardware uh uh in hardware. So uh this
+SSA plays a critical role when context
+is switched. If the context is not uh
+securely switch it then what can happen
+is that the uh after finishing the
+execution of trusted part of the enclave
+application
+uh when it is switched out and if the
+next uh process is an untrusted
+application then if the context remains
+then the untrusted application may
+uh yeah extract uh some sensitive
+information from the rem uh yeah
+unerased
+uh uh context information. For example,
+uh the register values are very obvious
+to be erased or initialized but there
+could be some remaining information like
+uh overflow or uh status bits. So uh
+this information must be erased and uh
+there are some vulnerabilities
+reported vulnerabilities in uh context
+switching of the SGX. So for example the
+uh branch prediction the branch
+prediction uh information is not um yeah
+uh cleared that means uh whether this
+branchy is predicted to be taken or not
+this information can be uh accessed uh
+by untrusted application. So that that
+is that is because that some resources
+are uh not strictly isolated.
+So uh we we will also discuss this this
+kind of uh vulnerabilities
+uh later uh but uh yeah in general the
+hardware uh should uh should maintain uh
+the secure context switching. So SSA is
+uh intended to provide uh secure context
+switching
+and in some case if the uh EPC the page
+cache is not enough to store all the
+pages uh then we have to evict some part
+of the uh some yeah memory pages to the
+unprotected memory region. So this is
+the and if the uh evicted page uh is
+stored in unprotected region then that
+pages might be swapped to the disk.
+So yeah if that happens then the
+unauthorized applications may access the
+uh yeah memory page. So that should be
+protected by encryption.
+So there are some um yeah special
+instruction to uh maintain the status of
+the uh evicted uh yeah uh EPC uh the the
+memory pages of enclave application. It
+is any yeah memory pages is uh initially
+free and uh this ecreate
+instruction uh is used to generate a
+enclave then the pages yeah it is
+currently in use that means the valid
+bit is now set but if it is need to be
+evicted to the unprotected region of the
+memory this uh instruction uh is used.
+So uh it is it should be currently
+blocked and uh so and also uh if e
+remove this instruction is executed then
+it is now uh it is now freed. So uh the
+ch the status the status changes to the
+free state.
+And if we look at uh the instructions a
+little bit detail the eB block this
+instruction precisely speaking in marks
+some pages for eviction and uh and at
+the same time it prevents new TLB
+entries from being created for blocked
+page. So the TLB also need to be
+maintained when cleared when the context
+switching happens. So uh it it does not
+because it is uh yeah supposed to be
+evicted. So it is not uh uh yeah cached
+by the TLB and ERA instruction uh tracks
+which logical processors need to need
+TLB flushes before eviction can safely
+proceed uh proceed. So uh this uh yeah
+because the as I just mentioned when
+context switching happens the TLB may
+have uh some uh yeah it does not have
+actually sensitive information but it
+may be exploited. So the it should be uh
+cleared flushed. So this instruction uh
+by using this one we can keep track of
+uh which uh which logical process need
+TB flies and EWB is actually the uh
+instruction that encrypts and makes the
+uh page contents. Here MANG means method
+authentication code. Even though we
+encrypt the data uh it does not
+guarantee the uh integrity of the
+encrypted data. If the encrypted data is
+modified we can anyways decrypt the data
+because uh it is just binary and yeah if
+we correctly yeah we we don't know
+whether the uh decrypted data is
+actually valid or not. it is just
+binary. So, uh there must be some uh
+authentication code included.
+So, uh after decryting the data and uh
+tries to match the decoded
+authentication code, if only if that
+decoded authentication code matches, we
+know that this data has not been
+modified. the integrity has been
+preserved. So uh this instruction uh uh
+not only encrypts but add some message
+authentication code
+and uh this by using these instructions
+we can load the uh evicted pages back to
+the EPC. So it is kind of a reverse uh
+does reverse operation from EWB.
+And because the virtual to physical
+memory translation is managed by the
+untrusted uh operating system, there
+must be some guide uh guide rails that
+uh protect or ensure the uh mapping is
+done correctly.
+So uh
+so this one is already I already
+mentioned that the mapping should be
+always the e lang uh the memory pages in
+the e lang must be uh uh mapped to the
+EPC pages and uh the page table. So this
+is ensured by the checking the page
+table. So the SGX always verifies the
+address translation to ensure uh the
+sudden uh this kind of uh yeah
+requirements
+and uh
+the SGX also as a part of isolation the
+SGX also yeah prevent some malicious
+operating system from um memory mapping
+attacks. So uh what I may just mention
+is that the virtual memory used by the
+enclave always should be mapped to the
+uh physical pages in EPC but uh other
+the types of text also available uh
+untrusted application the voucher page
+of untrusted application may be mapped
+to the physical page in EPC. See in that
+case the unauthorized untrusted
+application uh can access the data used
+by the uh yeah uh trusted application.
+So this should not happen. So this is
+also checked by the hardware.
+So the hardware checks both uh the
+physical memory mapping uh attack and uh
+the virtual memory uh the phys the
+virtual uh pag mapping attack.

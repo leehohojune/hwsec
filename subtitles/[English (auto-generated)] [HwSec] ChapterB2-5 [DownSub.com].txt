@@ -1,0 +1,184 @@
+Modern processors use branch prediction
+uh to improve the performance by
+avoiding pipeline stores. We can the
+branch prediction here includes not only
+the directional predictor that predicts
+whether the branch instruction branch is
+taken or not but also some branch target
+buffer and returns tech buffer. The
+branch target buffer temporarily stores
+the branch target address. Uh so when
+the
+prediction
+uh is uh yeah is taken then uh the
+target address does not need to be
+calculated again but can be fetched from
+the branch targeter. In a similar way,
+the return st buffer is storing the
+return address.
+So by using these hardwarebased
+components, we can improve the modern
+processors improve the performance uh by
+avoiding uh pipeline stores. But the
+problem in the SGX is that SGX
+does not clear the information of this
+branch prediction units
+when the context switching occurs.
+That's the main problem. That means when
+the uh
+inclave application is switched out and
+unprotected potentially malicious
+application is scheduled in the branch
+prediction units still retain some
+information about the execution of the
+enclave application. So if the be if the
+uh untrusted application is uh
+controlled by the attacker then the
+attacker may infer some sensitive
+information by analyzing the information
+remaining in the branchy uh prediction
+unit.
+So yeah, this is another subface that uh
+is uh exposed uh from the interest GX.
+One example is the page history table
+based tag. [snorts]
+So the directional branch predictor has
+some information has information whether
+a particular branch uh is likely to be
+taken or not.
+Typically it is a history based. So if
+the last branch instruction uh was taken
+then it is likely to predict that this
+branch instruction will be taken again.
+So if this information still remains in
+the branch prediction unit then uh by
+checking the prediction of this branch
+instruction the attacker can infer
+whether that branch was taken or not.
+that means the attacker can infer some
+information about the control flow of
+the uh victim process. So it is similar
+to the timing attack that uh by
+analyzing the control flow. If the
+control flow is dependent on the
+sensitive information then uh by
+analyzing the control flow the attackers
+can learn the sensitive information.
+So uh these two uh yeah method are
+representative examples. So the branch
+scope was the first uh yeah attack
+attempt uh exploiting the uh pattern
+history table.
+Uh so and the uh blue thunder is uh
+evolutionary improvement uh approach
+creating collisions in the two level uh
+predictors.
+So it could achieve uh 52 times faster
+uh uh attacks uh than the branch scope
+method
+and this method can be uh used combined
+with some speculative execution. As you
+know the spectre
+or meltdown
+uh these uh vulnerabilities are known in
+uh hardware Intel processor and it is
+related with speculative uh speculative
+execution. So if we combine the branch
+prediction
+uh and speculative execution
+uh there are uh yeah yeah the attackers
+can uh extract some uh sensitive
+information from the enclave
+application.
+So it includes these five steps. The
+first one is poison the branch target
+buffer to cause misprediction toward
+secretly leaking instructions.
+So that means
+um if the branch is to be predicted
+taken then the branch prediction unit
+fetches the branch target address from
+the uh branch target buffer.
+So it is just prediction and it may turn
+out to be incorrect then it is not
+committed and lower back just execution
+all of the execution uh is just
+cancelled but the problem here is this
+this is related with the spectre uh yeah
+vulnerability
+even though we don't commit the um uh
+process state
+that include memory and or registers.
+Some caches state
+or branch prediction state they are not
+rolled back. That means there those
+units still retain the information about
+the speculative execution. So for
+example when we speculatively execute
+the poisoned instruction
+then reveals the sensitive information
+then the poisoned instruction may access
+some memory just reading non-writing.
+So by reading some um some uh memory
+uh it will incur cash replacement.
+But when
+the speculation turns out to be
+incorrect
+then the instruction is not committed
+but the fetched cash line still in the
+cache.
+So by analyzing the uh caching lines by
+using some cache timing attack the
+attacker can extract the information
+and because in this way the attacker may
+might be able to run uh what they want
+to run. So it the it gives the attacker
+to have more capability of um yeah uh
+yeah revealing the sensitive
+information.
+So yeah, this is uh uh quite uh I think
+brilliant idea of exploiting the
+vulnerabilities
+uh combining the speculative execution
+and uh branch target uh branch
+prediction.
+In very similar way instead of
+manipulating the branch target buffer we
+can do the same thing to the written st
+buffer. So yeah just everything is very
+similar but only uh instead of
+uh poison the branch target buffer we
+can uh poison the retest tech buffer. So
+other uh yeah uh steps are similar to
+the previous one.
+And by observing the inclave interface,
+the attackers can infer some
+information.
+In one enclave application, the enclave
+application consists of uh trusted part
+and untrusted part. The application
+always begins from the untrusted part
+and by uh equal it enters
+the trusted part. And if the trusted
+part finishes or want to call some
+functions in the untrusted part it uh
+calls
+uh and access from the trusted part.
+So this is the interface of the uh
+enclave equal and oore. So by observing
+this pattern the attacker may not be
+able to observe the inside behavior of
+the enclave or trusted part.
+The attacker still can observe the
+interface
+and depending on what data the uh
+the function call uh actually gives uh
+the execution time may vary. So it is
+yeah the main principle is pretty
+similar with other timing attacks. So by
+manipulating the parameters the attacker
+can observe the execution time and then
+uh by analyzing the execution time the
+uh attacker can figure out the some
+sensitive information. If the execution
+time depends on the input data and

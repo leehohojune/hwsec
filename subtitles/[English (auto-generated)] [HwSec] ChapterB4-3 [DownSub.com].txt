@@ -1,0 +1,241 @@
+In this sub chapter we will discuss how
+uh we can use the HSM.
+What HSM
+does is basically the same
+generating the key and doing cryptical
+cryptographic operation in hardware
+and the key never leaves HSM. So the
+basic operation is the same but in this
+sub chapter we will discuss how uh what
+kind of applications uh we can use uh
+the HSM for.
+So the basic functionality is as I
+mentioned here uh the first one is
+generating the key securely. Then what's
+the meaning of secure generation of the
+key? The first one is is should be based
+on certified true random number
+generator. it if it is yeah actually
+even though we are using pseudo random
+number generator if the seed is uh yeah
+uh random enough then it could be
+considered as a uh true random number
+because uh
+we don't actually generate every key uh
+from directly from random number
+generator typically we uh derivate keys
+from random seed. So uh the here the
+question is what is the source of that
+randomness
+and the uh
+there are some uh standard uh that
+approves or certify the true random
+number generator. So uh the true random
+number generator
+uh
+yeah it is on based on uh of course it
+is uh hardware implementation and uh
+reliable operation of uh this random
+number generation could be challenging.
+uh but uh so that's why uh the
+certificate
+the standards define
+uh to which level uh the uh true random
+number generator must achieve
+and the other one is the another yeah
+here certify means the entropy. So if
+the true random number even though it is
+true random if it is not random enough
+random enough here means high entropy
+uh there there is a formal equation of
+measuring uh the entropy. So if the
+entropy is low that means even though it
+is true random
+a certain
+predictable numbers are likely to be
+generated and other numbers are very
+unlikely.
+That means the attackers may uh just
+randomly guess the seed. For example, if
+the true run number generator can
+generate 100 random numbers, just just
+an example 100 number generator 100 uh
+yeah random numbers. But for example,
+the probability of generating one is
+let's say 60%. And the probability of
+two is for example
+30%. Then out of 100 random numbers
+90% possibility is to generate one or
+two. So the if it is already known then
+the attacker can just do some brute
+force attack by just guessing um seed
+one and two. the generate the attacker
+can uh figure out the key the secrets uh
+with 90% accuracy. So this is true
+random but not high enough entropy.
+So that's why we need a good uh true
+random true random number generator
+which is often measured by uh entropy
+and uh generating a key is not the only
+requirement of course and the uh the low
+key material usually it means a random
+seed is never exposed to external
+software layers because the HSM does not
+provide any software interface to read
+that uh random seed and of course
+including the actually derivated keys
+and once it is generated it must be
+securely stored.
+So the high level standard requires the
+HSM hardware to protect the memory as
+well.
+So it should be stored temporaresistant
+nonexportable
+memory modules
+and uh it should be also erased or um
+yeah managed.
+The uh the key must to be uh yeah
+securely managed and uh that includes uh
+key rotation, expiration, archival,
+revocation. These kind of management
+functions also are provided by the HSM
+and it is executed autonomously
+uh and uh without exposing any sensitive
+uh key material. That means by the
+software uh interface
+uh if we want to uh do some management
+function to a specific key
+we need to uh indicate which key we are
+we want to uh for example archive or
+revocate.
+So uh there are so so HSMs usually
+uh off uh provide some kind of uh uh
+identification method of the key or
+indexing the key it depends on HSM. So
+uh in by using those uh indexes ID
+identification method uh we can uh we
+can apply management functions to the uh
+keys uh without uh actually exposing the
+key itself.
+The basic function is basically keep the
+key generating, keeping the key securely
+and doing uh cryp cryptographic
+operations within the hardware uh module
+and we can use this for hardwarebased
+certificate management.
+For the issuing a certificate, we also
+need key and encryption and uh storing
+this kind of B functions.
+So uh the HSM can be used uh
+protecting the private keys used in
+certificate operations
+and that includes uh signing, renewal,
+revocation. Yeah, this kind of basic
+operations are done within HSM and also
+management uh life cycle management
+uh can be supported by the HSM but the
+base functionality is the same but we
+can use them for certificate management
+and uh the system Um the HSM
+itself
+uh employs secing
+if the APSM has a processor or software
+module. But some some HSM do not have
+any processor. It has only uh dedicated
+hardware. But in that case they because
+it is not software based implementation.
+It doesn't require secure booting but if
+it includes software component then it
+itself uh employs secure booting
+but the system the host system
+is must be uh usually uh typically uh
+running uh on running some kind of
+software. Then for that software the
+host system also needs secure booting.
+So in that case we can use the HSM to
+verify the host uh yeah software.
+So the boon loader the integrity metric
+can be stored within the HSM and when we
+need to verify the next step software we
+can check the integrity by using the
+HSM.
+Some HSM even include hash functions.
+So uh the host system uh just to send
+the uh code of the next step to the HSM.
+Then the HSM computes not only hashi but
+also uh it compares the hashy value with
+the reference value. So in this way we
+can uh apply use the HSM for uh secure
+booting
+and yeah similarly uh we can also uh use
+the HSM for verifying OTAA over the air
+update
+because OTAA if we use OTAA that means
+We download remotely a new version of
+software and then install it on this
+device host. But before installing that
+remote uh yeah soft update we have to
+verify it otherwise if it is
+unauthorized that means it may have some
+malicious code. So we need to verify its
+source and also its integrity.
+We can do it in software but if the
+software is compromised then it can yeah
+download malicious code without yeah
+authentic verification process. So we
+can do it in HSM. So we can use the HSM
+for OTAA updates as well.
+And we can implement key exchange
+protocol using the HSM. Here the same
+the basic operation that the HSM provide
+are just the same encryption key
+generation protection but we can use the
+HSM for key exchange. So uh
+some HSM support uh cryptographic
+algorithms such as uh yeah ECDH directly
+then uh by the using the HSM we can
+directly implement the key exchanges
+protocol. But uh this is yeah depends on
+the implementation of HSM. But uh if
+even though the HSM does not directly
+support key exchange protocol, we can uh
+just to use uh the cryptographic
+algorithm in hardware. Uh we can
+implement the exchange protocol because
+the key exchange protocol is could be
+just bro uh could be broken down into
+encryption and decryption. So uh we can
+do that uh by using the HSM and uh for
+that protocol
+uh the each party need to keep the
+private key that can be done in hardware
+the HSM.
+So uh in if so then the key can be
+securely stored in the HSM
+and authentication can be also done by
+uh HSM. uh because in order to
+authenticate communication it is
+typically based on uh digital signature
+or MAC message authentication code. All
+of them need yeah generating a uh
+cryptographic
+uh yeah yeah message based on the given
+data. So uh that can be done uh in HSM
+and uh the key used for uh those uh yeah
+uh yeah yeah yeah cryptographic code uh
+the key is necessary and the key can be
+stored securely in HSM
+and yeah I already yeah mentioned this
+one. So, uh we can secure the ODA update
+by using the F uh HSN and uh for that
+the cryptographic signature and the the
+update the updated code is delivered uh
+in uh being encrypted then that can be
+decrypted in hardware. So it is uh even
+more secure than just uh software
+decryption
+and the verification
+uh if that is done then the verification
+uh is much more secure compared to uh
+software based verification. So uh we
+can uh use HSM for OTAA update.

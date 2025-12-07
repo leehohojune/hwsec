@@ -1,0 +1,247 @@
+The trusted platform module in short TPM
+uh is one of HSM hardware security
+module and it is maintained by trusted
+computing group and it is standardized.
+So that's why uh I believe it is the
+most popular HSM
+and the other reason is that it is um
+adapted by Windows.
+So anyways, it is a kind of HSM and uh
+it is a low cost security model module
+that delivers the foundation of a safe
+computing environment and it is
+basically HSM that means uh it can
+securely generate protect store uh the
+uh encryption keys
+and as like other HM HSMs uh it is
+implemented as a temporistant integrated
+circuit hardware and also the memory
+and uh the TPM allows users to uh assess
+the trusty worthiness of computers uh
+they interact with. That means uh it
+allows users to authenticate the
+hardware
+before using the hardware. So so that it
+can uh it can uh pave the path for
+secure computing because it is the
+hardware is the foundation of any
+computing. So uh by using the TPM we can
+uh verify the authenticity of the
+hardware platform
+and the basic functions include uh some
+secure access to memory and registers.
+Uh the memory can memory and registers
+are accessed only through a limited uh
+functionalities. So uh even though the
+host system is compromised, the
+compromised host cannot uh do uh cannot
+temper with the TPM other than the
+provided API. This uh drastically reduce
+the OTC surface and uh it it yeah offers
+integrity measurement. Uh then uh by
+checking the integrity uh we can
+authorize the hardware platform and uh
+the it also provides secure storage and
+reporting uh capabilities.
+So very uh good examples of using TPM is
+the Windows. So I believe that since uh
+Windows 8 the uh subsequent versions of
+Windows uh employ the TPM for secure
+booting. not not just the secure booting
+but the chain of trust and uh the self
+encrypting drives often employ TPM
+uh I say often but because not all the
+uh yeah drives here drives means hard
+disk drive and also SSD solid state
+drive the self encrypting drives means
+full in full disk encryption. So the
+full disk Yeah. If the drive uh supports
+full disk encryption that means every
+data in that storage drive is encrypted
+and the encryption is done by dedicated
+hardware. So the performance overhand is
+very low and the encryption key is
+managed by TPM or any other kind of uh
+hardware security module.
+And because we are encrypting everything
+uh this usually
+uh divide into two uh process. So by
+using one uh global key which is often
+called media encryption key every data
+is encrypted. So all data are uh
+encrypted using one key and then but it
+is encrypted but not separated isolated.
+So for isolation
+uh some part of the me uh drive is
+encrypted by different keys. In this way
+we can separate or isolate the disk
+space.
+Uh how to separate the disk space? Uh it
+depends on the uh vendor of the drive.
+uh but typically it is encrypted with
+different keys and the key itself is
+encrypted again and then stored
+somewhere in the drive. Then uh the
+uh
+key used to encrypt key is called key
+encryption key. It is also stored in
+TPN.
+So in this way if not then what what is
+the problem is that it is not easy to
+manage the keys. If the driver itself
+does not maintain the key then the keys
+I mean the I I'm not saying the media
+encryption key it is just one but the uh
+yeah multiple keys that isolate the disk
+space those keys must be stored
+somewhere in the host system.
+Then the host where can they store those
+keys?
+disk drive, right? So anyways, those
+keys must be stored in the drive
+otherwise if the keys are just stored in
+the main memory then yeah when the power
+goes off then the keys will be erased.
+So we cannot th those keys must be
+stored anyways in the drive. So that's
+why the hardware the driver itself keeps
+the key
+but then uh we need to secure the keys
+so the keys are uh encrypted and then
+that encryption key is stored in TPM. So
+that that's why we have this kind of
+multiple keys
+and the mobile security Windows 8 phone
+uh employs TPM uh for yeah protection of
+device and some authorization keys and
+so on. uh but in mobile devices
+uh because the mobile devices are not
+kind of standard.
+So uh the manufacturers
+actually employ different kinds of
+hardware security modules.
+But the hard hardware security module
+could be TPM but not always. But in case
+of Windows because the Windows 8 already
+employs TPM for secure booting. So the
+window 8 based phones also employs uh
+TPM. But mobile security yeah because it
+is vendor specific. So the vendors
+different vendors may have a different
+kind of uh HSM.
+This is a typical uh TPM architecture.
+It includes IOB block that is an
+interface uh with the host system and
+nonvolatile uh storage that includes the
+stores the endorsement key and storage
+loot key that kind of long-term uh keys
+and it also has cryptographic engines
+actual computation engines like SHA RSA
+Okay. Or some Yeah. Uh
+I am not sure for now but the recent
+version of TPM also support uh the ECC
+based uh cryptographic engines because
+nowadays the ECDSA kind of uh
+cryptographic algorithms are more
+popular and the platform configuration
+registers are uh this is some kind of
+software interface uh because I The IO
+block is actually UART IQC that kind of
+uh singular level interface but the the
+PCR they are registers that are
+accessible through by the software
+running on the software running on the
+host system. So the software on the host
+system is interacting with TPM by
+occasing these registers. That's what I
+meant by software interface.
+The endorsement key is the main key, the
+foundation of trust in TPM because the
+endorsement key is unique to each TPM
+and before shipping TPMS, each TPM is
+programmed with a unique endorsement
+key. So by using this endorsement key we
+can uh uniquely identify TPM. So uh that
+is a foundation and then by using this
+endorsement key uh the TPM generates a
+testation identity keys for uh proving
+the uh establishing the ownership uh
+process. So the ownership process means
+that uh the ownership process binds
+particular TPM with particular platform.
+The TPM is a kind of just component to a
+system. So the system once it is
+equipped with a TPM it it uh uh
+identifies and authenticates TPM. TPM
+also TPM identifies and authenticates
+the uh owner
+uh owner uh host. So uh the
+identification of the TPM is done based
+on this endorsement key
+and the uh PDR
+are uh some registers
+and about half of the PCRs are just
+reserved for TPM. M. So TPM is using uh
+the half of the PCRs but the rest of the
+registers can be used for the operating
+system and applications. So uh these uh
+uh remaining registers are uh playing as
+an interface with the external world.
+what the what TPM does is basically the
+same with what HSM
+do. So it can uh generate and store
+cryptographic keys in hardware and it
+never leaves TPM and it is used by the
+cryptographic engine inside the TPM
+and uh the hardware the TPM
+uniquely
+identifies hardware. Uh yeah because uh
+it has unique uh endorsement key
+and only safe actions are allowed. That
+means we can encrypt the data with a key
+uh but
+uh the host system cannot read the key
+directly.
+So these are just basic operations
+provided by any kind of hardware uh
+security module.
+So the hardware authentication
+especially is to address the existing
+um yeah concerns
+traditional security flaw
+because existing security systems
+usually implemented in software is
+running on unknown hardware. when the
+developers of the security solutions
+uh are uh implementing their solution in
+software they don't know where their
+solution will run on.
+So if the system including the hardware
+is compromised then uh the private keys
+cannot be uh fully protected especially
+filebased security approaches may have
+this kind of issues. So before learning
+these uh security solutions we need to
+check the authenticity
+of the hardware platform. If the TPM uh
+is employed then uh we can verify the
+platform by checking the identity of
+TPM.
+So yeah,
+uh the OTC always has a limited uh
+capability because the TPM allows only
+limited uh yeah APIs. So um the uh yeah
+we can protect the data in the TPM and
+also TPM can authenticate the hardware
+reserve by using uh the endorsement key.
+So once TPM is employed it is yeah
+deactivated initially and then uh from
+the owner owner host system uh the owner
+host system activates the ownership
+process. Then uh by uh when the
+ownership process is done then uh key
+pair is established and by checking this
+key pair uh the host system and the TPM
+can now uh authenticate each other.
+So in this way uh the TPM can fully uh
+securely bind uh with the host system.

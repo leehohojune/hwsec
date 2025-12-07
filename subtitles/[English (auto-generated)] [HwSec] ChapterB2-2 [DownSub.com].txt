@@ -1,0 +1,177 @@
+When an enclave application is created,
+it is created by ecreate instruction.
+This is a special instruction for uh SGX
+and it loads a new SEC data structure
+into a free EPCG.
+So this is the uh foundation of the new
+enclave and then it actually load code
+and data into the uh enclave memory
+space. So uh it is using e and e extend
+instructions to load coden data and uh
+uh while it is loading data the uh it is
+updating the inclave measurements that
+is for uh the checking the integrity of
+the coden data
+and the e init instruction finalizes the
+inclave enabling execution and
+preventing further loading operations.
+So uh it is done by uh the
+initialization is done by this eunit uh
+instruction and then it actually begins
+uh ex uh the execution. Then uh after
+finishing it execution the E remove
+instruction uh freeze the EPC pages and
+uh destroy the enclave uh and finish the
+enclave life cycle. If we see the same
+some some same same operation in as uh
+um the state transition diagram that is
+shown on the top right of this slide. So
+from this is the beginning state and by
+using the E create state uh it is uh
+some new memory space the EPC is
+allocated for this enclave and the
+memory is currently not initialized and
+by using these commands the uh necessary
+code and data is stored and after
+finishing the loading then by using this
+instruction Now uh it is uh initialized
+uh but it is not directly uh run here uh
+because the inclive application consists
+of trusted part and untrusted part and
+the application always begin from the
+untrusted part and while it is running
+if we need to execute the trusted part
+then it in use this e enter into uh the
+uh the the inclave application.
+So it is uh used and while it is running
+it is accessing memory pages and doing
+everything and if necessary it may evict
+the data by using this instructions and
+so on and then finally uh not finally
+may not be finally uh but it exit from
+the inclave region to the untrusted
+region and it may come back to the yeah
+trust region. And yeah, this may just
+keep going on going and forth and then u
+yeah finally if uh if the application
+terminates from the untrusted part and
+then by using this e remove instruction
+uh it is now uh freed
+when the inclave when the application
+enters into the enclave uh trusted part
+it is synchronous so by using the e
+enter instruction it is controlled jump
+jump into the predefined address so uh
+it is relatively easier to protect but
+in case of exit it could be either
+synchronous or asynchronous ous
+synchronous exit is possible because the
+e exit instruction uh allows us exit
+just yeah you know as a yeah as a
+regular uh path but asynchronous uh exit
+means some kind of exception. So when
+exception occurs then uh it is uh coming
+out of uh from the inlay uh operation.
+So if it is uh uh this uh diagram on the
+right is illustrates that kind of
+situation. So uh by using the E enter it
+can enter into the uh inclave
+computation and by using E exit it is
+synchronously
+exit and uh yeah returns to the
+untrusted part. But while the inclave or
+trusted part is running some exception
+may occur. So in that case uh because
+the exception is generating some
+interrupt that is handled by uh
+exception handler and if we don't have
+this kind of uh uh protection mechanism
+this if the exception handler is
+immediately called then this in
+exception because the exception handler
+is not uh trusted part. So the untrusted
+application may uh have an access to the
+uh context. though uh this asynchronous
+exit uh yeah make sure that the context
+information is cleared before calling
+the uh exception handler
+and after finishing the uh interrupt uh
+handling this e resume instruction uh by
+using this instruction it is coming back
+to the enclave uh execution
+The SGX also provide local and remote
+attestation mechanism. The for the local
+attestation it first establish uh the
+channel. So the approval enclver obtains
+verifiers inclaves measurement through a
+secure communication channel. So the
+approver also need uh to have the
+verifiers measurement and then the
+prover uh verif
+uh course this e report instruction to
+create a report structure. So this
+structure contains the uh information
+about the platform and then it is uh
+yeah transmitted to the verifier. The
+verifier uh checks the uh integrity and
+also the contents of the report and uh
+by using this uh finally the uh verifier
+can verify whether the prover is running
+on the uh same platform or not. So in
+SUGX the local destination uh is only to
+prove that the pro uh enclave is running
+on the same platform with the verifier
+enclave.
+The remote
+testation technique is an extension of
+this local uh attestation. So uh it is
+uh proving the enclave identity to a
+remote party. For this a special enclave
+quoting enclave is getting involved.
+So the process is like this. the uh
+challenger the verifier issues a
+challenge to the uh application inclave
+and then uh the uh inclave a tested uh
+enclave generates the report by using
+the e report instruction. This is the
+same with the local attestation. But uh
+here the quoting in clay is uh get
+involved that signs on the report or
+once more uh so that this can be uh
+verified by a remote party of the uh uh
+of the uh remote party in running on you
+know different uh remote uh yeah uh yeah
+system
+and SGX also has some data sealing
+mechanisms. If the data is need to be
+stored in the uh storage disk or SSD
+then the sealing mechanism must be uh
+properly enforced. Uh so the sealing
+mechanism includes the encryption of the
+data and uh to simplify this process uh
+the special uh file system is actually
+provided. The uh Intel SUGX provides
+IPFX.
+IPFS that is a specialized uh file
+system that handles this sealing
+mechanism as if the uh application is
+accessing just normal file. Uh uh
+because uh uh when the
+the in yeah the SGX does not trust the
+operating system and the file system is
+actually a part of the operating system.
+So if we don't trust the file system
+then uh even though we have a sealing
+mechanism it is very difficult for the
+programmers to access the storage
+because yeah we as a programmer we are
+familiar with accessing uh the storage
+as file. So uh we see the storage as a
+collection of files but uh if the file
+system is does not exist and we don't
+trust the operating system the
+programmer needs to implement uh their
+own uh file system. So instead of the
+programmer the Intel uh provides a
+special file system for uh inclave
+applications.

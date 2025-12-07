@@ -1,0 +1,224 @@
+Let's take a look at uh how Intel TDX
+works.
+The TDX stands for trust uh domain
+extensions
+is another hardwarebased trusted
+execution environment and it is adapted
+from the fourth generation Intel Zeon uh
+scalable processors
+and uh we can consider it is an
+extension of Intel SGX the while the SG
+GX protects processes.
+uh but the uh TDX is targeted at targets
+at uh protecting virtual machines
+and uh the TDX
+has a concept of secure arbitration mode
+in short SEM
+uh that encrypts CPU state and memory
+and also provides some integrity
+protection. and remote test station.
+Uh so the TDX
+uh is the latest version of the
+hardwarebased trusted execution uh
+environment provided by Intel. So it has
+many advanced features uh for uh
+protecting virtual machines and
+minimizing the attack surface. Uh so um
+yeah it can uh uh it can uh yeah uh
+mitigate some known uh vulnerabilities
+uh that could not be addressed by SGX.
+So the core security principles are
+pretty much similar with the previous
+SGX.
+The memory confidentiality is also uh
+guaranteed by the TDX. The trust domain
+TD TD data is encrypted when offloaded
+to the main memory uh using the
+cryptography key only known to the
+processor
+and the CPU state also is maintained to
+be uh confidential. So the vulture CPU
+states are protected during context
+switches
+and while the TD the vulture machine is
+running its integrity execution
+integrity is guaranteed by uh
+hardwarebased isolation techniques
+and the TDX also provides some IO
+protection mechanisms
+but The IO devices is themselves are
+developed and designed by other uh yeah
+companies the
+IO the total end to end IO cannot be
+fully guaranteed but uh TDX provides IO
+path secure IO path uh so that if the uh
+device can guarantee some security
+features then the application t T T T T
+T T T T T T T T T T T T T T T T T T T T
+T T T T T T T T T T T T T T T T can uh
+take advantage of the trusted IO.
+The TDX
+assumes
+these kind of capabilities of uh
+attackers.
+The adversary may physical or remote has
+may a physical or remote access to the
+computer.
+Typically remote access is assumed but
+here uh TDX also assume assumes the
+physical access to the computer. That
+means the adversary may uh access the
+bus or the memory. So uh it should be uh
+yeah also
+uh yeah protected
+and the adversary may control the boot
+for SMM hosts and hypervisor
+here. This is why we assume the physical
+access because if adversary cannot
+access physically access the computer
+then how can they manage the boot form.
+So that that's the reason and uh the
+adversaries may also have some control
+over the peripheral devices and the
+adversary can interrupt the TDS and
+manipulate memory and uh the physical
+and hardware attacks are visible on
+buses.
+So from those uh
+yeah threats against those threats I
+just mentioned the TDX prevents the
+adversaries from compromising
+confidentiality and integrity of the
+memory and uh CPU state but it cannot
+guarantee availability.
+uh adversaries may launch those attack
+by controlling the computing resources.
+If adver adversaries
+just uh take all the resources then yeah
+the TDX cannot prevent them from using
+the resources. So yeah, the availability
+may not be fully guaranteed but TDX the
+goal of TDX is uh guaranteeing uh the
+confidentiality and integrity.
+The trusted computing base includes
+hardware components. So the TDX enamel
+uh intent processor uh which is based on
+a VT MKTME and SUGX which will be
+discussed in the uh next slides and the
+TCB also includes Intel signed software.
+The representative example is TDX module
+which replace replaces the untrusted
+hypervisor.
+Also some software components are
+available uh including NP or PIM
+loaders. So uh they are uh they are
+basically a part of managing software of
+the uh TD the trusted domain uh virtual
+machine
+and the tenant software which is running
+within TD is also trusted in a sense
+trusted because uh the TDX protects
+TDS
+know uh we from the perspective of TDX
+the hardware
+uh we don't check their
+whether the
+uh software running in TD
+be can be trusted or I I mean the can
+are is malicious or not we just trust we
+just protect them so in a sense
+it is trusted.
+In other words, uh TDX is protecting TD
+owned by some tenant and this protection
+mechanism works for that tenant.
+So the software
+owned and developed by that tenant
+is trusted in this environment
+and all the defense mechanisms are
+against from the outside of the TD
+and the so the tenants
+uh need to develop their software
+trusting Intel for development,
+manufacturing and signing and so on. So
+uh Intel must be trusted.
+The TDX based on previous three uh
+previous three technologies. The first
+one is Intel WT. Viti stands for
+virtualization technique and it is
+originally to accelerate virtualization.
+Intel vit provides some hardware
+assisted virtualization techniques for
+better performance. So it is basic it is
+uh mainly for accelerating uh
+virtualization
+but because this is a hardware based it
+also enhances security
+compared to softwarebased approaches.
+It provides BMX rune mode for running
+hypervisor and BMX non-run mode for
+guest virtual machines and it also
+supports extended page table for address
+translation and some other uh isolation
+and virtualization techniques for IO
+devices.
+And if when the uh Intel VT is
+integrated to the TDX, the TDX extends
+the VT with new SIM VMX modes. So the uh
+now we have SIM BMX mode. So the same
+BMX rune mode replaces VUMX rune mode.
+So actually those Yeah, we we here we
+have four modes. BMX rune mode, simx run
+mode and BMX non mode and simx non mode.
+We have a four modes. They coexist.
+But uh only those
+uh
+virtual machines under the protection
+are running here SIM BMX non room mode
+and the hypervisor
+uh trusted hypervisor is running here
+SIM BMX room mode which is managed by
+TDX module. This is a uh software
+component signed developed and signed by
+Intel.
+So uh the Intel VIT is integrated with
+TDX to uh accelerate and enhance uh to
+enhance the uh security of
+virtualization.
+The second one is uh MKTMA.
+TME stands for total memory encryption.
+So by using this technology we can
+encrypt the entire memory.
+So by encrypting the entire memory not
+the part of the memory we can protect
+the memory contents from physical
+attacks on the memory or bus.
+Then uh we need to move uh maintain the
+key key management system is very
+important
+and by using this hardware based uh
+technology uh we can also manage the key
+uh which is supported by m uh this host
+key identifiers hk ids and uh the mktme
+that is multi key TME total memory
+encrypts. So this uh extension supports
+multiple keys for page granularity
+encryption. That means uh different
+pages may be encrypted by different
+keys. In this way we can crypically
+enforce uh isolation.
+So the TDX module controls the memory
+encryption for the trusted domains uh
+partitioning the HQ ID space.
+SGX is also a part of uh TDX.
+SGX uh protects against memory bus
+snooping and cold boot text uh by
+partitioning applications into secure uh
+enclaves.
+So and its memory hierarchy includes
+enclave page cache memory uh it also in
+uh employs memory encryption engine and
+supports local and remote testing and
+new instructions. These are some
+features of SGX. Not all of them are
+integrated with TDX but uh TDX leverages
+SGX uh remote testing mechanism.
