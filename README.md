@@ -5,3 +5,5 @@ A4 https://claude.ai/share/a62ff076-7ff5-40d6-88c6-71799c6c31f5
 A5 https://claude.ai/share/7e7abcca-afc7-4f42-a35e-7ad430838aec
 
 B1 https://claude.ai/share/fc917f87-d496-4917-bb3e-eaa32107ae72
+
+B2 https://claude.ai/share/6687d0aa-69e5-4b7b-b35a-662f4ff8db29
